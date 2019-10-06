@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/drawable-v21/notification_action_background.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/drawable-v21/abc_dialog_material_background.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/res/drawable-v21/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/drawable-v21/abc_list_divider_material.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/res/drawable-v21/abc_list_divider_material.xml"
+    }
+]

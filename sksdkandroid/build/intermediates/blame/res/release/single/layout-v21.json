@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/imperituroard/Desktop/sksdkandroidpr/sksdkandroid/build/intermediates/res/merged/release/layout-v21/notification_action.xml",
+        "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/res/layout-v21/notification_action.xml"
+    }
+]

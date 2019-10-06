@@ -1,0 +1,419 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.sk.android.sksdkandroidpr"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+11-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:5:5-77
+11-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:5:22-74
+12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+12-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:6:5-81
+12-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:6:22-78
+13    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+13-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:7:5-79
+13-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
+14-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:8:5-80
+14-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:8:22-77
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:9:5-79
+15-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:9:22-76
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:10:5-76
+16-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:10:22-73
+17    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+17-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:11:5-74
+17-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:11:22-72
+18    <uses-permission android:name="android.permission.READ_SMS" />
+18-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:12:5-66
+18-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:12:22-64
+19
+20    <permission
+20-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:13:5-14:47
+21        android:name="com.name.name.permission.C2D_MESSAGE"
+21-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:13:17-68
+22        android:protectionLevel="signature" />
+22-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:14:9-44
+23
+24    <uses-permission android:name="com.name.name.permission.C2D_MESSAGE" />
+24-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:15:5-76
+24-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:15:22-73
+25    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+25-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:16:5-74
+25-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:16:22-71
+26    <uses-permission android:name="android.permission.INTERNET" />
+26-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:22:5-67
+26-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:22:22-64
+27    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+27-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:24:5-68
+27-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:24:22-65
+28    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+28-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:26:5-82
+28-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:26:22-79
+29    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+29-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:26:5-110
+29-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:26:22-107
+30    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+30-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:25:5-81
+30-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:25:22-78
+31
+32    <application
+32-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:19:5-45:19
+33        android:allowBackup="true"
+33-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:20:9-35
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/AndroidManifest.xml:24:18-86
+35        android:debuggable="true"
+36        android:icon="@mipmap/ic_launcher"
+36-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:21:9-43
+37        android:label="@string/app_name"
+37-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:22:9-41
+38        android:roundIcon="@mipmap/ic_launcher_round"
+38-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:23:9-54
+39        android:supportsRtl="true"
+39-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:24:9-35
+40        android:testOnly="true"
+41        android:theme="@style/AppTheme" >
+41-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:25:9-40
+42        <service android:name="com.sk.android.sksdkandroid.SkFirebaseService" >
+42-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:27:9-32:19
+42-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:28:13-73
+43            <intent-filter>
+43-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:29:13-31:29
+44                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+44-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:17-77
+44-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:25-75
+45            </intent-filter>
+46        </service>
+47
+48        <meta-data
+48-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:34:9-36:53
+49            android:name="com.google.firebase.messaging.default_notification_color"
+49-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:35:13-84
+50            android:resource="@color/colorAccent" />
+50-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:36:13-50
+51
+52        <activity android:name="com.sk.android.sksdkandroidpr.MainActivity" >
+52-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:38:9-44:20
+52-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:38:19-47
+53            <intent-filter>
+53-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:39:13-43:29
+54                <action android:name="android.intent.action.MAIN" />
+54-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:40:17-69
+54-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:40:25-66
+55
+56                <category android:name="android.intent.category.LAUNCHER" />
+56-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:42:17-77
+56-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:42:27-74
+57            </intent-filter>
+58        </activity>
+59        <!--
+60             FirebaseMessagingService performs security checks at runtime,
+61             but set to not exported to explicitly avoid allowing another app to call it.
+62        -->
+63        <service
+63-->[com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:28:9-34:19
+64            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+64-->[com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:29:13-82
+65            android:exported="false" >
+65-->[com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:30:13-37
+66            <intent-filter android:priority="-500" >
+66-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:29:13-31:29
+67                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+67-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:17-77
+67-->/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:25-75
+68            </intent-filter>
+69        </service>
+70        <service
+70-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:27:9-33:19
+71            android:name="com.google.firebase.components.ComponentDiscoveryService"
+71-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:28:13-84
+72            android:exported="false" >
+72-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:29:13-37
+73            <meta-data
+73-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:30:13-32:85
+74                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+74-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:31:17-139
+75                android:value="com.google.firebase.components.ComponentRegistrar" />
+75-->[com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:32:17-82
+76            <meta-data
+76-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:32:13-34:85
+77                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+77-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:33:17-96
+78                android:value="com.google.firebase.components.ComponentRegistrar" />
+78-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:34:17-82
+79        </service>
+80
+81        <receiver
+81-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:37:9-44:20
+82            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+82-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:38:13-78
+83            android:exported="true"
+83-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:39:13-36
+84            android:permission="com.google.android.c2dm.permission.SEND" >
+84-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:40:13-73
+85            <intent-filter>
+85-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:41:13-43:29
+86                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+86-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:42:17-81
+86-->[com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:42:25-78
+87            </intent-filter>
+88        </receiver>
+89
+90        <provider
+90-->[com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:12:9-16:39
+91            android:name="com.google.firebase.provider.FirebaseInitProvider"
+91-->[com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:13:13-77
+92            android:authorities="com.sk.android.sksdkandroidpr.firebaseinitprovider"
+92-->[com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:14:13-72
+93            android:exported="false"
+93-->[com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:15:13-37
+94            android:initOrder="100" />
+94-->[com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:16:13-36
+95
+96        <activity
+96-->[com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+97            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+97-->[com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+98            android:exported="false"
+98-->[com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+99            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+99-->[com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+100
+101        <receiver
+101-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:29:9-33:20
+102            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+102-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:30:13-85
+103            android:enabled="true"
+103-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:31:13-35
+104            android:exported="false" >
+104-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:32:13-37
+105        </receiver>
+106        <receiver
+106-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:34:9-42:20
+107            android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+107-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:35:13-100
+108            android:enabled="true"
+108-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:36:13-35
+109            android:exported="true"
+109-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:37:13-36
+110            android:permission="android.permission.INSTALL_PACKAGES" >
+110-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:38:13-69
+111            <intent-filter>
+111-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:39:13-41:29
+112                <action android:name="com.android.vending.INSTALL_REFERRER" />
+112-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:40:17-79
+112-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:40:25-76
+113            </intent-filter>
+114        </receiver>
+115
+116        <service
+116-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:44:9-47:40
+117            android:name="com.google.android.gms.measurement.AppMeasurementService"
+117-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:45:13-84
+118            android:enabled="true"
+118-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:46:13-35
+119            android:exported="false" />
+119-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:47:13-37
+120        <service
+120-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:48:9-52:72
+121            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+121-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:49:13-87
+122            android:enabled="true"
+122-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:50:13-35
+123            android:exported="false"
+123-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:51:13-37
+124            android:permission="android.permission.BIND_JOB_SERVICE" />
+124-->[com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:52:13-69
+125
+126        <meta-data
+126-->[com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+127            android:name="com.google.android.gms.version"
+127-->[com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+128            android:value="@integer/google_play_services_version" />
+128-->[com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+129
+130        <provider
+130-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:28:9-34:35
+131            android:name="androidx.work.impl.WorkManagerInitializer"
+131-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:29:13-69
+132            android:authorities="com.sk.android.sksdkandroidpr.workmanager-init"
+132-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:30:13-68
+133            android:directBootAware="false"
+133-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:31:13-44
+134            android:exported="false"
+134-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:32:13-37
+135            android:multiprocess="true" />
+135-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:33:13-40
+136
+137        <service
+137-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:36:9-41:35
+138            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+138-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:37:13-88
+139            android:directBootAware="false"
+139-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:38:13-44
+140            android:enabled="@bool/enable_system_alarm_service_default"
+140-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:39:13-72
+141            android:exported="false" />
+141-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:40:13-37
+142        <service
+142-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:42:9-48:35
+143            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+143-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:43:13-84
+144            android:directBootAware="false"
+144-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:44:13-44
+145            android:enabled="@bool/enable_system_job_service_default"
+145-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:45:13-70
+146            android:exported="true"
+146-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:46:13-36
+147            android:permission="android.permission.BIND_JOB_SERVICE" />
+147-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:47:13-69
+148
+149        <receiver
+149-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:50:9-55:35
+150            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+150-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:51:13-88
+151            android:directBootAware="false"
+151-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:52:13-44
+152            android:enabled="true"
+152-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:53:13-35
+153            android:exported="false" />
+153-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:54:13-37
+154        <receiver
+154-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:56:9-66:20
+155            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+155-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:57:13-106
+156            android:directBootAware="false"
+156-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:58:13-44
+157            android:enabled="false"
+157-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:59:13-36
+158            android:exported="false" >
+158-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:60:13-37
+159            <intent-filter>
+159-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:62:13-65:29
+160                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+160-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:63:17-87
+160-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:63:25-84
+161                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+161-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:64:17-90
+161-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:64:25-87
+162            </intent-filter>
+163        </receiver>
+164        <receiver
+164-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:67:9-77:20
+165            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+165-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:68:13-104
+166            android:directBootAware="false"
+166-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:69:13-44
+167            android:enabled="false"
+167-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:70:13-36
+168            android:exported="false" >
+168-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:71:13-37
+169            <intent-filter>
+169-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:73:13-76:29
+170                <action android:name="android.intent.action.BATTERY_OKAY" />
+170-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:74:17-77
+170-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:74:25-74
+171                <action android:name="android.intent.action.BATTERY_LOW" />
+171-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:75:17-76
+171-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:75:25-73
+172            </intent-filter>
+173        </receiver>
+174        <receiver
+174-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:78:9-88:20
+175            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+175-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:79:13-104
+176            android:directBootAware="false"
+176-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:80:13-44
+177            android:enabled="false"
+177-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:81:13-36
+178            android:exported="false" >
+178-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:82:13-37
+179            <intent-filter>
+179-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:84:13-87:29
+180                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+180-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:85:17-83
+180-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:85:25-80
+181                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+181-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:86:17-82
+181-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:86:25-79
+182            </intent-filter>
+183        </receiver>
+184        <receiver
+184-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:89:9-98:20
+185            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+185-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:90:13-103
+186            android:directBootAware="false"
+186-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:91:13-44
+187            android:enabled="false"
+187-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:92:13-36
+188            android:exported="false" >
+188-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:93:13-37
+189            <intent-filter>
+189-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:95:13-97:29
+190                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+190-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:96:17-79
+190-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:96:25-76
+191            </intent-filter>
+192        </receiver>
+193        <receiver
+193-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:99:9-110:20
+194            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+194-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:100:13-88
+195            android:directBootAware="false"
+195-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:101:13-44
+196            android:enabled="false"
+196-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:102:13-36
+197            android:exported="false" >
+197-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:103:13-37
+198            <intent-filter>
+198-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:105:13-109:29
+199                <action android:name="android.intent.action.BOOT_COMPLETED" />
+199-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:106:17-79
+199-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:106:25-76
+200                <action android:name="android.intent.action.TIME_SET" />
+200-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:107:17-73
+200-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:107:25-70
+201                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+201-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:108:17-81
+201-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:108:25-78
+202            </intent-filter>
+203        </receiver>
+204        <receiver
+204-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:111:9-120:20
+205            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+205-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:112:13-99
+206            android:directBootAware="false"
+206-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:113:13-44
+207            android:enabled="@bool/enable_system_alarm_service_default"
+207-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:114:13-72
+208            android:exported="false" >
+208-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:115:13-37
+209            <intent-filter>
+209-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:117:13-119:29
+210                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+210-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:118:17-98
+210-->[androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:118:25-95
+211            </intent-filter>
+212        </receiver>
+213
+214        <provider
+214-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:23:9-27:43
+215            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+215-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:24:13-79
+216            android:authorities="com.sk.android.sksdkandroidpr.lifecycle-process"
+216-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:25:13-69
+217            android:exported="false"
+217-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:26:13-37
+218            android:multiprocess="true" />
+218-->[androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:27:13-40
+219    </application>
+220
+221</manifest>

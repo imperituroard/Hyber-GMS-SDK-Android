@@ -1,0 +1,3 @@
+rootProject.name='sksdkandroidpr'
+include ':app'
+include ':sksdkandroid'

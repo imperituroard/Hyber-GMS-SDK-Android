@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "836997086723",
+    "firebase_url": "https://sksdkandroidpr.firebaseio.com",
+    "project_id": "sksdkandroidpr",
+    "storage_bucket": "sksdkandroidpr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836997086723:android:6622c4cf71d0ddf5991836",
+        "android_client_info": {
+          "package_name": "com.sk.android.sksdkandroidpr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "836997086723-dr6r26jk7trrfh5tv3kpip3jtfjo6sem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sk.android.sksdkandroidpr",
+            "certificate_hash": "2b5bf7d8c65ef15d9235e9a0aa2a19de5dcdebfa"
+          }
+        },
+        {
+          "client_id": "836997086723-13at78mgcq634aik1dio9d17lld6n2hu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa5Ym8NI0FQ3PBOk5qXL-3mZNHB9-MiLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "836997086723-13at78mgcq634aik1dio9d17lld6n2hu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
