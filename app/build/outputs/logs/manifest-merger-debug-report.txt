@@ -1,15 +1,17 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:2:1-19:12
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:2:1-19:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core-ktx:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/45173cda3923f0ba52325b3a7b438172/core-ktx-1.1.0/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f6db62d7f1f450ab04c27e2c9cdfe2c3/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:17:1-37:12
 MERGED from [com.google.firebase:firebase-core:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7a139c81fcf67265addc99562b6e8392/firebase-core-17.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:17:1-123:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.firebase:firebase-analytics:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/317f634ba80d67be6dba8a0309d27136/firebase-analytics-17.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:17:1-36:12
 MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:17:1-47:12
@@ -26,8 +28,6 @@ MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /U
 MERGED from [com.google.android.gms:play-services-measurement-base:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/3010c71d9f475a448ee85ddcefc98557/play-services-measurement-base-17.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/74ca979011ea0b3f08817ece9cc57dab/play-services-ads-identifier-17.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:17:1-28:12
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:17:1-123:12
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:17:1-25:12
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/6de9a998ba5c280963fdcda6283e7ab3/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/ac91afea9519e62b28393d870b4dcac8/appcompat-resources-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/55393ba7781c32ca272101dd10d2983c/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -41,6 +41,9 @@ MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/imperituroard/
 MERGED from [androidx.customview:customview:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb79e53b65ceb24840f48c209cc00760/customview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/211a51347c7d88a229ebb46c47acb282/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb2bd1b7bd1f6ae0da4c2f7858cf28f0/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/494e9e6eb06c28579fbdee1ac07479cd/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/faa6b6b9dbe8d97c17794a7532f97ffb/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/3e598d7078d64e27c6c92287e3624d44/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.lifecycle:lifecycle-service:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/ae8e328506a32a0a43bba2a013204a2d/lifecycle-service-2.0.0/AndroidManifest.xml:17:1-22:12
@@ -51,46 +54,45 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/imperituroard/.gra
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fd74432e22973944fe6863bc34fdc467/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7fa63090b8d7514a87589668fcd247e3/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/32a2c215ffef5832e5058724492f0277/print-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb2bd1b7bd1f6ae0da4c2f7858cf28f0/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/494e9e6eb06c28579fbdee1ac07479cd/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/faa6b6b9dbe8d97c17794a7532f97ffb/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.sqlite:sqlite-framework:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/0bd1655d1fbc3a6ef68acb1539fcbd9f/sqlite-framework-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.sqlite:sqlite:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/a43a16fd5e648768a668c979d3d23f82/sqlite-2.0.0/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
 	package
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:3:5-44
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:3:5-44
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:1-47:12
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.READ_PHONE_NUMBERS
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:5:5-77
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:5:5-77
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:5:22-74
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:5:22-74
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:6:5-81
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:6:5-81
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:6:22-78
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:6:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:7:5-79
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:7:5-79
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:7:22-76
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:7:22-76
 uses-permission#android.permission.ACCESS_COARSE_UPDATES
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:8:5-80
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:8:5-80
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:8:22-77
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:8:22-77
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:9:5-79
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:9:5-79
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:24:5-79
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:22:5-79
@@ -101,46 +103,48 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /User
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:24:5-79
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:24:5-79
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:24:5-79
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:9:22-76
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:9:22-76
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:10:5-76
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:10:5-76
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:10:22-73
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:10:22-73
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:11:5-74
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:11:5-74
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:11:22-72
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:11:22-72
 uses-permission#android.permission.READ_SMS
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:12:5-66
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:12:5-66
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:12:22-64
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:12:22-64
 permission#com.name.name.permission.C2D_MESSAGE
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:13:5-14:47
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:13:5-14:47
 	android:protectionLevel
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:14:9-44
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:14:9-44
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:13:17-68
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:13:17-68
 uses-permission#com.name.name.permission.C2D_MESSAGE
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:15:5-76
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:15:5-76
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:15:22-73
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:15:22-73
 uses-permission#android.permission.USE_FINGERPRINT
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:16:5-74
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:16:5-74
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:16:22-71
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:16:22-71
 application
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:19:5-45:19
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:11:5-17:19
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:11:5-17:19
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:19:5-45:19
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:11:5-17:19
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:11:5-17:19
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f6db62d7f1f450ab04c27e2c9cdfe2c3/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f6db62d7f1f450ab04c27e2c9cdfe2c3/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:22:5-35:19
 MERGED from [com.google.firebase:firebase-core:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7a139c81fcf67265addc99562b6e8392/firebase-core-17.2.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-core:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7a139c81fcf67265addc99562b6e8392/firebase-core-17.2.0/AndroidManifest.xml:7:5-20
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:27:5-121:19
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:27:5-121:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.firebase:firebase-analytics:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/317f634ba80d67be6dba8a0309d27136/firebase-analytics-17.2.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-analytics:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/317f634ba80d67be6dba8a0309d27136/firebase-analytics-17.2.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:26:5-34:19
@@ -171,10 +175,6 @@ MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/74ca979011ea0b3f08817ece9cc57dab/play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:22:5-26:19
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:27:5-121:19
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:27:5-121:19
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:22:5-23:19
 MERGED from [androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/3e598d7078d64e27c6c92287e3624d44/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
@@ -184,55 +184,55 @@ MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.g
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:24:9-35
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:24:9-35
 	android:label
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:22:9-41
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:22:9-41
 	android:roundIcon
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:23:9-54
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:23:9-54
 	android:icon
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:21:9-43
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:21:9-43
 	android:allowBackup
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:20:9-35
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:20:9-35
 	android:theme
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:25:9-40
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:25:9-40
 service#com.sk.android.sksdkandroid.SkFirebaseService
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:27:9-32:19
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:12:9-16:19
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:12:9-16:19
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:27:9-32:19
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:12:9-16:19
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:12:9-16:19
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:28:13-73
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:28:13-73
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:29:13-31:29
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:29:13-31:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:17-77
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:17-77
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:25-75
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:30:25-75
 meta-data#com.google.firebase.messaging.default_notification_color
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:34:9-36:53
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:34:9-36:53
 	android:resource
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:36:13-50
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:36:13-50
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:35:13-84
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:35:13-84
 activity#com.sk.android.sksdkandroidpr.MainActivity
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:38:9-44:20
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:38:9-44:20
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:38:19-47
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:38:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:39:13-43:29
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:39:13-43:29
 action#android.intent.action.MAIN
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:40:17-69
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:40:25-66
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:42:17-77
+ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:42:17-77
 	android:name
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:42:27-74
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml:42:27-74
 uses-sdk
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:7:5-9:41
-MERGED from [com.sk.android:sksdkandroid:0.2.53] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/d4715d8d03895094ee92f8ef0f1d4eb3/sksdkandroid-0.2.53/AndroidManifest.xml:7:5-9:41
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.imperituroard:Hyber-SVC-SDK-Android:v1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/f00459aa2f2d8611d382a2dd2143cb21/test-1.0.3/AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core-ktx:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/45173cda3923f0ba52325b3a7b438172/core-ktx-1.1.0/AndroidManifest.xml:5:5-7:41
@@ -243,6 +243,10 @@ MERGED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard
 MERGED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-core:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7a139c81fcf67265addc99562b6e8392/firebase-core-17.2.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-core:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7a139c81fcf67265addc99562b6e8392/firebase-core-17.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-analytics:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/317f634ba80d67be6dba8a0309d27136/firebase-analytics-17.2.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-analytics:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/317f634ba80d67be6dba8a0309d27136/firebase-analytics-17.2.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:20:5-44
@@ -275,10 +279,6 @@ MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/74ca979011ea0b3f08817ece9cc57dab/play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-extensions:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b9cac8635dc09c0e6606945c6a58e2eb/lifecycle-extensions-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/6de9a998ba5c280963fdcda6283e7ab3/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/6de9a998ba5c280963fdcda6283e7ab3/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/ac91afea9519e62b28393d870b4dcac8/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
@@ -305,6 +305,12 @@ MERGED from [androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/trans
 MERGED from [androidx.core:core:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/48a77f3651ccfd55880f8460a9cd62a9/core-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/211a51347c7d88a229ebb46c47acb282/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/211a51347c7d88a229ebb46c47acb282/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb2bd1b7bd1f6ae0da4c2f7858cf28f0/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb2bd1b7bd1f6ae0da4c2f7858cf28f0/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/494e9e6eb06c28579fbdee1ac07479cd/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/494e9e6eb06c28579fbdee1ac07479cd/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/faa6b6b9dbe8d97c17794a7532f97ffb/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/faa6b6b9dbe8d97c17794a7532f97ffb/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/3e598d7078d64e27c6c92287e3624d44/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/3e598d7078d64e27c6c92287e3624d44/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:20:5-44
@@ -325,46 +331,30 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7fa63090b8d7514a87589668fcd247e3/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/32a2c215ffef5832e5058724492f0277/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/32a2c215ffef5832e5058724492f0277/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb2bd1b7bd1f6ae0da4c2f7858cf28f0/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fb2bd1b7bd1f6ae0da4c2f7858cf28f0/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/494e9e6eb06c28579fbdee1ac07479cd/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/494e9e6eb06c28579fbdee1ac07479cd/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/faa6b6b9dbe8d97c17794a7532f97ffb/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/faa6b6b9dbe8d97c17794a7532f97ffb/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite-framework:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/0bd1655d1fbc3a6ef68acb1539fcbd9f/sqlite-framework-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite-framework:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/0bd1655d1fbc3a6ef68acb1539fcbd9f/sqlite-framework-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/a43a16fd5e648768a668c979d3d23f82/sqlite-2.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/a43a16fd5e648768a668c979d3d23f82/sqlite-2.0.0/AndroidManifest.xml:20:5-44
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/AndroidManifest.xml
 service#com.google.firebase.messaging.FirebaseMessagingService
 ADDED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:28:9-34:19
 	android:exported
 		ADDED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:30:13-37
 	android:name
 		ADDED from [com.google.firebase:firebase-messaging:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/AndroidManifest.xml:29:13-82
-uses-permission#android.permission.INTERNET
-ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:22:5-67
-MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:23:5-67
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:22:22-64
 uses-permission#android.permission.WAKE_LOCK
-ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:24:5-68
+ADDED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:23:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:24:5-68
 MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:24:5-68
 MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:24:5-68
 MERGED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:25:5-68
@@ -373,122 +363,8 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /User
 MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:25:5-68
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:23:5-68
-MERGED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:23:5-68
 	android:name
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:24:22-65
-service#com.google.firebase.components.ComponentDiscoveryService
-ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:27:9-33:19
-MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:29:9-35:19
-MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:29:9-35:19
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:29:13-37
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:28:13-84
-meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
-ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:30:13-32:85
-	android:value
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:32:17-82
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:31:17-139
-uses-permission#com.google.android.c2dm.permission.RECEIVE
-ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:26:5-82
-	android:name
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:26:22-79
-meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
-ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:32:13-34:85
-	android:value
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:34:17-82
-	android:name
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:33:17-96
-receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
-ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:37:9-44:20
-	android:exported
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:39:13-36
-	android:permission
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:40:13-73
-	android:name
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:38:13-78
-intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
-ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:41:13-43:29
-action#com.google.android.c2dm.intent.RECEIVE
-ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:42:17-81
-	android:name
-		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:42:25-78
-provider#com.google.firebase.provider.FirebaseInitProvider
-ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:12:9-16:39
-	android:authorities
-		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:14:13-72
-	android:exported
-		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:15:13-37
-	android:initOrder
-		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:16:13-36
-	android:name
-		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:13:13-77
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-	android:exported
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-	android:theme
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-	android:name
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
-uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:26:5-110
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:26:5-110
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:26:5-110
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:26:22-107
-receiver#com.google.android.gms.measurement.AppMeasurementReceiver
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:29:9-33:20
-	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:31:13-35
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:32:13-37
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:30:13-85
-receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:34:9-42:20
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:29:9-37:20
-MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:29:9-37:20
-	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:36:13-35
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:37:13-36
-	android:permission
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:38:13-69
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:35:13-100
-intent-filter#action:name:com.android.vending.INSTALL_REFERRER
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:39:13-41:29
-action#com.android.vending.INSTALL_REFERRER
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:40:17-79
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:40:25-76
-service#com.google.android.gms.measurement.AppMeasurementService
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:44:9-47:40
-	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:46:13-35
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:47:13-37
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:45:13-84
-service#com.google.android.gms.measurement.AppMeasurementJobService
-ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:48:9-52:72
-	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:50:13-35
-	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:51:13-37
-	android:permission
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:52:13-69
-	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:49:13-87
-meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-	android:value
-		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
-	android:name
-		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+		ADDED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:23:22-65
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:25:5-81
 	android:name
@@ -673,6 +549,130 @@ action#androidx.work.impl.background.systemalarm.UpdateProxies
 ADDED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:118:17-98
 	android:name
 		ADDED from [androidx.work:work-runtime:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/fc2710710606fec6bb222b87f0e961f7/work-runtime-2.0.0/AndroidManifest.xml:118:25-95
+uses-permission#android.permission.INTERNET
+ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2396bdff49e22ef7c1eee91b7f4933e7/play-services-measurement-sdk-api-17.2.0/AndroidManifest.xml:23:5-67
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:22:22-64
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:29:9-35:19
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:29:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:28:13-84
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/392420c3dd2cc3d0fca3cc4b856bceb2/play-services-measurement-api-17.2.0/AndroidManifest.xml:31:17-139
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:26:22-79
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:33:17-96
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:37:9-44:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:39:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:40:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:38:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:41:13-43:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:42:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:20.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2c9c3ada7385ed70d44214515be3c040/firebase-iid-20.0.0/AndroidManifest.xml:42:25-78
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:12:9-16:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:14:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:15:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:16:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:19.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/da85807e18f6f20108b796ce75f33791/firebase-common-19.0.0/AndroidManifest.xml:13:13-77
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:30:13-85
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:34:9-42:20
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:29:9-37:20
+MERGED from [com.google.android.gms:play-services-measurement-impl:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/9df8092c900b0afc141c27ca06dda7bf/play-services-measurement-impl-17.2.0/AndroidManifest.xml:29:9-37:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:36:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:37:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:38:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:35:13-100
+intent-filter#action:name:com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:39:13-41:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:40:17-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:40:25-76
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:44:9-47:40
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:46:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:45:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:48:9-52:72
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:50:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:51:13-37
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:52:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:17.2.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/81f95de220bd5e1d95ad05c17403a552/play-services-measurement-17.2.0/AndroidManifest.xml:49:13-87
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:17.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
 provider#androidx.lifecycle.ProcessLifecycleOwnerInitializer
 ADDED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/imperituroard/.gradle/caches/transforms-2/files-2.1/7e1d5b061c486ece79194cc13dc47f9a/lifecycle-process-2.0.0/AndroidManifest.xml:23:9-27:43
 	android:authorities

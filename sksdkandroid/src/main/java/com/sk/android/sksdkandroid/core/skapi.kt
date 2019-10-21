@@ -488,15 +488,15 @@ try{
 
                 val wr: DataOutputStream = DataOutputStream(outputStream)
 
-                println("URL3 : $url")
+                //println("URL3 : $url")
                 wr.write(postData);
 
-                println("URL2 : $url")
+                //println("URL2 : $url")
 
                 wr.flush();
 
-                println("URL : $url")
-                println("Response Code : $responseCode")
+                //println("URL : $url")
+                //println("Response Code : $responseCode")
                 function_code_answer5 = responseCode;
 
                 //if (responseCode==401) { init_sk.clearData() }
@@ -510,7 +510,7 @@ try{
                         inputLine = it.readLine()
                     }
                     it.close()
-                    println("Response : $response")
+                    //println("Response : $response")
                     function_net_answer5 = response.toString()
                 }
             }

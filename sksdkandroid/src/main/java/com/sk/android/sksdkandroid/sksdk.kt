@@ -108,7 +108,7 @@ class HyberSK(user_msisdn: String="unknown", user_password: String="unknown", co
             if (init_sk.paramsglobal.registrationstatus == true) {
                 return answ.sk_register_new_register_exists2(init_sk.paramsglobal,context)
             } else {
-                val answ_svyazcom: SkDataApi2 = apisk.sk_device_register(
+                val answ_sk: SkDataApi2 = apisk.sk_device_register(
                     X_Hyber_Client_API_Key,
                     X_Hyber_Session_Id,
                     X_Hyber_App_Fingerprint,
@@ -120,17 +120,17 @@ class HyberSK(user_msisdn: String="unknown", user_password: String="unknown", co
                     init_sk.paramsglobal.sk_user_msisdn,
                     context
                 )
-                Log.d(TAG, "sk_register_new response: $answ_svyazcom");
+                Log.d(TAG, "sk_register_new response: $answ_sk");
                 Log.d(TAG, "uuid: ${init_sk.paramsglobal.sk_uuid}");
                 return SkFunAnswerRegister(
-                    code = answ_svyazcom.code,
-                    result = answ_svyazcom.body.result,
-                    description = answ_svyazcom.body.description,
-                    deviceId = answ_svyazcom.body.deviceId,
-                    token = answ_svyazcom.body.token,
-                    userId = answ_svyazcom.body.userId,
-                    userPhone = answ_svyazcom.body.userPhone,
-                    createdAt = answ_svyazcom.body.createdAt
+                    code = answ_sk.code,
+                    result = answ_sk.body.result,
+                    description = answ_sk.body.description,
+                    deviceId = answ_sk.body.deviceId,
+                    token = answ_sk.body.token,
+                    userId = answ_sk.body.userId,
+                    userPhone = answ_sk.body.userPhone,
+                    createdAt = answ_sk.body.createdAt
                 )
             }
         } catch (e: Exception) {
@@ -173,16 +173,16 @@ class HyberSK(user_msisdn: String="unknown", user_password: String="unknown", co
     fun sk_get_message_history(period_in_seconds: Int): SkFunAnswerGeneral {
         try {
             if (init_sk.paramsglobal.registrationstatus == true) {
-                val mess_hist_svyazcom: SkFunAnswerGeneral = apisk.sk_get_message_history(
+                val mess_hist_sk: SkFunAnswerGeneral = apisk.sk_get_message_history(
                     X_Hyber_Session_Id,
                     init_sk.paramsglobal.sk_registration_token,
                     period_in_seconds
                 )
-                println(mess_hist_svyazcom)
-                if  (mess_hist_svyazcom.code == 401){
+                println(mess_hist_sk)
+                if  (mess_hist_sk.code == 401){
                     try{ init_sk.clearData()} catch (ee:Exception){}
                 }
-                return answ.general_answer(mess_hist_svyazcom.code.toString(), mess_hist_svyazcom.body, "Success")
+                return answ.general_answer(mess_hist_sk.code.toString(), mess_hist_sk.body, "Success")
             } else {
                 return answer_not_registered
             }
@@ -195,15 +195,15 @@ class HyberSK(user_msisdn: String="unknown", user_password: String="unknown", co
     fun sk_get_device_all_from_sk(): SkFunAnswerGeneral {
         try {
             if (init_sk.paramsglobal.registrationstatus == true) {
-                val device_all_svyazcom: SkDataApi = apisk.sk_get_device_all(
+                val device_all_sk: SkDataApi = apisk.sk_get_device_all(
                     X_Hyber_Session_Id,
                     init_sk.paramsglobal.sk_registration_token
                 )
-                Log.d(TAG, "device_all_svyazcom : $device_all_svyazcom");
-                if  (device_all_svyazcom.code == 401){
+                Log.d(TAG, "device_all_sk : $device_all_sk");
+                if  (device_all_sk.code == 401){
                     try{ init_sk.clearData()} catch (ee:Exception){}
                 }
-                return answ.general_answer(device_all_svyazcom.code.toString(), device_all_svyazcom.body, "Success")
+                return answ.general_answer(device_all_sk.code.toString(), device_all_sk.body, "Success")
             } else {
                 return answer_not_registered
             }
@@ -291,12 +291,12 @@ class HyberSK(user_msisdn: String="unknown", user_password: String="unknown", co
     fun sk_clear_all_device(): SkFunAnswerGeneral {
         try {
             if (init_sk.paramsglobal.registrationstatus == true) {
-                val device_all_svyazcom: SkDataApi = apisk.sk_get_device_all(
+                val device_all_sk: SkDataApi = apisk.sk_get_device_all(
                     X_Hyber_Session_Id,
                     init_sk.paramsglobal.sk_registration_token
                 )
 
-                val device_list: String = parsing.parse_id_devices_all(device_all_svyazcom.body)
+                val device_list: String = parsing.parse_id_devices_all(device_all_sk.body)
 
                 val sk_answer: SkDataApi = apisk.sk_device_revoke(
                     device_list,

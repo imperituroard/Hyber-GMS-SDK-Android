@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rHK/values-zh-rHK.xml",
+            "outputFile": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rHK/values-zh-rHK.xml",
             "map": [
                 {
                     "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/res/values-zh-rHK/values.xml",

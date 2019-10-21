@@ -39,7 +39,7 @@ class ForegroundBackgroundListener(textBox: EditText) : LifecycleObserver {
     //any classes initialization
     private var textBox: EditText by Delegates.notNull()
 
-    //main class Svyazcom initialization
+    //main class initialization
     init {
         this.textBox = textBox
     }

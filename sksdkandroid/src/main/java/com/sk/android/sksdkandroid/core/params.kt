@@ -37,11 +37,11 @@ internal object SkParameters {
     //uuid generates only one time
     var sk_uuid:String = String()
 
-    //its deviceId which we receive from svyazcom server with answer for sk_register_new()
+    //its deviceId which we receive from server with answer for sk_register_new()
     var deviceId:String = String()
 
     //is procedure for register new device completed or not
-    // (true - devise exist on svyazcom server. )
+    // (true - devise exist on server. )
     // false - it s new device and we need to complete sk_register_new()
     var registrationstatus: Boolean = false
 
@@ -60,15 +60,15 @@ internal object SkParameters {
     var push_notification_display_priority: Int = 2
 
     //urls for rest api SkApi class
-    var sk_url_registration: String = "https://test-push.hyber.im/api/2.3/device/registration"
-    var sk_url_revoke: String = "https://test-push.hyber.im/api/2.3/device/revoke"
-    var sk_url_getdeviceall: String = "https://test-push.hyber.im/api/2.3/device/all"
-    var sk_url_device_update: String = "https://test-push.hyber.im/api/2.3/device/update"
-    var sk_url_message_callback: String = "https://test-push.hyber.im/api/2.3/message/callback"
-    var sk_url_message_dr: String = "https://test-push.hyber.im/api/2.3/message/dr"
+    var sk_url_registration: String = "https://push.hyber.im/api/2.3/device/registration"
+    var sk_url_revoke: String = "https://push.hyber.im/api/2.3/device/revoke"
+    var sk_url_getdeviceall: String = "https://push.hyber.im/api/2.3/device/all"
+    var sk_url_device_update: String = "https://push.hyber.im/api/2.3/device/update"
+    var sk_url_message_callback: String = "https://push.hyber.im/api/2.3/message/callback"
+    var sk_url_message_dr: String = "https://push.hyber.im/api/2.3/message/dr"
 
     fun sk_url_message_history(timestamp: String): String{
-        val sk_url_mess = "https://test-push.hyber.im/api/2.3/message/history?startDate=" + timestamp
+        val sk_url_mess = "https://push.hyber.im/api/2.3/message/history?startDate=" + timestamp
         return sk_url_mess
     }
 
