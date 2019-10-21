@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/b0e4e9b515602939548acfad8d77e6c7/jetified-firebase-messaging-20.0.0/res/values/values.xml",
@@ -35,6 +35,23 @@
                         "startOffsets": "6235,6300,6364",
                         "endColumns": "64,63,60",
                         "endOffsets": "6295,6359,6420"
+                    }
+                },
+                {
+                    "source": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "153,55,102",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "194,97,148"
+                    },
+                    "to": {
+                        "startLines": "155,156,157",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "7833,7879,7926",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "7874,7921,7972"
                     }
                 },
                 {
@@ -95,40 +112,6 @@
                     }
                 },
                 {
-                    "source": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "51",
-                        "endOffsets": "63"
-                    },
-                    "to": {
-                        "startLines": "417",
-                        "startColumns": "4",
-                        "startOffsets": "24967",
-                        "endColumns": "51",
-                        "endOffsets": "25014"
-                    }
-                },
-                {
-                    "source": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/res/values/colors.xml",
-                    "from": {
-                        "startLines": "4,2,3",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "153,55,102",
-                        "endColumns": "45,46,50",
-                        "endOffsets": "194,97,148"
-                    },
-                    "to": {
-                        "startLines": "155,156,157",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "7833,7879,7926",
-                        "endColumns": "45,46,50",
-                        "endOffsets": "7874,7921,7972"
-                    }
-                },
-                {
                     "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/res/values/values.xml",
                     "from": {
                         "startLines": "4,7",
@@ -143,6 +126,23 @@
                         "startOffsets": "22963,26059",
                         "endColumns": "67,166",
                         "endOffsets": "23026,26221"
+                    }
+                },
+                {
+                    "source": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "51",
+                        "endOffsets": "63"
+                    },
+                    "to": {
+                        "startLines": "417",
+                        "startColumns": "4",
+                        "startOffsets": "24967",
+                        "endColumns": "51",
+                        "endOffsets": "25014"
                     }
                 },
                 {
@@ -165,24 +165,7 @@
                     }
                 },
                 {
-                    "source": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/build/generated/res/google-services/debug/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,308,390,494,603,723,821",
-                        "endColumns": "143,108,81,103,108,119,97,74",
-                        "endOffsets": "194,303,385,489,598,718,816,891"
-                    },
-                    "to": {
-                        "startLines": "436,438,439,440,441,442,443,444",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "27352,27578,27687,27769,27873,27982,28102,28200",
-                        "endColumns": "143,108,81,103,108,119,97,74",
-                        "endOffsets": "27491,27682,27764,27868,27977,28097,28195,28270"
-                    }
-                },
-                {
-                    "source": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",
@@ -198,6 +181,23 @@
                         "endLines": "457",
                         "endColumns": "12",
                         "endOffsets": "29155"
+                    }
+                },
+                {
+                    "source": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/generated/res/google-services/debug/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,308,390,494,603,723,821",
+                        "endColumns": "143,108,81,103,108,119,97,74",
+                        "endOffsets": "194,303,385,489,598,718,816,891"
+                    },
+                    "to": {
+                        "startLines": "436,438,439,440,441,442,443,444",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "27352,27578,27687,27769,27873,27982,28102,28200",
+                        "endColumns": "143,108,81,103,108,119,97,74",
+                        "endOffsets": "27491,27682,27764,27868,27977,28097,28195,28270"
                     }
                 },
                 {

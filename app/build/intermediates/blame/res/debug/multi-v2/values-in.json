@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-in/values-in.xml",
+            "outputFile": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-in/values-in.xml",
             "map": [
                 {
                     "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/50311154fe8f267a04cd839eba354b9f/play-services-base-17.0.0/res/values-in/values.xml",

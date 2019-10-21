@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-lt/values-lt.xml",
+            "outputFile": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-lt/values-lt.xml",
             "map": [
                 {
                     "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/c46310074a2d0362ab1626e32231a467/appcompat-1.1.0/res/values-lt/values-lt.xml",

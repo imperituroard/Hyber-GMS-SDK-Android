@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml",
+            "outputFile": "/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml",
             "map": [
                 {
                     "source": "/Users/imperituroard/.gradle/caches/transforms-2/files-2.1/2df6a5d72e98c7353841ced1b71c31bc/jetified-play-services-basement-17.0.0/res/values-pt-rPT/values.xml",

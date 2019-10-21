@@ -26,7 +26,7 @@
       </configuration>
     </facet>
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/sksdkandroid/src/debug/java;/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/sksdkandroid/src/release/kotlin;/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/sksdkandroid/src/release/java;/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/sksdkandroid/src/debugAndroidTest/kotlin;/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/sksdkandroid/src/debugUnitTest/kotlin;/Users/imperituroard/Desktop/Hyber-SVC-SDK-Android/sksdkandroid/src/releaseUnitTest/kotlin">
+      <configuration version="3" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false" pureKotlinSourceFolders="$MODULE_DIR$/src/debug/kotlin;/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android test/sksdkandroid/src/debug/java;/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android test/sksdkandroid/src/release/kotlin;/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android test/sksdkandroid/src/release/java;/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android test/sksdkandroid/src/debugAndroidTest/kotlin;/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android test/sksdkandroid/src/debugUnitTest/kotlin;/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android test/sksdkandroid/src/releaseUnitTest/kotlin">
         <compilerSettings>
           <option name="additionalArguments" value="-Xallow-no-source-files" />
         </compilerSettings>

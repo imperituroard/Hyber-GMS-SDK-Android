@@ -37,11 +37,11 @@ internal object SkParameters {
     //uuid generates only one time
     var sk_uuid:String = String()
 
-    //its deviceId which we receive from svyazcom server with answer for sk_register_new()
+    //its deviceId which we receive from server with answer for sk_register_new()
     var deviceId:String = String()
 
     //is procedure for register new device completed or not
-    // (true - devise exist on svyazcom server. )
+    // (true - devise exist on server. )
     // false - it s new device and we need to complete sk_register_new()
     var registrationstatus: Boolean = false
 
