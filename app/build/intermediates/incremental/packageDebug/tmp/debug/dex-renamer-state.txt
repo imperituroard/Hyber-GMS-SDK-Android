@@ -1,4 +1,0 @@
-#Mon Oct 07 23:12:14 MSK 2019
-base.0=/Users/imperituroard/Desktop/Projects-Android/Hyber-SVC-SDK-Android/app/build/intermediates/dex/debug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

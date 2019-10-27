@@ -28,7 +28,7 @@ import com.sk.android.sksdkandroid.core.Initialization
 import com.sk.android.sksdkandroid.core.SkPublicParams
 
 
-internal class SkFirebaseService (): FirebaseMessagingService() {
+public class SkFirebaseService (): FirebaseMessagingService() {
 
     private val COUNT_PLUS = 1
     private val COUNT_MINUS = 2

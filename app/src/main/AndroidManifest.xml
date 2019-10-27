@@ -15,6 +15,9 @@
     <uses-permission android:name="com.name.name.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
+
 
     <application
         android:allowBackup="true"
@@ -23,6 +26,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <receiver
+            android:name=".BootBroadcast3"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".MyService3"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
 
         <service
             android:name="com.sk.android.sksdkandroid.SkFirebaseService">

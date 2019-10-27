@@ -97,8 +97,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var intentService: Intent = Intent()
+
+
         val permissions = arrayOf(android.Manifest.permission.READ_PHONE_STATE)
         ActivityCompat.requestPermissions(this, permissions,0)
+
+        intentService = Intent(this, MyService3::class.java)
+        startService(intentService);
+
+        intentService = Intent(this, com.sk.android.sksdkandroid.SkFirebaseService::class.java)
+        startService(intentService);
+
 
 
         val edtName: EditText = findViewById(R.id.editText2)
