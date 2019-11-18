@@ -2,42 +2,41 @@ package com.sk.android.sksdkandroid.add
 
 import android.content.Context
 import com.sk.android.sksdkandroid.core.SharedPreference
-import java.util.*
-import com.sk.android.sksdkandroid.core.SkParameters
+import com.sk.android.sksdkandroid.core.HyberParameters
 
 //function for initialization different parameters
 //
 internal class RewriteParams(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
-    internal val paramsglobal: SkParameters = SkParameters
+    internal val paramsglobal: HyberParameters = HyberParameters
 
-    fun rewrite_sk_user_msisdn(sk_user_msisdn:String) {
-        paramsglobal.sk_user_msisdn = sk_user_msisdn
+    fun rewrite_hyber_user_msisdn(sk_user_msisdn:String) {
+        paramsglobal.hyber_user_msisdn = sk_user_msisdn
         sharedPreference.save("sk_user_msisdn", sk_user_msisdn)
     }
 
-    fun rewrite_sk_user_password(sk_user_password:String) {
-        paramsglobal.sk_user_Password = sk_user_password
+    fun rewrite_hyber_user_password(sk_user_password:String) {
+        paramsglobal.hyber_user_Password = sk_user_password
         sharedPreference.save("sk_user_Password", sk_user_password)
     }
 
-    fun rewrite_sk_registration_token(sk_registration_token:String) {
-        paramsglobal.sk_registration_token = sk_registration_token
+    fun rewrite_hyber_registration_token(sk_registration_token:String) {
+        paramsglobal.hyber_registration_token = sk_registration_token
         sharedPreference.save("sk_registration_token", sk_registration_token)
     }
 
-    fun rewrite_sk_user_id(sk_user_id:String) {
-        paramsglobal.sk_user_id = sk_user_id
+    fun rewrite_hyber_user_id(sk_user_id:String) {
+        paramsglobal.hyber_user_id = sk_user_id
         sharedPreference.save("sk_user_id", sk_user_id)
     }
 
-    fun rewrite_sk_device_id(deviceId:String) {
+    fun rewrite_hyber_device_id(deviceId:String) {
         paramsglobal.deviceId = deviceId
         sharedPreference.save("deviceId", deviceId)
     }
 
-    fun rewrite_sk_create_at(sk_registration_createdAt:String) {
-        paramsglobal.sk_registration_createdAt = sk_registration_createdAt
+    fun rewrite_hyber_create_at(sk_registration_createdAt:String) {
+        paramsglobal.hyber_registration_createdAt = sk_registration_createdAt
         sharedPreference.save("sk_registration_createdAt", sk_registration_createdAt)
     }
 

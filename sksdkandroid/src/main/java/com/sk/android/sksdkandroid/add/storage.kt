@@ -14,7 +14,7 @@ import androidx.room.Room
 import kotlin.properties.Delegates
 
 
-class SkStorage(context: Context) {
+class HyberStorage(context: Context) {
 
     //any classes initialization
     private var context: Context by Delegates.notNull()

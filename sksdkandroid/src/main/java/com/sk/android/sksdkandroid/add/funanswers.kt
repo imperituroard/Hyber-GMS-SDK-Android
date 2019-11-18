@@ -2,11 +2,11 @@ package com.sk.android.sksdkandroid.add
 
 import android.content.Context
 import com.sk.android.sksdkandroid.core.Initialization
-import com.sk.android.sksdkandroid.core.SkParameters
+import com.sk.android.sksdkandroid.core.HyberParameters
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
-import com.sk.android.sksdkandroid.core.SkFunAnswerGeneral
-import com.sk.android.sksdkandroid.core.SkFunAnswerRegister
+import com.sk.android.sksdkandroid.core.HyberFunAnswerGeneral
+import com.sk.android.sksdkandroid.core.HyberFunAnswerRegister
 
 internal class Answer() {
 
@@ -73,7 +73,7 @@ internal class Answer() {
         val body: String
     )
 
-    fun sk_register_new_register_exists(paramsgl: SkParameters): String {
+    fun hyber_register_new_register_exists(paramsgl: HyberParameters): String {
 
         @Serializable
         data class Body1(
@@ -98,14 +98,14 @@ internal class Answer() {
                 "Exists",
                 "Device already registered. Nothing to do",
                 701,
-                Body1(paramsgl.deviceId, paramsgl.sk_uuid)
+                Body1(paramsgl.deviceId, paramsgl.hyber_uuid)
             )
         )
         return jsonData
     }
 
-    fun sk_register_new_register_exists2(paramsgl: SkParameters, context: Context): SkFunAnswerRegister {
-        var init_sk: Initialization = Initialization(context)
+    fun hyber_register_new_register_exists2(paramsgl: HyberParameters, context: Context): HyberFunAnswerRegister {
+        val init_hyber: Initialization = Initialization(context)
         @Serializable
         data class Body1(
             @SerialName("deviceId")
@@ -114,19 +114,19 @@ internal class Answer() {
             val uuid: String
         )
 
-        return SkFunAnswerRegister(
+        return HyberFunAnswerRegister(
             code = 701,
-            deviceId = init_sk.paramsglobal.deviceId,
-            token = init_sk.paramsglobal.sk_registration_token,
-            userId = init_sk.paramsglobal.sk_user_id,
-            userPhone = init_sk.paramsglobal.sk_user_msisdn,
-            createdAt = init_sk.paramsglobal.sk_registration_createdAt,
+            deviceId = init_hyber.paramsglobal.deviceId,
+            token = init_hyber.paramsglobal.hyber_registration_token,
+            userId = init_hyber.paramsglobal.hyber_user_id,
+            userPhone = init_hyber.paramsglobal.hyber_user_msisdn,
+            createdAt = init_hyber.paramsglobal.hyber_registration_createdAt,
             result = "Exists",
             description = "Device already registered. Nothing to do"
         )
     }
 
-    fun sk_registration_notregistered(paramsgl: SkParameters): String {
+    fun hyber_registration_notregistered(paramsgl: HyberParameters): String {
 
         @Serializable
         data class Body1(
@@ -151,16 +151,16 @@ internal class Answer() {
                 "Not Registered",
                 "Device not registered. Nothing to do",
                 701,
-                Body1(paramsgl.deviceId, paramsgl.sk_uuid)
+                Body1(paramsgl.deviceId, paramsgl.hyber_uuid)
             )
         )
         return jsonData
     }
 
-    fun register_procedure_answer2(resp_code: String, resp_body: String, context: Context): SkFunAnswerRegister {
+    fun register_procedure_answer2(resp_code: String, resp_body: String, context: Context): HyberFunAnswerRegister {
 
-        val sk_rewrite: RewriteParams = RewriteParams(context)
-        val anss: SkFunAnswerRegister
+        val hyber_rewrite: RewriteParams = RewriteParams(context)
+        val anss: HyberFunAnswerRegister
 
         if (resp_code == "200") {
             val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
@@ -173,7 +173,7 @@ internal class Answer() {
                     parent.profile.userPhone,
                     parent.profile.createdAt
                 )).toString()
-            anss = SkFunAnswerRegister(
+            anss = HyberFunAnswerRegister(
                 code = 200,
                 description = "Success",
                 result = "Ok",
@@ -184,16 +184,16 @@ internal class Answer() {
                 createdAt = parent.profile.createdAt
             )
 
-            sk_rewrite.rewrite_sk_user_id(parent.profile.userId)
-            sk_rewrite.rewrite_sk_registration_token(parent.session.token)
-            sk_rewrite.rewrite_sk_create_at(parent.profile.createdAt)
-            sk_rewrite.rewrite_sk_device_id(parent.device.deviceId)
-            sk_rewrite.rewrite_api_registrationstatus(true)
+            hyber_rewrite.rewrite_hyber_user_id(parent.profile.userId)
+            hyber_rewrite.rewrite_hyber_registration_token(parent.session.token)
+            hyber_rewrite.rewrite_hyber_create_at(parent.profile.createdAt)
+            hyber_rewrite.rewrite_hyber_device_id(parent.device.deviceId)
+            hyber_rewrite.rewrite_api_registrationstatus(true)
 
             return anss
         } else if (resp_code == "401") {
 
-            anss = SkFunAnswerRegister(
+            anss = HyberFunAnswerRegister(
                 code = 401,
                 description = "(Client error) authentication error, probably errors",
                 result = "Failed",
@@ -207,7 +207,7 @@ internal class Answer() {
             return anss
         }
         else if (resp_code == "400") {
-            anss = SkFunAnswerRegister(
+            anss = HyberFunAnswerRegister(
                 code = 400,
                 description = "(Client error) request validation error",
                 result = "Failed",
@@ -221,7 +221,7 @@ internal class Answer() {
             return anss
         } else if (resp_code == "500") {
 
-            anss = SkFunAnswerRegister(
+            anss = HyberFunAnswerRegister(
                 code = 500,
                 description = "(Server error)",
                 result = "Failed",
@@ -234,7 +234,7 @@ internal class Answer() {
             return anss
 
         } else if (resp_code == "700") {
-            anss = SkFunAnswerRegister(
+            anss = HyberFunAnswerRegister(
                 code = 700,
                 description = "Internal SDK error",
                 result = "Failed",
@@ -248,7 +248,7 @@ internal class Answer() {
         }
         else {
 
-            anss = SkFunAnswerRegister(
+            anss = HyberFunAnswerRegister(
                 code = 710,
                 description = "Unknown error",
                 result = "Failed",
@@ -270,7 +270,7 @@ internal class Answer() {
 
     fun register_procedure_answer(resp_code: String, resp_body: String, context: Context): String {
 
-        val sk_rewrite: RewriteParams = RewriteParams(context)
+        val hyber_rewrite: RewriteParams = RewriteParams(context)
 
         if (resp_code == "200") {
             val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
@@ -290,11 +290,11 @@ internal class Answer() {
                 )
             )
 
-            sk_rewrite.rewrite_sk_user_id(parent.profile.userId)
-            sk_rewrite.rewrite_sk_registration_token(parent.session.token)
-            sk_rewrite.rewrite_sk_create_at(parent.profile.createdAt)
-            sk_rewrite.rewrite_sk_device_id(parent.device.deviceId)
-            sk_rewrite.rewrite_api_registrationstatus(true)
+            hyber_rewrite.rewrite_hyber_user_id(parent.profile.userId)
+            hyber_rewrite.rewrite_hyber_registration_token(parent.session.token)
+            hyber_rewrite.rewrite_hyber_create_at(parent.profile.createdAt)
+            hyber_rewrite.rewrite_hyber_device_id(parent.device.deviceId)
+            hyber_rewrite.rewrite_api_registrationstatus(true)
 
             return jsonData
         } else if (resp_code == "401") {
@@ -362,14 +362,14 @@ internal class Answer() {
         //Response : {"session": {"token": "5d54b26ccde343348c70c2f79c81d37f"}, "profile": {"userId": 21, "userPhone": "380991234567", "createdAt": "2019-09-07T14:10:49.599893+00"}, "device": {"deviceId": 65}}
     }
 
-    fun general_answer(resp_code: String, body_json: String, description: String): SkFunAnswerGeneral{
-        val resp: SkFunAnswerGeneral
+    fun general_answer(resp_code: String, body_json: String, description: String): HyberFunAnswerGeneral{
+        val resp: HyberFunAnswerGeneral
         if (resp_code=="200"){
-            resp = SkFunAnswerGeneral(200, "OK", "Success", body_json)
+            resp = HyberFunAnswerGeneral(200, "OK", "Success", body_json)
         } else if (resp_code=="400"){
-            resp = SkFunAnswerGeneral(400, "Failed", "Failed", "unknown")
+            resp = HyberFunAnswerGeneral(400, "Failed", "Failed", "unknown")
         } else {
-            resp = SkFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
+            resp = HyberFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
         }
 
         return resp

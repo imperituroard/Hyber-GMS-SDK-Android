@@ -16,7 +16,7 @@ import com.sk.android.sksdkandroid.add.GetInfo
 import java.lang.Exception
 
 //class for communication with sk rest server (REST API)
-internal class SkApi() {
+internal class HyberApi() {
 
     //class init for creation answers
     private var answ_form: Answer = Answer()
@@ -41,7 +41,7 @@ internal class SkApi() {
     }
 
     //POST procedure for new registration
-    fun sk_device_register(
+    fun hyber_device_register(
         X_Hyber_Client_API_Key: String,
         X_Hyber_Session_Id: String,
         X_Hyber_App_Fingerprint: String,
@@ -52,8 +52,8 @@ internal class SkApi() {
         user_Pass: String,
         user_Phone: String,
         context: Context
-    ): SkDataApi2 {
-        var function_net_answer: SkFunAnswerRegister = SkFunAnswerRegister(0,"","","", "", "", "", "")
+    ): HyberDataApi2 {
+        var function_net_answer: HyberFunAnswerRegister = HyberFunAnswerRegister(0,"","","", "", "", "", "")
         var function_code_answer: Int = 0
 
         val thread_net_f1 = Thread(Runnable {
@@ -73,7 +73,7 @@ internal class SkApi() {
 
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
-                val mURL = URL(SkParameters.sk_url_registration)
+                val mURL = URL(HyberParameters.hyber_url_registration)
                 val urlc = mURL.openConnection() as HttpsURLConnection
                 urlc.doOutput = true
                 urlc.setRequestProperty("Content-Language", "en-US");
@@ -152,15 +152,15 @@ internal class SkApi() {
         thread_net_f1.start()
         thread_net_f1.join()
 
-        return SkDataApi2(function_net_answer.code, function_net_answer, 0)
+        return HyberDataApi2(function_net_answer.code, function_net_answer, 0)
     }
 
     //POST
-    fun sk_device_revoke(
+    fun hyber_device_revoke(
         dev_list: String,
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String
-    ): SkDataApi {
+    ): HyberDataApi {
 
         var function_net_answer2: String = String()
 
@@ -195,7 +195,7 @@ internal class SkApi() {
 
                 //println(stringBuilder)
 
-                val mURL2 = URL(SkParameters.sk_url_revoke)
+                val mURL2 = URL(HyberParameters.hyber_url_revoke)
 
                 val urlc2 = mURL2.openConnection() as HttpsURLConnection
                 urlc2.doOutput = true
@@ -259,18 +259,18 @@ internal class SkApi() {
         thread_net_f2.start()
         thread_net_f2.join()
 
-        return SkDataApi(function_net_answer2.toInt(), "{}", 0)
+        return HyberDataApi(function_net_answer2.toInt(), "{}", 0)
     }
 
     //GET
-    fun sk_get_message_history(
+    fun hyber_get_message_history(
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String,
         period_in_seconds: Int
-    ): SkFunAnswerGeneral {
+    ): HyberFunAnswerGeneral {
 
         var function_net_answer3: String = String()
-        var final_answer: SkFunAnswerGeneral
+        var final_answer: HyberFunAnswerGeneral
         var function_code_answer3: Int = 0
 
         val thread_net_f3 = Thread(Runnable {
@@ -291,7 +291,7 @@ try{
             );
 
 
-            val mURL2 = URL(SkParameters.sk_url_message_history(currentTimestamp2.toString()))
+            val mURL2 = URL(HyberParameters.hyber_url_message_history(currentTimestamp2.toString()))
 
             //val urlc2 = mURL2.openConnection() as HttpsURLConnection
 
@@ -337,13 +337,13 @@ try{
 
         thread_net_f3.start()
         thread_net_f3.join()
-        return SkFunAnswerGeneral(function_code_answer3, "OK","Processed", function_net_answer3)
+        return HyberFunAnswerGeneral(function_code_answer3, "OK","Processed", function_net_answer3)
 
     }
 
 
     //GET
-    fun sk_get_device_all(X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String): SkDataApi {
+    fun hyber_get_device_all(X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String): HyberDataApi {
 
         try{
 
@@ -368,7 +368,7 @@ try{
                     "Result: Start step1, Function: sk_get_device_all, Class: SkApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $auth_token"
                 )
 
-                val mURL2 = URL(SkParameters.sk_url_getdeviceall)
+                val mURL2 = URL(HyberParameters.hyber_url_getdeviceall)
 
                 //val urlc2 = mURL2.openConnection() as HttpsURLConnection
 
@@ -415,16 +415,16 @@ try{
 
         thread_net_f4.start()
         thread_net_f4.join()
-        return SkDataApi(function_code_answer4, function_net_answer4, 0)
+        return HyberDataApi(function_code_answer4, function_net_answer4, 0)
 
     } catch (e: Exception) {
-        return SkDataApi(700, "Failed", 0)
+        return HyberDataApi(700, "Failed", 0)
     }
 
     }
 
     //POST
-    fun sk_device_update(
+    fun hyber_device_update(
         X_Hyber_Auth_Token: String,
         X_Hyber_Session_Id: String,
         device_Name: String,
@@ -432,7 +432,7 @@ try{
         os_Type: String,
         sdk_Version: String,
         fcm_Token: String
-    ): SkDataApi {
+    ): HyberDataApi {
 
         var function_net_answer5: String = String()
         var function_code_answer5: Int = 0
@@ -460,7 +460,7 @@ try{
 
             val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
 
-            val mURL = URL(SkParameters.sk_url_device_update)
+            val mURL = URL(HyberParameters.hyber_url_device_update)
 
             val urlc = mURL.openConnection() as HttpsURLConnection
             urlc.doOutput = true
@@ -530,7 +530,7 @@ try{
         thread_net_f5.start()
         thread_net_f5.join()
 
-        return SkDataApi(function_code_answer5, function_net_answer5, 0)
+        return HyberDataApi(function_code_answer5, function_net_answer5, 0)
 
 
     }
@@ -541,7 +541,7 @@ try{
         sk_answer: String,
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String
-    ): SkDataApi {
+    ): HyberDataApi {
 
 
         var function_net_answer6: String = String()
@@ -570,7 +570,7 @@ try{
 
             //println(stringBuilder)
 
-            val mURL2 = URL(SkParameters.sk_url_message_callback)
+            val mURL2 = URL(HyberParameters.hyber_url_message_callback)
 
             val urlc2 = mURL2.openConnection() as HttpsURLConnection
             urlc2.doOutput = true
@@ -633,7 +633,7 @@ try{
 
         thread_net_f6.start()
         thread_net_f6.join()
-        return SkDataApi(function_code_answer6, function_net_answer6, 0)
+        return HyberDataApi(function_code_answer6, function_net_answer6, 0)
 
 
     }
@@ -643,7 +643,7 @@ try{
         message_id: String,
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String
-    ): SkDataApi {
+    ): HyberDataApi {
 
         var function_net_answer7: String = String()
 
@@ -665,7 +665,7 @@ try{
 
             val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-            val mURL2 = URL(SkParameters.sk_url_message_dr)
+            val mURL2 = URL(HyberParameters.hyber_url_message_dr)
 
             val urlc2 = mURL2.openConnection() as HttpsURLConnection
             urlc2.doOutput = true
@@ -715,6 +715,6 @@ try{
         })
         thread_net_f7.start()
         thread_net_f7.join()
-        return SkDataApi(function_net_answer7.toInt(), "{}", 0)
+        return HyberDataApi(function_net_answer7.toInt(), "{}", 0)
     }
 }

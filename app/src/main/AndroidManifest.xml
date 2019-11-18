@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name="com.sk.android.sksdkandroid.SkFirebaseService">
+            android:name="com.sk.android.sksdkandroid.HyberFirebaseService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>

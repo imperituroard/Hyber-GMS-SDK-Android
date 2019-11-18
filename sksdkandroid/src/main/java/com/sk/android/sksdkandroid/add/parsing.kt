@@ -3,7 +3,7 @@ package com.sk.android.sksdkandroid.add
 import android.content.ContentValues.TAG
 import android.util.Log
 
-internal class SkParsing() {
+internal class HyberParsing() {
 
     fun parse_id_devices_all(input_json: String):String
     {

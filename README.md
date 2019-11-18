@@ -58,7 +58,7 @@ Installation completed. Now you can use Hyber SDK
 To start firebase service add service in your AndroidManifest.xml file
 
 <service
-    android:name="com.sk.android.sksdkandroid.SkFirebaseService">
+    android:name="com.sk.android.sksdkandroid.HyberFirebaseService">
     <intent-filter>
          <action android:name="com.google.firebase.MESSAGING_EVENT"/>
     </intent-filter>
@@ -81,7 +81,7 @@ registration_test.sk_register_new("ClientApiKey", "Fingerprint")
 for get function answers you can use special data types
 
 Data type for registration procedure
-import com.sk.android.sksdkandroid.core.SkFunAnswerRegister
+import com.sk.android.sksdkandroid.core.HyberFunAnswerRegister
 
 
 

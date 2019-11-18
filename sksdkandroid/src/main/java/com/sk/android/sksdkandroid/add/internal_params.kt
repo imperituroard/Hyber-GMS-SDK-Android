@@ -2,7 +2,7 @@ package com.sk.android.sksdkandroid.add
 import android.app.Notification
 import android.os.Build
 
-internal object SkInternal {
+internal object HyberInternal {
 
     fun notification_priority_old(prio: Int): Int {
 

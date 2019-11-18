@@ -6,10 +6,10 @@ import android.content.Intent
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import com.sk.android.sksdkandroid.R
-import com.sk.android.sksdkandroid.add.SkInternal
+import com.sk.android.sksdkandroid.add.HyberInternal
 
 
-open class SkPublicParams {
+open class HyberPublicParams {
 
 
     open fun notificationBuilder(context: Context, notificationTextMess: String): NotificationCompat.Builder {
@@ -23,7 +23,7 @@ open class SkPublicParams {
             .setContentText(notificationTextMess)
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.googleg_standard_color_18)
-            .setPriority(SkInternal.notification_priority_old(SkParameters.push_notification_display_priority))
+            .setPriority(HyberInternal.notification_priority_old(HyberParameters.push_notification_display_priority))
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
 
@@ -32,10 +32,10 @@ open class SkPublicParams {
     }
 }
 
-internal object SkParameters {
+internal object HyberParameters {
 
     //uuid generates only one time
-    var sk_uuid:String = String()
+    var hyber_uuid:String = String()
 
     //its deviceId which we receive from server with answer for sk_register_new()
     var deviceId:String = String()
@@ -46,43 +46,43 @@ internal object SkParameters {
     var registrationstatus: Boolean = false
 
     var sdkversion: String = "0.2.30"
-    var sk_osType: String = String()
-    var sk_deviceName: String = String()
-    var sk_deviceType: String = String()
-    var sk_user_Password: String = String()
-    var sk_user_msisdn: String = String()
-    var sk_registration_token: String = String()
-    var sk_user_id: String = String()
-    var sk_registration_createdAt: String = String()
+    var hyber_osType: String = String()
+    var hyber_deviceName: String = String()
+    var hyber_deviceType: String = String()
+    var hyber_user_Password: String = String()
+    var hyber_user_msisdn: String = String()
+    var hyber_registration_token: String = String()
+    var hyber_user_id: String = String()
+    var hyber_registration_createdAt: String = String()
     var firebase_registration_token: String = String()
-    var sk_registration_time: String = String()
+    var hyber_registration_time: String = String()
 
     var push_notification_display_priority: Int = 2
 
     //urls for rest api SkApi class
-    var sk_url_registration: String = "https://push.hyber.im/api/2.3/device/registration"
-    var sk_url_revoke: String = "https://push.hyber.im/api/2.3/device/revoke"
-    var sk_url_getdeviceall: String = "https://push.hyber.im/api/2.3/device/all"
-    var sk_url_device_update: String = "https://push.hyber.im/api/2.3/device/update"
-    var sk_url_message_callback: String = "https://push.hyber.im/api/2.3/message/callback"
-    var sk_url_message_dr: String = "https://push.hyber.im/api/2.3/message/dr"
+    var hyber_url_registration: String = "https://push.hyber.im/api/2.3/device/registration"
+    var hyber_url_revoke: String = "https://push.hyber.im/api/2.3/device/revoke"
+    var hyber_url_getdeviceall: String = "https://push.hyber.im/api/2.3/device/all"
+    var hyber_url_device_update: String = "https://push.hyber.im/api/2.3/device/update"
+    var hyber_url_message_callback: String = "https://push.hyber.im/api/2.3/message/callback"
+    var hyber_url_message_dr: String = "https://push.hyber.im/api/2.3/message/dr"
 
-    fun sk_url_message_history(timestamp: String): String{
-        val sk_url_mess = "https://push.hyber.im/api/2.3/message/history?startDate=" + timestamp
-        return sk_url_mess
+    fun hyber_url_message_history(timestamp: String): String{
+        val hyber_url_mess = "https://push.hyber.im/api/2.3/message/history?startDate=" + timestamp
+        return hyber_url_mess
     }
 
 }
 
-interface SkAp {}
-enum class SkApC: SkAp {
+interface HyberAp {}
+enum class HyberApC: HyberAp {
     CODE, BODY
 }
 
-internal data class SkDataApi(val code: Int, val body: String, val time: Int)
+internal data class HyberDataApi(val code: Int, val body: String, val time: Int)
 
 
-public data class SkFunAnswerRegister(
+public data class HyberFunAnswerRegister(
     val code: Int,
     val result: String,
     val description: String,
@@ -93,14 +93,14 @@ public data class SkFunAnswerRegister(
     val createdAt: String
 )
 
-internal data class SkDataApi2(
+internal data class HyberDataApi2(
     val code: Int,
-    val body: SkFunAnswerRegister,
+    val body: HyberFunAnswerRegister,
     val time: Int
 )
 
 
-public data class SkFunAnswerGeneral(
+public data class HyberFunAnswerGeneral(
     val code: Int,
     val result: String,
     val description: String,
