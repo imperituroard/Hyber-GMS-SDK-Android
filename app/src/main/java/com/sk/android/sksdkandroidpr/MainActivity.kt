@@ -11,7 +11,7 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.widget.Button
 import android.widget.EditText
-import com.sk.android.sksdkandroid.HyberSK
+import com.sk.android.sksdkandroid.HyberSDK
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.core.app.ActivityCompat
 import android.telephony.TelephonyManager
@@ -20,7 +20,7 @@ import android.text.TextUtils
 import android.os.Build
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
-import com.sk.android.sksdkandroid.SkPushMess
+import com.sk.android.sksdkandroid.HyberPushMess
 import androidx.core.app.NotificationCompat
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -30,8 +30,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import kotlin.properties.Delegates
 import android.hardware.fingerprint.FingerprintManager
-import com.sk.android.sksdkandroid.core.SkFunAnswerRegister
-import com.sk.android.sksdkandroid.core.SkFunAnswerGeneral
+import com.sk.android.sksdkandroid.core.HyberFunAnswerRegister
+import com.sk.android.sksdkandroid.core.HyberFunAnswerGeneral
+import com.sk.android.sksdkandroid.HyberMessaging
 
 class ForegroundBackgroundListener(textBox: EditText) : LifecycleObserver {
 
@@ -50,9 +51,9 @@ class ForegroundBackgroundListener(textBox: EditText) : LifecycleObserver {
         println("foreground")
 
 
-        if (SkPushMess.message != null) {
+        if (HyberPushMess.message != null) {
             val mess: String = textBox.text.toString()
-            textBox.setText(mess + "\n" + SkPushMess.message)
+            textBox.setText(mess + "\n" + HyberPushMess.message)
         }
     }
 
@@ -69,10 +70,10 @@ class MainActivity : AppCompatActivity() {
 
     val mPlugInReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (SkPushMess.message != null) {
+            if (HyberPushMess.message != null) {
                 val edtName: EditText = findViewById(R.id.editText2)
                 val mess: String = edtName.text.toString()
-                edtName.setText(mess + "\n" + SkPushMess.message)
+                edtName.setText(mess + "\n" + HyberPushMess.message)
             }
         }
     }
@@ -97,6 +98,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var intentService: Intent = Intent()
+        if (Build.VERSION.SDK_INT<=25) {
+            intentService = Intent(this, HyberMessaging::class.java)
+            startService(intentService);
+        }
+
         val permissions = arrayOf(android.Manifest.permission.READ_PHONE_STATE)
         ActivityCompat.requestPermissions(this, permissions,0)
 
@@ -105,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         val edittext1: EditText = findViewById(R.id.editText) as EditText
 
 
-        val ddd123:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+        val ddd123:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
 
         ProcessLifecycleOwner.get()
             .lifecycle
@@ -155,14 +162,14 @@ class MainActivity : AppCompatActivity() {
 
 
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
 
             //ddd.init_firebase(this, this, R.mipmap.ic_launcher)
             val msisd:String =edittext1.text.toString()
             println(msisd)
             ddd.rewrite_msisdn(msisd)
 
-            val sssss: SkFunAnswerRegister = ddd.sk_register_new("test","AIzaSyDvNUnk7R5Qx_aaMCFjFAWTi2jY8vbZW88")
+            val sssss: HyberFunAnswerRegister = ddd.hyber_register_new("test","AIzaSyDvNUnk7R5Qx_aaMCFjFAWTi2jY8vbZW88")
 
             edtName.setText(tttt + "\n" + sssss.toString())
 
@@ -170,9 +177,9 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
-            val sssss2: SkFunAnswerGeneral = ddd.sk_clear_current_device()
+            val sssss2: HyberFunAnswerGeneral = ddd.hyber_clear_current_device()
             edtName.setText(tttt + "\n" + sssss2.toString())
         }
 
@@ -222,11 +229,11 @@ class MainActivity : AppCompatActivity() {
         button4.setOnClickListener {
 
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             val msisd:String =edittext1.text.toString()
             println(msisd)
             ddd.rewrite_msisdn(msisd)
-            val sssss4: SkFunAnswerGeneral = ddd.sk_get_message_history(7200)
+            val sssss4: HyberFunAnswerGeneral = ddd.hyber_get_message_history(7200)
             edtName.setText(tttt + "\n" + sssss4)
 
         }
@@ -234,10 +241,10 @@ class MainActivity : AppCompatActivity() {
         button5.setOnClickListener {
 
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
 
-            val sssss5: SkFunAnswerGeneral = ddd.sk_get_device_all_from_sk()
+            val sssss5: HyberFunAnswerGeneral = ddd.hyber_get_device_all_from_hyber()
 
             edtName.setText(tttt + "\n" + sssss5)
 
@@ -246,10 +253,10 @@ class MainActivity : AppCompatActivity() {
         button6.setOnClickListener {
 
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
 
-            val sssss5: SkFunAnswerGeneral = ddd.sk_update_registration()
+            val sssss5: HyberFunAnswerGeneral = ddd.hyber_update_registration()
 
             edtName.setText(tttt + "\n" + sssss5)
 
@@ -258,17 +265,17 @@ class MainActivity : AppCompatActivity() {
         button7.setOnClickListener {
 
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
-            val sssss7: SkFunAnswerGeneral = ddd.sk_send_message_callback("23f2f2f2f2f","Hello World")
+            val sssss7: HyberFunAnswerGeneral = ddd.hyber_send_message_callback("23f2f2f2f2f","Hello World")
             edtName.setText(tttt + "\n" + sssss7)
         }
 
         button8.setOnClickListener {
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
-            val sssss8: SkFunAnswerGeneral = ddd.sk_message_delivery_report("23f2f2f2f2f")
+            val sssss8: HyberFunAnswerGeneral = ddd.hyber_message_delivery_report("23f2f2f2f2f")
 
             edtName.setText(tttt + "\n" + sssss8)
 
@@ -276,7 +283,7 @@ class MainActivity : AppCompatActivity() {
 
         button9.setOnClickListener {
 
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
 
         }
@@ -286,9 +293,9 @@ class MainActivity : AppCompatActivity() {
         button10.setOnClickListener {
 
             val tttt:String = edtName.text.toString()
-            val ddd:HyberSK = HyberSK(edittext1.text.toString(), "password",this)
+            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
             ddd.rewrite_msisdn(edittext1.text.toString())
-            val sssss33: SkFunAnswerGeneral = ddd.sk_clear_all_device()
+            val sssss33: HyberFunAnswerGeneral = ddd.hyber_clear_all_device()
             edtName.setText(tttt + "\n" + sssss33)
 
         }

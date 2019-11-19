@@ -79,6 +79,62 @@ internal class Initialization(val context: Context) {
         }
     }
 
+
+    fun hyber_init2() {
+        val registrationstatus:Boolean = sharedPreference.getValueBoolien("registrationstatus", false)
+        paramsglobal.registrationstatus = registrationstatus
+
+        val token = FirebaseInstanceId.getInstance().token
+
+        //var sk_uuid:String = sharedPreference.getValueString("sk_uuid").toString()
+        if (registrationstatus == false) {
+            val hyber_uuid = UUID.randomUUID().toString()
+            sharedPreference.save("sk_uuid", hyber_uuid)
+            paramsglobal.hyber_uuid = hyber_uuid
+
+            sharedPreference.save("firebase_registration_token", token.toString())
+            paramsglobal.firebase_registration_token = token.toString()
+
+        } else {
+
+            val hyber_uuid:String = sharedPreference.getValueString("sk_uuid")!!.toString()
+            paramsglobal.hyber_uuid = hyber_uuid
+
+            val devid:String = sharedPreference.getValueString("deviceId")!!.toString()
+            paramsglobal.deviceId = devid
+
+
+            val hyber_user_msisdn:String = sharedPreference.getValueString("sk_user_msisdn")!!.toString()
+            paramsglobal.hyber_user_msisdn = hyber_user_msisdn
+
+            val hyber_user_Password:String = sharedPreference.getValueString("sk_user_Password")!!.toString()
+            paramsglobal.hyber_user_Password = hyber_user_Password
+
+            val hyber_deviceType:String = sharedPreference.getValueString("sk_deviceType")!!.toString()
+            paramsglobal.hyber_deviceType = hyber_deviceType
+
+            val hyber_deviceName:String = sharedPreference.getValueString("sk_deviceName")!!.toString()
+            paramsglobal.hyber_deviceName = hyber_deviceName
+
+            val hyber_osType:String = sharedPreference.getValueString("sk_osType")!!.toString()
+            paramsglobal.hyber_osType = hyber_osType
+
+            val hyber_registration_token:String = sharedPreference.getValueString("sk_registration_token")!!.toString()
+            paramsglobal.hyber_registration_token = hyber_registration_token
+
+            val hyber_user_id:String = sharedPreference.getValueString("sk_user_id")!!.toString()
+            paramsglobal.hyber_user_id = hyber_user_id
+
+            val hyber_registration_createdAt:String = sharedPreference.getValueString("sk_registration_createdAt")!!.toString()
+            paramsglobal.hyber_registration_createdAt = hyber_registration_createdAt
+
+            sharedPreference.save("firebase_registration_token", token.toString())
+            paramsglobal.firebase_registration_token = token.toString()
+        }
+    }
+
+
+
     fun clearData(){
         sharedPreference.clearSharedPreference()
     }

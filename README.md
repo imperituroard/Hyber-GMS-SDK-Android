@@ -69,7 +69,7 @@ Now you can use SDK procedures
 
 import main SDK class
 
-import com.sk.android.sksdkandroid.HyberSK
+import com.sk.android.sksdkandroid.HyberSDK
 
 
 for registration 

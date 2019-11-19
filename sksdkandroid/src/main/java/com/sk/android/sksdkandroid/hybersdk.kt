@@ -19,7 +19,7 @@ object HyberPushMess {
     var message: String? = null   //global variable
 }
 
-class HyberSK(user_msisdn: String="unknown", user_password: String="unknown", context: Context) {
+class HyberSDK(user_msisdn: String="unknown", user_password: String="unknown", context: Context) {
 
     //any classes initialization
     private var context: Context by Delegates.notNull()

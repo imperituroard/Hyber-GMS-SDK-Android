@@ -31,6 +31,12 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name="com.sk.android.sksdkandroid.HyberMessaging"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
