@@ -1,7 +1,7 @@
 package com.sk.android.sksdkandroidpr
 
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+
 import com.google.firebase.iid.FirebaseInstanceId
 import android.util.Log
 import java.io.IOException
@@ -11,7 +11,7 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.widget.Button
 import android.widget.EditText
-import com.sk.android.sksdkandroid.HyberSDK
+
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.core.app.ActivityCompat
 import android.telephony.TelephonyManager
@@ -20,7 +20,7 @@ import android.text.TextUtils
 import android.os.Build
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
-import com.sk.android.sksdkandroid.HyberPushMess
+
 import androidx.core.app.NotificationCompat
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -30,9 +30,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ProcessLifecycleOwner
 import kotlin.properties.Delegates
 import android.hardware.fingerprint.FingerprintManager
+
+
 import com.sk.android.sksdkandroid.core.HyberFunAnswerRegister
 import com.sk.android.sksdkandroid.core.HyberFunAnswerGeneral
 import com.sk.android.sksdkandroid.HyberMessaging
+import com.sk.android.sksdkandroid.HyberPushMess
+
+import android.os.Bundle
+import com.sk.android.sksdkandroid.HyberSDK
+
 
 class ForegroundBackgroundListener(textBox: EditText) : LifecycleObserver {
 
@@ -98,6 +105,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+
         var intentService: Intent = Intent()
         if (Build.VERSION.SDK_INT<=25) {
             intentService = Intent(this, HyberMessaging::class.java)
@@ -108,8 +118,24 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, permissions,0)
 
 
+        val button1: Button = findViewById(R.id.button)
         val edtName: EditText = findViewById(R.id.editText2)
         val edittext1: EditText = findViewById(R.id.editText) as EditText
+        edtName.setSelection(0)
+
+        button1.setOnClickListener {
+            val text_msisdn:String = edtName.text.toString()
+            val registration:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
+
+            val msisd:String =edittext1.text.toString()
+            println(msisd)
+            registration.rewrite_msisdn(msisd)
+            val registration_test: HyberFunAnswerRegister = registration.hyber_register_new("test","AIzaSyDvNUnk7R5Qx_aaMCFjFAWTi2jY8vbZW88")
+            edtName.setText(text_msisdn + "\n" + registration_test.toString())
+
+        }
+
+
 
 
         val ddd123:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
@@ -127,10 +153,11 @@ class MainActivity : AppCompatActivity() {
         val token = FirebaseInstanceId.getInstance().token
         println("Token fb: $token")
 
-        edtName.setSelection(0)
 
 
-        val button1: Button = findViewById(R.id.button)
+
+
+
         val button2: Button = findViewById(R.id.button2)
         val button3: Button = findViewById(R.id.button3)
         val button4: Button = findViewById(R.id.button4)
@@ -158,22 +185,7 @@ class MainActivity : AppCompatActivity() {
             //setResult(RESULT_OK, intent);
         }
 
-        button1.setOnClickListener {
 
-
-            val tttt:String = edtName.text.toString()
-            val ddd:HyberSDK = HyberSDK(edittext1.text.toString(), "password",this)
-
-            //ddd.init_firebase(this, this, R.mipmap.ic_launcher)
-            val msisd:String =edittext1.text.toString()
-            println(msisd)
-            ddd.rewrite_msisdn(msisd)
-
-            val sssss: HyberFunAnswerRegister = ddd.hyber_register_new("test","AIzaSyDvNUnk7R5Qx_aaMCFjFAWTi2jY8vbZW88")
-
-            edtName.setText(tttt + "\n" + sssss.toString())
-
-        }
 
         button2.setOnClickListener {
             val tttt:String = edtName.text.toString()

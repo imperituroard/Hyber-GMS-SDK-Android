@@ -59,18 +59,80 @@ internal object HyberParameters {
 
     var push_notification_display_priority: Int = 2
 
+    var branch = "test"
+
+    fun fun_hyber_url_device_update(): String {
+        if (branch=="master") {
+            return "https://push.hyber.im/api/2.3/device/update"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/update"
+        }
+    }
+
+    fun fun_hyber_url_registration(): String {
+        if (branch=="master") {
+            return "https://push.hyber.im/api/2.3/device/registration"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/registration"
+        }
+    }
+
+    fun fun_hyber_url_revoke(): String {
+        if (branch=="master") {
+            return "https://push.hyber.im/api/2.3/device/revoke"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/revoke"
+        }
+    }
+
+    fun fun_hyber_url_getdeviceall(): String {
+        if (branch=="master") {
+            return "https://push.hyber.im/api/2.3/device/all"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/device/all"
+        }
+    }
+
+
+    fun fun_hyber_url_message_callback(): String {
+        if (branch=="master") {
+            return "https://push.hyber.im/api/2.3/message/callback"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/message/callback"
+        }
+    }
+
+    fun fun_hyber_url_message_dr(): String {
+        if (branch=="master") {
+            return "https://push.hyber.im/api/2.3/message/dr"
+        }else {
+            return "https://test-push.hyber.im/api/2.3/message/dr"
+        }
+    }
+
     //urls for rest api SkApi class
-    var hyber_url_registration: String = "https://push.hyber.im/api/2.3/device/registration"
-    var hyber_url_revoke: String = "https://push.hyber.im/api/2.3/device/revoke"
-    var hyber_url_getdeviceall: String = "https://push.hyber.im/api/2.3/device/all"
-    var hyber_url_device_update: String = "https://push.hyber.im/api/2.3/device/update"
-    var hyber_url_message_callback: String = "https://push.hyber.im/api/2.3/message/callback"
-    var hyber_url_message_dr: String = "https://push.hyber.im/api/2.3/message/dr"
+    var hyber_url_registration: String = fun_hyber_url_registration()
+    var hyber_url_revoke: String = fun_hyber_url_revoke()
+    var hyber_url_getdeviceall: String = fun_hyber_url_getdeviceall()
+    var hyber_url_device_update: String = fun_hyber_url_device_update()
+    var hyber_url_message_callback: String = fun_hyber_url_message_callback()
+    var hyber_url_message_dr: String = fun_hyber_url_message_dr()
 
     fun hyber_url_message_history(timestamp: String): String{
-        val hyber_url_mess = "https://push.hyber.im/api/2.3/message/history?startDate=" + timestamp
-        return hyber_url_mess
+        if (branch=="master") {
+            val hyber_url_mess = "https://push.hyber.im/api/2.3/message/history?startDate=" + timestamp
+            return hyber_url_mess
+        }else{
+            val hyber_url_mess2 = "https://test-push.hyber.im/api/2.3/message/history?startDate=" + timestamp
+            return hyber_url_mess2
+        }
+
     }
+
+
+
+
+
 
 }
 
