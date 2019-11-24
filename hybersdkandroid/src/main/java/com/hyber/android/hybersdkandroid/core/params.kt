@@ -64,6 +64,7 @@ internal object HyberParameters {
 
     var push_notification_display_priority: Int = 2
 
+    //var branch = "test"
     var branch = "master"
 
     fun fun_hyber_url_device_update(): String {
