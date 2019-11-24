@@ -478,6 +478,19 @@ class HyberSDK(
             //println("failed rewrite password")
             return answer_not_known
         }
+
+
+        //12
+        fun rewrite_branch(hyber_branch: String): HyberFunAnswerGeneral {
+            try {
+               rewrite_params.rewrite_hyber_branch(hyber_branch)
+               return answ.general_answer("200", "{}", "Success")
+            } catch (e: Exception) {
+                //println("failed rewrite password")
+               return answer_not_known
+            }
+        }
+
     }
 
 }

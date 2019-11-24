@@ -67,6 +67,8 @@ internal object HyberParameters {
     //var branch = "test"
     var branch = "master"
 
+
+
     fun fun_hyber_url_device_update(): String {
         if (branch == "master") {
             return "https://push.hyber.im/api/2.3/device/update"

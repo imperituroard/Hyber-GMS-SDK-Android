@@ -54,5 +54,10 @@ internal class RewriteParams(val context: Context) {
 
     }
 
+    fun rewrite_hyber_branch(hyber_branch: String) {
+        paramsglobal.branch = hyber_branch
+        sharedPreference.save("hyber_branch", hyber_branch)
+    }
+
     // sharedPreference.save("ddd","sss")
 }

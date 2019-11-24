@@ -28,7 +28,7 @@ internal class Initialization(val context: Context) {
         hyber_deviceName1: String
     ) {
         val registrationstatus: Boolean =
-            sharedPreference.getValueBoolien("registrationstatus", false)
+        sharedPreference.getValueBoolien("registrationstatus", false)
         paramsglobal.registrationstatus = registrationstatus
 
         //val token = FirebaseInstanceId.getInstance().token
@@ -40,7 +40,6 @@ internal class Initialization(val context: Context) {
             // or directly send it to server
             sharedPreference.save("firebase_registration_token", token.toString())
             paramsglobal.firebase_registration_token = token.toString()
-
         }
 
         //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
@@ -64,10 +63,20 @@ internal class Initialization(val context: Context) {
             sharedPreference.save("hyber_deviceName", hyber_deviceName1)
             paramsglobal.hyber_deviceName = hyber_deviceName1
 
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
+            }
+
             //sharedPreference.save("firebase_registration_token", token.toString())
             //paramsglobal.firebase_registration_token = token.toString()
 
         } else {
+
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
+            }
 
             val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
             paramsglobal.hyber_uuid = hyber_uuid
@@ -89,7 +98,7 @@ internal class Initialization(val context: Context) {
             paramsglobal.hyber_deviceType = hyber_deviceType
 
             val hyber_deviceName: String =
-                sharedPreference.getValueString("hyber_deviceName")!!.toString()
+            sharedPreference.getValueString("hyber_deviceName")!!.toString()
             paramsglobal.hyber_deviceName = hyber_deviceName
 
             val hyber_osType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
@@ -115,7 +124,7 @@ internal class Initialization(val context: Context) {
 
     fun hyber_init2() {
         val registrationstatus: Boolean =
-            sharedPreference.getValueBoolien("registrationstatus", false)
+        sharedPreference.getValueBoolien("registrationstatus", false)
         paramsglobal.registrationstatus = registrationstatus
 
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
@@ -134,8 +143,18 @@ internal class Initialization(val context: Context) {
             sharedPreference.save("hyber_uuid", hyber_uuid)
             paramsglobal.hyber_uuid = hyber_uuid
 
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
+            }
+
 
         } else {
+
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
+            }
 
             val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
             paramsglobal.hyber_uuid = hyber_uuid
@@ -217,8 +236,18 @@ internal class Initialization(val context: Context) {
             sharedPreference.save("hyber_uuid", hyber_uuid)
             paramsglobal.hyber_uuid = hyber_uuid
 
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
+            }
+
 
         } else {
+
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
+            }
 
             val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
             paramsglobal.hyber_uuid = hyber_uuid
