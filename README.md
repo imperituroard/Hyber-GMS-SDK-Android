@@ -1,1 +1,0 @@
-# Hyber-SVC-SDK-Android

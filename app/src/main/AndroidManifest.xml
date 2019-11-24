@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sk.android.sksdkandroidpr">
+    package="com.hyber.android.hybersdkandroidpr">
 
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -14,9 +14,15 @@
         android:protectionLevel="signature" />
     <uses-permission android:name="com.name.name.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION"/>
 
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.QUICKBOOT_POWERON" />
+    <uses-permission android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS"/>
+    <uses-permission android:name="android.settings.APP_NOTIFICATION_SETTINGS"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
 
 
     <application
@@ -28,39 +34,28 @@
         android:theme="@style/AppTheme">
 
 
-        <receiver
-            android:name=".BootBroadcast3"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-            </intent-filter>
-        </receiver>
-
         <service
-            android:name=".MyService3"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
-
-
-        <service
-            android:name="com.sk.android.sksdkandroid.SkFirebaseService">
+            android:name="com.hyber.android.hybersdkandroid.HyberFirebaseService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
+        </service>
+
+        <service
+            android:name="com.hyber.android.hybersdkandroid.HyberMessaging"
+            android:enabled="true"
+            android:exported="true" >
         </service>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
