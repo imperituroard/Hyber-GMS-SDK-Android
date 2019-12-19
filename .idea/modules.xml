@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Hyber-SDK-Android.iml" filepath="$PROJECT_DIR$/Hyber-SDK-Android.iml" group="Hyber-SDK-Android" />
       <module fileurl="file://$PROJECT_DIR$/hybersdkandroid/hybersdkandroid.iml" filepath="$PROJECT_DIR$/hybersdkandroid/hybersdkandroid.iml" group="Hyber-SDK-Android/hybersdkandroid" />
-      <module fileurl="file://$PROJECT_DIR$/sdk-android-Hyber-SDK-Android.iml" filepath="$PROJECT_DIR$/sdk-android-Hyber-SDK-Android.iml" group="Hyber-SDK-Android" />
+      <module fileurl="file://$PROJECT_DIR$/sdk-android-old-Hyber-SDK-Android.iml" filepath="$PROJECT_DIR$/sdk-android-old-Hyber-SDK-Android.iml" group="Hyber-SDK-Android" />
       <module fileurl="file://$PROJECT_DIR$/sksdkandroidpr.iml" filepath="$PROJECT_DIR$/sksdkandroidpr.iml" group="sksdkandroidpr" />
       <module fileurl="file://$PROJECT_DIR$/sksdkandroid/test.iml" filepath="$PROJECT_DIR$/sksdkandroid/test.iml" group="sksdkandroidpr/sksdkandroid" />
     </modules>
