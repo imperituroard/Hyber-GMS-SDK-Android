@@ -7,7 +7,7 @@ apply from: "publisher.gradle"
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "27.0.3"
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
@@ -19,12 +19,7 @@ android {
         //multiDexEnabled true
 
     }
-
-    configurations.all {
-        resolutionStrategy {
-            force 'com.android.support:support-v4:27.1.0'
-        }
-    }
+    
 
     buildTypes {
         release {
