@@ -12,7 +12,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "3.0.0"
 
         //testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //consumerProguardFiles 'consumer-rules.pro'
@@ -50,9 +50,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.9.1"
   //  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    implementation "com.android.support:support-v4:27.1.1"
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+
    // implementation 'com.google.firebase:firebase-core:17.2.1'
    // implementation 'com.google.firebase:firebase-iid:20.0.2'
-    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+    implementation 'com.google.firebase:firebase-messaging:18.0.0'
     //implementation 'android.arch.work:work-runtime:1.0.1'
 
     // Testing dependencies

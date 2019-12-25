@@ -6,8 +6,8 @@ import android.content.ContentValues
 import android.util.Log
 import android.content.Context
 import android.content.res.Configuration
-import androidx.core.content.ContextCompat.getSystemService
-import android.telephony.TelephonyManager
+//import androidx.core.content.ContextCompat.getSystemService
+//import android.telephony.TelephonyManager
 
 internal class GetInfo() {
 

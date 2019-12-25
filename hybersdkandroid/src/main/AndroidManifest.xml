@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hyber.android.hybersdkandroid" >
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hyber.android.hybersdkandroid"
+    tools:replace="android:appComponentFactory"
+    android:appComponentFactory="whateverString"
+    >
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS"/>

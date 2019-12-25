@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import android.provider.Settings.Global.getString
 import com.google.android.gms.tasks.Task
-import androidx.annotation.NonNull
+//import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnCompleteListener
 import android.content.ContentValues.TAG
 
