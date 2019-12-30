@@ -83,25 +83,8 @@ internal class Answer() {
             val uuid: String
         )
 
-        @Serializable
-        data class MyModel(
-            val result: String,
-            val description: String,
-            val code: Int,
-            @SerialName("body")
-            val body: Body1
-        )
 
-        val jsonData = JSON.stringify(
-            MyModel.serializer(),
-            MyModel(
-                "Exists",
-                "Device already registered. Nothing to do",
-                701,
-                Body1(paramsgl.deviceId, paramsgl.hyber_uuid)
-            )
-        )
-        return jsonData
+        return ""
     }
 
     fun hyber_register_new_register_exists2(
@@ -149,6 +132,7 @@ internal class Answer() {
             val body: Body1
         )
 
+        /*
         val jsonData = JSON.stringify(
             MyModel.serializer(),
             MyModel(
@@ -158,7 +142,9 @@ internal class Answer() {
                 Body1(paramsgl.deviceId, paramsgl.hyber_uuid)
             )
         )
-        return jsonData
+        */
+
+        return ""
     }
 
     fun register_procedure_answer2(
@@ -169,7 +155,7 @@ internal class Answer() {
 
         val hyber_rewrite: RewriteParams = RewriteParams(context)
         val anss: HyberFunAnswerRegister
-
+/*
         if (resp_code == "200") {
             val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
             val jsonBody = JSON.stringify(
@@ -254,7 +240,7 @@ internal class Answer() {
             )
             return anss
         } else {
-
+*/
             anss = HyberFunAnswerRegister(
                 code = 710,
                 description = "Unknown error",
@@ -267,7 +253,7 @@ internal class Answer() {
             )
 
             return anss
-        }
+     //   }
 
         //return "MyModel.serializer(a)"
 
@@ -279,6 +265,7 @@ internal class Answer() {
 
         val hyber_rewrite: RewriteParams = RewriteParams(context)
 
+        /*
         if (resp_code == "200") {
             val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
             val jsonData = JSON.stringify(
@@ -351,16 +338,16 @@ internal class Answer() {
         } else {
 
             val resp710 = JSON.stringify(
-                NewRegistrationFailed.serializer(),
+             //  NewRegistrationFailed.serializer(),
                 NewRegistrationFailed(
                     "Failed",
                     710,
                     "Unknown error",
                     "unknown"
                 )
-            )
-            return resp710
-        }
+            )*/
+            return ""
+     //   }
 
         //return "MyModel.serializer(a)"
 
