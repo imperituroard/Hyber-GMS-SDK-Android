@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Hyber-SDK-Android.iml" filepath="$PROJECT_DIR$/Hyber-SDK-Android.iml" group="Hyber-SDK-Android" />
+      <module fileurl="file://$PROJECT_DIR$/hybersdkandroid/hybersdkandroid.iml" filepath="$PROJECT_DIR$/hybersdkandroid/hybersdkandroid.iml" group="Hyber-SDK-Android/hybersdkandroid" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sdk-android-old.iml" filepath="$PROJECT_DIR$/.idea/sdk-android-old.iml" />
+    </modules>
+  </component>
+</project>
