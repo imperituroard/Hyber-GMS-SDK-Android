@@ -9,7 +9,7 @@ import com.hyber.android.hybersdkandroid.core.HyberFunAnswerGeneral
 import com.hyber.android.hybersdkandroid.core.HyberFunAnswerRegister
 
 internal class Answer() {
-
+/*
     @Serializable
     data class ParentRegistration(
         @SerialName("session")
@@ -72,10 +72,10 @@ internal class Answer() {
         val description: String,
         val body: String
     )
-
+*/
     fun hyber_register_new_register_exists(paramsgl: HyberParameters): String {
 
-        @Serializable
+     /*   @Serializable
         data class Body1(
             @SerialName("deviceId")
             val deviceId: String,
@@ -84,6 +84,8 @@ internal class Answer() {
         )
 
 
+
+      */
         return ""
     }
 
@@ -93,6 +95,7 @@ internal class Answer() {
     ): HyberFunAnswerRegister {
         val init_hyber: Initialization = Initialization(context)
 
+        /*
         @Serializable
         data class Body1(
             @SerialName("deviceId")
@@ -100,6 +103,8 @@ internal class Answer() {
             @SerialName("uuid")
             val uuid: String
         )
+
+         */
 
         return HyberFunAnswerRegister(
             code = 701,
@@ -114,7 +119,7 @@ internal class Answer() {
     }
 
     fun hyber_registration_notregistered(paramsgl: HyberParameters): String {
-
+/*
         @Serializable
         data class Body1(
             @SerialName("deviceId")
@@ -132,6 +137,8 @@ internal class Answer() {
             val body: Body1
         )
 
+
+ */
         /*
         val jsonData = JSON.stringify(
             MyModel.serializer(),
