@@ -67,7 +67,7 @@ dependencies {
 
   //  implementation "com.android.support:support-v4:27.0.0"
 
-   // implementation 'com.android.support:appcompat-v7:27.0.0'
+  //  implementation 'com.android.support:appcompat-v7:27.0.0'
 
   //  implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.51"
 
@@ -75,7 +75,9 @@ dependencies {
    // implementation 'com.google.firebase:firebase-iid:20.0.2'
 
 
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+   // implementation 'com.google.android.gms:11.+'
+
+   // implementation 'com.google.firebase:firebase-messaging:18.+'
 
    // implementation 'com.google.firebase:firebase:11.6.2'
     //implementation 'android.arch.work:work-runtime:1.0.1'
