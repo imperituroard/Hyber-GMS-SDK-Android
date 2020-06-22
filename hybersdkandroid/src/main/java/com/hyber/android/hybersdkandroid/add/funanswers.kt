@@ -9,7 +9,7 @@ import com.hyber.android.hybersdkandroid.core.HyberFunAnswerGeneral
 import com.hyber.android.hybersdkandroid.core.HyberFunAnswerRegister
 
 internal class Answer() {
-/*
+
     @Serializable
     data class ParentRegistration(
         @SerialName("session")
@@ -72,54 +72,9 @@ internal class Answer() {
         val description: String,
         val body: String
     )
-*/
+
     fun hyber_register_new_register_exists(paramsgl: HyberParameters): String {
 
-     /*   @Serializable
-        data class Body1(
-            @SerialName("deviceId")
-            val deviceId: String,
-            @SerialName("uuid")
-            val uuid: String
-        )
-
-
-
-      */
-        return ""
-    }
-
-    fun hyber_register_new_register_exists2(
-        paramsgl: HyberParameters,
-        context: Context
-    ): HyberFunAnswerRegister {
-        val init_hyber: Initialization = Initialization(context)
-
-        /*
-        @Serializable
-        data class Body1(
-            @SerialName("deviceId")
-            val deviceId: String,
-            @SerialName("uuid")
-            val uuid: String
-        )
-
-         */
-
-        return HyberFunAnswerRegister(
-            code = 701,
-            deviceId = init_hyber.paramsglobal.deviceId,
-            token = init_hyber.paramsglobal.hyber_registration_token,
-            userId = init_hyber.paramsglobal.hyber_user_id,
-            userPhone = init_hyber.paramsglobal.hyber_user_msisdn,
-            createdAt = init_hyber.paramsglobal.hyber_registration_createdAt,
-            result = "Exists",
-            description = "Device already registered. Nothing to do"
-        )
-    }
-
-    fun hyber_registration_notregistered(paramsgl: HyberParameters): String {
-/*
         @Serializable
         data class Body1(
             @SerialName("deviceId")
@@ -137,9 +92,63 @@ internal class Answer() {
             val body: Body1
         )
 
+        val jsonData = JSON.stringify(
+            MyModel.serializer(),
+            MyModel(
+                "Exists",
+                "Device already registered. Nothing to do",
+                701,
+                Body1(paramsgl.deviceId, paramsgl.hyber_uuid)
+            )
+        )
+        return jsonData
+    }
 
- */
-        /*
+    fun hyber_register_new_register_exists2(
+        paramsgl: HyberParameters,
+        context: Context
+    ): HyberFunAnswerRegister {
+        val init_hyber: Initialization = Initialization(context)
+
+        @Serializable
+        data class Body1(
+            @SerialName("deviceId")
+            val deviceId: String,
+            @SerialName("uuid")
+            val uuid: String
+        )
+
+        return HyberFunAnswerRegister(
+            code = 701,
+            deviceId = init_hyber.paramsglobal.deviceId,
+            token = init_hyber.paramsglobal.hyber_registration_token,
+            userId = init_hyber.paramsglobal.hyber_user_id,
+            userPhone = init_hyber.paramsglobal.hyber_user_msisdn,
+            createdAt = init_hyber.paramsglobal.hyber_registration_createdAt,
+            result = "Exists",
+            description = "Device already registered. Nothing to do"
+        )
+    }
+
+    fun hyber_registration_notregistered(paramsgl: HyberParameters): String {
+
+        @Serializable
+        data class Body1(
+            @SerialName("deviceId")
+            val deviceId: String,
+            @SerialName("uuid")
+            val uuid: String
+        )
+
+        @Serializable
+        data class MyModel(
+            val result: String,
+            val description: String,
+            val code: Int,
+            @SerialName("body")
+            val body: Body1
+        )
+
         val jsonData = JSON.stringify(
             MyModel.serializer(),
             MyModel(
@@ -149,9 +158,7 @@ internal class Answer() {
                 Body1(paramsgl.deviceId, paramsgl.hyber_uuid)
             )
         )
-        */
-
-        return ""
+        return jsonData
     }
 
     fun register_procedure_answer2(
@@ -162,7 +169,7 @@ internal class Answer() {
 
         val hyber_rewrite: RewriteParams = RewriteParams(context)
         val anss: HyberFunAnswerRegister
-/*
+
         if (resp_code == "200") {
             val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
             val jsonBody = JSON.stringify(
@@ -247,7 +254,7 @@ internal class Answer() {
             )
             return anss
         } else {
-*/
+
             anss = HyberFunAnswerRegister(
                 code = 710,
                 description = "Unknown error",
@@ -260,7 +267,7 @@ internal class Answer() {
             )
 
             return anss
-     //   }
+        }
 
         //return "MyModel.serializer(a)"
 
@@ -272,7 +279,6 @@ internal class Answer() {
 
         val hyber_rewrite: RewriteParams = RewriteParams(context)
 
-        /*
         if (resp_code == "200") {
             val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
             val jsonData = JSON.stringify(
@@ -345,16 +351,16 @@ internal class Answer() {
         } else {
 
             val resp710 = JSON.stringify(
-             //  NewRegistrationFailed.serializer(),
+                NewRegistrationFailed.serializer(),
                 NewRegistrationFailed(
                     "Failed",
                     710,
                     "Unknown error",
                     "unknown"
                 )
-            )*/
-            return ""
-     //   }
+            )
+            return resp710
+        }
 
         //return "MyModel.serializer(a)"
 

@@ -2,15 +2,15 @@ package com.hyber.android.hybersdkandroid.core
 
 import android.content.Context
 import java.util.*
-//import com.google.firebase.iid.FirebaseInstanceId
-//import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.android.gms.tasks.OnSuccessListener
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
 import android.provider.Settings.Global.getString
-//import com.google.android.gms.tasks.Task
-//import androidx.annotation.NonNull
-//import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import androidx.annotation.NonNull
+import com.google.android.gms.tasks.OnCompleteListener
 import android.content.ContentValues.TAG
 
 
@@ -33,6 +33,14 @@ internal class Initialization(val context: Context) {
 
         //val token = FirebaseInstanceId.getInstance().token
 
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            // Do whatever you want with your token now
+            // i.e. store it on SharedPreferences or DB
+            // or directly send it to server
+            sharedPreference.save("firebase_registration_token", token.toString())
+            paramsglobal.firebase_registration_token = token.toString()
+        }
 
         //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
         if (registrationstatus == false) {
@@ -55,13 +63,9 @@ internal class Initialization(val context: Context) {
             sharedPreference.save("hyber_deviceName", hyber_deviceName1)
             paramsglobal.hyber_deviceName = hyber_deviceName1
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
             }
 
             //sharedPreference.save("firebase_registration_token", token.toString())
@@ -69,15 +73,10 @@ internal class Initialization(val context: Context) {
 
         } else {
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
             }
-
 
             val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
             paramsglobal.hyber_uuid = hyber_uuid
@@ -128,7 +127,15 @@ internal class Initialization(val context: Context) {
         sharedPreference.getValueBoolien("registrationstatus", false)
         paramsglobal.registrationstatus = registrationstatus
 
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            // Do whatever you want with your token now
+            // i.e. store it on SharedPreferences or DB
+            // or directly send it to server
+            sharedPreference.save("firebase_registration_token", token.toString())
+            paramsglobal.firebase_registration_token = token.toString()
 
+        }
 
         //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
         if (registrationstatus == false) {
@@ -136,25 +143,17 @@ internal class Initialization(val context: Context) {
             sharedPreference.save("hyber_uuid", hyber_uuid)
             paramsglobal.hyber_uuid = hyber_uuid
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
             }
 
 
         } else {
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
             }
 
             val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
@@ -205,6 +204,21 @@ internal class Initialization(val context: Context) {
         paramsglobal.registrationstatus = registrationstatus
 
 
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            // Do whatever you want with your token now
+            // i.e. store it on SharedPreferences or DB
+            // or directly send it to server
+            println("")
+            if (token.toString() != "") {
+                sharedPreference.save("firebase_registration_token", token.toString())
+                paramsglobal.firebase_registration_token = token.toString()
+            } else {
+                val firebase_registration_token: String =
+                    sharedPreference.getValueString("firebase_registration_token")!!.toString()
+                paramsglobal.firebase_registration_token = firebase_registration_token
+            }
+        }
 
         //var token = FirebaseInstanceId.getInstance().token.toString()
         //println("token old: $token")
@@ -222,25 +236,17 @@ internal class Initialization(val context: Context) {
             sharedPreference.save("hyber_uuid", hyber_uuid)
             paramsglobal.hyber_uuid = hyber_uuid
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
             }
 
 
         } else {
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+            val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
+            if (hyber_branch!="") {
+                paramsglobal.hyber_uuid = hyber_branch
             }
 
             val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()

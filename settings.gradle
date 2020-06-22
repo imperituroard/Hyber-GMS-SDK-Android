@@ -1,2 +1,3 @@
 rootProject.name='Hyber-SDK-Android'
+include ':app'
 include ':hybersdkandroid'

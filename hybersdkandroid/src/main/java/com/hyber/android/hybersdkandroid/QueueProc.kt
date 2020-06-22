@@ -10,7 +10,7 @@ import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.Initialization
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
-//import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import java.io.BufferedReader
 import java.io.DataOutputStream
@@ -55,7 +55,6 @@ internal class QueueProc {
         val api_hyber: HyberApi = HyberApi()
         val inithyber_params: Initialization = Initialization(context)
 
-        /*
         @Serializable
         data class Empty(
             @Optional()
@@ -94,8 +93,6 @@ internal class QueueProc {
             val messages: List<Qulist>
         )
 
-         */
-/*
         val parent = JSON.parse(ParentQu.serializer(), queue)
 
         if (!parent.messages.isEmpty()) {
@@ -110,8 +107,6 @@ internal class QueueProc {
         }
     }
 
- */
-    }
 
     internal fun hyber_device_mess_queue(
         X_Hyber_Session_Id: String,

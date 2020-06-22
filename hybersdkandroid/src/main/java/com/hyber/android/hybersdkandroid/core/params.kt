@@ -6,15 +6,35 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.VibrationEffect
-//import android.support.v4.app.NotificationCompat
-//import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import com.hyber.android.hybersdkandroid.R
 import com.hyber.android.hybersdkandroid.add.HyberInternal
 
 
 open class HyberPublicParams {
 
+    open fun notificationBuilder(
+        context: Context,
+        notificationTextMess: String
+    ): NotificationCompat.Builder {
+        val intent = Intent(context, context::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(
+            context, 0 /* Request code */, intent,
+            PendingIntent.FLAG_ONE_SHOT
+        )
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
+        val notificationBuilder = NotificationCompat.Builder(context, "hyber.push.hyber")
+            .setContentText(notificationTextMess)
+            .setAutoCancel(true)
+            .setSmallIcon(R.drawable.googleg_standard_color_18)
+            .setPriority(HyberInternal.notification_priority_old(HyberParameters.push_notification_display_priority))
+            .setSound(defaultSoundUri)
+            //.setVibrate(longArrayOf(1000))
+            .setContentIntent(pendingIntent)
+        return notificationBuilder
+    }
 }
 
 internal object HyberParameters {
@@ -45,7 +65,7 @@ internal object HyberParameters {
     var push_notification_display_priority: Int = 2
 
     //var branch = "test"
-    var branch: String = "master"
+    var branch = "master"
 
 
 

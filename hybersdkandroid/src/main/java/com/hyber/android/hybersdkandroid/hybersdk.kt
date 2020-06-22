@@ -189,7 +189,7 @@ class HyberSDK(
                     X_Hyber_Session_Id,
                     init_hyber.paramsglobal.hyber_registration_token
                 )
-                Log.d(TAG, "hyber_answer : ${hyber_answer.toString()}");
+                //Log.d(TAG, "hyber_answer : ${hyber_answer.toString()}");
 
                 if (hyber_answer.code == 200) {
                     Log.d(TAG, "start clear data");
@@ -478,17 +478,19 @@ class HyberSDK(
             //println("failed rewrite password")
             return answer_not_known
         }
-    }
 
-    //12
-    fun rewrite_branch(hyber_branch: String): HyberFunAnswerGeneral {
-        try {
-            rewrite_params.rewrite_hyber_branch(hyber_branch)
-            return answ.general_answer("200", "{}", "Success")
-        } catch (e: Exception) {
-            //println("failed rewrite password")
-            return answer_not_known
+
+        //12
+        fun rewrite_branch(hyber_branch: String): HyberFunAnswerGeneral {
+            try {
+               rewrite_params.rewrite_hyber_branch(hyber_branch)
+               return answ.general_answer("200", "{}", "Success")
+            } catch (e: Exception) {
+                //println("failed rewrite password")
+               return answer_not_known
+            }
         }
+
     }
 
 }
