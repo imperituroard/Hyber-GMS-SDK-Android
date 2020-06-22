@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hyber.android.hybersdkandroid" >
 
@@ -5,27 +6,9 @@
     <uses-permission android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS"/>
     <uses-permission android:name="android.settings.APP_NOTIFICATION_SETTINGS"/>
 
-    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <permission android:name="com.name.name.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="com.name.name.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION"/>
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-
     <application>
         <service
-            android:name="com.hyber.android.hybersdkandroid.HyberFirebaseService"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            android:name="com.hyber.android.hybersdkandroid.HyberFirebaseService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
@@ -36,6 +19,5 @@
             android:enabled="true"
             android:exported="true" >
         </service>
-
     </application>
 </manifest>

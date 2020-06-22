@@ -16,7 +16,7 @@ import com.hyber.android.hybersdkandroid.core.HyberPublicParams
 import com.hyber.android.hybersdkandroid.core.Initialization
 
 
-public class HyberFirebaseService() : FirebaseMessagingService() {
+internal class HyberFirebaseService() : FirebaseMessagingService() {
 
     private val COUNT_PLUS = 1
     private val COUNT_MINUS = 2

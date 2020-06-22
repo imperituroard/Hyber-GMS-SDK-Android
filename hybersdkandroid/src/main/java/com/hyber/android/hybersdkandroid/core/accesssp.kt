@@ -10,5 +10,6 @@ internal class SpAccess(val context: Context) {
         sharedPreference.save(keyy, data)
         //Toast.makeText(this@MainActivity,"Data Stored",Toast.LENGTH_SHORT).show()
     }
+
 }
 
