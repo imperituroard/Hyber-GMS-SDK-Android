@@ -91,7 +91,7 @@ class HyberSDK(
         }
     }
 
-    //private var hyber_storage: HyberStorage =HyberStorage(context)
+    //private var hyber_storage: HyberStorage = HyberStorage(context)
     //parameter for device identification
     private var X_Hyber_Session_Id: String = init_hyber.paramsglobal.firebase_registration_token
 
@@ -114,6 +114,9 @@ class HyberSDK(
     //704 - not registered
     //705 - remote server error
     //710 - unknown error
+
+    //network errors
+    //901 - failed registration with firebase
 
     //{
     //    "result":"Ok",
@@ -149,30 +152,38 @@ class HyberSDK(
             if (init_hyber.paramsglobal.registrationstatus == true) {
                 return answ.hyber_register_new_register_exists2(init_hyber.paramsglobal, context)
             } else {
-                val answ_hyber: HyberDataApi2 = apihyber.hyber_device_register(
-                    X_Hyber_Client_API_Key,
-                    X_Hyber_Session_Id,
-                    X_Hyber_App_Fingerprint,
-                    init_hyber.paramsglobal.hyber_deviceName,
-                    init_hyber.paramsglobal.hyber_deviceType,
-                    init_hyber.paramsglobal.hyber_osType,
-                    init_hyber.paramsglobal.sdkversion,
-                    init_hyber.paramsglobal.hyber_user_Password,
-                    init_hyber.paramsglobal.hyber_user_msisdn,
-                    context
-                )
-                Log.d(TAG, "hyber_register_new response: $answ_hyber");
-                Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
-                return HyberFunAnswerRegister(
-                    code = answ_hyber.code,
-                    result = answ_hyber.body.result,
-                    description = answ_hyber.body.description,
-                    deviceId = answ_hyber.body.deviceId,
-                    token = answ_hyber.body.token,
-                    userId = answ_hyber.body.userId,
-                    userPhone = answ_hyber.body.userPhone,
-                    createdAt = answ_hyber.body.createdAt
-                )
+                if (X_Hyber_Session_Id != "" && X_Hyber_Session_Id != " ") {
+                    val answ_hyber: HyberDataApi2 = apihyber.hyber_device_register(
+                        X_Hyber_Client_API_Key,
+                        X_Hyber_Session_Id,
+                        X_Hyber_App_Fingerprint,
+                        init_hyber.paramsglobal.hyber_deviceName,
+                        init_hyber.paramsglobal.hyber_deviceType,
+                        init_hyber.paramsglobal.hyber_osType,
+                        init_hyber.paramsglobal.sdkversion,
+                        init_hyber.paramsglobal.hyber_user_Password,
+                        init_hyber.paramsglobal.hyber_user_msisdn,
+                        context
+                    )
+                    Log.d(TAG, "hyber_register_new response: $answ_hyber");
+                    Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
+                    return HyberFunAnswerRegister(
+                        code = answ_hyber.code,
+                        result = answ_hyber.body.result,
+                        description = answ_hyber.body.description,
+                        deviceId = answ_hyber.body.deviceId,
+                        token = answ_hyber.body.token,
+                        userId = answ_hyber.body.userId,
+                        userPhone = answ_hyber.body.userPhone,
+                        createdAt = answ_hyber.body.createdAt
+                    )
+                } else {
+                    return answ.register_procedure_answer2(
+                        "901",
+                        "X_Hyber_Session_Id is empty. Maybe firebase registration problem",
+                        context
+                    )
+                }
             }
         } catch (e: Exception) {
             return answ.register_procedure_answer2("700", "unknown", context)
