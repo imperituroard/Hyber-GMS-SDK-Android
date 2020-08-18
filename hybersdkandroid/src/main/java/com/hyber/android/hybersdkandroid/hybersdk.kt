@@ -149,11 +149,12 @@ class HyberSDK(
         X_Hyber_App_Fingerprint: String
     ): HyberFunAnswerRegister {
         try {
+            Log.d(TAG, "Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${init_hyber.paramsglobal.registrationstatus}, X_Hyber_Session_Id: ${X_Hyber_Session_Id}");
             if (init_hyber.paramsglobal.registrationstatus == true) {
                 return answ.hyber_register_new_register_exists2(init_hyber.paramsglobal, context)
             } else {
                 if (X_Hyber_Session_Id != "" && X_Hyber_Session_Id != " ") {
-                    val answ_hyber: HyberDataApi2 = apihyber.hyber_device_register(
+                    val respHyber: HyberDataApi2 = apihyber.hyber_device_register(
                         X_Hyber_Client_API_Key,
                         X_Hyber_Session_Id,
                         X_Hyber_App_Fingerprint,
@@ -165,17 +166,17 @@ class HyberSDK(
                         init_hyber.paramsglobal.hyber_user_msisdn,
                         context
                     )
-                    Log.d(TAG, "hyber_register_new response: $answ_hyber");
+                    Log.d(TAG, "hyber_register_new response: $respHyber");
                     Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
                     return HyberFunAnswerRegister(
-                        code = answ_hyber.code,
-                        result = answ_hyber.body.result,
-                        description = answ_hyber.body.description,
-                        deviceId = answ_hyber.body.deviceId,
-                        token = answ_hyber.body.token,
-                        userId = answ_hyber.body.userId,
-                        userPhone = answ_hyber.body.userPhone,
-                        createdAt = answ_hyber.body.createdAt
+                        code = respHyber.code,
+                        result = respHyber.body.result,
+                        description = respHyber.body.description,
+                        deviceId = respHyber.body.deviceId,
+                        token = respHyber.body.token,
+                        userId = respHyber.body.userId,
+                        userPhone = respHyber.body.userPhone,
+                        createdAt = respHyber.body.createdAt
                     )
                 } else {
                     return answ.register_procedure_answer2(

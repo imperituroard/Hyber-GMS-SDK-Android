@@ -65,6 +65,17 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
         //hyber_main.hyber_update_registration()
 
         try {
+            if (s != "") {
+                val hyber_update_params: RewriteParams = RewriteParams(applicationContext)
+                hyber_update_params.rewrite_firebase_token(s)
+                Log.d(TAG, "HyberFirebaseService.onNewToken local update: success");
+            }
+
+        } catch (e: Exception) {
+            Log.d(TAG, "HyberFirebaseService.onNewToken local update: unknown error");
+        }
+
+        try {
             if (HyberParameters.hyber_registration_token != "" && HyberParameters.firebase_registration_token != "") {
                 api.hyber_device_update(
                     HyberParameters.hyber_registration_token,
@@ -75,24 +86,17 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
                     HyberParameters.sdkversion,
                     s
                 )
+                Log.d(TAG, "HyberFirebaseService.onNewToken update: success");
             } else {
-                println("Update failed")
+                Log.d(TAG, "HyberFirebaseService.onNewToken update: failed");
             }
 
         } catch (e: Exception) {
-            println("Update failed")
+            Log.d(TAG, "HyberFirebaseService.onNewToken update: unknown error");
         }
 
 
-        try {
-            if (s != "") {
-                val hyber_update_params: RewriteParams = RewriteParams(applicationContext)
-                hyber_update_params.rewrite_firebase_token(s)
-            }
 
-        } catch (e: Exception) {
-            println("Update2 failed")
-        }
 
 
         // If you want to send messages to this application instance or
@@ -130,13 +134,12 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
                         HyberParameters.firebase_registration_token,
                         HyberParameters.hyber_registration_token
                     )
-                    println("delivery report success: messid ${remoteMessage.messageId.toString()}, fbtoken: ${HyberParameters.firebase_registration_token}, hybertoken: ${HyberParameters.hyber_registration_token}")
+                    Log.d(TAG, "delivery report success: messid ${remoteMessage.messageId.toString()}, fbtoken: ${HyberParameters.firebase_registration_token}, hybertoken: ${HyberParameters.hyber_registration_token}")
                 } else {
-                    println("delivery report failed: messid ${remoteMessage.messageId.toString()}, fbtoken: ${HyberParameters.firebase_registration_token}, hybertoken: ${HyberParameters.hyber_registration_token}")
-
+                    Log.d(TAG, "delivery report failed: messid ${remoteMessage.messageId.toString()}, fbtoken: ${HyberParameters.firebase_registration_token}, hybertoken: ${HyberParameters.hyber_registration_token}")
                 }
             } catch (e: Exception) {
-                println("failed")
+                Log.d(TAG, "onMessageReceived: failed")
             }
 
             try {
