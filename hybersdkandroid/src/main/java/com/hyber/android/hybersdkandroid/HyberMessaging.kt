@@ -29,6 +29,7 @@ public class HyberMessaging : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
+        /*
         if (Build.VERSION.SDK_INT <= 25) {
             //Send Foreground Notification
             sendNotification("", "", "")
@@ -41,8 +42,18 @@ public class HyberMessaging : Service() {
             return super.onStartCommand(intent, flags, startId);
             //return START_REDELIVER_INTENT
         } else {
+            val init_hyber: Initialization = Initialization(applicationContext)
+            init_hyber.hyber_init2()
+
             return super.onStartCommand(intent, flags, startId);
         }
+        */
+
+        val init_hyber: Initialization = Initialization(applicationContext)
+        init_hyber.hyber_init2()
+
+        return super.onStartCommand(intent, flags, startId);
+
 
     }
 
