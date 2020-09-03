@@ -20,6 +20,26 @@ internal class Initialization(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
     internal val paramsglobal: HyberParameters = HyberParameters
 
+    fun hyber_update_firebase_auto() {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            // Do whatever you want with your token now
+            // i.e. store it on SharedPreferences or DB
+            // or directly send it to server
+            if (token.toString() != "") {
+                sharedPreference.save("firebase_registration_token", token.toString())
+                paramsglobal.firebase_registration_token = token.toString()
+                Log.d(TAG, "hyber_init.Firebase token: ${token.toString()}")
+            }
+        }
+    }
+
+    fun hyber_update_firebase_manual(x_token: String) {
+        sharedPreference.save("firebase_registration_token", x_token)
+        paramsglobal.firebase_registration_token = x_token
+        Log.d(TAG, "hyber_init.Firebase token: ${x_token}")
+    }
+
     fun hyber_init(
         hyber_osType1: String,
         hyber_user_msisdn1: String,
@@ -28,19 +48,27 @@ internal class Initialization(val context: Context) {
         hyber_deviceName1: String
     ) {
         val registrationstatus: Boolean =
-        sharedPreference.getValueBoolien("registrationstatus", false)
+            sharedPreference.getValueBoolien("registrationstatus", false)
         paramsglobal.registrationstatus = registrationstatus
 
-        //val token = FirebaseInstanceId.getInstance().token
 
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
             val token = instanceIdResult.token
             // Do whatever you want with your token now
             // i.e. store it on SharedPreferences or DB
             // or directly send it to server
-            sharedPreference.save("firebase_registration_token", token.toString())
-            paramsglobal.firebase_registration_token = token.toString()
+            if (token.toString() != "") {
+                sharedPreference.save("firebase_registration_token", token.toString())
+                paramsglobal.firebase_registration_token = token.toString()
+                Log.d(TAG, "hyber_init.Firebase token: ${token.toString()}")
+            } else {
+                val firebase_registration_token: String =
+                    sharedPreference.getValueString("firebase_registration_token")!!.toString()
+                paramsglobal.firebase_registration_token = firebase_registration_token
+                Log.d(TAG, "hyber_init.Firebase token: ${token.toString()}")
+            }
         }
+        //val token = FirebaseInstanceId.getInstance().token
 
         //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
         if (registrationstatus == false) {
@@ -226,7 +254,6 @@ internal class Initialization(val context: Context) {
             // Do whatever you want with your token now
             // i.e. store it on SharedPreferences or DB
             // or directly send it to server
-            println("")
             if (token.toString() != "") {
                 sharedPreference.save("firebase_registration_token", token.toString())
                 paramsglobal.firebase_registration_token = token.toString()

@@ -93,6 +93,7 @@ class HyberSDK(
 
     //private var hyber_storage: HyberStorage = HyberStorage(context)
     //parameter for device identification
+
     private var X_Hyber_Session_Id: String = init_hyber.paramsglobal.firebase_registration_token
 
     private var answer_not_registered: HyberFunAnswerGeneral =
@@ -153,6 +154,8 @@ class HyberSDK(
             if (init_hyber.paramsglobal.registrationstatus == true) {
                 return answ.hyber_register_new_register_exists2(init_hyber.paramsglobal, context)
             } else {
+                init_hyber.hyber_update_firebase_auto()
+                X_Hyber_Session_Id = init_hyber.paramsglobal.firebase_registration_token
                 if (X_Hyber_Session_Id != "" && X_Hyber_Session_Id != " ") {
                     val respHyber: HyberDataApi2 = apihyber.hyber_device_register(
                         X_Hyber_Client_API_Key,
@@ -166,6 +169,61 @@ class HyberSDK(
                         init_hyber.paramsglobal.hyber_user_msisdn,
                         context
                     )
+                    Log.d(TAG, "hyber_register_new response: $respHyber");
+                    Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
+                    return HyberFunAnswerRegister(
+                        code = respHyber.code,
+                        result = respHyber.body.result,
+                        description = respHyber.body.description,
+                        deviceId = respHyber.body.deviceId,
+                        token = respHyber.body.token,
+                        userId = respHyber.body.userId,
+                        userPhone = respHyber.body.userPhone,
+                        createdAt = respHyber.body.createdAt
+                    )
+                } else {
+                    return answ.register_procedure_answer2(
+                        "901",
+                        "X_Hyber_Session_Id is empty. Maybe firebase registration problem",
+                        context
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            return answ.register_procedure_answer2("700", "unknown", context)
+        }
+        //apihyber.hyber_device_register()
+    }
+
+
+    //1-1
+    //registration procedure with direct FCM token input
+    //hyber_register_new2(
+    fun hyber_register_new2(
+        X_Hyber_Client_API_Key: String,    // APP API key on hyber platform
+        X_Hyber_App_Fingerprint: String,   // App Fingerprint key
+        X_FCM_token: String                // FCM firebase token
+    ): HyberFunAnswerRegister {
+        try {
+            Log.d(TAG, "Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${init_hyber.paramsglobal.registrationstatus}, X_Hyber_Session_Id: ${X_Hyber_Session_Id}");
+            if (init_hyber.paramsglobal.registrationstatus == true) {
+                return answ.hyber_register_new_register_exists2(init_hyber.paramsglobal, context)
+            } else {
+                init_hyber.hyber_update_firebase_manual(X_FCM_token)
+                if (X_FCM_token != "" && X_FCM_token != " ") {
+                    val respHyber: HyberDataApi2 = apihyber.hyber_device_register(
+                        X_Hyber_Client_API_Key,
+                        X_FCM_token,
+                        X_Hyber_App_Fingerprint,
+                        init_hyber.paramsglobal.hyber_deviceName,
+                        init_hyber.paramsglobal.hyber_deviceType,
+                        init_hyber.paramsglobal.hyber_osType,
+                        init_hyber.paramsglobal.sdkversion,
+                        init_hyber.paramsglobal.hyber_user_Password,
+                        init_hyber.paramsglobal.hyber_user_msisdn,
+                        context
+                    )
+
                     Log.d(TAG, "hyber_register_new response: $respHyber");
                     Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
                     return HyberFunAnswerRegister(
