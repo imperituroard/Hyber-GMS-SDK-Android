@@ -7,9 +7,9 @@ import java.lang.Exception
 
 @Suppress("unused")
 internal class SharedPreference(val context: Context) {
-    private val PREFS_NAME = "hyberdatabase"
-    val sharedPref: SharedPreferences =
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val preferenceDatabase = "hyberdatabase"
+    private val sharedPref: SharedPreferences =
+        context.getSharedPreferences(preferenceDatabase, Context.MODE_PRIVATE)
 
     fun save(KEY_NAME: String, text: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
@@ -30,29 +30,26 @@ internal class SharedPreference(val context: Context) {
     }
 
     fun getValueString(KEY_NAME: String): String? {
-
-        try {
-            return sharedPref.getString(KEY_NAME, null)
+        return try {
+            sharedPref.getString(KEY_NAME, null)
         } catch (e: Exception) {
-            return ""
+            ""
         }
-
     }
 
     fun getValueInt(KEY_NAME: String): Int {
-        try {
-            return sharedPref.getInt(KEY_NAME, 0)
+        return try {
+            sharedPref.getInt(KEY_NAME, 0)
         } catch (e: Exception) {
-            return 0
+            0
         }
     }
 
-    fun getValueBoolien(KEY_NAME: String, defaultValue: Boolean): Boolean {
-
-        try {
-            return sharedPref.getBoolean(KEY_NAME, defaultValue)
+    fun getValueBool(KEY_NAME: String, defaultValue: Boolean): Boolean {
+        return try {
+            sharedPref.getBoolean(KEY_NAME, defaultValue)
         } catch (e: Exception) {
-            return false
+            false
         }
     }
 

@@ -1,9 +1,7 @@
 package com.hyber.android.hybersdkandroid
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.HyberDataApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
@@ -26,19 +24,16 @@ internal class QueueProc {
 
     //function for create special token for another procedures
     private fun hash(sss: String): String {
-        try {
+        return try {
             val bytes = sss.toByteArray()
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
-
             HyberLoggerSdk.debug("Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
-
-            return resp
+            resp
         } catch (e: Exception) {
             HyberLoggerSdk.debug("Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed")
-
-            return "failed"
+            "failed"
         }
     }
 
@@ -64,7 +59,7 @@ internal class QueueProc {
         )
 
         @Serializable
-        data class Qulist(
+        data class QueryList(
             @SerialName("phone")
             val phone: String,
             @SerialName("messageId")
@@ -86,20 +81,17 @@ internal class QueueProc {
         @Serializable
         data class ParentQu(
             @Optional
-            val messages: List<Qulist>
+            val messages: List<QueryList>
         )
-
         val parent = JSON.parse(ParentQu.serializer(), queue)
-
         if (parent.messages.isNotEmpty()) {
             val list = parent.messages
             Thread.sleep(2000)
-            //inithyber_params.hyber_init3()
+            //initHyber_params.hyber_init3()
             list.forEach {
                 HyberLoggerSdk.debug("fb token: ${PushSdkParameters.firebase_registration_token}")
-
                 apiHyber.hMessageDr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
-                println(it.messageId)
+                HyberLoggerSdk.debug("Result: Start step2, Function: processHyberQueue, Class: HyberApi, message: ${it.messageId}")
             }
         }
     }
@@ -119,71 +111,43 @@ internal class QueueProc {
             try {
                 HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_mess_queue, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token")
 
-
-                //val stringBuilder = StringBuilder("{\"name\":\"Cedric Beust\", \"age\":23}")
-                //val message = "{\"name\":\"Cedric Beust\", \"age\":23}"
                 val message2 = "{}"
 
-                Log.d(
-                    ContentValues.TAG,
-                    "Result: Start step2, Function: hyber_device_mess_queue, Class: HyberApi, message2: $message2"
-                )
+                HyberLoggerSdk.debug("Result: Start step2, Function: hyber_device_mess_queue, Class: HyberApi, message2: $message2")
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
                 //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
 
-                println(currentTimestamp2)
-                //println(date)
-                //currentTimestamp2 = 1
-
-                //println(currentTimestamp2)
+                HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue \"currentTimestamp2 : $currentTimestamp2\"")
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                //println(stringBuilder)
-
                 val mURL2 = URL(hyberUrlMessQueue)
 
-                val urlc2 = mURL2.openConnection() as HttpsURLConnection
-                urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US")
-                //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json")
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", authToken)
+                val urlConnectorPlatform = mURL2.openConnection() as HttpsURLConnection
+                urlConnectorPlatform.doOutput = true
+                urlConnectorPlatform.setRequestProperty("Content-Language", "en-US")
+                urlConnectorPlatform.setRequestProperty("Content-Type", "application/json")
+                urlConnectorPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                urlConnectorPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                urlConnectorPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                urlConnectorPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                with(urlc2) {
-                    // optional default is GET
+                with(urlConnectorPlatform) {
                     requestMethod = "POST"
                     doOutput = true
-                    //doInput = true
-                    //useCaches = false
-                    //setRequestProperty("","")
-
-                    //val wr = OutputStreamWriter(getOutputStream());
-
                     val wr = DataOutputStream(outputStream)
-
-                    println("URL3 : $url")
                     wr.write(postData2)
-
-                    println("URL2 : $url")
-
                     wr.flush()
 
-                    Log.d(ContentValues.TAG, "URL : $url")
-
-                    Log.d(ContentValues.TAG, "Response Code : $responseCode")
-
+                    HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue \"URL : $url\"")
+                    HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue \"Response Code : $responseCode\"")
                     try {
                         BufferedReader(InputStreamReader(inputStream)).use {
                             val response = StringBuffer()
-
                             var inputLine = it.readLine()
                             while (inputLine != null) {
                                 response.append(inputLine)
@@ -191,14 +155,11 @@ internal class QueueProc {
                             }
                             it.close()
 
-
                             try {
                                 if (response.toString() != """{"messages":[]}""") {
                                     HyberPushMess.message = response.toString()
                                     val intent = Intent()
                                     intent.action = "com.hyber.android.hybersdkandroid.Push"
-                                    //intent.putExtra("Data", 1000)
-                                    //intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
                                     context.sendBroadcast(intent)
                                 }
                             } catch (e: Exception) {
@@ -211,13 +172,10 @@ internal class QueueProc {
                                 X_Hyber_Auth_Token,
                                 context
                             )
-
-                            println("Response : $response")
-                            //function_net_answer6 = responseCode.toString() + " " + "Response : $response"
-                            //function_net_answer6 = response.toString()
+                            HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue Response : $response")
                         }
                     } catch (e: Exception) {
-                        println("Failed")
+                        HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue response: unknown Fail")
                     }
 
                     functionNetAnswer2 = responseCode.toString()

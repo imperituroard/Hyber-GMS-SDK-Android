@@ -44,7 +44,7 @@ internal class Answer {
     )
 
     @Serializable
-    data class RegAnswSuccess(
+    data class RegAnswerSuccess(
         @SerialName("deviceId")
         val deviceId: String,
         @SerialName("token")
@@ -58,7 +58,7 @@ internal class Answer {
     )
 
     fun hyberRegisterNewRegisterExists2(
-        paramsgl: PushSdkParameters,
+        paramSgl: PushSdkParameters,
         context: Context
     ): HyberFunAnswerRegister {
         val initHyber = Initialization(context)
@@ -82,125 +82,131 @@ internal class Answer {
     ): HyberFunAnswerRegister {
 
         val hyberRewrite = RewriteParams(context)
-        val anss: HyberFunAnswerRegister
+        val answerRegistrar: HyberFunAnswerRegister
 
-        if (resp_code == "200") {
-            val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
-            val jsonBody = JSON.stringify(
-                RegAnswSuccess.serializer(),
-                RegAnswSuccess(
-                    parent.device.deviceId,
-                    parent.session.token,
-                    parent.profile.userId,
-                    parent.profile.userPhone,
-                    parent.profile.createdAt
+        when (resp_code) {
+            "200" -> {
+                val parent = JSON.parse(ParentRegistration.serializer(), resp_body)
+                val jsonBody = JSON.stringify(
+                    RegAnswerSuccess.serializer(),
+                    RegAnswerSuccess(
+                        parent.device.deviceId,
+                        parent.session.token,
+                        parent.profile.userId,
+                        parent.profile.userPhone,
+                        parent.profile.createdAt
+                    )
                 )
-            )
-            anss = HyberFunAnswerRegister(
-                code = 200,
-                description = "Success",
-                result = "Ok",
-                deviceId = parent.device.deviceId,
-                token = parent.session.token,
-                userId = parent.profile.userId,
-                userPhone = parent.profile.userPhone,
-                createdAt = parent.profile.createdAt
-            )
+                answerRegistrar = HyberFunAnswerRegister(
+                    code = 200,
+                    description = "Success",
+                    result = "Ok",
+                    deviceId = parent.device.deviceId,
+                    token = parent.session.token,
+                    userId = parent.profile.userId,
+                    userPhone = parent.profile.userPhone,
+                    createdAt = parent.profile.createdAt
+                )
 
-            hyberRewrite.rewriteHyberUserId(parent.profile.userId)
-            hyberRewrite.rewriteHyberRegistrationToken(parent.session.token)
-            hyberRewrite.rewriteHyberCreateAt(parent.profile.createdAt)
-            hyberRewrite.rewriteHyberDeviceId(parent.device.deviceId)
-            hyberRewrite.rewriteApiRegistrationStatus(true)
+                hyberRewrite.rewriteHyberUserId(parent.profile.userId)
+                hyberRewrite.rewriteHyberRegistrationToken(parent.session.token)
+                hyberRewrite.rewriteHyberCreateAt(parent.profile.createdAt)
+                hyberRewrite.rewriteHyberDeviceId(parent.device.deviceId)
+                hyberRewrite.rewriteApiRegistrationStatus(true)
 
-            return anss
-        } else if (resp_code == "401") {
+                return answerRegistrar
+            }
+            "401" -> {
 
-            anss = HyberFunAnswerRegister(
-                code = 401,
-                description = "(Client error) authentication error, probably errors",
-                result = "Failed",
-                deviceId = "unknown",
-                token = "unknown",
-                userId = "unknown",
-                userPhone = "unknown",
-                createdAt = "unknown"
-            )
+                answerRegistrar = HyberFunAnswerRegister(
+                    code = 401,
+                    description = "(Client error) authentication error, probably errors",
+                    result = "Failed",
+                    deviceId = "unknown",
+                    token = "unknown",
+                    userId = "unknown",
+                    userPhone = "unknown",
+                    createdAt = "unknown"
+                )
 
-            return anss
-        } else if (resp_code == "400") {
-            anss = HyberFunAnswerRegister(
-                code = 400,
-                description = "(Client error) request validation error",
-                result = "Failed",
-                deviceId = "unknown",
-                token = "unknown",
-                userId = "unknown",
-                userPhone = "unknown",
-                createdAt = "unknown"
-            )
+                return answerRegistrar
+            }
+            "400" -> {
+                answerRegistrar = HyberFunAnswerRegister(
+                    code = 400,
+                    description = "(Client error) request validation error",
+                    result = "Failed",
+                    deviceId = "unknown",
+                    token = "unknown",
+                    userId = "unknown",
+                    userPhone = "unknown",
+                    createdAt = "unknown"
+                )
 
-            return anss
-        } else if (resp_code == "500") {
+                return answerRegistrar
+            }
+            "500" -> {
 
-            anss = HyberFunAnswerRegister(
-                code = 500,
-                description = "(Server error)",
-                result = "Failed",
-                deviceId = "unknown",
-                token = "unknown",
-                userId = "unknown",
-                userPhone = "unknown",
-                createdAt = "unknown"
-            )
-            return anss
+                answerRegistrar = HyberFunAnswerRegister(
+                    code = 500,
+                    description = "(Server error)",
+                    result = "Failed",
+                    deviceId = "unknown",
+                    token = "unknown",
+                    userId = "unknown",
+                    userPhone = "unknown",
+                    createdAt = "unknown"
+                )
+                return answerRegistrar
 
-        } else if (resp_code == "700") {
-            anss = HyberFunAnswerRegister(
-                code = 700,
-                description = "Internal SDK error",
-                result = "Failed",
-                deviceId = "unknown",
-                token = "unknown",
-                userId = "unknown",
-                userPhone = "unknown",
-                createdAt = "unknown"
-            )
-            return anss
-        } else {
+            }
+            "700" -> {
+                answerRegistrar = HyberFunAnswerRegister(
+                    code = 700,
+                    description = "Internal SDK error",
+                    result = "Failed",
+                    deviceId = "unknown",
+                    token = "unknown",
+                    userId = "unknown",
+                    userPhone = "unknown",
+                    createdAt = "unknown"
+                )
+                return answerRegistrar
+            }
+            else -> {
 
-            anss = HyberFunAnswerRegister(
-                code = 710,
-                description = "Unknown error",
-                result = "Failed",
-                deviceId = "unknown",
-                token = "unknown",
-                userId = "unknown",
-                userPhone = "unknown",
-                createdAt = "unknown"
-            )
-
-            return anss
+                answerRegistrar = HyberFunAnswerRegister(
+                    code = 710,
+                    description = "Unknown error",
+                    result = "Failed",
+                    deviceId = "unknown",
+                    token = "unknown",
+                    userId = "unknown",
+                    userPhone = "unknown",
+                    createdAt = "unknown"
+                )
+                return answerRegistrar
+            }
         }
-
     }
-
 
     fun generalAnswer(
         resp_code: String,
         body_json: String,
         description: String
     ): HyberFunAnswerGeneral {
-        val resp: HyberFunAnswerGeneral
-        if (resp_code == "200") {
-            resp = HyberFunAnswerGeneral(200, "OK", "Success", body_json)
-        } else if (resp_code == "400") {
-            resp = HyberFunAnswerGeneral(400, "Failed", "Failed", "unknown")
-        } else {
-            resp = HyberFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
-        }
 
-        return resp
+        return when (resp_code) {
+            "200" -> {
+                HyberFunAnswerGeneral(200, "OK", "Success", body_json)
+            }
+            "400" -> {
+                HyberFunAnswerGeneral(400, "Failed", "Failed", "unknown")
+            }
+            else -> {
+                HyberFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
+            }
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.hyber.android.hybersdkandroid.add.Answer
 import com.hyber.android.hybersdkandroid.add.GetInfo
+import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.InputStreamReader
@@ -26,19 +27,19 @@ internal class HyberApi {
 
     //function for create special token for another procedures
     private fun hash(sss: String): String {
-        try {
+        return try {
             val bytes = sss.toByteArray()
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
             Log.d(TAG, "Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
-            return resp
+            resp
         } catch (e: Exception) {
             Log.d(
                 TAG,
                 "Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed"
             )
-            return "failed"
+            "failed"
         }
     }
 
@@ -60,10 +61,8 @@ internal class HyberApi {
 
         val threadNetF1 = Thread(Runnable {
             try {
-                Log.d(
-                    TAG,
-                    "Result: Start step1, Function: hyber_device_register, Class: HyberApi, xPlatformClientAPIKey: $xPlatformClientAPIKey, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_App_Fingerprint: $X_Hyber_App_Fingerprint, device_Name: $device_Name, device_Type: $device_Type, os_Type: $os_Type, sdk_Version: $sdk_Version, user_Pass: $user_Pass, user_Phone: $user_Phone"
-                )
+                HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_register, Class: HyberApi, xPlatformClientAPIKey: $xPlatformClientAPIKey, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_App_Fingerprint: $X_Hyber_App_Fingerprint, device_Name: $device_Name, device_Type: $device_Type, os_Type: $os_Type, sdk_Version: $sdk_Version, user_Pass: $user_Pass, user_Phone: $user_Phone")
+
                 val message =
                     "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$osVersion\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
                 //val message = "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$os_version\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
@@ -76,16 +75,16 @@ internal class HyberApi {
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
                 val mURL = URL(PushSdkParameters.branch_current_active.fun_hyber_url_registration)
-                val urlc = mURL.openConnection() as HttpsURLConnection
-                urlc.doOutput = true
-                urlc.setRequestProperty("Content-Language", "en-US")
-                urlc.setRequestProperty("X-Hyber-Client-API-Key", xPlatformClientAPIKey)
-                urlc.setRequestProperty("Content-Type", "application/json")
-                urlc.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                urlc.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint)
-                urlc.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                val connectorWebPlatform = mURL.openConnection() as HttpsURLConnection
+                connectorWebPlatform.doOutput = true
+                connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
+                connectorWebPlatform.setRequestProperty("X-Hyber-Client-API-Key", xPlatformClientAPIKey)
+                connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint)
+                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                with(urlc) {
+                with(connectorWebPlatform) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -195,20 +194,18 @@ internal class HyberApi {
 
                 val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_revoke)
 
-                val urlc2 = mURL2.openConnection() as HttpsURLConnection
-                urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US")
-                //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json")
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", authToken)
+                val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
+                connectorWebPlatform.doOutput = true
+                connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
+                connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
-                with(urlc2) {
+                with(connectorWebPlatform) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -270,7 +267,7 @@ internal class HyberApi {
         var functionNetAnswer3 = String()
         var functionCodeAnswer3 = 0
 
-        val thread_net_f3 = Thread(Runnable {
+        val threadNetF3 = Thread(Runnable {
             try {
 
                 val currentTimestamp2 =
@@ -291,17 +288,13 @@ internal class HyberApi {
                 val mURL2 =
                     URL(PushSdkParameters.branch_current_active.hyber_url_message_history + currentTimestamp2.toString())
 
-                //val urlc2 = mURL2.openConnection() as HttpsURLConnection
-
                 with(mURL2.openConnection() as HttpsURLConnection) {
                     requestMethod = "GET"  // optional default is GET
 
                     //doOutput = true
                     setRequestProperty("Content-Language", "en-US")
-                    //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
                     setRequestProperty("Content-Type", "application/json")
                     setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                    //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
                     setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
                     setRequestProperty("X-Hyber-Auth-Token", authToken)
 
@@ -333,8 +326,8 @@ internal class HyberApi {
 
         })
 
-        thread_net_f3.start()
-        thread_net_f3.join()
+        threadNetF3.start()
+        threadNetF3.join()
         return HyberFunAnswerGeneral(functionCodeAnswer3, "OK", "Processed", functionNetAnswer3)
 
     }
@@ -348,7 +341,7 @@ internal class HyberApi {
             var functionNetAnswer4 = String()
             var functionCodeAnswer4 = 0
 
-            val thread_net_f4 = Thread(Runnable {
+            val threadNetF4 = Thread(Runnable {
 
 
                 try {
@@ -370,23 +363,17 @@ internal class HyberApi {
                     val mURL2 =
                         URL(PushSdkParameters.branch_current_active.fun_hyber_url_get_device_all)
 
-                    //val urlc2 = mURL2.openConnection() as HttpsURLConnection
-
 
                     with(mURL2.openConnection() as HttpsURLConnection) {
                         requestMethod = "GET"  // optional default is GET
                         //doOutput = true
                         setRequestProperty("Content-Language", "en-US")
-                        //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
                         setRequestProperty("Content-Type", "application/json")
                         setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                        //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
                         setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
                         setRequestProperty("X-Hyber-Auth-Token", authToken)
 
                         sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
-
-                        //requestMethod = "GET"
 
                         Log.d(
                             TAG,
@@ -416,8 +403,8 @@ internal class HyberApi {
                 }
             })
 
-            thread_net_f4.start()
-            thread_net_f4.join()
+            threadNetF4.start()
+            threadNetF4.join()
             return HyberDataApi(functionCodeAnswer4, functionNetAnswer4, 0)
 
         } catch (e: Exception) {
@@ -453,56 +440,34 @@ internal class HyberApi {
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
                 //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
 
-                println(currentTimestamp2)
-                println(X_Hyber_Session_Id)
-                //println(date)
 
-                val auth_token = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
-
-                println(auth_token)
+                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
 
                 val mURL = URL(PushSdkParameters.branch_current_active.fun_hyber_url_device_update)
 
-                val urlc = mURL.openConnection() as HttpsURLConnection
-                urlc.doOutput = true
-                urlc.setRequestProperty("Content-Language", "en-US")
-                //urlc.setRequestProperty("X-Hyber-Client-API-Key", X_Hyber_Client_API_Key);
-                urlc.setRequestProperty("Content-Type", "application/json")
-                urlc.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                //urlc.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint);
-                urlc.setRequestProperty("X-Hyber-Auth-Token", auth_token)
-                urlc.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                urlc.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                val connectorWebPlatform = mURL.openConnection() as HttpsURLConnection
+                connectorWebPlatform.doOutput = true
+                connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
+                connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                with(urlc) {
+                with(connectorWebPlatform) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
-                    //doInput = true
-                    //useCaches = false
-                    //setRequestProperty("","")
-
-
-                    println("URL : $url")
-
-                    //val wr = OutputStreamWriter(getOutputStream());
 
                     val wr = DataOutputStream(outputStream)
 
-                    //println("URL3 : $url")
                     wr.write(postData)
-
-                    //println("URL2 : $url")
 
                     wr.flush()
 
-                    //println("URL : $url")
-                    //println("Response Code : $responseCode")
                     functionCodeAnswer5 = responseCode
-
-                    //if (responseCode==401) { init_hyber.clearData() }
 
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
@@ -513,7 +478,6 @@ internal class HyberApi {
                             inputLine = it.readLine()
                         }
                         it.close()
-                        //println("Response : $response")
                         functionNetAnswer5 = response.toString()
                     }
                 }
@@ -553,43 +517,31 @@ internal class HyberApi {
         val threadNetF6 = Thread(Runnable {
 
             try {
-
-                //val stringBuilder = StringBuilder("{\"name\":\"Cedric Beust\", \"age\":23}")
-                //val message = "{\"name\":\"Cedric Beust\", \"age\":23}"
                 val message2 = "{\"messageId\": \"$message_id\", \"answer\": \"$hyber_answer\"}"
-
                 Log.d(TAG, "Body message to hyber : $message2")
-
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
                 //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
-
-                println(currentTimestamp2)
-                //println(date)
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                //println(stringBuilder)
-
                 val mURL2 =
                     URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_callback)
 
-                val urlc2 = mURL2.openConnection() as HttpsURLConnection
-                urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US")
-                //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json")
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", authToken)
+                val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
+                connectorWebPlatform.doOutput = true
+                connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
+                connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
-                with(urlc2) {
+                with(connectorWebPlatform) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -601,15 +553,11 @@ internal class HyberApi {
 
                     val wr = DataOutputStream(outputStream)
 
-                    println("URL3 : $url")
                     wr.write(postData2)
-                    println("URL2 : $url")
                     wr.flush()
                     Log.d(TAG, "URL : $url")
                     Log.d(TAG, "Response Code : $responseCode")
                     functionCodeAnswer6 = responseCode
-                    // if (responseCode==401) { init_hyber.clearData() }
-
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
 
@@ -667,27 +615,25 @@ internal class HyberApi {
 
                     Log.d(TAG, "Timestamp : $currentTimestamp2")
 
-                    val auth_token = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                    val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
 
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
                     val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_dr)
 
-                    val urlc2 = mURL2.openConnection() as HttpsURLConnection
-                    urlc2.doOutput = true
-                    urlc2.setRequestProperty("Content-Language", "en-US")
-                    //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                    urlc2.setRequestProperty("Content-Type", "application/json")
-                    urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                    //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                    urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                    urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token)
+                    val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
+                    connectorWebPlatform.doOutput = true
+                    connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
+                    connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
+                    connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                    connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                    connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                    urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                    connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
-                    with(urlc2) {
+                    with(connectorWebPlatform) {
                         // optional default is GET
                         requestMethod = "POST"
                         doOutput = true

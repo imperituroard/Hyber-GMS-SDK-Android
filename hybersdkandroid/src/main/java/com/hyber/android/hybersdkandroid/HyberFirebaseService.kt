@@ -98,9 +98,9 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
                         PushSdkParameters.hyber_registration_token
                     )
                     HyberLoggerSdk.debug("From Message Delivery Report: $hyberAnswer")
-                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, fbtoken: ${PushSdkParameters.firebase_registration_token}, hybertoken: ${PushSdkParameters.hyber_registration_token}")
+                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${PushSdkParameters.firebase_registration_token}, hyberToken: ${PushSdkParameters.hyber_registration_token}")
                 } else {
-                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, fbtoken: ${PushSdkParameters.firebase_registration_token}, hybertoken: ${PushSdkParameters.hyber_registration_token}")
+                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${PushSdkParameters.firebase_registration_token}, hyberToken: ${PushSdkParameters.hyber_registration_token}")
                 }
             } catch (e: Exception) {
                 HyberLoggerSdk.debug("onMessageReceived: failed")
@@ -137,7 +137,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(
-            0, // ID of notification
+            137923, // ID of notification
             notificationObject.notificationBuilder(
                 applicationContext,
                 remoteMessage.notification!!.body.toString()

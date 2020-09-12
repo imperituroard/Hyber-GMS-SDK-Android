@@ -16,25 +16,25 @@ class HyberMessaging : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        /*
+
         if (Build.VERSION.SDK_INT <= 25) {
             //Send Foreground Notification
             sendNotification("", "", "")
 
 
-            val init_hyber: Initialization = Initialization(applicationContext)
-            init_hyber.hyber_init2()
+            val initHyber = Initialization(applicationContext)
+            //init_hyber.hyberInit2()
 
             //return Service.START_STICKY;
-            return super.onStartCommand(intent, flags, startId);
+            return super.onStartCommand(intent, flags, startId)
             //return START_REDELIVER_INTENT
         } else {
-            val init_hyber: Initialization = Initialization(applicationContext)
-            init_hyber.hyber_init2()
+            val initHyber = Initialization(applicationContext)
+            //init_hyber.hyber_init2()
 
-            return super.onStartCommand(intent, flags, startId);
+            return super.onStartCommand(intent, flags, startId)
         }
-        */
+
 
         val initHyber = Initialization(applicationContext)
         initHyber.hSdkInit2()
@@ -71,10 +71,10 @@ class HyberMessaging : Service() {
             .setWhen(System.currentTimeMillis())
 
         val notification: Notification
-        if (Build.VERSION.SDK_INT <= 15) {
-            notification = builder.notification // API-15 and lower
+        notification = if (Build.VERSION.SDK_INT <= 15) {
+            builder.notification // API-15 and lower
         } else {
-            notification = builder.build()
+            builder.build()
         }
 
         startForeground(DEFAULT_NOTIFICATION_ID, notification)

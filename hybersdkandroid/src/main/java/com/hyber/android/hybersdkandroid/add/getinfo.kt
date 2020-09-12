@@ -2,55 +2,47 @@ package com.hyber.android.hybersdkandroid.add
 
 import android.os.Build
 import android.text.TextUtils
-import android.content.ContentValues
-import android.util.Log
 import android.content.Context
 import android.content.res.Configuration
+import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 
 internal class GetInfo {
 
-    //var context: Context= Context()
     /** Returns the consumer friendly device name  */
     fun getDeviceName(): String? {
         val manufacturer = Build.MANUFACTURER
         val model = Build.MODEL
-        try {
-            return if (model.startsWith(manufacturer)) {
+        return try {
+            if (model.startsWith(manufacturer)) {
                 capitalize(model)
             } else capitalize(manufacturer) + " " + model
         } catch (e: Exception) {
-            return "unknown"
+            "unknown"
         }
     }
 
     fun getAndroidVersion(): String {
-        try {
-            return Build.VERSION.RELEASE
+        return try {
+            Build.VERSION.RELEASE
         } catch (e: java.lang.Exception) {
-            return "unknown"
+            "unknown"
         }
     }
 
     //get device type (phone or tablet)
     fun getPhoneType(context: Context): String {
-        try {
-            val flagisTab: Boolean =
+        return try {
+            val flagIsTab: Boolean =
                 context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
-            if (flagisTab) {
-                Log.d(
-                    ContentValues.TAG,
-                    "Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagisTab, answer: tablet"
-                )
-                return "tablet"
+            if (flagIsTab) {
+                HyberLoggerSdk.debug("Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagIsTab, answer: tablet")
+                "tablet"
             } else {
-                Log.d(
-                    ContentValues.TAG,
-                    "Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagisTab, answer: phone"
-                )
-                return "phone"
+                HyberLoggerSdk.debug("Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagIsTab, answer: phone")
+                "phone"
             }
         } catch (e: java.lang.Exception) {
-            return "unknown"
+            "unknown"
         }
     }
 

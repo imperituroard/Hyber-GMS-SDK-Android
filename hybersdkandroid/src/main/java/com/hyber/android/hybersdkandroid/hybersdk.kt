@@ -27,19 +27,18 @@ class HyberSDKQueue {
                 "Registration data not found",
                 "Not registered"
             )
-
             val initHyberParams2 = Initialization(context)
             initHyberParams2.hSdkInit3()
-            if (initHyberParams2.parametersGlobal.registrationStatus) {
+            return if (initHyberParams2.parametersGlobal.registrationStatus) {
                 val queue = QueueProc()
                 val anss = queue.hyberDeviceMessQueue(
                     initHyberParams2.parametersGlobal.firebase_registration_token,
                     initHyberParams2.parametersGlobal.hyber_registration_token, context
                 )
-                println(anss)
-                return answ.generalAnswer("200", "{}", "Success")
+                HyberLoggerSdk.debug("HyberSDKQueue.hyber_check_queue response: $anss")
+                answ.generalAnswer("200", "{}", "Success")
             } else {
-                return answerNotRegistered
+                answerNotRegistered
             }
         } catch (e: Exception) {
             return answerNotKnown
@@ -480,29 +479,25 @@ class HyberSDK(
 
     //9temp
     fun rewrite_msisdn(newmsisdn: String): HyberFunAnswerGeneral {
-        try {
+        return try {
             if (initHObject.parametersGlobal.registrationStatus) {
                 rewriteParams.rewriteHyberUserMsisdn(newmsisdn)
-                return answerAny.generalAnswer("200", "{}", "Success")
+                answerAny.generalAnswer("200", "{}", "Success")
             } else {
-                return answerNotRegistered
+                answerNotRegistered
             }
         } catch (e: Exception) {
-            return answerNotKnown
+            answerNotKnown
         }
     }
 
     //10temp
     fun rewrite_password(newPassword: String): HyberFunAnswerGeneral {
-        try {
-            if (initHObject.parametersGlobal.registrationStatus) {
-                rewriteParams.rewriteHyberUserPassword(newPassword)
-                return answerAny.generalAnswer("200", "{}", "Success")
-            } else {
-                return answerNotRegistered
-            }
-        } catch (e: Exception) {
-            return answerNotKnown
+        return if (initHObject.parametersGlobal.registrationStatus) {
+            rewriteParams.rewriteHyberUserPassword(newPassword)
+            answerAny.generalAnswer("200", "{}", "Success")
+        } else {
+            answerNotRegistered
         }
     }
 

@@ -8,7 +8,8 @@
 
     <application>
         <service
-            android:name="com.hyber.android.hybersdkandroid.HyberFirebaseService">
+            android:name="com.hyber.android.hybersdkandroid.HyberFirebaseService"
+            android:permission="android.settings.APP_NOTIFICATION_SETTINGS">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
@@ -17,7 +18,8 @@
         <service
             android:name="com.hyber.android.hybersdkandroid.HyberMessaging"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true"
+            android:permission="android.settings.CHANNEL_NOTIFICATION_SETTINGS">
         </service>
     </application>
 </manifest>
