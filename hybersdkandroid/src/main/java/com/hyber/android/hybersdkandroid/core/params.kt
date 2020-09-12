@@ -76,7 +76,7 @@ internal object PushSdkParameters {
     // false - it s new device and we need to complete hyber_register_new()
     var registrationStatus: Boolean = false
 
-    var sdkVersion: String = "1.0.0.9"
+    var sdkVersion: String = "1.0.0.11"
     var hyber_osType: String = String()
     var hyber_deviceName: String = String()
     var hyber_deviceType: String = String()
