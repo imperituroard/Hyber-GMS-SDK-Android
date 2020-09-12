@@ -7,7 +7,6 @@ import com.hyber.android.hybersdkandroid.add.HyberParsing
 import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.*
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
-import mu.KotlinLogging
 import kotlin.properties.Delegates
 
 @Suppress("SpellCheckingInspection")
@@ -130,8 +129,7 @@ class HyberSDK(
                     context
                 )
             } else {
-                rewrite_msisdn(user_msisdn)
-                rewrite_password(user_password)
+
                 initHObject.hSdkUpdateFirebaseAuto()
                 _xHyberSessionId = initHObject.parametersGlobal.firebase_registration_token
                 if (_xHyberSessionId != "" && _xHyberSessionId != " ") {
@@ -147,6 +145,9 @@ class HyberSDK(
                         user_msisdn,
                         context
                     )
+                    rewriteParams.rewriteHyberUserMsisdn(user_msisdn)
+                    rewriteParams.rewriteHyberUserPassword(user_password)
+
                     HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
                     HyberLoggerSdk.debug("uuid: ${initHObject.parametersGlobal.hyber_uuid}")
 
@@ -194,8 +195,6 @@ class HyberSDK(
                 )
 
             } else {
-                rewrite_msisdn(user_msisdn)
-                rewrite_password(user_password)
                 initHObject.hSdkUpdateFirebaseManual(X_FCM_token)
                 if (X_FCM_token != "" && X_FCM_token != " ") {
                     val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
@@ -210,6 +209,8 @@ class HyberSDK(
                         user_msisdn,
                         context
                     )
+                    rewriteParams.rewriteHyberUserMsisdn(user_msisdn)
+                    rewriteParams.rewriteHyberUserPassword(user_password)
 
                     HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
                     HyberLoggerSdk.debug("uuid: ${initHObject.parametersGlobal.hyber_uuid}")
@@ -313,22 +314,22 @@ class HyberSDK(
     fun hyber_get_device_all_from_hyber(): HyberFunAnswerGeneral {
         try {
             if (initHObject.parametersGlobal.registrationStatus) {
-                val device_all_hyber: HyberDataApi = apiHyberData.hGetDeviceAll(
+                val deviceAllHyber: HyberDataApi = apiHyberData.hGetDeviceAll(
                     _xHyberSessionId,
                     initHObject.parametersGlobal.hyber_registration_token
                 )
-                HyberLoggerSdk.debug("device_all_hyber : $device_all_hyber")
+                HyberLoggerSdk.debug("device_all_hyber : $deviceAllHyber")
 
 
-                if (device_all_hyber.code == 401) {
+                if (deviceAllHyber.code == 401) {
                     try {
                         initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
                 return answerAny.generalAnswer(
-                    device_all_hyber.code.toString(),
-                    device_all_hyber.body,
+                    deviceAllHyber.code.toString(),
+                    deviceAllHyber.body,
                     "Success"
                 )
             } else {
