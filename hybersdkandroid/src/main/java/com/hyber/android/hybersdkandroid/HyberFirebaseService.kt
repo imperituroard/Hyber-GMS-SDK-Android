@@ -1,35 +1,20 @@
 package com.hyber.android.hybersdkandroid
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import android.content.Context
-import android.app.NotificationManager
+import com.hyber.android.hybersdkandroid.add.HyberParsing
+import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.HyberParameters
-import com.hyber.android.hybersdkandroid.add.HyberParsing
-import java.util.concurrent.Executors
-import android.os.Messenger
-import android.content.Intent
-import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.HyberPublicParams
-import com.hyber.android.hybersdkandroid.core.Initialization
+import java.util.concurrent.Executors
 
 
-internal class HyberFirebaseService() : FirebaseMessagingService() {
-
-    private val COUNT_PLUS = 1
-    private val COUNT_MINUS = 2
-    private val SET_COUNT = 0
-    private val GET_COUNT = 3
-
-    private var count = 0
-
-    private var messanger: Messenger? = null
-    private var toActivityMessenger: Messenger? = null
-
-    private val MSG_KEY = "yo"
-
+internal class HyberFirebaseService : FirebaseMessagingService() {
 
     private var api: HyberApi = HyberApi()
     private var parsing: HyberParsing = HyberParsing()
@@ -51,7 +36,7 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "MyService onDestroy")
-        var someRes = null
+        var someRes: Nothing? = null
     }
 
     override fun onNewToken(s: String) {
@@ -66,33 +51,33 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
 
         try {
             if (s != "") {
-                val hyber_update_params: RewriteParams = RewriteParams(applicationContext)
-                hyber_update_params.rewrite_firebase_token(s)
-                Log.d(TAG, "HyberFirebaseService.onNewToken local update: success");
+                val hyberUpdateParams = RewriteParams(applicationContext)
+                hyberUpdateParams.rewriteFirebaseToken(s)
+                Log.d(TAG, "HyberFirebaseService.onNewToken local update: success")
             }
 
         } catch (e: Exception) {
-            Log.d(TAG, "HyberFirebaseService.onNewToken local update: unknown error");
+            Log.d(TAG, "HyberFirebaseService.onNewToken local update: unknown error")
         }
 
         try {
             if (HyberParameters.hyber_registration_token != "" && HyberParameters.firebase_registration_token != "") {
-                api.hyber_device_update(
+                api.hDeviceUpdate(
                     HyberParameters.hyber_registration_token,
                     HyberParameters.firebase_registration_token,
                     HyberParameters.hyber_deviceName,
                     HyberParameters.hyber_deviceType,
                     HyberParameters.hyber_osType,
-                    HyberParameters.sdkversion,
+                    HyberParameters.sdkVersion,
                     s
                 )
-                Log.d(TAG, "HyberFirebaseService.onNewToken update: success");
+                Log.d(TAG, "HyberFirebaseService.onNewToken update: success")
             } else {
-                Log.d(TAG, "HyberFirebaseService.onNewToken update: failed");
+                Log.d(TAG, "HyberFirebaseService.onNewToken update: failed")
             }
 
         } catch (e: Exception) {
-            Log.d(TAG, "HyberFirebaseService.onNewToken update: unknown error");
+            Log.d(TAG, "HyberFirebaseService.onNewToken update: unknown error")
         }
 
 
@@ -124,13 +109,13 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
         Log.d(TAG, "From: " + remoteMessage.from!!)
 
         // Check if message contains a data payload.
-        if (remoteMessage.data.size > 0) {
+        if (remoteMessage.data.isNotEmpty()) {
             try {
 
                 if (HyberParameters.firebase_registration_token != "" && HyberParameters.hyber_registration_token != "") {
 
-                    api.hyber_message_dr(
-                        parsing.parse_message_id(remoteMessage.data.toString()),
+                    api.hMessageDr(
+                        parsing.parseMessageId(remoteMessage.data.toString()),
                         HyberParameters.firebase_registration_token,
                         HyberParameters.hyber_registration_token
                     )
@@ -187,13 +172,13 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
     }
 
 
-    fun sendNotification(remoteMessage: RemoteMessage) {
-        val notif: HyberPublicParams = HyberPublicParams()
+    private fun sendNotification(remoteMessage: RemoteMessage) {
+        val notificationObject = HyberPublicParams()
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(
             0 /* ID of notification */,
-            notif.notificationBuilder(
+            notificationObject.notificationBuilder(
                 applicationContext,
                 remoteMessage.notification!!.body.toString()
             ).build()
@@ -201,7 +186,7 @@ internal class HyberFirebaseService() : FirebaseMessagingService() {
     }
 
     private companion object {
-        private val TAG = "FCMService"
+        private const val TAG = "FCMService"
     }
 }
 

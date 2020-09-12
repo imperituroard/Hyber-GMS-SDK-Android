@@ -1,34 +1,33 @@
 package com.hyber.android.hybersdkandroid.core
 
-import android.content.Context
-import com.hyber.android.hybersdkandroid.add.Answer
-import java.security.MessageDigest
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.DataOutputStream
-import javax.net.ssl.SSLSocketFactory
-import java.nio.charset.Charset
-import android.util.Log
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.util.Log
+import com.hyber.android.hybersdkandroid.add.Answer
 import com.hyber.android.hybersdkandroid.add.GetInfo
-import java.lang.Exception
+import java.io.BufferedReader
+import java.io.DataOutputStream
+import java.io.InputStreamReader
+import java.net.URL
+import java.nio.charset.Charset
+import java.security.MessageDigest
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLSocketFactory
 
 //class for communication with hyber rest server (REST API)
-internal class HyberApi() {
+internal class HyberApi {
 
     //class init for creation answers
-    private var answ_form: Answer = Answer()
-    private var os_version_class: GetInfo = GetInfo()
+    private var answerForm: Answer = Answer()
+    private var osVersionClass: GetInfo = GetInfo()
 
     //parameters for procedures
-    private val os_version: String = os_version_class.get_android_version()
+    private val osVersion: String = osVersionClass.getAndroidVersion()
 
     //function for create special token for another procedures
     private fun hash(sss: String): String {
         try {
-            val bytes = sss.toString().toByteArray()
+            val bytes = sss.toByteArray()
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
@@ -44,8 +43,8 @@ internal class HyberApi() {
     }
 
     //POST procedure for new registration
-    fun hyber_device_register(
-        X_Hyber_Client_API_Key: String,
+    fun hDeviceRegister(
+        xPlatformClientAPIKey: String,
         X_Hyber_Session_Id: String,
         X_Hyber_App_Fingerprint: String,
         device_Name: String,
@@ -56,38 +55,37 @@ internal class HyberApi() {
         user_Phone: String,
         context: Context
     ): HyberDataApi2 {
-        var function_net_answer: HyberFunAnswerRegister =
-            HyberFunAnswerRegister(0, "", "", "", "", "", "", "")
-        var function_code_answer: Int = 0
+        var functionNetAnswer = HyberFunAnswerRegister()
+        var functionCodeAnswer = 0
 
-        val thread_net_f1 = Thread(Runnable {
+        val threadNetF1 = Thread(Runnable {
             try {
                 Log.d(
                     TAG,
-                    "Result: Start step1, Function: hyber_device_register, Class: HyberApi, X_Hyber_Client_API_Key: $X_Hyber_Client_API_Key, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_App_Fingerprint: $X_Hyber_App_Fingerprint, device_Name: $device_Name, device_Type: $device_Type, os_Type: $os_Type, sdk_Version: $sdk_Version, user_Pass: $user_Pass, user_Phone: $user_Phone"
+                    "Result: Start step1, Function: hyber_device_register, Class: HyberApi, xPlatformClientAPIKey: $xPlatformClientAPIKey, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_App_Fingerprint: $X_Hyber_App_Fingerprint, device_Name: $device_Name, device_Type: $device_Type, os_Type: $os_Type, sdk_Version: $sdk_Version, user_Pass: $user_Pass, user_Phone: $user_Phone"
                 )
                 val message =
-                    "{\"userPhone\":\"" + user_Phone + "\",\"userPass\":\"" + user_Pass + "\",\"osType\":\"" + os_Type + "\",\"osVersion\":\"" + os_version + "\",\"deviceType\":\"" + device_Type + "\",\"deviceName\":\"" + device_Name + "\",\"sdkVersion\":\"" + sdk_Version + "\"}"
+                    "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$osVersion\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
                 //val message = "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$os_version\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
 
                 Log.d(
                     TAG,
                     "Result: Start step2, Function: hyber_device_register, Class: HyberApi, message: $message"
-                );
+                )
 
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
-                val mURL = URL(HyberParameters.hyber_url_registration)
+                val mURL = URL(HyberParameters.branch_current_active.fun_hyber_url_registration)
                 val urlc = mURL.openConnection() as HttpsURLConnection
                 urlc.doOutput = true
-                urlc.setRequestProperty("Content-Language", "en-US");
-                urlc.setRequestProperty("X-Hyber-Client-API-Key", X_Hyber_Client_API_Key);
-                urlc.setRequestProperty("Content-Type", "application/json");
-                urlc.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
-                urlc.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint);
-                urlc.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                urlc.setRequestProperty("Content-Language", "en-US")
+                urlc.setRequestProperty("X-Hyber-Client-API-Key", xPlatformClientAPIKey)
+                urlc.setRequestProperty("Content-Type", "application/json")
+                urlc.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                urlc.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint)
+                urlc.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                with(urlc as HttpsURLConnection) {
+                with(urlc) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -97,18 +95,18 @@ internal class HyberApi() {
                     Log.d(TAG, "URL : $url")
 
                     Log.d(TAG, "start DataOutputStream")
-                    val wr: DataOutputStream = DataOutputStream(outputStream)
+                    val wr = DataOutputStream(outputStream)
                     Log.d(TAG, "start write")
 
                     wr.write(postData)
 
                     Log.d(TAG, "end write")
-                    wr.flush();
+                    wr.flush()
                     Log.d(
                         TAG,
-                        "Result: Finished step3, Function: hyber_device_register, Class: HyberApi, Response Code : ${responseCode.toString()}"
+                        "Result: Finished step3, Function: hyber_device_register, Class: HyberApi, Response Code : $responseCode"
                     )
-                    function_code_answer = responseCode;
+                    functionCodeAnswer = responseCode
                     if (responseCode == 200) {
 
                         BufferedReader(InputStreamReader(inputStream)).use {
@@ -122,16 +120,16 @@ internal class HyberApi() {
                             it.close()
                             Log.d(
                                 TAG,
-                                "Result: Finished step4, Function: hyber_device_register, Class: HyberApi, Response : ${response.toString()}"
+                                "Result: Finished step4, Function: hyber_device_register, Class: HyberApi, Response : $response"
                             )
-                            function_net_answer = answ_form.register_procedure_answer2(
+                            functionNetAnswer = answerForm.registerProcedureAnswer2(
                                 responseCode.toString(),
                                 response.toString(),
                                 context
                             )
                         }
                     } else {
-                        function_net_answer = answ_form.register_procedure_answer2(
+                        functionNetAnswer = answerForm.registerProcedureAnswer2(
                             responseCode.toString(),
                             "unknown",
                             context
@@ -143,9 +141,9 @@ internal class HyberApi() {
 
                 Log.d(
                     TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace.toString()}"
+                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
                 )
-                function_net_answer = answ_form.register_procedure_answer2(
+                functionNetAnswer = answerForm.registerProcedureAnswer2(
                     "705",
                     "unknown",
                     context
@@ -153,22 +151,22 @@ internal class HyberApi() {
             }
         })
 
-        thread_net_f1.start()
-        thread_net_f1.join()
+        threadNetF1.start()
+        threadNetF1.join()
 
-        return HyberDataApi2(function_net_answer.code, function_net_answer, 0)
+        return HyberDataApi2(functionNetAnswer.code, functionNetAnswer, 0)
     }
 
     //POST
-    fun hyber_device_revoke(
+    fun hDeviceRevoke(
         dev_list: String,
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String
     ): HyberDataApi {
 
-        var function_net_answer2: String = String()
+        var functionNetAnswer2 = String()
 
-        val thread_net_f2 = Thread(Runnable {
+        val threadNetF2 = Thread(Runnable {
 
             try {
 
@@ -177,9 +175,7 @@ internal class HyberApi() {
                     "Result: Start step1, Function: hyber_device_revoke, Class: HyberApi, dev_list: $dev_list, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token"
                 )
 
-                //val stringBuilder = StringBuilder("{\"name\":\"Cedric Beust\", \"age\":23}")
-                //val message = "{\"name\":\"Cedric Beust\", \"age\":23}"
-                val message2 = "{\"devices\":" + dev_list.toString() + "}"
+                val message2 = "{\"devices\":$dev_list}"
 
                 Log.d(
                     TAG,
@@ -192,29 +188,27 @@ internal class HyberApi() {
                 println(currentTimestamp2)
                 //println(date)
 
-                val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                //println(stringBuilder)
-
-                val mURL2 = URL(HyberParameters.hyber_url_revoke)
+                val mURL2 = URL(HyberParameters.branch_current_active.fun_hyber_url_revoke)
 
                 val urlc2 = mURL2.openConnection() as HttpsURLConnection
                 urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US");
+                urlc2.setRequestProperty("Content-Language", "en-US")
                 //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json");
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
+                urlc2.setRequestProperty("Content-Type", "application/json")
+                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                 //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token);
+                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                urlc2.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
-                with(urlc2 as HttpsURLConnection) {
+                with(urlc2) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -224,18 +218,18 @@ internal class HyberApi() {
 
                     //val wr = OutputStreamWriter(getOutputStream());
 
-                    val wr: DataOutputStream = DataOutputStream(outputStream)
+                    val wr = DataOutputStream(outputStream)
 
                     println("URL3 : $url")
-                    wr.write(postData2);
+                    wr.write(postData2)
 
                     println("URL2 : $url")
 
-                    wr.flush();
+                    wr.flush()
 
-                    Log.d(TAG, "URL : $url");
+                    Log.d(TAG, "URL : $url")
 
-                    Log.d(TAG, "Response Code : $responseCode");
+                    Log.d(TAG, "Response Code : $responseCode")
 
                     try {
                         BufferedReader(InputStreamReader(inputStream)).use {
@@ -253,29 +247,28 @@ internal class HyberApi() {
                         println("Failed")
                     }
 
-                    function_net_answer2 = responseCode.toString()
+                    functionNetAnswer2 = responseCode.toString()
                 }
             } catch (e: Exception) {
-                function_net_answer2 = "500"
+                functionNetAnswer2 = "500"
             }
         })
 
-        thread_net_f2.start()
-        thread_net_f2.join()
+        threadNetF2.start()
+        threadNetF2.join()
 
-        return HyberDataApi(function_net_answer2.toInt(), "{}", 0)
+        return HyberDataApi(functionNetAnswer2.toInt(), "{}", 0)
     }
 
     //GET
-    fun hyber_get_message_history(
+    fun hGetMessageHistory(
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String,
         period_in_seconds: Int
     ): HyberFunAnswerGeneral {
 
-        var function_net_answer3: String = String()
-        var final_answer: HyberFunAnswerGeneral
-        var function_code_answer3: Int = 0
+        var functionNetAnswer3 = String()
+        var functionCodeAnswer3 = 0
 
         val thread_net_f3 = Thread(Runnable {
             try {
@@ -287,16 +280,16 @@ internal class HyberApi() {
                 println(currentTimestamp2)
                 //println(date)
 
-                val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 Log.d(
                     TAG,
-                    "\nSent 'GET' request to hyber_get_device_all with : X_Hyber_Session_Id : $X_Hyber_Session_Id; X_Hyber_Auth_Token : $X_Hyber_Auth_Token; period_in_seconds : ${period_in_seconds.toString()}"
-                );
+                    "\nSent 'GET' request to hyber_get_device_all with : X_Hyber_Session_Id : $X_Hyber_Session_Id; X_Hyber_Auth_Token : $X_Hyber_Auth_Token; period_in_seconds : $period_in_seconds"
+                )
 
 
                 val mURL2 =
-                    URL(HyberParameters.hyber_url_message_history(currentTimestamp2.toString()))
+                    URL(HyberParameters.branch_current_active.hyber_url_message_history + currentTimestamp2.toString())
 
                 //val urlc2 = mURL2.openConnection() as HttpsURLConnection
 
@@ -304,25 +297,25 @@ internal class HyberApi() {
                     requestMethod = "GET"  // optional default is GET
 
                     //doOutput = true
-                    setRequestProperty("Content-Language", "en-US");
+                    setRequestProperty("Content-Language", "en-US")
                     //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                    setRequestProperty("Content-Type", "application/json");
-                    setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
+                    setRequestProperty("Content-Type", "application/json")
+                    setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                     //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                    setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                    setRequestProperty("X-Hyber-Auth-Token", auth_token);
+                    setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                    setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                    sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                    sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
                     requestMethod = "GET"
 
-                    Log.d(TAG, "\nSent 'GET' request to URL : $url; Response Code : $responseCode");
-                    function_code_answer3 = responseCode
+                    Log.d(TAG, "\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                    functionCodeAnswer3 = responseCode
 
                     inputStream.bufferedReader().use {
 
                         //println(it.readLine())
-                        function_net_answer3 = it.readLine().toString()
+                        functionNetAnswer3 = it.readLine().toString()
 
                     }
                 }
@@ -330,10 +323,10 @@ internal class HyberApi() {
 
                 Log.d(
                     TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace.toString()}"
+                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
                 )
-                function_code_answer3 = 700
-                function_net_answer3 = "Failed"
+                functionCodeAnswer3 = 700
+                functionNetAnswer3 = "Failed"
 
                 //final_answer = HyberFunAnswerGeneral(700, "Failed", "Rest Api thread exception", "{}")
             }
@@ -342,18 +335,18 @@ internal class HyberApi() {
 
         thread_net_f3.start()
         thread_net_f3.join()
-        return HyberFunAnswerGeneral(function_code_answer3, "OK", "Processed", function_net_answer3)
+        return HyberFunAnswerGeneral(functionCodeAnswer3, "OK", "Processed", functionNetAnswer3)
 
     }
 
 
     //GET
-    fun hyber_get_device_all(X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String): HyberDataApi {
+    fun hGetDeviceAll(X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String): HyberDataApi {
 
         try {
 
-            var function_net_answer4: String = String()
-            var function_code_answer4: Int = 0
+            var functionNetAnswer4 = String()
+            var functionCodeAnswer4 = 0
 
             val thread_net_f4 = Thread(Runnable {
 
@@ -367,14 +360,15 @@ internal class HyberApi() {
                     println(currentTimestamp2)
                     //println(date)
 
-                    val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                    val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                     Log.d(
                         TAG,
-                        "Result: Start step1, Function: hyber_get_device_all, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $auth_token"
+                        "Result: Start step1, Function: hyber_get_device_all, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $authToken"
                     )
 
-                    val mURL2 = URL(HyberParameters.hyber_url_getdeviceall)
+                    val mURL2 =
+                        URL(HyberParameters.branch_current_active.fun_hyber_url_get_device_all)
 
                     //val urlc2 = mURL2.openConnection() as HttpsURLConnection
 
@@ -382,34 +376,34 @@ internal class HyberApi() {
                     with(mURL2.openConnection() as HttpsURLConnection) {
                         requestMethod = "GET"  // optional default is GET
                         //doOutput = true
-                        setRequestProperty("Content-Language", "en-US");
+                        setRequestProperty("Content-Language", "en-US")
                         //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                        setRequestProperty("Content-Type", "application/json");
-                        setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
+                        setRequestProperty("Content-Type", "application/json")
+                        setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                         //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                        setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                        setRequestProperty("X-Hyber-Auth-Token", auth_token);
+                        setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                        setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                        sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                        sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
                         //requestMethod = "GET"
 
                         Log.d(
                             TAG,
                             "\nSent 'GET' request to URL : $url; Response Code : $responseCode"
-                        );
-                        function_code_answer4 = responseCode;
+                        )
+                        functionCodeAnswer4 = responseCode
 
                         //if (responseCode==401) { init_hyber.clearData() }
 
                         inputStream.bufferedReader().use {
 
                             //println(it.readLine())
-                            function_net_answer4 = it.readLine().toString()
+                            functionNetAnswer4 = it.readLine().toString()
 
                             Log.d(
                                 TAG,
-                                "Result: Finish step2, Function: hyber_get_device_all, Class: HyberApi, function_net_answer4: $function_net_answer4"
+                                "Result: Finish step2, Function: hyber_get_device_all, Class: HyberApi, function_net_answer4: $functionNetAnswer4"
                             )
                         }
                     }
@@ -418,13 +412,13 @@ internal class HyberApi() {
                         TAG,
                         "Result: Failed step3, Function: hyber_get_device_all, Class: HyberApi, exception: $e"
                     )
-                    function_net_answer4 = "Failed"
+                    functionNetAnswer4 = "Failed"
                 }
             })
 
             thread_net_f4.start()
             thread_net_f4.join()
-            return HyberDataApi(function_code_answer4, function_net_answer4, 0)
+            return HyberDataApi(functionCodeAnswer4, functionNetAnswer4, 0)
 
         } catch (e: Exception) {
             return HyberDataApi(700, "Failed", 0)
@@ -433,7 +427,7 @@ internal class HyberApi() {
     }
 
     //POST
-    fun hyber_device_update(
+    fun hDeviceUpdate(
         X_Hyber_Auth_Token: String,
         X_Hyber_Session_Id: String,
         device_Name: String,
@@ -443,14 +437,14 @@ internal class HyberApi() {
         fcm_Token: String
     ): HyberDataApi {
 
-        var function_net_answer5: String = String()
-        var function_code_answer5: Int = 0
+        var functionNetAnswer5 = String()
+        var functionCodeAnswer5 = 0
 
-        val thread_net_f5 = Thread(Runnable {
+        val threadNetF5 = Thread(Runnable {
 
             try {
                 val message =
-                    "{\"fcmToken\": \"" + fcm_Token + "\",\"osType\": \"" + os_Type + "\",\"osVersion\": \"$os_version\",\"deviceType\": \"" + device_Type + "\",\"deviceName\": \"" + device_Name + "\",\"sdkVersion\": \"" + sdk_Version + "\" }"
+                    "{\"fcmToken\": \"$fcm_Token\",\"osType\": \"$os_Type\",\"osVersion\": \"$osVersion\",\"deviceType\": \"$device_Type\",\"deviceName\": \"$device_Name\",\"sdkVersion\": \"$sdk_Version\" }"
                 println(message)
 
 
@@ -463,26 +457,26 @@ internal class HyberApi() {
                 println(X_Hyber_Session_Id)
                 //println(date)
 
-                val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                val auth_token = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 println(auth_token)
 
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
 
-                val mURL = URL(HyberParameters.hyber_url_device_update)
+                val mURL = URL(HyberParameters.branch_current_active.fun_hyber_url_device_update)
 
                 val urlc = mURL.openConnection() as HttpsURLConnection
                 urlc.doOutput = true
-                urlc.setRequestProperty("Content-Language", "en-US");
+                urlc.setRequestProperty("Content-Language", "en-US")
                 //urlc.setRequestProperty("X-Hyber-Client-API-Key", X_Hyber_Client_API_Key);
-                urlc.setRequestProperty("Content-Type", "application/json");
-                urlc.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
+                urlc.setRequestProperty("Content-Type", "application/json")
+                urlc.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                 //urlc.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint);
-                urlc.setRequestProperty("X-Hyber-Auth-Token", auth_token);
-                urlc.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                urlc.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                urlc.setRequestProperty("X-Hyber-Auth-Token", auth_token)
+                urlc.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                urlc.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                with(urlc as HttpsURLConnection) {
+                with(urlc) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -495,18 +489,18 @@ internal class HyberApi() {
 
                     //val wr = OutputStreamWriter(getOutputStream());
 
-                    val wr: DataOutputStream = DataOutputStream(outputStream)
+                    val wr = DataOutputStream(outputStream)
 
                     //println("URL3 : $url")
-                    wr.write(postData);
+                    wr.write(postData)
 
                     //println("URL2 : $url")
 
-                    wr.flush();
+                    wr.flush()
 
                     //println("URL : $url")
                     //println("Response Code : $responseCode")
-                    function_code_answer5 = responseCode;
+                    functionCodeAnswer5 = responseCode
 
                     //if (responseCode==401) { init_hyber.clearData() }
 
@@ -520,7 +514,7 @@ internal class HyberApi() {
                         }
                         it.close()
                         //println("Response : $response")
-                        function_net_answer5 = response.toString()
+                        functionNetAnswer5 = response.toString()
                     }
                 }
 
@@ -528,24 +522,24 @@ internal class HyberApi() {
 
                 Log.d(
                     TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace.toString()}"
+                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
                 )
-                function_net_answer5 = "Failed"
+                functionNetAnswer5 = "Failed"
             }
 
 
         })
 
-        thread_net_f5.start()
-        thread_net_f5.join()
+        threadNetF5.start()
+        threadNetF5.join()
 
-        return HyberDataApi(function_code_answer5, function_net_answer5, 0)
+        return HyberDataApi(functionCodeAnswer5, functionNetAnswer5, 0)
 
 
     }
 
     //POST
-    fun hyber_message_callback(
+    fun hMessageCallback(
         message_id: String,
         hyber_answer: String,
         X_Hyber_Session_Id: String,
@@ -553,10 +547,10 @@ internal class HyberApi() {
     ): HyberDataApi {
 
 
-        var function_net_answer6: String = String()
-        var function_code_answer6: Int = 0
+        var functionNetAnswer6 = String()
+        var functionCodeAnswer6 = 0
 
-        val thread_net_f6 = Thread(Runnable {
+        val threadNetF6 = Thread(Runnable {
 
             try {
 
@@ -564,7 +558,7 @@ internal class HyberApi() {
                 //val message = "{\"name\":\"Cedric Beust\", \"age\":23}"
                 val message2 = "{\"messageId\": \"$message_id\", \"answer\": \"$hyber_answer\"}"
 
-                Log.d(TAG, "Body message to hyber : $message2");
+                Log.d(TAG, "Body message to hyber : $message2")
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
                 //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
@@ -572,29 +566,30 @@ internal class HyberApi() {
                 println(currentTimestamp2)
                 //println(date)
 
-                val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
                 //println(stringBuilder)
 
-                val mURL2 = URL(HyberParameters.hyber_url_message_callback)
+                val mURL2 =
+                    URL(HyberParameters.branch_current_active.fun_hyber_url_message_callback)
 
                 val urlc2 = mURL2.openConnection() as HttpsURLConnection
                 urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US");
+                urlc2.setRequestProperty("Content-Language", "en-US")
                 //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json");
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
+                urlc2.setRequestProperty("Content-Type", "application/json")
+                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                 //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token);
+                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                urlc2.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
-                with(urlc2 as HttpsURLConnection) {
+                with(urlc2) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -604,15 +599,15 @@ internal class HyberApi() {
 
                     //val wr = OutputStreamWriter(getOutputStream());
 
-                    val wr: DataOutputStream = DataOutputStream(outputStream)
+                    val wr = DataOutputStream(outputStream)
 
                     println("URL3 : $url")
-                    wr.write(postData2);
+                    wr.write(postData2)
                     println("URL2 : $url")
-                    wr.flush();
-                    Log.d(TAG, "URL : $url");
-                    Log.d(TAG, "Response Code : $responseCode");
-                    function_code_answer6 = responseCode;
+                    wr.flush()
+                    Log.d(TAG, "URL : $url")
+                    Log.d(TAG, "Response Code : $responseCode")
+                    functionCodeAnswer6 = responseCode
                     // if (responseCode==401) { init_hyber.clearData() }
 
                     BufferedReader(InputStreamReader(inputStream)).use {
@@ -626,7 +621,7 @@ internal class HyberApi() {
                         it.close()
                         println("Response : $response")
                         //function_net_answer6 = responseCode.toString() + " " + "Response : $response"
-                        function_net_answer6 = response.toString()
+                        functionNetAnswer6 = response.toString()
                     }
                 }
 
@@ -634,21 +629,21 @@ internal class HyberApi() {
 
                 Log.d(
                     TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace.toString()}"
+                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
                 )
 
             }
         })
 
-        thread_net_f6.start()
-        thread_net_f6.join()
-        return HyberDataApi(function_code_answer6, function_net_answer6, 0)
+        threadNetF6.start()
+        threadNetF6.join()
+        return HyberDataApi(functionCodeAnswer6, functionNetAnswer6, 0)
 
 
     }
 
     //POST
-    fun hyber_message_dr(
+    fun hMessageDr(
         message_id: String,
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String
@@ -656,43 +651,43 @@ internal class HyberApi() {
 
         if (X_Hyber_Session_Id != "" && X_Hyber_Auth_Token != "" && message_id != "") {
 
-            var function_net_answer7: String = String()
+            var functionNetAnswer7 = String()
 
-            val thread_net_f7 = Thread(Runnable {
+            val threadNetF7 = Thread(Runnable {
 
                 try {
                     //val message2 = StringBuilder("{\"messageId\": \"$message_id\"}")
                     val message2 = "{\"messageId\": \"$message_id\"}"
 
-                    Log.d(TAG, "Body message to hyber : $message2");
+                    Log.d(TAG, "Body message to hyber : $message2")
 
                     val currentTimestamp2 =
                         System.currentTimeMillis() // We want timestamp in seconds
                     //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
 
-                    Log.d(TAG, "Timestamp : $currentTimestamp2");
+                    Log.d(TAG, "Timestamp : $currentTimestamp2")
 
-                    val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                    val auth_token = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
 
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                    val mURL2 = URL(HyberParameters.hyber_url_message_dr)
+                    val mURL2 = URL(HyberParameters.branch_current_active.fun_hyber_url_message_dr)
 
                     val urlc2 = mURL2.openConnection() as HttpsURLConnection
                     urlc2.doOutput = true
-                    urlc2.setRequestProperty("Content-Language", "en-US");
+                    urlc2.setRequestProperty("Content-Language", "en-US")
                     //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                    urlc2.setRequestProperty("Content-Type", "application/json");
-                    urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
+                    urlc2.setRequestProperty("Content-Type", "application/json")
+                    urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                     //urlc.setRequestProperty("X-Hyber-App-Fingerprint", "1");
-                    urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                    urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token);
+                    urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                    urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token)
 
-                    urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                    urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
-                    with(urlc2 as HttpsURLConnection) {
+                    with(urlc2) {
                         // optional default is GET
                         requestMethod = "POST"
                         doOutput = true
@@ -702,11 +697,11 @@ internal class HyberApi() {
 
                         //val wr = OutputStreamWriter(getOutputStream());
 
-                        val wr: DataOutputStream = DataOutputStream(outputStream)
-                        wr.write(postData2);
-                        wr.flush();
-                        Log.d(TAG, "URL : $url");
-                        Log.d(TAG, "Response Code : $responseCode");
+                        val wr = DataOutputStream(outputStream)
+                        wr.write(postData2)
+                        wr.flush()
+                        Log.d(TAG, "URL : $url")
+                        Log.d(TAG, "Response Code : $responseCode")
                         //if (responseCode==401) { init_hyber.clearData() }
 
                         BufferedReader(InputStreamReader(inputStream)).use {
@@ -718,17 +713,17 @@ internal class HyberApi() {
                                 inputLine = it.readLine()
                             }
                             it.close()
-                            Log.d(TAG, "Response : $response");
+                            Log.d(TAG, "Response : $response")
                         }
-                        function_net_answer7 = responseCode.toString()
+                        functionNetAnswer7 = responseCode.toString()
                     }
                 } catch (e: Exception) {
-                    function_net_answer7 = "500"
+                    functionNetAnswer7 = "500"
                 }
             })
-            thread_net_f7.start()
-            thread_net_f7.join()
-            return HyberDataApi(function_net_answer7.toInt(), "{}", 0)
+            threadNetF7.start()
+            threadNetF7.join()
+            return HyberDataApi(functionNetAnswer7.toInt(), "{}", 0)
         } else {
             return HyberDataApi(700, "{}", 0)
         }

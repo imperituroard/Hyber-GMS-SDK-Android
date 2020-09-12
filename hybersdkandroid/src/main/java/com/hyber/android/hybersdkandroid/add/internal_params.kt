@@ -5,7 +5,7 @@ import android.os.Build
 
 internal object HyberInternal {
 
-    fun notification_priority_old(prio: Int): Int {
+    fun notificationPriorityOld(prio: Int): Int {
 
         if (Build.VERSION.SDK_INT >= 21) {
             when (prio) {

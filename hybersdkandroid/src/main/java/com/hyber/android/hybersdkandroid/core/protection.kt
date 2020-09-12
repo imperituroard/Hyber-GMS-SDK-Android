@@ -6,7 +6,7 @@ import java.util.*
 internal class Protection(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
 
-    fun check_registration() {
+    fun checkRegistration() {
         var uuid = sharedPreference.getValueString("registerstatus")
         if (uuid == "") {
             uuid = UUID.randomUUID().toString()

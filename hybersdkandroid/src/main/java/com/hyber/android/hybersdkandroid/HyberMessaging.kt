@@ -1,31 +1,20 @@
 package com.hyber.android.hybersdkandroid
 
-import android.R.string.cancel
-import android.content.Intent
-import android.os.IBinder
 //import android.R
 //import androidx.core.app.NotificationCompat
-import android.app.PendingIntent
 //import androidx.core.app.ApplicationProvider.getApplicationContext
-import android.app.Service.START_REDELIVER_INTENT
-import android.content.Context.NOTIFICATION_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.app.NotificationCompat;
-import android.app.NotificationManager
-import android.app.Service
 import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
+import android.content.Intent
 import android.os.Build
-import com.hyber.android.hybersdkandroid.add.RewriteParams
+import android.os.IBinder
+import androidx.core.app.NotificationCompat
 import com.hyber.android.hybersdkandroid.core.Initialization
 
-public class HyberMessaging : Service() {
+class HyberMessaging : Service() {
     private var notificationManager: NotificationManager? = null
-
-    override fun onCreate() {
-        super.onCreate()
-
-        //notificationManager = this.getSystemService(this.NOTIFICATION_SERVICE) as NotificationManager
-    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
@@ -49,10 +38,10 @@ public class HyberMessaging : Service() {
         }
         */
 
-        val init_hyber: Initialization = Initialization(applicationContext)
-        init_hyber.hyber_init2()
+        val initHyber = Initialization(applicationContext)
+        initHyber.hyber_init2()
 
-        return super.onStartCommand(intent, flags, startId);
+        return super.onStartCommand(intent, flags, startId)
 
 
     }
@@ -62,7 +51,7 @@ public class HyberMessaging : Service() {
 
         //These three lines makes Notification to open main activity after clicking on it
         val notificationIntent = Intent(this, applicationContext::class.java)
-        notificationIntent.setAction(Intent.ACTION_MAIN)
+        notificationIntent.action = Intent.ACTION_MAIN
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER)
 
         val contentIntent = PendingIntent.getActivity(
@@ -83,7 +72,7 @@ public class HyberMessaging : Service() {
             .setWhen(System.currentTimeMillis())
 
         val notification: Notification
-        if (android.os.Build.VERSION.SDK_INT <= 15) {
+        if (Build.VERSION.SDK_INT <= 15) {
             notification = builder.notification // API-15 and lower
         } else {
             notification = builder.build()
@@ -107,6 +96,6 @@ public class HyberMessaging : Service() {
     }
 
     companion object {
-        val DEFAULT_NOTIFICATION_ID = 103
+        const val DEFAULT_NOTIFICATION_ID = 103
     }
 }

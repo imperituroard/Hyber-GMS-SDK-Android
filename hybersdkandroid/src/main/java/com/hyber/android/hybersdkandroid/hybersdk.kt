@@ -1,89 +1,81 @@
 package com.hyber.android.hybersdkandroid
 
-import android.app.Activity
-import android.content.Context
-import com.hyber.android.hybersdkandroid.add.Answer
-import android.util.Log
 import android.content.ContentValues.TAG
-import java.lang.Exception
+import android.content.Context
+import android.util.Log
+import com.hyber.android.hybersdkandroid.add.Answer
 import com.hyber.android.hybersdkandroid.add.GetInfo
-import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.add.HyberParsing
+import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.*
-import com.hyber.android.hybersdkandroid.core.Initialization
-import com.hyber.android.hybersdkandroid.core.HyberApi
-import com.hyber.android.hybersdkandroid.core.HyberDataApi
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import kotlin.properties.Delegates
 
 object HyberPushMess {
     var message: String? = null   //global variable
 }
 
-class HyberSDKQueue() {
+class HyberSDKQueue {
     fun hyber_check_queue(context: Context): HyberFunAnswerGeneral {
-        val answer_not_known: HyberFunAnswerGeneral =
+        val answerNotKnown =
             HyberFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
 
         try {
-            val answ: Answer = Answer()
-            val answer_not_registered: HyberFunAnswerGeneral = HyberFunAnswerGeneral(
+            val answ = Answer()
+            val answerNotRegistered = HyberFunAnswerGeneral(
                 704,
                 "Failed",
                 "Registration data not found",
                 "Not registered"
             )
 
-            val inithyber_params2: Initialization = Initialization(context)
-            inithyber_params2.hyber_init3()
-            if (inithyber_params2.paramsglobal.registrationstatus == true) {
-                val queue: QueueProc = QueueProc()
-                val anss = queue.hyber_device_mess_queue(
-                    inithyber_params2.paramsglobal.firebase_registration_token,
-                    inithyber_params2.paramsglobal.hyber_registration_token, context
+            val initHyberParams2 = Initialization(context)
+            initHyberParams2.hyber_init3()
+            if (initHyberParams2.parametersGlobal.registrationStatus) {
+                val queue = QueueProc()
+                val anss = queue.hyberDeviceMessQueue(
+                    initHyberParams2.parametersGlobal.firebase_registration_token,
+                    initHyberParams2.parametersGlobal.hyber_registration_token, context
                 )
                 println(anss)
-                return answ.general_answer("200", "{}", "Success")
+                return answ.generalAnswer("200", "{}", "Success")
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
             //println("failed rewrite password")
-            return answer_not_known
+            return answerNotKnown
         }
     }
 }
 
 class HyberSDK(
-    user_msisdn: String = "unknown",
-    user_password: String = "unknown",
-    context: Context
+    context: Context,
+    platform_branch: UrlsPlatformList = HyberParametersPublic.branchMasterValue
 ) {
 
     //any classes initialization
     private var context: Context by Delegates.notNull()
-    private var init_hyber: Initialization = Initialization(context)
-    private var local_device_info: GetInfo = GetInfo()
-    private var user_msisdn: String by Delegates.notNull()
-    private var user_password: String by Delegates.notNull()
-    private var apihyber: HyberApi = HyberApi()
-    private var answ: Answer = Answer()
-    private var rewrite_params: RewriteParams = RewriteParams(context)
+    private var initHObject: Initialization = Initialization(context)
+    private var localDeviceInfo: GetInfo = GetInfo()
+    private var apiHyberData: HyberApi = HyberApi()
+    private var answerAny: Answer = Answer()
+    private var rewriteParams: RewriteParams = RewriteParams(context)
     private var parsing: HyberParsing = HyberParsing()
+    private val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     //main class initialization
     init {
         this.context = context
-        this.user_msisdn = user_msisdn
-        this.user_password = user_password
-        init_hyber.hyber_init(
+        initHObject.hInit(
             "android",
-            user_msisdn,
-            user_password,
-            local_device_info.get_phone_type(context),
-            local_device_info.getDeviceName().toString()
+            localDeviceInfo.getPhoneType(context),
+            localDeviceInfo.getDeviceName().toString(),
+            platform_branch
         )
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
+            if (initHObject.parametersGlobal.registrationStatus) {
                 this.hyber_update_registration()
             }
         } catch (e: Exception) {
@@ -94,11 +86,11 @@ class HyberSDK(
     //private var hyber_storage: HyberStorage = HyberStorage(context)
     //parameter for device identification
 
-    private var X_Hyber_Session_Id: String = init_hyber.paramsglobal.firebase_registration_token
+    private var _xHyberSessionId: String = initHObject.parametersGlobal.firebase_registration_token
 
-    private var answer_not_registered: HyberFunAnswerGeneral =
+    private var answerNotRegistered: HyberFunAnswerGeneral =
         HyberFunAnswerGeneral(704, "Failed", "Registration data not found", "Not registered")
-    private var answer_not_known: HyberFunAnswerGeneral =
+    private var answerNotKnown: HyberFunAnswerGeneral =
         HyberFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
 
     //answer codes
@@ -129,48 +121,41 @@ class HyberSDK(
 
 
     //1
-    private fun initsdk(
-        hyber_osType: String,
-        hyber_user_msisdn: String,
-        hyber_user_Password: String,
-        hyber_deviceType: String
-    ) {
-        init_hyber.hyber_init(
-            "android",
-            hyber_user_msisdn,
-            hyber_user_Password,
-            hyber_deviceType,
-            local_device_info.getDeviceName().toString()
-        )
-    }
-
-    //1
     fun hyber_register_new(
         X_Hyber_Client_API_Key: String,
-        X_Hyber_App_Fingerprint: String
+        X_Hyber_App_Fingerprint: String,
+        user_msisdn: String,
+        user_password: String
     ): HyberFunAnswerRegister {
+        logger.debug("test logger")
         try {
-            Log.d(TAG, "Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${init_hyber.paramsglobal.registrationstatus}, X_Hyber_Session_Id: ${X_Hyber_Session_Id}");
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                return answ.hyber_register_new_register_exists2(init_hyber.paramsglobal, context)
+            Log.d(
+                TAG,
+                "Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${initHObject.parametersGlobal.registrationStatus}, X_Hyber_Session_Id: $_xHyberSessionId"
+            )
+            if (initHObject.parametersGlobal.registrationStatus) {
+                return answerAny.hyberRegisterNewRegisterExists2(
+                    initHObject.parametersGlobal,
+                    context
+                )
             } else {
-                init_hyber.hyber_update_firebase_auto()
-                X_Hyber_Session_Id = init_hyber.paramsglobal.firebase_registration_token
-                if (X_Hyber_Session_Id != "" && X_Hyber_Session_Id != " ") {
-                    val respHyber: HyberDataApi2 = apihyber.hyber_device_register(
+                initHObject.hUpdateFirebaseAuto()
+                _xHyberSessionId = initHObject.parametersGlobal.firebase_registration_token
+                if (_xHyberSessionId != "" && _xHyberSessionId != " ") {
+                    val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
                         X_Hyber_Client_API_Key,
-                        X_Hyber_Session_Id,
+                        _xHyberSessionId,
                         X_Hyber_App_Fingerprint,
-                        init_hyber.paramsglobal.hyber_deviceName,
-                        init_hyber.paramsglobal.hyber_deviceType,
-                        init_hyber.paramsglobal.hyber_osType,
-                        init_hyber.paramsglobal.sdkversion,
-                        init_hyber.paramsglobal.hyber_user_Password,
-                        init_hyber.paramsglobal.hyber_user_msisdn,
+                        initHObject.parametersGlobal.hyber_deviceName,
+                        initHObject.parametersGlobal.hyber_deviceType,
+                        initHObject.parametersGlobal.hyber_osType,
+                        initHObject.parametersGlobal.sdkVersion,
+                        user_password,
+                        user_msisdn,
                         context
                     )
-                    Log.d(TAG, "hyber_register_new response: $respHyber");
-                    Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
+                    Log.d(TAG, "hyber_register_new response: $respHyber")
+                    Log.d(TAG, "uuid: ${initHObject.parametersGlobal.hyber_uuid}")
                     return HyberFunAnswerRegister(
                         code = respHyber.code,
                         result = respHyber.body.result,
@@ -182,7 +167,7 @@ class HyberSDK(
                         createdAt = respHyber.body.createdAt
                     )
                 } else {
-                    return answ.register_procedure_answer2(
+                    return answerAny.registerProcedureAnswer2(
                         "901",
                         "X_Hyber_Session_Id is empty. Maybe firebase registration problem",
                         context
@@ -190,7 +175,7 @@ class HyberSDK(
                 }
             }
         } catch (e: Exception) {
-            return answ.register_procedure_answer2("700", "unknown", context)
+            return answerAny.registerProcedureAnswer2("700", "unknown", context)
         }
         //apihyber.hyber_device_register()
     }
@@ -202,30 +187,38 @@ class HyberSDK(
     fun hyber_register_new2(
         X_Hyber_Client_API_Key: String,    // APP API key on hyber platform
         X_Hyber_App_Fingerprint: String,   // App Fingerprint key
+        user_msisdn: String,               // User MSISDN
+        user_password: String,             // User Password
         X_FCM_token: String                // FCM firebase token
     ): HyberFunAnswerRegister {
         try {
-            Log.d(TAG, "Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${init_hyber.paramsglobal.registrationstatus}, X_Hyber_Session_Id: ${X_Hyber_Session_Id}");
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                return answ.hyber_register_new_register_exists2(init_hyber.paramsglobal, context)
+            Log.d(
+                TAG,
+                "Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${initHObject.parametersGlobal.registrationStatus}, X_Hyber_Session_Id: $_xHyberSessionId"
+            )
+            if (initHObject.parametersGlobal.registrationStatus) {
+                return answerAny.hyberRegisterNewRegisterExists2(
+                    initHObject.parametersGlobal,
+                    context
+                )
             } else {
-                init_hyber.hyber_update_firebase_manual(X_FCM_token)
+                initHObject.hUpdateFirebaseManual(X_FCM_token)
                 if (X_FCM_token != "" && X_FCM_token != " ") {
-                    val respHyber: HyberDataApi2 = apihyber.hyber_device_register(
+                    val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
                         X_Hyber_Client_API_Key,
                         X_FCM_token,
                         X_Hyber_App_Fingerprint,
-                        init_hyber.paramsglobal.hyber_deviceName,
-                        init_hyber.paramsglobal.hyber_deviceType,
-                        init_hyber.paramsglobal.hyber_osType,
-                        init_hyber.paramsglobal.sdkversion,
-                        init_hyber.paramsglobal.hyber_user_Password,
-                        init_hyber.paramsglobal.hyber_user_msisdn,
+                        initHObject.parametersGlobal.hyber_deviceName,
+                        initHObject.parametersGlobal.hyber_deviceType,
+                        initHObject.parametersGlobal.hyber_osType,
+                        initHObject.parametersGlobal.sdkVersion,
+                        user_password,
+                        user_msisdn,
                         context
                     )
 
-                    Log.d(TAG, "hyber_register_new response: $respHyber");
-                    Log.d(TAG, "uuid: ${init_hyber.paramsglobal.hyber_uuid}");
+                    Log.d(TAG, "hyber_register_new response: $respHyber")
+                    Log.d(TAG, "uuid: ${initHObject.parametersGlobal.hyber_uuid}")
                     return HyberFunAnswerRegister(
                         code = respHyber.code,
                         result = respHyber.body.result,
@@ -237,7 +230,7 @@ class HyberSDK(
                         createdAt = respHyber.body.createdAt
                     )
                 } else {
-                    return answ.register_procedure_answer2(
+                    return answerAny.registerProcedureAnswer2(
                         "901",
                         "X_Hyber_Session_Id is empty. Maybe firebase registration problem",
                         context
@@ -245,48 +238,47 @@ class HyberSDK(
                 }
             }
         } catch (e: Exception) {
-            return answ.register_procedure_answer2("700", "unknown", context)
+            return answerAny.registerProcedureAnswer2("700", "unknown", context)
         }
-        //apihyber.hyber_device_register()
     }
 
     //2
     fun hyber_clear_current_device(): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                val hyber_answer: HyberDataApi = apihyber.hyber_device_revoke(
-                    "[\"${init_hyber.paramsglobal.deviceId}\"]",
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_registration_token
+            if (initHObject.parametersGlobal.registrationStatus) {
+                val hyber_answer: HyberDataApi = apiHyberData.hDeviceRevoke(
+                    "[\"${initHObject.parametersGlobal.deviceId}\"]",
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_registration_token
                 )
-                Log.d(TAG, "hyber_answer : ${hyber_answer.toString()}");
+                Log.d(TAG, "hyber_answer : $hyber_answer")
 
                 if (hyber_answer.code == 200) {
-                    Log.d(TAG, "start clear data");
-                    init_hyber.clearData()
-                    return answ.general_answer(
+                    Log.d(TAG, "start clear data")
+                    initHObject.clearData()
+                    return answerAny.generalAnswer(
                         "200",
-                        "{\"device\":\"${init_hyber.paramsglobal.deviceId}\"}",
+                        "{\"device\":\"${initHObject.parametersGlobal.deviceId}\"}",
                         "Success"
                     )
                 } else {
                     if (hyber_answer.code == 401) {
                         try {
-                            init_hyber.clearData()
+                            initHObject.clearData()
                         } catch (ee: Exception) {
                         }
                     }
-                    return answ.general_answer(
+                    return answerAny.generalAnswer(
                         hyber_answer.code.toString(),
                         "{\"body\":\"unknown\"}",
                         "Some problem"
                     )
                 }
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
@@ -294,91 +286,85 @@ class HyberSDK(
     //3
     fun hyber_get_message_history(period_in_seconds: Int): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                val mess_hist_hyber: HyberFunAnswerGeneral = apihyber.hyber_get_message_history(
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_registration_token,
+            if (initHObject.parametersGlobal.registrationStatus) {
+                val mess_hist_hyber: HyberFunAnswerGeneral = apiHyberData.hGetMessageHistory(
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_registration_token,
                     period_in_seconds
                 )
                 println(mess_hist_hyber)
                 if (mess_hist_hyber.code == 401) {
                     try {
-                        init_hyber.clearData()
+                        initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
-                return answ.general_answer(
+                return answerAny.generalAnswer(
                     mess_hist_hyber.code.toString(),
                     mess_hist_hyber.body,
                     "Success"
                 )
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
     //4
     fun hyber_get_device_all_from_hyber(): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                val device_all_hyber: HyberDataApi = apihyber.hyber_get_device_all(
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_registration_token
+            if (initHObject.parametersGlobal.registrationStatus) {
+                val device_all_hyber: HyberDataApi = apiHyberData.hGetDeviceAll(
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_registration_token
                 )
-                Log.d(TAG, "device_all_hyber : $device_all_hyber");
+                Log.d(TAG, "device_all_hyber : $device_all_hyber")
                 if (device_all_hyber.code == 401) {
                     try {
-                        init_hyber.clearData()
+                        initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
-                return answ.general_answer(
+                return answerAny.generalAnswer(
                     device_all_hyber.code.toString(),
                     device_all_hyber.body,
                     "Success"
                 )
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
-    private fun init_firebase(context: Context, activity: Activity, icon: Int) {
-        //val fireb: MyFirebaseInstanceIdService = MyFirebaseInstanceIdService(context, activity, icon)
-        //FirebaseApp.initializeApp(context)
-        println("Token firebase: ${init_hyber.paramsglobal.firebase_registration_token}")
-    }
-
     //5
-    fun hyber_update_registration(): HyberFunAnswerGeneral {
+    private fun hyber_update_registration(): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                val resss: HyberDataApi = apihyber.hyber_device_update(
-                    init_hyber.paramsglobal.hyber_registration_token,
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_deviceName,
-                    init_hyber.paramsglobal.hyber_deviceType,
-                    init_hyber.paramsglobal.hyber_osType,
-                    init_hyber.paramsglobal.sdkversion,
-                    init_hyber.paramsglobal.firebase_registration_token
+            if (initHObject.parametersGlobal.registrationStatus) {
+                val resss: HyberDataApi = apiHyberData.hDeviceUpdate(
+                    initHObject.parametersGlobal.hyber_registration_token,
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_deviceName,
+                    initHObject.parametersGlobal.hyber_deviceType,
+                    initHObject.parametersGlobal.hyber_osType,
+                    initHObject.parametersGlobal.sdkVersion,
+                    initHObject.parametersGlobal.firebase_registration_token
                 )
                 if (resss.code == 401) {
                     try {
-                        init_hyber.clearData()
+                        initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
-                return answ.general_answer(resss.code.toString(), resss.body, "Success")
+                return answerAny.generalAnswer(resss.code.toString(), resss.body, "Success")
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
@@ -388,57 +374,57 @@ class HyberSDK(
         message_text: String
     ): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                val respp: HyberDataApi = apihyber.hyber_message_callback(
+            if (initHObject.parametersGlobal.registrationStatus) {
+                val respp: HyberDataApi = apiHyberData.hMessageCallback(
                     message_id,
                     message_text,
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_registration_token
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_registration_token
                 )
                 if (respp.code == 401) {
                     try {
-                        init_hyber.clearData()
+                        initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
-                return answ.general_answer(respp.code.toString(), respp.body, "Success")
+                return answerAny.generalAnswer(respp.code.toString(), respp.body, "Success")
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
     //7
     fun hyber_message_delivery_report(message_id: String): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                if (init_hyber.paramsglobal.hyber_registration_token != "" && X_Hyber_Session_Id != "") {
-                    val respp1: HyberDataApi = apihyber.hyber_message_dr(
+            if (initHObject.parametersGlobal.registrationStatus) {
+                if (initHObject.parametersGlobal.hyber_registration_token != "" && _xHyberSessionId != "") {
+                    val respp1: HyberDataApi = apiHyberData.hMessageDr(
                         message_id,
-                        X_Hyber_Session_Id,
-                        init_hyber.paramsglobal.hyber_registration_token
+                        _xHyberSessionId,
+                        initHObject.parametersGlobal.hyber_registration_token
                     )
                     if (respp1.code == 401) {
                         try {
-                            init_hyber.clearData()
+                            initHObject.clearData()
                         } catch (ee: Exception) {
                         }
                     }
-                    return answ.general_answer(respp1.code.toString(), respp1.body, "Success")
+                    return answerAny.generalAnswer(respp1.code.toString(), respp1.body, "Success")
                 } else {
-                    return answ.general_answer(
+                    return answerAny.generalAnswer(
                         "700",
                         "{}",
                         "Failed. firebase_registration_token or hyber_registration_token empty"
                     )
                 }
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
@@ -446,75 +432,74 @@ class HyberSDK(
     //8 delete all devices
     fun hyber_clear_all_device(): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                val device_all_hyber: HyberDataApi = apihyber.hyber_get_device_all(
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_registration_token
+            if (initHObject.parametersGlobal.registrationStatus) {
+                val device_all_hyber: HyberDataApi = apiHyberData.hGetDeviceAll(
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_registration_token
                 )
 
-                val device_list: String = parsing.parse_id_devices_all(device_all_hyber.body)
+                val deviceList: String = parsing.parseIdDevicesAll(device_all_hyber.body)
 
-                val hyber_answer: HyberDataApi = apihyber.hyber_device_revoke(
-                    device_list,
-                    X_Hyber_Session_Id,
-                    init_hyber.paramsglobal.hyber_registration_token
+                val hyberAnswer: HyberDataApi = apiHyberData.hDeviceRevoke(
+                    deviceList,
+                    _xHyberSessionId,
+                    initHObject.parametersGlobal.hyber_registration_token
                 )
-                Log.d(TAG, "hyber_answer : $hyber_answer");
+                Log.d(TAG, "hyber_answer : $hyberAnswer")
 
-                if (hyber_answer.code == 200) {
-                    Log.d(TAG, "start clear data");
-                    init_hyber.clearData()
-                    return answ.general_answer("200", "{\"devices\":$device_list}", "Success")
+                if (hyberAnswer.code == 200) {
+                    Log.d(TAG, "start clear data")
+                    initHObject.clearData()
+                    return answerAny.generalAnswer("200", "{\"devices\":$deviceList}", "Success")
                 } else {
-                    if (hyber_answer.code == 401) {
+                    if (hyberAnswer.code == 401) {
                         try {
-                            init_hyber.clearData()
+                            initHObject.clearData()
                         } catch (ee: Exception) {
                         }
                     }
-                    return answ.general_answer(
-                        hyber_answer.code.toString(),
+                    return answerAny.generalAnswer(
+                        hyberAnswer.code.toString(),
                         "{\"body\":\"unknown\"}",
                         "Some problem"
                     )
 
                 }
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
 
         } catch (e: Exception) {
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
     //9temp
     fun rewrite_msisdn(newmsisdn: String): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                rewrite_params.rewrite_hyber_user_msisdn(newmsisdn)
-                return answ.general_answer("200", "{}", "Success")
+            if (initHObject.parametersGlobal.registrationStatus) {
+                rewriteParams.rewriteHyberUserMsisdn(newmsisdn)
+                return answerAny.generalAnswer("200", "{}", "Success")
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            //println("failed rewrite msisdn")
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
     //10temp
     fun rewrite_password(newpassword: String): HyberFunAnswerGeneral {
         try {
-            if (init_hyber.paramsglobal.registrationstatus == true) {
-                rewrite_params.rewrite_hyber_user_password(newpassword)
-                return answ.general_answer("200", "{}", "Success")
+            if (initHObject.parametersGlobal.registrationStatus) {
+                rewriteParams.rewriteHyberUserPassword(newpassword)
+                return answerAny.generalAnswer("200", "{}", "Success")
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
             //println("failed rewrite password")
-            return answer_not_known
+            return answerNotKnown
         }
     }
 
@@ -522,19 +507,19 @@ class HyberSDK(
     //11hyber
     fun hyber_check_queue(): HyberFunAnswerGeneral {
         try {
-            val inithyber_params2: Initialization = Initialization(context)
+            val inithyber_params2 = Initialization(context)
             inithyber_params2.hyber_init3()
-            if (inithyber_params2.paramsglobal.registrationstatus == true) {
-                if (inithyber_params2.paramsglobal.firebase_registration_token != "" && inithyber_params2.paramsglobal.hyber_registration_token != "") {
-                    val queue: QueueProc = QueueProc()
-                    val anss = queue.hyber_device_mess_queue(
-                        inithyber_params2.paramsglobal.firebase_registration_token,
-                        inithyber_params2.paramsglobal.hyber_registration_token, context
+            if (inithyber_params2.parametersGlobal.registrationStatus) {
+                if (inithyber_params2.parametersGlobal.firebase_registration_token != "" && inithyber_params2.parametersGlobal.hyber_registration_token != "") {
+                    val queue = QueueProc()
+                    val anss = queue.hyberDeviceMessQueue(
+                        inithyber_params2.parametersGlobal.firebase_registration_token,
+                        inithyber_params2.parametersGlobal.hyber_registration_token, context
                     )
                     println(anss)
-                    return answ.general_answer("200", "{}", "Success")
+                    return answerAny.generalAnswer("200", "{}", "Success")
                 } else {
-                    return answ.general_answer(
+                    return answerAny.generalAnswer(
                         "700",
                         "{}",
                         "Failed. firebase_registration_token or hyber_registration_token empty"
@@ -542,22 +527,10 @@ class HyberSDK(
                 }
 
             } else {
-                return answer_not_registered
+                return answerNotRegistered
             }
         } catch (e: Exception) {
-            //println("failed rewrite password")
-            return answer_not_known
-        }
-    }
-
-    //12
-    fun rewrite_branch(hyber_branch: String): HyberFunAnswerGeneral {
-        try {
-            rewrite_params.rewrite_hyber_branch(hyber_branch)
-            return answ.general_answer("200", "{}", "Success")
-        } catch (e: Exception) {
-            //println("failed rewrite password")
-            return answer_not_known
+            return answerNotKnown
         }
     }
 

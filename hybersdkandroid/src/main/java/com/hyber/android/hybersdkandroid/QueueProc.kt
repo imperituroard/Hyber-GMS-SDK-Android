@@ -4,9 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.HyberDataApi
 import com.hyber.android.hybersdkandroid.core.HyberParameters
-import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.Initialization
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -15,8 +15,6 @@ import kotlinx.serialization.json.JSON
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.InputStreamReader
-import java.lang.Exception
-import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.Charset
 import java.security.MessageDigest
@@ -28,7 +26,7 @@ internal class QueueProc {
     //function for create special token for another procedures
     private fun hash(sss: String): String {
         try {
-            val bytes = sss.toString().toByteArray()
+            val bytes = sss.toByteArray()
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
@@ -46,24 +44,24 @@ internal class QueueProc {
         }
     }
 
-    fun process_hyber_queue(
+    private fun processHyberQueue(
         queue: String,
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String,
         context: Context
     ) {
-        val api_hyber: HyberApi = HyberApi()
-        val inithyber_params: Initialization = Initialization(context)
+        val apiHyber = HyberApi()
+        val initHyberParams = Initialization(context)
 
         @Serializable
         data class Empty(
-            @Optional()
+            @Optional
             val url: String? = null,
-            @Optional()
+            @Optional
             val button: String? = null,
-            @Optional()
+            @Optional
             val text: String? = null,
-            @Optional()
+            @Optional
             val messageId: String? = null
         )
 
@@ -89,35 +87,35 @@ internal class QueueProc {
 
         @Serializable
         data class ParentQu(
-            @Optional()
+            @Optional
             val messages: List<Qulist>
         )
 
         val parent = JSON.parse(ParentQu.serializer(), queue)
 
-        if (!parent.messages.isEmpty()) {
+        if (parent.messages.isNotEmpty()) {
             val list = parent.messages
             Thread.sleep(2000)
             //inithyber_params.hyber_init3()
             list.forEach {
                 println("fb token: ${HyberParameters.firebase_registration_token}")
-                api_hyber.hyber_message_dr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
+                apiHyber.hMessageDr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
                 println(it.messageId)
             }
         }
     }
 
 
-    internal fun hyber_device_mess_queue(
+    internal fun hyberDeviceMessQueue(
         X_Hyber_Session_Id: String,
         X_Hyber_Auth_Token: String,
         context: Context
     ): HyberDataApi {
-        var function_net_answer2: String = String()
+        var functionNetAnswer2 = String()
 
-        val thread_net_f2 = Thread(Runnable {
+        val threadNetF2 = Thread(Runnable {
 
-            val hyber_url_mess_queue: String = HyberParameters.hyber_url_mess_queue
+            val hyberUrlMessQueue: String = HyberParameters.branch_current_active.fun_hyber_url_mess_queue
 
             try {
 
@@ -144,26 +142,26 @@ internal class QueueProc {
 
                 //println(currentTimestamp2)
 
-                val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
+                val auth_token = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
                 //println(stringBuilder)
 
-                val mURL2 = URL(hyber_url_mess_queue)
+                val mURL2 = URL(hyberUrlMessQueue)
 
                 val urlc2 = mURL2.openConnection() as HttpsURLConnection
                 urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US");
+                urlc2.setRequestProperty("Content-Language", "en-US")
                 //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json");
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token);
+                urlc2.setRequestProperty("Content-Type", "application/json")
+                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token)
 
-                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
+                urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                with(urlc2 as HttpsURLConnection) {
+                with(urlc2) {
                     // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
@@ -173,18 +171,18 @@ internal class QueueProc {
 
                     //val wr = OutputStreamWriter(getOutputStream());
 
-                    val wr: DataOutputStream = DataOutputStream(outputStream)
+                    val wr = DataOutputStream(outputStream)
 
                     println("URL3 : $url")
-                    wr.write(postData2);
+                    wr.write(postData2)
 
                     println("URL2 : $url")
 
-                    wr.flush();
+                    wr.flush()
 
-                    Log.d(ContentValues.TAG, "URL : $url");
+                    Log.d(ContentValues.TAG, "URL : $url")
 
-                    Log.d(ContentValues.TAG, "Response Code : $responseCode");
+                    Log.d(ContentValues.TAG, "Response Code : $responseCode")
 
                     try {
                         BufferedReader(InputStreamReader(inputStream)).use {
@@ -211,7 +209,7 @@ internal class QueueProc {
                                 HyberPushMess.message = ""
                             }
 
-                            process_hyber_queue(
+                            processHyberQueue(
                                 response.toString(),
                                 X_Hyber_Session_Id,
                                 X_Hyber_Auth_Token,
@@ -226,119 +224,15 @@ internal class QueueProc {
                         println("Failed")
                     }
 
-                    function_net_answer2 = responseCode.toString()
+                    functionNetAnswer2 = responseCode.toString()
                 }
             } catch (e: Exception) {
-                function_net_answer2 = "500"
+                functionNetAnswer2 = "500"
             }
         })
-        thread_net_f2.start()
-        thread_net_f2.join()
-        return HyberDataApi(function_net_answer2.toInt(), "{}", 0)
-    }
-
-    internal fun hyber_device_mess_queue2(
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String
-    ): HyberDataApi {
-        var function_net_answer2: String = String()
-
-        val thread_net_f2 = Thread(Runnable {
-
-            try {
-                val hyber_url_mess_queue: String = HyberParameters.hyber_url_mess_queue
-
-
-                Log.d(
-                    ContentValues.TAG,
-                    "Result: Start step1, Function: hyber_device_revoke, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token"
-                )
-
-                //val stringBuilder = StringBuilder("{\"name\":\"Cedric Beust\", \"age\":23}")
-                //val message = "{\"name\":\"Cedric Beust\", \"age\":23}"
-                val message2 = "{}"
-
-                Log.d(
-                    ContentValues.TAG,
-                    "Result: Start step2, Function: hyber_device_revoke, Class: HyberApi, message2: $message2"
-                )
-
-                var currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
-                //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
-
-                println(currentTimestamp2)
-                //println(date)
-                currentTimestamp2 = 1
-
-                println(currentTimestamp2)
-
-                val auth_token = hash(X_Hyber_Auth_Token + ":" + currentTimestamp2.toString())
-
-                val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
-
-                //println(stringBuilder)
-
-                val mURL2 = URL(hyber_url_mess_queue)
-
-                val urlc2 = mURL2.openConnection() as HttpURLConnection
-                urlc2.doOutput = true
-                urlc2.setRequestProperty("Content-Language", "en-US");
-                //urlc.setRequestProperty("X-Hyber-Client-API-Key", "test");
-                urlc2.setRequestProperty("Content-Type", "application/json");
-                urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id);
-                urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString());
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token);
-
-                //urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory;
-
-                with(urlc2 as HttpURLConnection) {
-                    // optional default is GET
-                    requestMethod = "POST"
-                    doOutput = true
-                    //doInput = true
-                    //useCaches = false
-                    //setRequestProperty("","")
-
-                    //val wr = OutputStreamWriter(getOutputStream());
-
-                    val wr: DataOutputStream = DataOutputStream(outputStream)
-
-                    println("URL3 : $url")
-                    wr.write(postData2);
-
-                    println("URL2 : $url")
-
-                    wr.flush();
-
-                    Log.d(ContentValues.TAG, "URL : $url");
-
-                    Log.d(ContentValues.TAG, "Response Code : $responseCode");
-
-                    try {
-                        BufferedReader(InputStreamReader(inputStream)).use {
-                            val response = StringBuffer()
-
-                            var inputLine = it.readLine()
-                            while (inputLine != null) {
-                                response.append(inputLine)
-                                inputLine = it.readLine()
-                            }
-                            it.close()
-                            println("Response : $response")
-                        }
-                    } catch (e: Exception) {
-                        println("Failed")
-                    }
-
-                    function_net_answer2 = responseCode.toString()
-                }
-            } catch (e: Exception) {
-                function_net_answer2 = "500"
-            }
-        })
-        thread_net_f2.start()
-        thread_net_f2.join()
-        return HyberDataApi(function_net_answer2.toInt(), "{}", 0)
+        threadNetF2.start()
+        threadNetF2.join()
+        return HyberDataApi(functionNetAnswer2.toInt(), "{}", 0)
     }
 
 
