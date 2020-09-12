@@ -54,15 +54,6 @@ internal class GetInfo {
         }
     }
 
-    //current release android SDK (not module sdk)
-    fun getAndroidSdk(): Int {
-        return Build.VERSION.SDK_INT
-    }
-
-    private fun getImsi() {
-        //val phoneMgr = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-    }
-
     private fun capitalize(str: String): String? {
         if (TextUtils.isEmpty(str)) {
             return str

@@ -12,6 +12,7 @@ import kotlin.properties.Delegates
 @Suppress("SpellCheckingInspection")
 object HyberPushMess {
     var message: String? = null   //global variable for push messages
+    var log_level_active: String = "error" //global variable sdk log level
 }
 
 @Suppress("SpellCheckingInspection", "unused", "FunctionName")
@@ -49,7 +50,8 @@ class HyberSDKQueue {
 @Suppress("SpellCheckingInspection", "unused", "FunctionName", "MemberVisibilityCanBePrivate")
 class HyberSDK(
     context: Context,
-    platform_branch: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
+    platform_branch: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue,
+    log_level: String = "error"
 ) {
 
     //any classes initialization
@@ -64,6 +66,7 @@ class HyberSDK(
     //main class initialization
     init {
         this.context = context
+        HyberPushMess.log_level_active = log_level
         initHObject.hSdkInit(
             "android",
             localDeviceInfo.getPhoneType(context),

@@ -1,8 +1,6 @@
 package com.hyber.android.hybersdkandroid
 
-//import android.R
-//import androidx.core.app.NotificationCompat
-//import androidx.core.app.ApplicationProvider.getApplicationContext
+
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -47,6 +45,7 @@ class HyberMessaging : Service() {
     }
 
     //Send custom notification
+    @Suppress("unused")
     fun sendNotification(Ticker: String, Title: String, Text: String) {
 
         //These three lines makes Notification to open main activity after clicking on it

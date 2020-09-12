@@ -8,6 +8,7 @@ import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.HyberDataApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.Initialization
+import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -30,16 +31,13 @@ internal class QueueProc {
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
-            Log.d(
-                ContentValues.TAG,
-                "Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp"
-            )
+
+            HyberLoggerSdk.debug("Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
+
             return resp
         } catch (e: Exception) {
-            Log.d(
-                ContentValues.TAG,
-                "Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed"
-            )
+            HyberLoggerSdk.debug("Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed")
+
             return "failed"
         }
     }
@@ -98,7 +96,8 @@ internal class QueueProc {
             Thread.sleep(2000)
             //inithyber_params.hyber_init3()
             list.forEach {
-                println("fb token: ${PushSdkParameters.firebase_registration_token}")
+                HyberLoggerSdk.debug("fb token: ${PushSdkParameters.firebase_registration_token}")
+
                 apiHyber.hMessageDr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
                 println(it.messageId)
             }
@@ -118,11 +117,8 @@ internal class QueueProc {
             val hyberUrlMessQueue: String = PushSdkParameters.branch_current_active.fun_hyber_url_mess_queue
 
             try {
+                HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_mess_queue, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token")
 
-                Log.d(
-                    ContentValues.TAG,
-                    "Result: Start step1, Function: hyber_device_mess_queue, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token"
-                )
 
                 //val stringBuilder = StringBuilder("{\"name\":\"Cedric Beust\", \"age\":23}")
                 //val message = "{\"name\":\"Cedric Beust\", \"age\":23}"
@@ -142,7 +138,7 @@ internal class QueueProc {
 
                 //println(currentTimestamp2)
 
-                val auth_token = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
@@ -157,7 +153,7 @@ internal class QueueProc {
                 urlc2.setRequestProperty("Content-Type", "application/json")
                 urlc2.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                 urlc2.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                urlc2.setRequestProperty("X-Hyber-Auth-Token", auth_token)
+                urlc2.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
                 urlc2.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 

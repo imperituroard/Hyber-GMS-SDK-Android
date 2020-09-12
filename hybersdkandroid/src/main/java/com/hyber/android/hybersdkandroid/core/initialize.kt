@@ -59,9 +59,9 @@ internal class Initialization(val context: Context) {
         }
 
         if (!registrationStatus) {
-            val hyber_uuid = UUID.randomUUID().toString()
-            sharedPreference.save("hyber_uuid", hyber_uuid)
-            parametersGlobal.hyber_uuid = hyber_uuid
+            val hyberUuid = UUID.randomUUID().toString()
+            sharedPreference.save("hyber_uuid", hyberUuid)
+            parametersGlobal.hyber_uuid = hyberUuid
 
             sharedPreference.save("hyber_osType", hOsType1)
             parametersGlobal.hyber_osType = hOsType1
@@ -85,9 +85,9 @@ internal class Initialization(val context: Context) {
                 sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
             parametersGlobal.hyber_user_msisdn = hyberUserMsisdn
 
-            val hyber_user_Password: String =
+            val hyberUserPassword: String =
                 sharedPreference.getValueString("hyber_user_Password")!!.toString()
-            parametersGlobal.hyber_user_Password = hyber_user_Password
+            parametersGlobal.hyber_user_Password = hyberUserPassword
 
             val hyber_deviceType: String =
                 sharedPreference.getValueString("hyber_deviceType")!!.toString()
@@ -104,9 +104,9 @@ internal class Initialization(val context: Context) {
                 sharedPreference.getValueString("hyber_registration_token")!!.toString()
             parametersGlobal.hyber_registration_token = hyber_registration_token
 
-            val hyber_user_id: String =
+            val hyberUserId: String =
                 sharedPreference.getValueString("hyber_user_id")!!.toString()
-            parametersGlobal.hyber_user_id = hyber_user_id
+            parametersGlobal.hyber_user_id = hyberUserId
 
             val hyber_registration_createdAt: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
@@ -229,16 +229,16 @@ internal class Initialization(val context: Context) {
                 sharedPreference.getValueString("hyber_deviceName")!!.toString()
             parametersGlobal.hyber_deviceName = hyber_deviceName
 
-            val hyber_osType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
-            parametersGlobal.hyber_osType = hyber_osType
+            val hyberOsType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
+            parametersGlobal.hyber_osType = hyberOsType
 
-            val hyber_registration_token: String =
+            val hyberRegistrationToken: String =
                 sharedPreference.getValueString("hyber_registration_token")!!.toString()
-            parametersGlobal.hyber_registration_token = hyber_registration_token
+            parametersGlobal.hyber_registration_token = hyberRegistrationToken
 
-            val hyber_user_id: String =
+            val hyberUserId: String =
                 sharedPreference.getValueString("hyber_user_id")!!.toString()
-            parametersGlobal.hyber_user_id = hyber_user_id
+            parametersGlobal.hyber_user_id = hyberUserId
 
             val hyberRegistrationCreatedAt: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
@@ -249,6 +249,7 @@ internal class Initialization(val context: Context) {
 
     fun clearData() {
         sharedPreference.clearSharedPreference()
+        parametersGlobal.registrationStatus = false
     }
 
 }

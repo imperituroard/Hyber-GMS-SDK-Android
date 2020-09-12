@@ -57,23 +57,6 @@ internal class Answer {
         val createdAt: String
     )
 
-    @Serializable
-    data class NewRegistrationOk(
-        val result: String,
-        val code: Int,
-        val description: String,
-        @SerialName("body")
-        val body: RegAnswSuccess
-    )
-
-    @Serializable
-    data class NewRegistrationFailed(
-        val result: String,
-        val code: Int,
-        val description: String,
-        val body: String
-    )
-
     fun hyberRegisterNewRegisterExists2(
         paramsgl: PushSdkParameters,
         context: Context

@@ -3,7 +3,6 @@
 package com.hyber.android.hybersdkandroid.core
 
 import android.app.PendingIntent
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
@@ -92,6 +91,8 @@ internal object PushSdkParameters {
 
     //platform url branches. It can be rewrite by Hyber SDK initiation
     var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
+
+
 
 }
 
