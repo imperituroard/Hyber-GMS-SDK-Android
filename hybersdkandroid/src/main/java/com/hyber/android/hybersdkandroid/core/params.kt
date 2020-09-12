@@ -1,6 +1,9 @@
+@file:Suppress("unused", "SpellCheckingInspection")
+
 package com.hyber.android.hybersdkandroid.core
 
 import android.app.PendingIntent
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
@@ -27,7 +30,7 @@ open class HyberPublicParams {
             .setContentText(notificationTextMess)
             .setAutoCancel(true)
             .setSmallIcon(R.drawable.googleg_standard_color_18)
-            .setPriority(HyberInternal.notificationPriorityOld(HyberParameters.push_notification_display_priority))
+            .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
             .setSound(defaultSoundUri)
             //.setVibrate(longArrayOf(1000))
             .setContentIntent(pendingIntent)
@@ -36,7 +39,7 @@ open class HyberPublicParams {
 
 
 //URLs DATA for Hyber platform for different branches
-object HyberParametersPublic {
+object PushSdkParametersPublic {
     val branchMasterValue: UrlsPlatformList = UrlsPlatformList(
         fun_hyber_url_device_update = "https://push.hyber.im/api/2.3/device/update",
         fun_hyber_url_registration = "https://push.hyber.im/api/2.3/device/registration",
@@ -57,9 +60,10 @@ object HyberParametersPublic {
         fun_hyber_url_mess_queue = "https://test-push.hyber.im/api/2.3/message/queue",
         hyber_url_message_history = "https://test-push.hyber.im/api/2.3/message/history?startDate="
     )
+    const val TAG_LOGGING = "HyberPushSDK"
 }
 
-internal object HyberParameters {
+internal object PushSdkParameters {
 
     //uuid generates only one time
     var hyber_uuid: String = String()
@@ -87,8 +91,7 @@ internal object HyberParameters {
     var push_notification_display_priority: Int = 2
 
     //platform url branches. It can be rewrite by Hyber SDK initiation
-    var branch_current_active: UrlsPlatformList = HyberParametersPublic.branchMasterValue
-
+    var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
 
 }
 

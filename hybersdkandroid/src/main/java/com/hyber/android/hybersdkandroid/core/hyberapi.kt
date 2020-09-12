@@ -75,7 +75,7 @@ internal class HyberApi {
 
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
-                val mURL = URL(HyberParameters.branch_current_active.fun_hyber_url_registration)
+                val mURL = URL(PushSdkParameters.branch_current_active.fun_hyber_url_registration)
                 val urlc = mURL.openConnection() as HttpsURLConnection
                 urlc.doOutput = true
                 urlc.setRequestProperty("Content-Language", "en-US")
@@ -193,7 +193,7 @@ internal class HyberApi {
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                val mURL2 = URL(HyberParameters.branch_current_active.fun_hyber_url_revoke)
+                val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_revoke)
 
                 val urlc2 = mURL2.openConnection() as HttpsURLConnection
                 urlc2.doOutput = true
@@ -289,7 +289,7 @@ internal class HyberApi {
 
 
                 val mURL2 =
-                    URL(HyberParameters.branch_current_active.hyber_url_message_history + currentTimestamp2.toString())
+                    URL(PushSdkParameters.branch_current_active.hyber_url_message_history + currentTimestamp2.toString())
 
                 //val urlc2 = mURL2.openConnection() as HttpsURLConnection
 
@@ -368,7 +368,7 @@ internal class HyberApi {
                     )
 
                     val mURL2 =
-                        URL(HyberParameters.branch_current_active.fun_hyber_url_get_device_all)
+                        URL(PushSdkParameters.branch_current_active.fun_hyber_url_get_device_all)
 
                     //val urlc2 = mURL2.openConnection() as HttpsURLConnection
 
@@ -463,7 +463,7 @@ internal class HyberApi {
 
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
 
-                val mURL = URL(HyberParameters.branch_current_active.fun_hyber_url_device_update)
+                val mURL = URL(PushSdkParameters.branch_current_active.fun_hyber_url_device_update)
 
                 val urlc = mURL.openConnection() as HttpsURLConnection
                 urlc.doOutput = true
@@ -574,7 +574,7 @@ internal class HyberApi {
                 //println(stringBuilder)
 
                 val mURL2 =
-                    URL(HyberParameters.branch_current_active.fun_hyber_url_message_callback)
+                    URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_callback)
 
                 val urlc2 = mURL2.openConnection() as HttpsURLConnection
                 urlc2.doOutput = true
@@ -672,7 +672,7 @@ internal class HyberApi {
 
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                    val mURL2 = URL(HyberParameters.branch_current_active.fun_hyber_url_message_dr)
+                    val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_dr)
 
                     val urlc2 = mURL2.openConnection() as HttpsURLConnection
                     urlc2.doOutput = true

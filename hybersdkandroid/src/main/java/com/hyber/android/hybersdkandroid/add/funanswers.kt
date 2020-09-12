@@ -3,7 +3,7 @@ package com.hyber.android.hybersdkandroid.add
 import android.content.Context
 import com.hyber.android.hybersdkandroid.core.HyberFunAnswerGeneral
 import com.hyber.android.hybersdkandroid.core.HyberFunAnswerRegister
-import com.hyber.android.hybersdkandroid.core.HyberParameters
+import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.Initialization
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -75,7 +75,7 @@ internal class Answer {
     )
 
     fun hyberRegisterNewRegisterExists2(
-        paramsgl: HyberParameters,
+        paramsgl: PushSdkParameters,
         context: Context
     ): HyberFunAnswerRegister {
         val initHyber = Initialization(context)

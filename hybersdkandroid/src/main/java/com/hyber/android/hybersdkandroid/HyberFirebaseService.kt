@@ -9,7 +9,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.hyber.android.hybersdkandroid.add.HyberParsing
 import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.HyberApi
-import com.hyber.android.hybersdkandroid.core.HyberParameters
+import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.HyberPublicParams
 import java.util.concurrent.Executors
 
@@ -61,14 +61,14 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         }
 
         try {
-            if (HyberParameters.hyber_registration_token != "" && HyberParameters.firebase_registration_token != "") {
+            if (PushSdkParameters.hyber_registration_token != "" && PushSdkParameters.firebase_registration_token != "") {
                 api.hDeviceUpdate(
-                    HyberParameters.hyber_registration_token,
-                    HyberParameters.firebase_registration_token,
-                    HyberParameters.hyber_deviceName,
-                    HyberParameters.hyber_deviceType,
-                    HyberParameters.hyber_osType,
-                    HyberParameters.sdkVersion,
+                    PushSdkParameters.hyber_registration_token,
+                    PushSdkParameters.firebase_registration_token,
+                    PushSdkParameters.hyber_deviceName,
+                    PushSdkParameters.hyber_deviceType,
+                    PushSdkParameters.hyber_osType,
+                    PushSdkParameters.sdkVersion,
                     s
                 )
                 Log.d(TAG, "HyberFirebaseService.onNewToken update: success")
@@ -112,16 +112,16 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         if (remoteMessage.data.isNotEmpty()) {
             try {
 
-                if (HyberParameters.firebase_registration_token != "" && HyberParameters.hyber_registration_token != "") {
+                if (PushSdkParameters.firebase_registration_token != "" && PushSdkParameters.hyber_registration_token != "") {
 
                     api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),
-                        HyberParameters.firebase_registration_token,
-                        HyberParameters.hyber_registration_token
+                        PushSdkParameters.firebase_registration_token,
+                        PushSdkParameters.hyber_registration_token
                     )
-                    Log.d(TAG, "delivery report success: messid ${remoteMessage.messageId.toString()}, fbtoken: ${HyberParameters.firebase_registration_token}, hybertoken: ${HyberParameters.hyber_registration_token}")
+                    Log.d(TAG, "delivery report success: messid ${remoteMessage.messageId.toString()}, fbtoken: ${PushSdkParameters.firebase_registration_token}, hybertoken: ${PushSdkParameters.hyber_registration_token}")
                 } else {
-                    Log.d(TAG, "delivery report failed: messid ${remoteMessage.messageId.toString()}, fbtoken: ${HyberParameters.firebase_registration_token}, hybertoken: ${HyberParameters.hyber_registration_token}")
+                    Log.d(TAG, "delivery report failed: messid ${remoteMessage.messageId.toString()}, fbtoken: ${PushSdkParameters.firebase_registration_token}, hybertoken: ${PushSdkParameters.hyber_registration_token}")
                 }
             } catch (e: Exception) {
                 Log.d(TAG, "onMessageReceived: failed")

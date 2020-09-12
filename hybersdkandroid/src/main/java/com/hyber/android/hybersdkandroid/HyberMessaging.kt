@@ -39,7 +39,7 @@ class HyberMessaging : Service() {
         */
 
         val initHyber = Initialization(applicationContext)
-        initHyber.hyber_init2()
+        initHyber.hSdkInit2()
 
         return super.onStartCommand(intent, flags, startId)
 

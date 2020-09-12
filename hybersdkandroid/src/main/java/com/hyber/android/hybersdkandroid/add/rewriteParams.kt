@@ -1,14 +1,14 @@
 package com.hyber.android.hybersdkandroid.add
 
 import android.content.Context
-import com.hyber.android.hybersdkandroid.core.HyberParameters
+import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.SharedPreference
 
 //function for initialization different parameters
 //
 internal class RewriteParams(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
-    private val paramsglobal: HyberParameters = HyberParameters
+    private val paramsglobal: PushSdkParameters = PushSdkParameters
 
     fun rewriteHyberUserMsisdn(hyber_user_msisdn: String) {
         paramsglobal.hyber_user_msisdn = hyber_user_msisdn

@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.HyberDataApi
-import com.hyber.android.hybersdkandroid.core.HyberParameters
+import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.Initialization
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -98,7 +98,7 @@ internal class QueueProc {
             Thread.sleep(2000)
             //inithyber_params.hyber_init3()
             list.forEach {
-                println("fb token: ${HyberParameters.firebase_registration_token}")
+                println("fb token: ${PushSdkParameters.firebase_registration_token}")
                 apiHyber.hMessageDr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
                 println(it.messageId)
             }
@@ -115,7 +115,7 @@ internal class QueueProc {
 
         val threadNetF2 = Thread(Runnable {
 
-            val hyberUrlMessQueue: String = HyberParameters.branch_current_active.fun_hyber_url_mess_queue
+            val hyberUrlMessQueue: String = PushSdkParameters.branch_current_active.fun_hyber_url_mess_queue
 
             try {
 
