@@ -288,6 +288,7 @@ class HyberSDK(
     //2
     fun hyber_clear_current_device(): HyberFunAnswerGeneral {
         try {
+            HyberLoggerSdk.debug("hyber_clear_current_device start")
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
             val xHyberSessionId = HyberDatabase.firebase_registration_token
@@ -335,6 +336,7 @@ class HyberSDK(
     //3
     fun hyber_get_message_history(period_in_seconds: Int): HyberFunAnswerGeneral {
         try {
+            HyberLoggerSdk.debug("hyber_get_message_history period_in_seconds: $period_in_seconds")
             updateToken()
             HyberLoggerSdk.debug("Start hyber_get_message_history request: firebase_registration_token: ${HyberDatabase.firebase_registration_token}, hyber_registration_token: ${HyberDatabase.hyber_registration_token}, period_in_seconds: $period_in_seconds")
             if (HyberDatabase.registrationStatus) {
@@ -399,6 +401,7 @@ class HyberSDK(
     //5
     fun hyber_update_registration(): HyberFunAnswerGeneral {
         try {
+            HyberLoggerSdk.debug("hyber_update_registration started")
             updateToken()
             if (HyberDatabase.registrationStatus) {
                 val resss: HyberDataApi = apiHyberData.hDeviceUpdate(
@@ -431,6 +434,7 @@ class HyberSDK(
         message_text: String
     ): HyberFunAnswerGeneral {
         try {
+            HyberLoggerSdk.debug("hyber_send_message_callback message_id: $message_id, message_text: $message_text")
             updateToken()
             if (HyberDatabase.registrationStatus) {
                 val respp: HyberDataApi = apiHyberData.hMessageCallback(
@@ -457,6 +461,7 @@ class HyberSDK(
     //7
     fun hyber_message_delivery_report(message_id: String): HyberFunAnswerGeneral {
         try {
+            HyberLoggerSdk.debug("hyber_message_delivery_report message_id: $message_id")
             updateToken()
             if (HyberDatabase.registrationStatus) {
                 if (HyberDatabase.hyber_registration_token != "" && HyberDatabase.firebase_registration_token != "") {
@@ -497,6 +502,7 @@ class HyberSDK(
                     HyberDatabase.firebase_registration_token, //_xHyberSessionId
                     HyberDatabase.hyber_registration_token
                 )
+                HyberLoggerSdk.debug("hyber_clear_all_device deviceAllHyber: $deviceAllHyber")
 
                 val deviceList: String = parsing.parseIdDevicesAll(deviceAllHyber.body)
 
@@ -537,6 +543,7 @@ class HyberSDK(
 
     //9temp
     fun rewrite_msisdn(newmsisdn: String): HyberFunAnswerGeneral {
+        HyberLoggerSdk.debug("rewrite_msisdn start: $newmsisdn")
         return try {
             if (HyberDatabase.registrationStatus) {
                 rewriteParams.rewriteHyberUserMsisdn(newmsisdn)
@@ -551,6 +558,8 @@ class HyberSDK(
 
     //10temp
     fun rewrite_password(newPassword: String): HyberFunAnswerGeneral {
+
+        HyberLoggerSdk.debug("rewrite_password start: $newPassword")
 
         return if (HyberDatabase.registrationStatus) {
             rewriteParams.rewriteHyberUserPassword(newPassword)
@@ -601,8 +610,11 @@ class HyberSDK(
                 }
                 // Get new Instance ID token
                 val token = task.result!!.token
-                HyberDatabase.firebase_registration_token = token
-                HyberLoggerSdk.debug("HyberSDK.updateToken token2: $token")
+                if (token != "") {
+                    HyberDatabase.firebase_registration_token = token
+                    HyberLoggerSdk.debug("HyberSDK.updateToken token2: $token")
+                    rewriteParams.rewriteFirebaseToken(token)
+                }
             })
         HyberLoggerSdk.debug("HyberSDK.updateToken finished2")
     }
