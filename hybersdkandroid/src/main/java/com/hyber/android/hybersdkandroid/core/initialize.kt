@@ -36,7 +36,7 @@ internal class Initialization(val context: Context) {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase experim: failed")
+                    HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase experimental: failed")
                     return@OnCompleteListener
                 }
                 // Get new Instance ID token
