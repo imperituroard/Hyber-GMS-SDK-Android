@@ -94,19 +94,16 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         if (remoteMessage.data.isNotEmpty()) {
             try {
 
-                val initInitial = Initialization(applicationContext)
-                val localData = initInitial.hSdkGetParametersFromLocal()
-                if (localData.firebase_registration_token != "" && localData.hyber_registration_token != "") {
-
+                if (HyberDatabase.firebase_registration_token != "" && HyberDatabase.hyber_registration_token != "") {
                     val hyberAnswer = api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),
-                        localData.firebase_registration_token,
-                        localData.hyber_registration_token
+                        HyberDatabase.firebase_registration_token,
+                        HyberDatabase.hyber_registration_token
                     )
                     HyberLoggerSdk.debug("From Message Delivery Report: $hyberAnswer")
-                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${localData.firebase_registration_token}, hyberToken: ${localData.hyber_registration_token}")
+                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${HyberDatabase.firebase_registration_token}, hyberToken: ${HyberDatabase.hyber_registration_token}")
                 } else {
-                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${localData.firebase_registration_token}, hyberToken: ${localData.hyber_registration_token}")
+                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${HyberDatabase.firebase_registration_token}, hyberToken: ${HyberDatabase.hyber_registration_token}")
                 }
             } catch (e: Exception) {
                 HyberLoggerSdk.debug("onMessageReceived: failed")
