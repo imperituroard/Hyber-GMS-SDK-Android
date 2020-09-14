@@ -70,7 +70,7 @@ object PushSdkParametersPublic {
 
 object PushSdkParameters {
     private var infoLocalDeviceHardware: GetInfo = GetInfo()
-    var sdkVersion: String = "1.0.0.35"
+    var sdkVersion: String = "1.0.0.37"
     var hyber_osType: String = "android"
     var hyber_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
 
@@ -80,6 +80,9 @@ object PushSdkParameters {
         }
     //platform url branches. It can be rewrite by Hyber SDK initiation
     var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
+
+    var hyber_log_level_error = "error"
+    var hyber_log_level_debug = "debug"
 }
 
 interface HyberAp
