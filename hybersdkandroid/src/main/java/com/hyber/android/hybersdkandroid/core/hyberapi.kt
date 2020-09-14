@@ -85,21 +85,12 @@ internal class HyberApi {
                 connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
                 with(connectorWebPlatform) {
-                    // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
-                    //doInput = true
-                    //useCaches = false
-                    //setRequestProperty("","")
-                    Log.d(TAG, "URL : $url")
-
-                    Log.d(TAG, "start DataOutputStream")
                     val wr = DataOutputStream(outputStream)
-                    Log.d(TAG, "start write")
 
                     wr.write(postData)
 
-                    Log.d(TAG, "end write")
                     wr.flush()
                     Log.d(
                         TAG,
@@ -182,13 +173,8 @@ internal class HyberApi {
                 )
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
-                //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
-
-                println(currentTimestamp2)
-                //println(date)
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
-
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
@@ -206,27 +192,11 @@ internal class HyberApi {
 
 
                 with(connectorWebPlatform) {
-                    // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
-                    //doInput = true
-                    //useCaches = false
-                    //setRequestProperty("","")
-
-                    //val wr = OutputStreamWriter(getOutputStream());
-
                     val wr = DataOutputStream(outputStream)
-
-                    println("URL3 : $url")
                     wr.write(postData2)
-
-                    println("URL2 : $url")
-
                     wr.flush()
-
-                    Log.d(TAG, "URL : $url")
-
-                    Log.d(TAG, "Response Code : $responseCode")
 
                     try {
                         BufferedReader(InputStreamReader(inputStream)).use {
@@ -238,10 +208,10 @@ internal class HyberApi {
                                 inputLine = it.readLine()
                             }
                             it.close()
-                            println("Response : $response")
+                            HyberLoggerSdk.debug("Response : $response")
                         }
                     } catch (e: Exception) {
-                        println("Failed")
+                        HyberLoggerSdk.debug("Failed")
                     }
 
                     functionNetAnswer2 = responseCode.toString()
@@ -272,10 +242,6 @@ internal class HyberApi {
 
                 val currentTimestamp2 =
                     System.currentTimeMillis() - period_in_seconds // We want timestamp in seconds
-                //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
-
-                println(currentTimestamp2)
-                //println(date)
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
@@ -302,14 +268,11 @@ internal class HyberApi {
 
                     requestMethod = "GET"
 
-                    Log.d(TAG, "\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                    HyberLoggerSdk.debug("Sent 'GET' request to URL : $url; Response Code : $responseCode")
                     functionCodeAnswer3 = responseCode
 
                     inputStream.bufferedReader().use {
-
-                        //println(it.readLine())
                         functionNetAnswer3 = it.readLine().toString()
-
                     }
                 }
             } catch (e: Exception) {
@@ -321,7 +284,6 @@ internal class HyberApi {
                 functionCodeAnswer3 = 700
                 functionNetAnswer3 = "Failed"
 
-                //final_answer = HyberFunAnswerGeneral(700, "Failed", "Rest Api thread exception", "{}")
             }
 
         })
@@ -348,10 +310,6 @@ internal class HyberApi {
 
                     val currentTimestamp2 =
                         System.currentTimeMillis() // We want timestamp in seconds
-                    //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
-
-                    println(currentTimestamp2)
-                    //println(date)
 
                     val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
@@ -375,17 +333,13 @@ internal class HyberApi {
 
                         sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                        Log.d(
-                            TAG,
-                            "\nSent 'GET' request to URL : $url; Response Code : $responseCode"
-                        )
+                        HyberLoggerSdk.debug("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
                         functionCodeAnswer4 = responseCode
 
                         //if (responseCode==401) { init_hyber.clearData() }
 
                         inputStream.bufferedReader().use {
 
-                            //println(it.readLine())
                             functionNetAnswer4 = it.readLine().toString()
 
                             Log.d(
@@ -432,14 +386,10 @@ internal class HyberApi {
             try {
                 val message =
                     "{\"fcmToken\": \"$fcm_Token\",\"osType\": \"$os_Type\",\"osVersion\": \"$osVersion\",\"deviceType\": \"$device_Type\",\"deviceName\": \"$device_Name\",\"sdkVersion\": \"$sdk_Version\" }"
-                println(message)
 
-
-                val currentTimestamp = System.currentTimeMillis()
+                HyberLoggerSdk.debug(message)
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
-                //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
-
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
@@ -457,7 +407,6 @@ internal class HyberApi {
                 connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
                 with(connectorWebPlatform) {
-                    // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
 
@@ -483,11 +432,8 @@ internal class HyberApi {
                 }
 
             } catch (e: Exception) {
+                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
 
-                Log.d(
-                    TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
-                )
                 functionNetAnswer5 = "Failed"
             }
 
@@ -518,9 +464,8 @@ internal class HyberApi {
 
             try {
                 val message2 = "{\"messageId\": \"$message_id\", \"answer\": \"$hyber_answer\"}"
-                Log.d(TAG, "Body message to hyber : $message2")
+                HyberLoggerSdk.debug("Body message to hyber : $message2")
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
-                //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
@@ -542,21 +487,15 @@ internal class HyberApi {
 
 
                 with(connectorWebPlatform) {
-                    // optional default is GET
                     requestMethod = "POST"
                     doOutput = true
-                    //doInput = true
-                    //useCaches = false
-                    //setRequestProperty("","")
-
-                    //val wr = OutputStreamWriter(getOutputStream());
 
                     val wr = DataOutputStream(outputStream)
 
                     wr.write(postData2)
                     wr.flush()
-                    Log.d(TAG, "URL : $url")
-                    Log.d(TAG, "Response Code : $responseCode")
+                    HyberLoggerSdk.debug("URL : $url")
+                    HyberLoggerSdk.debug("Response Code : $responseCode")
                     functionCodeAnswer6 = responseCode
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
@@ -567,19 +506,14 @@ internal class HyberApi {
                             inputLine = it.readLine()
                         }
                         it.close()
-                        println("Response : $response")
-                        //function_net_answer6 = responseCode.toString() + " " + "Response : $response"
+                        HyberLoggerSdk.debug("Response : $response")
+
                         functionNetAnswer6 = response.toString()
                     }
                 }
 
             } catch (e: Exception) {
-
-                Log.d(
-                    TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
-                )
-
+                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
             }
         })
 
@@ -604,19 +538,15 @@ internal class HyberApi {
             val threadNetF7 = Thread(Runnable {
 
                 try {
-                    //val message2 = StringBuilder("{\"messageId\": \"$message_id\"}")
                     val message2 = "{\"messageId\": \"$message_id\"}"
 
-                    Log.d(TAG, "Body message to hyber : $message2")
-
+                    HyberLoggerSdk.debug("Body message to hyber : $message2")
                     val currentTimestamp2 =
                         System.currentTimeMillis() // We want timestamp in seconds
-                    //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
 
-                    Log.d(TAG, "Timestamp : $currentTimestamp2")
+                    HyberLoggerSdk.debug("Timestamp : $currentTimestamp2")
 
                     val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
-
 
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
@@ -634,21 +564,13 @@ internal class HyberApi {
 
 
                     with(connectorWebPlatform) {
-                        // optional default is GET
                         requestMethod = "POST"
                         doOutput = true
-                        //doInput = true
-                        //useCaches = false
-                        //setRequestProperty("","")
-
-                        //val wr = OutputStreamWriter(getOutputStream());
-
                         val wr = DataOutputStream(outputStream)
                         wr.write(postData2)
                         wr.flush()
-                        Log.d(TAG, "URL : $url")
-                        Log.d(TAG, "Response Code : $responseCode")
-                        //if (responseCode==401) { init_hyber.clearData() }
+                        HyberLoggerSdk.debug("URL : $url")
+                        HyberLoggerSdk.debug("Response Code : $responseCode")
 
                         BufferedReader(InputStreamReader(inputStream)).use {
                             val response = StringBuffer()
@@ -659,7 +581,7 @@ internal class HyberApi {
                                 inputLine = it.readLine()
                             }
                             it.close()
-                            Log.d(TAG, "Response : $response")
+                            HyberLoggerSdk.debug("Response : $response")
                         }
                         functionNetAnswer7 = responseCode.toString()
                     }
