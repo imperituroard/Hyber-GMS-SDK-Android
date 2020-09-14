@@ -41,9 +41,10 @@ internal class Initialization(val context: Context) {
         val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
         loadedDataLocalOperation.registrationStatus = registrationStatus
 
+        //1
+        loadedDataLocalOperation.firebase_registration_token = hSdkUpdateFirebaseAuto()
+
         if (registrationStatus) {
-            //1
-            loadedDataLocalOperation.firebase_registration_token = hSdkUpdateFirebaseAuto()
 
             //2
             val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
