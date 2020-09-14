@@ -57,8 +57,6 @@ internal class Answer {
     )
 
     fun hyberRegisterNewRegisterExists2(
-        paramSgl: PushSdkParameters,
-        context: Context,
         hyberGlobParamAll: PushSdkParameters
     ): HyberFunAnswerRegister {
 

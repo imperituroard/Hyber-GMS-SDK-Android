@@ -5,7 +5,6 @@ import android.content.Intent
 import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.HyberDataApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
-import com.hyber.android.hybersdkandroid.core.Initialization
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -44,7 +43,6 @@ internal class QueueProc {
         context: Context
     ) {
         val apiHyber = HyberApi()
-        val initHyberParams = Initialization(context, HyberPushMess.hyberInternalParamsObject)
 
         @Serializable
         data class Empty(
