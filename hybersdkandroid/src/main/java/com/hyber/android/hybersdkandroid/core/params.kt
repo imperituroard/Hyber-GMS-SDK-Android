@@ -70,7 +70,7 @@ object PushSdkParametersPublic {
 
 object PushSdkParameters {
     private var infoLocalDeviceHardware: GetInfo = GetInfo()
-    var sdkVersion: String = "1.0.0.30"
+    var sdkVersion: String = "1.0.0.32"
     var hyber_osType: String = "android"
     var hyber_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
 

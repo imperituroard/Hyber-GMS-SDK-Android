@@ -17,6 +17,7 @@ internal class Initialization(val context: Context) {
             val token = instanceIdResult.token
             if (token != "") {
                 sharedPreference.saveString("firebase_registration_token", token)
+                HyberDatabase.firebase_registration_token = token
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token: $token")
             } else {
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token empty")
@@ -40,11 +41,13 @@ internal class Initialization(val context: Context) {
         val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
         HyberDatabase.registrationStatus = registrationStatus
 
+        HyberLoggerSdk.debug("Initialization.hSdkGetParametersFromLocal registrationStatus: $registrationStatus")
+
         hSdkUpdateFirebaseAuto()
 
         //1
-        val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
-        HyberDatabase.firebase_registration_token = firebaseRegistrationToken
+        //val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
+        //HyberDatabase.firebase_registration_token = firebaseRegistrationToken
 
         if (registrationStatus) {
 
