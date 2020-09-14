@@ -24,7 +24,6 @@ internal class Initialization(val context: Context) {
             val token = instanceIdResult.token
             if (token != "") {
                 sharedPreference.saveString("firebase_registration_token", token)
-                HyberDatabase.firebase_registration_token = token
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token: $token")
             } else {
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token empty")
@@ -33,6 +32,7 @@ internal class Initialization(val context: Context) {
         HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished")
 
 
+        /*
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -43,12 +43,12 @@ internal class Initialization(val context: Context) {
                 val token = task.result!!.token
                 sharedPreference.saveString("firebase_registration_token", token)
                 HyberDatabase.firebase_registration_token = token
-
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token2: $token")
-
             })
+             HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished2")
 
-        HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished2")
+         */
+
 
     }
 
@@ -72,8 +72,11 @@ internal class Initialization(val context: Context) {
         hSdkUpdateFirebaseAuto()
 
         //1
-        //val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
-        //HyberDatabase.firebase_registration_token = firebaseRegistrationToken
+        val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
+        if (firebaseRegistrationToken != "") {
+            HyberDatabase.firebase_registration_token = firebaseRegistrationToken
+        }
+
 
         if (registrationStatus) {
 
