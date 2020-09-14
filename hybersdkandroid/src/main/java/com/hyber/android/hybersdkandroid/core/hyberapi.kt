@@ -1,8 +1,6 @@
 package com.hyber.android.hybersdkandroid.core
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import com.hyber.android.hybersdkandroid.add.Answer
 import com.hyber.android.hybersdkandroid.add.GetInfo
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
