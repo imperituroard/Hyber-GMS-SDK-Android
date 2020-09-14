@@ -28,7 +28,7 @@ class HyberSDKQueue {
                 "Not registered"
             )
             val initHyberParams2 = Initialization(context)
-            initHyberParams2.hSdkInit3()
+            initHyberParams2.hSdkInit2()
             return if (initHyberParams2.parametersGlobal.registrationStatus) {
                 val queue = QueueProc()
                 val anss = queue.hyberDeviceMessQueue(
@@ -322,7 +322,6 @@ class HyberSDK(
                 )
                 HyberLoggerSdk.debug("device_all_hyber : $deviceAllHyber")
 
-
                 if (deviceAllHyber.code == 401) {
                     try {
                         initHObject.clearData()
@@ -506,7 +505,7 @@ class HyberSDK(
     fun hyber_check_queue(): HyberFunAnswerGeneral {
         try {
             val initHParams2 = Initialization(context)
-            initHParams2.hSdkInit3()
+            initHParams2.hSdkInit2()
             if (initHParams2.parametersGlobal.registrationStatus) {
                 if (initHParams2.parametersGlobal.firebase_registration_token != "" && initHParams2.parametersGlobal.hyber_registration_token != "") {
                     val queue = QueueProc()
@@ -525,7 +524,6 @@ class HyberSDK(
                         "Failed. firebase_registration_token or hyber_registration_token empty"
                     )
                 }
-
             } else {
                 return answerNotRegistered
             }
@@ -533,5 +531,4 @@ class HyberSDK(
             return answerNotKnown
         }
     }
-
 }

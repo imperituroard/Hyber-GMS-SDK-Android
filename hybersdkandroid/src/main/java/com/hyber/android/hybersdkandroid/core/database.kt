@@ -3,12 +3,13 @@ package com.hyber.android.hybersdkandroid.core
 import android.content.Context
 import android.content.SharedPreferences
 import java.lang.Exception
+import android.R.id.edit
 
 
 @Suppress("unused")
 internal class SharedPreference(val context: Context) {
     private val preferenceDatabase = "hyberdatabase"
-    private val sharedPref: SharedPreferences =
+    private var sharedPref: SharedPreferences =
         context.getSharedPreferences(preferenceDatabase, Context.MODE_PRIVATE)
 
     fun save(KEY_NAME: String, text: String) {
@@ -30,27 +31,15 @@ internal class SharedPreference(val context: Context) {
     }
 
     fun getValueString(KEY_NAME: String): String? {
-        return try {
-            sharedPref.getString(KEY_NAME, null)
-        } catch (e: Exception) {
-            ""
-        }
+        return sharedPref.getString(KEY_NAME, "")
     }
 
     fun getValueInt(KEY_NAME: String): Int {
-        return try {
-            sharedPref.getInt(KEY_NAME, 0)
-        } catch (e: Exception) {
-            0
-        }
+        return sharedPref.getInt(KEY_NAME, 0)
     }
 
     fun getValueBool(KEY_NAME: String, defaultValue: Boolean): Boolean {
-        return try {
-            sharedPref.getBoolean(KEY_NAME, defaultValue)
-        } catch (e: Exception) {
-            false
-        }
+        return sharedPref.getBoolean(KEY_NAME, defaultValue)
     }
 
     fun clearSharedPreference() {
