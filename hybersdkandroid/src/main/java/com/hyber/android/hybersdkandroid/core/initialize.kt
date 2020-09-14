@@ -11,6 +11,7 @@ internal class Initialization(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
 
     private fun hSdkUpdateFirebaseAuto(): String {
+        HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto start")
         var token = ""
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
             token = instanceIdResult.token
@@ -21,9 +22,9 @@ internal class Initialization(val context: Context) {
                 val firebaseRegistrationToken: String =
                     sharedPreference.getValueString("firebase_registration_token")!!.toString()
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token empty loaded: $firebaseRegistrationToken")
-                token = firebaseRegistrationToken
             }
         }
+        HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished token: $token")
         return token
     }
 
