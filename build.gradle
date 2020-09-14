@@ -1,25 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.51'
-    ext.gradle_tools = '3.1.3'
-
-    ext.compile_sdk = 27
-    ext.build_tools = '27.0.3'
-    ext.min_sdk = 21
-    ext.target_sdk = 27
-
+    ext.kotlin_version = '1.3.50'
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_tools"
+        classpath 'com.android.tools.build:gradle:3.6.0-alpha10'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:3.1.1'
-        //classpath 'com.google.gms:google-services:3.1.1'
-        //classpath "org.jetbrains.kotlin:kotlin-serialization:1.+"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -29,16 +21,10 @@ allprojects {
     repositories {
         google()
         jcenter()
-       // maven {
-       //     url 'https://jitpack.io'
+        maven {
+            url 'https://jitpack.io'
         //    credentials { username authToken }
-       // }
-    }
-}
-
-configurations.all {
-    resolutionStrategy {
-        force 'com.android.support:support-v4:27.0.3'
+        }
     }
 }
 

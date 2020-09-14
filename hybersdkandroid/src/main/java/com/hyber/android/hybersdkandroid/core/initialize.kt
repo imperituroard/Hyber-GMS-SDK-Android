@@ -1,297 +1,244 @@
 package com.hyber.android.hybersdkandroid.core
 
-import android.content.Context
-import java.util.*
-//import com.google.firebase.iid.FirebaseInstanceId
-//import com.google.android.gms.tasks.OnSuccessListener
-import android.app.Activity
-import android.util.Log
-import android.widget.Toast
-import android.provider.Settings.Global.getString
-//import com.google.android.gms.tasks.Task
-//import androidx.annotation.NonNull
-//import com.google.android.gms.tasks.OnCompleteListener
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.util.Log
+import com.google.firebase.iid.FirebaseInstanceId
+import java.util.*
 
 
 //function for initialization different parameters
-//
 internal class Initialization(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
-    internal val paramsglobal: HyberParameters = HyberParameters
+    internal val parametersGlobal: PushSdkParameters = PushSdkParameters
 
-    fun hyber_init(
-        hyber_osType1: String,
-        hyber_user_msisdn1: String,
-        hyber_user_Password1: String,
-        hyber_deviceType1: String,
-        hyber_deviceName1: String
+    fun hSdkUpdateFirebaseAuto() {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            if (token != "") {
+                sharedPreference.save("firebase_registration_token", token)
+                parametersGlobal.firebase_registration_token = token
+                Log.d(TAG, "hyber_init.Firebase token: $token")
+            }
+        }
+    }
+
+    fun hSdkUpdateFirebaseManual(x_token: String) {
+        sharedPreference.save("firebase_registration_token", x_token)
+        parametersGlobal.firebase_registration_token = x_token
+        Log.d(TAG, "hyber_init.Firebase token: $x_token")
+    }
+
+    fun hSdkInit(
+        hOsType1: String,
+        hDeviceType1: String,
+        hDeviceName1: String,
+        hUrlsInfo: UrlsPlatformList
     ) {
-        val registrationstatus: Boolean =
-        sharedPreference.getValueBoolien("registrationstatus", false)
-        paramsglobal.registrationstatus = registrationstatus
+        val registrationStatus: Boolean =
+            sharedPreference.getValueBool("registrationstatus", false)
+        parametersGlobal.registrationStatus = registrationStatus
 
-        //val token = FirebaseInstanceId.getInstance().token
+        parametersGlobal.branch_current_active = hUrlsInfo
 
-
-        //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
-        if (registrationstatus == false) {
-            val hyber_uuid = UUID.randomUUID().toString()
-            sharedPreference.save("hyber_uuid", hyber_uuid)
-            paramsglobal.hyber_uuid = hyber_uuid
-
-            sharedPreference.save("hyber_user_msisdn", hyber_user_msisdn1)
-            paramsglobal.hyber_user_msisdn = hyber_user_msisdn1
-
-            sharedPreference.save("hyber_osType", hyber_osType1)
-            paramsglobal.hyber_osType = hyber_osType1
-
-            sharedPreference.save("hyber_user_Password", hyber_user_Password1)
-            paramsglobal.hyber_user_Password = hyber_user_Password1
-
-            sharedPreference.save("hyber_deviceType", hyber_deviceType1)
-            paramsglobal.hyber_deviceType = hyber_deviceType1
-
-            sharedPreference.save("hyber_deviceName", hyber_deviceName1)
-            paramsglobal.hyber_deviceName = hyber_deviceName1
-
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            if (token != "") {
+                sharedPreference.save("firebase_registration_token", token)
+                parametersGlobal.firebase_registration_token = token
+                Log.d(TAG, "hyber_init.Firebase token: $token")
+            } else {
+                val firebaseRegistrationToken: String =
+                    sharedPreference.getValueString("firebase_registration_token")!!.toString()
+                parametersGlobal.firebase_registration_token = firebaseRegistrationToken
+                Log.d(TAG, "hyber_init.Firebase token: $token")
             }
+        }
 
-            //sharedPreference.save("firebase_registration_token", token.toString())
-            //paramsglobal.firebase_registration_token = token.toString()
+        if (!registrationStatus) {
+            val hyberUuid = UUID.randomUUID().toString()
+            sharedPreference.save("hyber_uuid", hyberUuid)
+            parametersGlobal.hyber_uuid = hyberUuid
+
+            sharedPreference.save("hyber_osType", hOsType1)
+            parametersGlobal.hyber_osType = hOsType1
+
+            sharedPreference.save("hyber_deviceType", hDeviceType1)
+            parametersGlobal.hyber_deviceType = hDeviceType1
+
+            sharedPreference.save("hyber_deviceName", hDeviceName1)
+            parametersGlobal.hyber_deviceName = hDeviceName1
 
         } else {
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
-            }
+            val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
+            parametersGlobal.hyber_uuid = hyberUuid
+
+            val devId: String = sharedPreference.getValueString("deviceId")!!.toString()
+            parametersGlobal.deviceId = devId
 
 
-            val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
-            paramsglobal.hyber_uuid = hyber_uuid
-
-            val devid: String = sharedPreference.getValueString("deviceId")!!.toString()
-            paramsglobal.deviceId = devid
-
-
-            val hyber_user_msisdn: String =
+            val hyberUserMsisdn: String =
                 sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
-            paramsglobal.hyber_user_msisdn = hyber_user_msisdn
+            parametersGlobal.hyber_user_msisdn = hyberUserMsisdn
 
-            val hyber_user_Password: String =
+            val hyberUserPassword: String =
                 sharedPreference.getValueString("hyber_user_Password")!!.toString()
-            paramsglobal.hyber_user_Password = hyber_user_Password
+            parametersGlobal.hyber_user_Password = hyberUserPassword
 
-            val hyber_deviceType: String =
+            val hyberDeviceType: String =
                 sharedPreference.getValueString("hyber_deviceType")!!.toString()
-            paramsglobal.hyber_deviceType = hyber_deviceType
+            parametersGlobal.hyber_deviceType = hyberDeviceType
 
-            val hyber_deviceName: String =
+            val hyberDeviceName: String =
             sharedPreference.getValueString("hyber_deviceName")!!.toString()
-            paramsglobal.hyber_deviceName = hyber_deviceName
+            parametersGlobal.hyber_deviceName = hyberDeviceName
 
-            val hyber_osType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
-            paramsglobal.hyber_osType = hyber_osType
+            val hyberOsType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
+            parametersGlobal.hyber_osType = hyberOsType
 
-            val hyber_registration_token: String =
+            val hyberRegistrationToken: String =
                 sharedPreference.getValueString("hyber_registration_token")!!.toString()
-            paramsglobal.hyber_registration_token = hyber_registration_token
+            parametersGlobal.hyber_registration_token = hyberRegistrationToken
 
-            val hyber_user_id: String =
+            val hyberUserId: String =
                 sharedPreference.getValueString("hyber_user_id")!!.toString()
-            paramsglobal.hyber_user_id = hyber_user_id
+            parametersGlobal.hyber_user_id = hyberUserId
 
-            val hyber_registration_createdAt: String =
+            val hyberRegistrationCreateDat: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
-            paramsglobal.hyber_registration_createdAt = hyber_registration_createdAt
+            parametersGlobal.hyber_registration_createdAt = hyberRegistrationCreateDat
 
-            //sharedPreference.save("firebase_registration_token", token.toString())
-            //paramsglobal.firebase_registration_token = token.toString()
         }
     }
 
 
-    fun hyber_init2() {
-        val registrationstatus: Boolean =
-        sharedPreference.getValueBoolien("registrationstatus", false)
-        paramsglobal.registrationstatus = registrationstatus
+    fun hSdkInit2() {
+        val registrationStatus: Boolean =
+        sharedPreference.getValueBool("registrationstatus", false)
+        parametersGlobal.registrationStatus = registrationStatus
 
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            sharedPreference.save("firebase_registration_token", token)
+            parametersGlobal.firebase_registration_token = token
+        }
 
-
-        //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
-        if (registrationstatus == false) {
-            val hyber_uuid = UUID.randomUUID().toString()
-            sharedPreference.save("hyber_uuid", hyber_uuid)
-            paramsglobal.hyber_uuid = hyber_uuid
-
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
-            }
-
+        if (!registrationStatus) {
+            val hyberUuid = UUID.randomUUID().toString()
+            sharedPreference.save("hyber_uuid", hyberUuid)
+            parametersGlobal.hyber_uuid = hyberUuid
 
         } else {
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
-            }
+            val hSdkUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
+            parametersGlobal.hyber_uuid = hSdkUuid
 
-            val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
-            paramsglobal.hyber_uuid = hyber_uuid
-
-            val devid: String = sharedPreference.getValueString("deviceId")!!.toString()
-            paramsglobal.deviceId = devid
+            val devSdkId: String = sharedPreference.getValueString("deviceId")!!.toString()
+            parametersGlobal.deviceId = devSdkId
 
 
-            val hyber_user_msisdn: String =
+            val hSdkUserMsisdn: String =
                 sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
-            paramsglobal.hyber_user_msisdn = hyber_user_msisdn
+            parametersGlobal.hyber_user_msisdn = hSdkUserMsisdn
 
-            val hyber_user_Password: String =
+            val hyberUserPassword: String =
                 sharedPreference.getValueString("hyber_user_Password")!!.toString()
-            paramsglobal.hyber_user_Password = hyber_user_Password
+            parametersGlobal.hyber_user_Password = hyberUserPassword
 
-            val hyber_deviceType: String =
+            val hyberDeviceType: String =
                 sharedPreference.getValueString("hyber_deviceType")!!.toString()
-            paramsglobal.hyber_deviceType = hyber_deviceType
+            parametersGlobal.hyber_deviceType = hyberDeviceType
 
-            val hyber_deviceName: String =
+            val hyberDeviceName: String =
                 sharedPreference.getValueString("hyber_deviceName")!!.toString()
-            paramsglobal.hyber_deviceName = hyber_deviceName
+            parametersGlobal.hyber_deviceName = hyberDeviceName
 
-            val hyber_osType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
-            paramsglobal.hyber_osType = hyber_osType
+            val hyberOsType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
+            parametersGlobal.hyber_osType = hyberOsType
 
-            val hyber_registration_token: String =
+            val hyberRegistrationToken: String =
                 sharedPreference.getValueString("hyber_registration_token")!!.toString()
-            paramsglobal.hyber_registration_token = hyber_registration_token
+            parametersGlobal.hyber_registration_token = hyberRegistrationToken
 
-            val hyber_user_id: String =
+            val hyberUserId: String =
                 sharedPreference.getValueString("hyber_user_id")!!.toString()
-            paramsglobal.hyber_user_id = hyber_user_id
+            parametersGlobal.hyber_user_id = hyberUserId
 
-            val hyber_registration_createdAt: String =
+            val hyberRegistrationCreatedAt: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
-            paramsglobal.hyber_registration_createdAt = hyber_registration_createdAt
+            parametersGlobal.hyber_registration_createdAt = hyberRegistrationCreatedAt
 
         }
     }
 
-
-    fun hyber_init3() {
+    fun hSdkInit3() {
         val registrationstatus: Boolean =
-            sharedPreference.getValueBoolien("registrationstatus", false)
-        paramsglobal.registrationstatus = registrationstatus
+            sharedPreference.getValueBool("registrationstatus", false)
+        parametersGlobal.registrationStatus = registrationstatus
 
-
-
-        //var token = FirebaseInstanceId.getInstance().token.toString()
-        //println("token old: $token")
-
-        /*
-        if (token=="") {
-            token = FirebaseInstanceId.getInstance().getInstanceId().getResult()!!.getToken().toString()
-            println("token new: $token")
-        }
-         */
-
-        //var hyber_uuid:String = sharedPreference.getValueString("hyber_uuid").toString()
-        if (registrationstatus == false) {
-            val hyber_uuid = UUID.randomUUID().toString()
-            sharedPreference.save("hyber_uuid", hyber_uuid)
-            paramsglobal.hyber_uuid = hyber_uuid
-
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            if (token != "") {
+                sharedPreference.save("firebase_registration_token", token)
+                parametersGlobal.firebase_registration_token = token
+            } else {
+                val firebaseRegistrationToken: String =
+                    sharedPreference.getValueString("firebase_registration_token")!!.toString()
+                parametersGlobal.firebase_registration_token = firebaseRegistrationToken
             }
+        }
 
+        if (!registrationstatus) {
+            val hyberUuid = UUID.randomUUID().toString()
+            sharedPreference.save("hyber_uuid", hyberUuid)
+            parametersGlobal.hyber_uuid = hyberUuid
 
         } else {
 
-            try {
-                val hyber_branch: String = sharedPreference.getValueString("hyber_branch")!!.toString()
-                if (hyber_branch != "") {
-                    paramsglobal.branch = hyber_branch
-                }
-            }catch (e:Exception){
-                println("hyber_branch failed")
-            }
+            val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
+            parametersGlobal.hyber_uuid = hyberUuid
 
-            val hyber_uuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
-            paramsglobal.hyber_uuid = hyber_uuid
-
-            val devid: String = sharedPreference.getValueString("deviceId")!!.toString()
-            paramsglobal.deviceId = devid
+            val devId: String = sharedPreference.getValueString("deviceId")!!.toString()
+            parametersGlobal.deviceId = devId
 
 
-            val hyber_user_msisdn: String =
+            val hyberUserMsisdn: String =
                 sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
-            paramsglobal.hyber_user_msisdn = hyber_user_msisdn
+            parametersGlobal.hyber_user_msisdn = hyberUserMsisdn
 
-            val hyber_user_Password: String =
+            val hyberUserPassword: String =
                 sharedPreference.getValueString("hyber_user_Password")!!.toString()
-            paramsglobal.hyber_user_Password = hyber_user_Password
+            parametersGlobal.hyber_user_Password = hyberUserPassword
 
-            val hyber_deviceType: String =
+            val hyberDeviceType: String =
                 sharedPreference.getValueString("hyber_deviceType")!!.toString()
-            paramsglobal.hyber_deviceType = hyber_deviceType
+            parametersGlobal.hyber_deviceType = hyberDeviceType
 
-            val hyber_deviceName: String =
+            val hyberDeviceName: String =
                 sharedPreference.getValueString("hyber_deviceName")!!.toString()
-            paramsglobal.hyber_deviceName = hyber_deviceName
+            parametersGlobal.hyber_deviceName = hyberDeviceName
 
-            val hyber_osType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
-            paramsglobal.hyber_osType = hyber_osType
+            val hyberOsType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
+            parametersGlobal.hyber_osType = hyberOsType
 
-            val hyber_registration_token: String =
+            val hyberRegistrationToken: String =
                 sharedPreference.getValueString("hyber_registration_token")!!.toString()
-            paramsglobal.hyber_registration_token = hyber_registration_token
+            parametersGlobal.hyber_registration_token = hyberRegistrationToken
 
-            val hyber_user_id: String =
+            val hyberUserId: String =
                 sharedPreference.getValueString("hyber_user_id")!!.toString()
-            paramsglobal.hyber_user_id = hyber_user_id
+            parametersGlobal.hyber_user_id = hyberUserId
 
-            val hyber_registration_createdAt: String =
+            val hyberRegistrationCreatedAt: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
-            paramsglobal.hyber_registration_createdAt = hyber_registration_createdAt
-
+            parametersGlobal.hyber_registration_createdAt = hyberRegistrationCreatedAt
         }
     }
-
 
     fun clearData() {
         sharedPreference.clearSharedPreference()
+        parametersGlobal.registrationStatus = false
     }
 
-    fun firebase_init(context: Context) {
-
-    }
-
-    // sharedPreference.save("ddd","sss")
 }

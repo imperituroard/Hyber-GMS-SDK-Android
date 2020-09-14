@@ -1,57 +1,39 @@
 package com.hyber.android.hybersdkandroid
 
-import android.R.string.cancel
-import android.content.Intent
-import android.os.IBinder
-//import android.R
-//import androidx.core.app.NotificationCompat
-import android.app.PendingIntent
-//import androidx.core.app.ApplicationProvider.getApplicationContext
-import android.app.Service.START_REDELIVER_INTENT
-import android.content.Context.NOTIFICATION_SERVICE
-//import androidx.core.content.ContextCompat.getSystemService
-import android.app.NotificationManager
-import android.app.Service
+
 import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.Service
+import android.content.Intent
 import android.os.Build
-//import android.support.v4.app.NotificationCompat
-import com.hyber.android.hybersdkandroid.add.RewriteParams
+import android.os.IBinder
+import androidx.core.app.NotificationCompat
 import com.hyber.android.hybersdkandroid.core.Initialization
 
-public class HyberMessaging : Service() {
+class HyberMessaging : Service() {
     private var notificationManager: NotificationManager? = null
 
-    override fun onCreate() {
-        super.onCreate()
-
-        //notificationManager = this.getSystemService(this.NOTIFICATION_SERVICE) as NotificationManager
-    }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
         if (Build.VERSION.SDK_INT <= 25) {
             //Send Foreground Notification
             sendNotification("", "", "")
-
-
-            val init_hyber: Initialization = Initialization(applicationContext)
-            init_hyber.hyber_init2()
-
-            //return Service.START_STICKY;
-            return super.onStartCommand(intent, flags, startId);
-            //return START_REDELIVER_INTENT
+            val initHyber = Initialization(applicationContext)
+            initHyber.hSdkInit2()
         } else {
-            return super.onStartCommand(intent, flags, startId);
+            val initHyber = Initialization(applicationContext)
+            initHyber.hSdkInit2()
         }
-
+        return super.onStartCommand(intent, flags, startId)
     }
 
     //Send custom notification
+    @Suppress("unused")
     fun sendNotification(Ticker: String, Title: String, Text: String) {
 
         //These three lines makes Notification to open main activity after clicking on it
         val notificationIntent = Intent(this, applicationContext::class.java)
-        notificationIntent.setAction(Intent.ACTION_MAIN)
+        notificationIntent.action = Intent.ACTION_MAIN
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER)
 
         val contentIntent = PendingIntent.getActivity(
@@ -61,8 +43,24 @@ public class HyberMessaging : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
+        val builder = NotificationCompat.Builder(this, "DEFAULT_NOTIFICATION_ID")
+        builder.setContentIntent(contentIntent)
+            .setOngoing(true)   //Can't be swiped out
+            //.setSmallIcon(R.mipmap.sym_def_app_icon)
+            //.setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.large))   // большая картинка
+            .setTicker(Ticker)
+            .setContentTitle(Title) //Заголовок
+            .setContentText(Text) // Текст уведомления
+            .setWhen(System.currentTimeMillis())
 
+        val notification: Notification
+        notification = if (Build.VERSION.SDK_INT <= 15) {
+            builder.notification // API-15 and lower
+        } else {
+            builder.build()
+        }
 
+        startForeground(DEFAULT_NOTIFICATION_ID, notification)
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -80,6 +78,6 @@ public class HyberMessaging : Service() {
     }
 
     companion object {
-        val DEFAULT_NOTIFICATION_ID = 103
+        const val DEFAULT_NOTIFICATION_ID = 103
     }
 }

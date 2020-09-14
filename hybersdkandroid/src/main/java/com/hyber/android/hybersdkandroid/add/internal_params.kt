@@ -5,21 +5,21 @@ import android.os.Build
 
 internal object HyberInternal {
 
-    fun notification_priority_old(prio: Int): Int {
+    fun notificationPriorityOld(priorityInfo: Int): Int {
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            when (prio) {
-                0 -> return Notification.DEFAULT_VIBRATE
-                1 -> return Notification.VISIBILITY_PUBLIC
-                2 -> return Notification.VISIBILITY_PUBLIC
-                else -> return Notification.DEFAULT_VIBRATE
+        return if (Build.VERSION.SDK_INT >= 21) {
+            when (priorityInfo) {
+                0 -> Notification.DEFAULT_VIBRATE
+                1 -> Notification.VISIBILITY_PUBLIC
+                2 -> Notification.VISIBILITY_PUBLIC
+                else -> Notification.DEFAULT_VIBRATE
             }
         } else {
-            when (prio) {
-                0 -> return Notification.PRIORITY_DEFAULT
-                1 -> return Notification.PRIORITY_HIGH
-                2 -> return Notification.PRIORITY_MAX
-                else -> return Notification.PRIORITY_DEFAULT
+            when (priorityInfo) {
+                0 -> Notification.PRIORITY_DEFAULT
+                1 -> Notification.PRIORITY_HIGH
+                2 -> Notification.PRIORITY_MAX
+                else -> Notification.PRIORITY_DEFAULT
             }
         }
 
