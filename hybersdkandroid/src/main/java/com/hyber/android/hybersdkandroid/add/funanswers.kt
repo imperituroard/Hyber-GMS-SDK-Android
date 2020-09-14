@@ -65,11 +65,11 @@ internal class Answer {
 
         return HyberFunAnswerRegister(
             code = 701,
-            deviceId = initHyber.parametersGlobal.deviceId,
-            token = initHyber.parametersGlobal.hyber_registration_token,
-            userId = initHyber.parametersGlobal.hyber_user_id,
-            userPhone = initHyber.parametersGlobal.hyber_user_msisdn,
-            createdAt = initHyber.parametersGlobal.hyber_registration_createdAt,
+            deviceId = PushSdkParameters.deviceId,
+            token = PushSdkParameters.hyber_registration_token,
+            userId = PushSdkParameters.hyber_user_id,
+            userPhone = PushSdkParameters.hyber_user_msisdn,
+            createdAt = PushSdkParameters.hyber_registration_createdAt,
             result = "Exists",
             description = "Device already registered. Nothing to do"
         )

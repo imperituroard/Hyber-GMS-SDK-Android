@@ -75,7 +75,7 @@ internal object PushSdkParameters {
     // false - it s new device and we need to complete hyber_register_new()
     var registrationStatus: Boolean = false
 
-    var sdkVersion: String = "1.0.0.17"
+    var sdkVersion: String = "1.0.0.18"
     var hyber_osType: String = String()
     var hyber_deviceName: String = String()
     var hyber_deviceType: String = String()
@@ -91,8 +91,6 @@ internal object PushSdkParameters {
 
     //platform url branches. It can be rewrite by Hyber SDK initiation
     var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
-
-
 
 }
 
