@@ -62,7 +62,7 @@ object PushSdkParametersPublic {
     const val TAG_LOGGING = "HyberPushSDK"
 }
 
-internal object PushSdkParameters {
+object PushSdkParameters {
 
     //uuid generates only one time
     var hyber_uuid: String = String()
