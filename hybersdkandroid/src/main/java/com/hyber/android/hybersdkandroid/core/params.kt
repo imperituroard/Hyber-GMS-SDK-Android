@@ -130,7 +130,7 @@ data class UrlsPlatformList(
     val hyber_url_message_history: String
 )
 
-internal data class HyberOperativeData(
+data class HyberOperativeData(
 
     //is procedure for register new device completed or not
     // (true - devise exist on server. )

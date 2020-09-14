@@ -15,6 +15,7 @@ object HyberPushMess {
     var log_level_active: String = "error" //global variable sdk log level
 }
 
+lateinit var HyberDatabase: HyberOperativeData
 
 @Suppress("SpellCheckingInspection", "unused", "FunctionName")
 class HyberSDKQueue {
@@ -126,17 +127,17 @@ class HyberSDK(
         user_password: String
     ): HyberFunAnswerRegister {
         try {
-            val localDataLoaded = initHObject.hSdkGetParametersFromLocal()
-            val xHyberSessionId = localDataLoaded.firebase_registration_token
-            HyberLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${localDataLoaded.registrationStatus}, X_Hyber_Session_Id: $xHyberSessionId")
+            initHObject.hSdkGetParametersFromLocal()
+            val xHyberSessionId = HyberDatabase.firebase_registration_token
+            HyberLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${HyberDatabase.registrationStatus}, X_Hyber_Session_Id: $xHyberSessionId")
 
-            if (localDataLoaded.registrationStatus) {
+            if (HyberDatabase.registrationStatus) {
                 return answerAny.hyberRegisterNewRegisterExists2(
-                    localDataLoaded.deviceId,
-                    localDataLoaded.hyber_registration_token,
-                    localDataLoaded.hyber_user_id,
-                    localDataLoaded.hyber_user_msisdn,
-                    localDataLoaded.hyber_registration_createdAt
+                    HyberDatabase.deviceId,
+                    HyberDatabase.hyber_registration_token,
+                    HyberDatabase.hyber_user_id,
+                    HyberDatabase.hyber_user_msisdn,
+                    HyberDatabase.hyber_registration_createdAt
                 )
             } else {
 
@@ -157,7 +158,7 @@ class HyberSDK(
                     rewriteParams.rewriteHyberUserPassword(user_password)
 
                     HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
-                    HyberLoggerSdk.debug("uuid: ${localDataLoaded.hyber_uuid}")
+                    HyberLoggerSdk.debug("uuid: ${HyberDatabase.hyber_uuid}")
 
                     var regStatus = false
                     if (respHyber.code == 200) {
@@ -392,16 +393,15 @@ class HyberSDK(
     //5
     fun hyber_update_registration(): HyberFunAnswerGeneral {
         try {
-            val localDataLoaded = initHObject.hSdkGetParametersFromLocal()
-            if (localDataLoaded.registrationStatus) {
+            if (HyberDatabase.registrationStatus) {
                 val resss: HyberDataApi = apiHyberData.hDeviceUpdate(
-                    localDataLoaded.hyber_registration_token,
-                    localDataLoaded.firebase_registration_token, //_xHyberSessionId
+                    HyberDatabase.hyber_registration_token,
+                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
                     hyberInternalParamsObject.hyber_deviceName,
                     hyberDeviceType,
                     hyberInternalParamsObject.hyber_osType,
                     hyberInternalParamsObject.sdkVersion,
-                    localDataLoaded.firebase_registration_token
+                    HyberDatabase.firebase_registration_token
                 )
                 if (resss.code == 401) {
                     try {
@@ -484,19 +484,18 @@ class HyberSDK(
     //8 delete all devices
     fun hyber_clear_all_device(): HyberFunAnswerGeneral {
         try {
-            val localDataLoaded = initHObject.hSdkGetParametersFromLocal()
-            if (localDataLoaded.registrationStatus) {
+            if (HyberDatabase.registrationStatus) {
                 val deviceAllHyber: HyberDataApi = apiHyberData.hGetDeviceAll(
-                    localDataLoaded.firebase_registration_token, //_xHyberSessionId
-                    localDataLoaded.hyber_registration_token
+                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
+                    HyberDatabase.hyber_registration_token
                 )
 
                 val deviceList: String = parsing.parseIdDevicesAll(deviceAllHyber.body)
 
                 val hyberAnswer: HyberDataApi = apiHyberData.hDeviceRevoke(
                     deviceList,
-                    localDataLoaded.firebase_registration_token, //_xHyberSessionId
-                    localDataLoaded.hyber_registration_token
+                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
+                    HyberDatabase.hyber_registration_token
                 )
 
                 HyberLoggerSdk.debug("hyber_answer : $hyberAnswer")
