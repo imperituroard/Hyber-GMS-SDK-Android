@@ -2,8 +2,6 @@ package com.hyber.android.hybersdkandroid.core
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.lang.Exception
-import android.R.id.edit
 
 
 @Suppress("unused")

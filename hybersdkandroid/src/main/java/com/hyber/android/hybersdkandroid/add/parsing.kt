@@ -1,7 +1,5 @@
 package com.hyber.android.hybersdkandroid.add
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 
 internal class HyberParsing {
