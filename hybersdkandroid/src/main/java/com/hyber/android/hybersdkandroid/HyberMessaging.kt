@@ -15,33 +15,16 @@ class HyberMessaging : Service() {
     private var notificationManager: NotificationManager? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-
         if (Build.VERSION.SDK_INT <= 25) {
             //Send Foreground Notification
             sendNotification("", "", "")
-
-
             val initHyber = Initialization(applicationContext)
-            //init_hyber.hyberInit2()
-
-            //return Service.START_STICKY;
-            return super.onStartCommand(intent, flags, startId)
-            //return START_REDELIVER_INTENT
+            initHyber.hSdkInit2()
         } else {
             val initHyber = Initialization(applicationContext)
-            //init_hyber.hyber_init2()
-
-            return super.onStartCommand(intent, flags, startId)
+            initHyber.hSdkInit2()
         }
-
-
-        val initHyber = Initialization(applicationContext)
-        initHyber.hSdkInit2()
-
         return super.onStartCommand(intent, flags, startId)
-
-
     }
 
     //Send custom notification

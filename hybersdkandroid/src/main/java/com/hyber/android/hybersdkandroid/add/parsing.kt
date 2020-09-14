@@ -2,10 +2,12 @@ package com.hyber.android.hybersdkandroid.add
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 
 internal class HyberParsing {
 
     fun parseIdDevicesAll(input_json: String): String {
+        HyberLoggerSdk.debug("Result: Function: parseIdDevicesAll, Class: HyberParsing, input_json: $input_json")
         var restParsingStr = "["
         val regex =
             """"id":\s(\d+),\s|"id":(\d+),\s|"id":(\d+),|"id" :(\d+),|"id":(\d+) ,""".toRegex()
@@ -17,19 +19,16 @@ internal class HyberParsing {
             restParsingStr = "$restParsingStr\"$value\", "
         }
         restParsingStr = restParsingStr.dropLast(2) + "]"
+        HyberLoggerSdk.debug("Result: Function: parseIdDevicesAll, Class: HyberParsing, output: $restParsingStr")
         return restParsingStr
     }
 
     fun parseMessageId(input_json: String): String {
-
-        Log.d(
-            TAG,
-            "Result: Function: parse_message_id, Class: HyberParsing, input_json: $input_json"
-        )
+        HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, input_json: $input_json")
         val regex = ""","messageId":"(.+)",|messageId=(.+),|"messageId":"(.+)"""".toRegex()
         val matchResults = regex.find(input_json)
         val (res) = matchResults!!.destructured
+        HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, output: $res")
         return res
     }
-
 }

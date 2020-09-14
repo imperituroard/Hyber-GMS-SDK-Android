@@ -15,9 +15,6 @@ internal class Initialization(val context: Context) {
     fun hSdkUpdateFirebaseAuto() {
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
             val token = instanceIdResult.token
-            // Do whatever you want with your token now
-            // i.e. store it on SharedPreferences or DB
-            // or directly send it to server
             if (token != "") {
                 sharedPreference.save("firebase_registration_token", token)
                 parametersGlobal.firebase_registration_token = token
@@ -125,14 +122,12 @@ internal class Initialization(val context: Context) {
             val token = instanceIdResult.token
             sharedPreference.save("firebase_registration_token", token)
             parametersGlobal.firebase_registration_token = token
-
         }
 
         if (!registrationStatus) {
             val hyberUuid = UUID.randomUUID().toString()
             sharedPreference.save("hyber_uuid", hyberUuid)
             parametersGlobal.hyber_uuid = hyberUuid
-
 
         } else {
 
@@ -177,18 +172,13 @@ internal class Initialization(val context: Context) {
         }
     }
 
-
     fun hSdkInit3() {
         val registrationstatus: Boolean =
             sharedPreference.getValueBool("registrationstatus", false)
         parametersGlobal.registrationStatus = registrationstatus
 
-
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
             val token = instanceIdResult.token
-            // Do whatever you want with your token now
-            // i.e. store it on SharedPreferences or DB
-            // or directly send it to server
             if (token != "") {
                 sharedPreference.save("firebase_registration_token", token)
                 parametersGlobal.firebase_registration_token = token
@@ -243,7 +233,6 @@ internal class Initialization(val context: Context) {
             val hyberRegistrationCreatedAt: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
             parametersGlobal.hyber_registration_createdAt = hyberRegistrationCreatedAt
-
         }
     }
 
