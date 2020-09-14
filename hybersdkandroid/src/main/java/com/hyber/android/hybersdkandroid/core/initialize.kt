@@ -1,8 +1,6 @@
 package com.hyber.android.hybersdkandroid.core
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.util.Log
 import com.google.firebase.iid.FirebaseInstanceId
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import java.util.*
@@ -28,7 +26,6 @@ internal class Initialization(val context: Context) {
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token: $token")
             }
         }
-
     }
 
     fun hSdkUpdateFirebaseManual(x_token: String) {
@@ -37,7 +34,9 @@ internal class Initialization(val context: Context) {
         HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseManual.Firebase token: $x_token")
     }
 
-    private fun paramsLoader(){
+    private fun paramsLoader() {
+        HyberLoggerSdk.debug("Initialization.paramsLoader started")
+
         val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
         parametersGlobal.hyber_uuid = hyberUuid
 
@@ -74,6 +73,7 @@ internal class Initialization(val context: Context) {
         val hyberRegistrationCreatedAt: String =
             sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
         parametersGlobal.hyber_registration_createdAt = hyberRegistrationCreatedAt
+        HyberLoggerSdk.debug("Initialization.paramsLoader finished: hyberUuid=$hyberUuid, devId=$devId, hyberUserMsisdn=$hyberUserMsisdn, hyberUserPassword=$hyberUserPassword, hyberDeviceType=$hyberDeviceType, hyberDeviceName=$hyberDeviceName, hyberOsType=$hyberOsType, hyberRegistrationToken=$hyberRegistrationToken, hyberUserId=$hyberUserId, hyberRegistrationCreatedAt=$hyberRegistrationCreatedAt")
     }
 
     fun hSdkInit(
@@ -82,13 +82,15 @@ internal class Initialization(val context: Context) {
         hDeviceName1: String,
         hUrlsInfo: UrlsPlatformList
     ) {
-        val registrationStatus: Boolean =
-            sharedPreference.getValueBool("registrationstatus", false)
+        val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
         parametersGlobal.registrationStatus = registrationStatus
         parametersGlobal.branch_current_active = hUrlsInfo
         parametersGlobal.hyber_osType = hOsType1
         parametersGlobal.hyber_deviceType = hDeviceType1
         parametersGlobal.hyber_deviceName = hDeviceName1
+
+        HyberLoggerSdk.debug("Initialization.hSdkInit  registrationstatus: $registrationStatus")
+        HyberLoggerSdk.debug("Initialization.hSdkInit  hUrlsInfo=$hUrlsInfo, hOsType1=$hOsType1, hDeviceType1=$hDeviceType1, hDeviceName1=$hDeviceName1")
 
         hSdkUpdateFirebaseAuto()
 
@@ -106,8 +108,9 @@ internal class Initialization(val context: Context) {
 
     fun hSdkInit2() {
         val registrationStatus: Boolean =
-        sharedPreference.getValueBool("registrationstatus", false)
+            sharedPreference.getValueBool("registrationstatus", false)
         parametersGlobal.registrationStatus = registrationStatus
+        HyberLoggerSdk.debug("Initialization.hSdkInit  getValueBool: $registrationStatus")
 
         hSdkUpdateFirebaseAuto()
 
@@ -121,10 +124,10 @@ internal class Initialization(val context: Context) {
         }
     }
 
-
     fun clearData() {
         sharedPreference.clearSharedPreference()
         parametersGlobal.registrationStatus = false
+        HyberLoggerSdk.debug("Initialization.clearData  processed")
     }
 
 }
