@@ -35,6 +35,8 @@ internal class Initialization(val context: Context) {
     fun hSdkGetParametersFromLocal(): HyberOperativeData {
         HyberLoggerSdk.debug("Initialization.hSdkGetParametersFromLocal started")
 
+        HyberDatabase = HyberOperativeData()
+
         val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
         HyberDatabase.registrationStatus = registrationStatus
 
