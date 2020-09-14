@@ -39,8 +39,7 @@ internal class QueueProc {
     private fun processHyberQueue(
         queue: String,
         X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String,
-        context: Context
+        X_Hyber_Auth_Token: String
     ) {
         val apiHyber = HyberApi()
 
@@ -87,7 +86,7 @@ internal class QueueProc {
             Thread.sleep(2000)
             //initHyber_params.hyber_init3()
             list.forEach {
-                HyberLoggerSdk.debug("fb token: ${PushSdkParameters.firebase_registration_token}")
+                HyberLoggerSdk.debug("fb token: $X_Hyber_Session_Id")
                 apiHyber.hMessageDr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
                 HyberLoggerSdk.debug("Result: Start step2, Function: processHyberQueue, Class: HyberApi, message: ${it.messageId}")
             }
@@ -167,8 +166,7 @@ internal class QueueProc {
                             processHyberQueue(
                                 response.toString(),
                                 X_Hyber_Session_Id,
-                                X_Hyber_Auth_Token,
-                                context
+                                X_Hyber_Auth_Token
                             )
                             HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue Response : $response")
                         }

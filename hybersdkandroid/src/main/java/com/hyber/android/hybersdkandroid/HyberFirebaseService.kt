@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.hyber.android.hybersdkandroid.add.GetInfo
 import com.hyber.android.hybersdkandroid.add.HyberParsing
 import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.HyberPublicParams
+import com.hyber.android.hybersdkandroid.core.Initialization
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 
 
@@ -17,6 +19,8 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
 
     private var api: HyberApi = HyberApi()
     private var parsing: HyberParsing = HyberParsing()
+    private var initInitial: Initialization = Initialization(applicationContext)
+    private var getDevInform: GetInfo = GetInfo()
 
     override fun onCreate() {
         super.onCreate()
@@ -43,12 +47,13 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         }
 
         try {
-            if (PushSdkParameters.hyber_registration_token != "" && PushSdkParameters.firebase_registration_token != "") {
+            val localData = initInitial.hSdkGetParametersFromLocal()
+            if (localData.hyber_registration_token != "" && localData.firebase_registration_token != "") {
                 val answerPlatform = api.hDeviceUpdate(
-                    PushSdkParameters.hyber_registration_token,
-                    PushSdkParameters.firebase_registration_token,
+                    localData.hyber_registration_token,
+                    localData.firebase_registration_token,
                     PushSdkParameters.hyber_deviceName,
-                    PushSdkParameters.hyber_deviceType,
+                    getDevInform.getPhoneType(applicationContext),
                     PushSdkParameters.hyber_osType,
                     PushSdkParameters.sdkVersion,
                     s
@@ -90,17 +95,18 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         if (remoteMessage.data.isNotEmpty()) {
             try {
 
-                if (PushSdkParameters.firebase_registration_token != "" && PushSdkParameters.hyber_registration_token != "") {
+                val localData = initInitial.hSdkGetParametersFromLocal()
+                if (localData.firebase_registration_token != "" && localData.hyber_registration_token != "") {
 
                     val hyberAnswer = api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),
-                        PushSdkParameters.firebase_registration_token,
-                        PushSdkParameters.hyber_registration_token
+                        localData.firebase_registration_token,
+                        localData.hyber_registration_token
                     )
                     HyberLoggerSdk.debug("From Message Delivery Report: $hyberAnswer")
-                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${PushSdkParameters.firebase_registration_token}, hyberToken: ${PushSdkParameters.hyber_registration_token}")
+                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${localData.firebase_registration_token}, hyberToken: ${localData.hyber_registration_token}")
                 } else {
-                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${PushSdkParameters.firebase_registration_token}, hyberToken: ${PushSdkParameters.hyber_registration_token}")
+                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${localData.firebase_registration_token}, hyberToken: ${localData.hyber_registration_token}")
                 }
             } catch (e: Exception) {
                 HyberLoggerSdk.debug("onMessageReceived: failed")
