@@ -5,8 +5,6 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.hyber.android.hybersdkandroid.HyberDatabase
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import java.util.*
-import com.google.android.gms.tasks.OnCompleteListener
-
 
 
 
@@ -73,6 +71,8 @@ internal class Initialization(val context: Context) {
 
         //1
         val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
+        HyberLoggerSdk.debug("Initialization.hSdkGetParametersFromLocal firebaseRegistrationToken: $firebaseRegistrationToken")
+
         if (firebaseRegistrationToken != "") {
             HyberDatabase.firebase_registration_token = firebaseRegistrationToken
         }
@@ -151,7 +151,10 @@ internal class Initialization(val context: Context) {
 
 
     fun clearData() {
-        sharedPreference.clearSharedPreference()
+        //sharedPreference.clearSharedPreference()
+        sharedPreference.save("registrationstatus", false)
+        sharedPreference.saveString("deviceId", "")
+        sharedPreference.saveString("hyber_user_id", "")
         HyberDatabase.registrationStatus = false
         HyberLoggerSdk.debug("Initialization.clearData  processed")
     }
