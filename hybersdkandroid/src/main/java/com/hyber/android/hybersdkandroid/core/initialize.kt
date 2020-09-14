@@ -5,6 +5,13 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.hyber.android.hybersdkandroid.HyberDatabase
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import java.util.*
+import com.google.android.gms.tasks.OnCompleteListener
+
+
+
+
+
+
 
 
 //function for initialization different parameters
@@ -24,6 +31,25 @@ internal class Initialization(val context: Context) {
             }
         }
         HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished")
+
+
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase experim: failed")
+                    return@OnCompleteListener
+                }
+                // Get new Instance ID token
+                val token = task.result!!.token
+                sharedPreference.saveString("firebase_registration_token", token)
+                HyberDatabase.firebase_registration_token = token
+
+                HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token2: $token")
+
+            })
+
+        HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished2")
+
     }
 
     fun hSdkUpdateFirebaseManual(x_token: String): String {
