@@ -611,9 +611,11 @@ class HyberSDK(
                 // Get new Instance ID token
                 val token = task.result!!.token
                 if (token != "") {
-                    HyberDatabase.firebase_registration_token = token
-                    HyberLoggerSdk.debug("HyberSDK.updateToken token2: $token")
-                    rewriteParams.rewriteFirebaseToken(token)
+                    if (token != HyberDatabase.firebase_registration_token) {
+                        HyberDatabase.firebase_registration_token = token
+                        HyberLoggerSdk.debug("HyberSDK.updateToken token2: $token")
+                        rewriteParams.rewriteFirebaseToken(token)
+                    }
                 }
             })
         HyberLoggerSdk.debug("HyberSDK.updateToken finished2")
