@@ -44,7 +44,7 @@ internal class QueueProc {
         context: Context
     ) {
         val apiHyber = HyberApi()
-        val initHyberParams = Initialization(context)
+        val initHyberParams = Initialization(context, HyberPushMess.hyberInternalParamsObject)
 
         @Serializable
         data class Empty(
@@ -188,6 +188,5 @@ internal class QueueProc {
         threadNetF2.join()
         return HyberDataApi(functionNetAnswer2.toInt(), "{}", 0)
     }
-
 
 }

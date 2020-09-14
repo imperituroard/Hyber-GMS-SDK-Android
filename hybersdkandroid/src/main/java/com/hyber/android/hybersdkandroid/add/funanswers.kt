@@ -4,7 +4,6 @@ import android.content.Context
 import com.hyber.android.hybersdkandroid.core.HyberFunAnswerGeneral
 import com.hyber.android.hybersdkandroid.core.HyberFunAnswerRegister
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
-import com.hyber.android.hybersdkandroid.core.Initialization
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
@@ -59,17 +58,17 @@ internal class Answer {
 
     fun hyberRegisterNewRegisterExists2(
         paramSgl: PushSdkParameters,
-        context: Context
+        context: Context,
+        hyberGlobParamAll: PushSdkParameters
     ): HyberFunAnswerRegister {
-        val initHyber = Initialization(context)
 
         return HyberFunAnswerRegister(
             code = 701,
-            deviceId = PushSdkParameters.deviceId,
-            token = PushSdkParameters.hyber_registration_token,
-            userId = PushSdkParameters.hyber_user_id,
-            userPhone = PushSdkParameters.hyber_user_msisdn,
-            createdAt = PushSdkParameters.hyber_registration_createdAt,
+            deviceId = hyberGlobParamAll.deviceId,
+            token = hyberGlobParamAll.hyber_registration_token,
+            userId = hyberGlobParamAll.hyber_user_id,
+            userPhone = hyberGlobParamAll.hyber_user_msisdn,
+            createdAt = hyberGlobParamAll.hyber_registration_createdAt,
             result = "Exists",
             description = "Device already registered. Nothing to do"
         )
