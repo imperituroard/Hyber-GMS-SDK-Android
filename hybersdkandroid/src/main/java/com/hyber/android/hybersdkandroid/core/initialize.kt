@@ -10,26 +10,22 @@ import java.util.*
 internal class Initialization(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
 
-    private fun hSdkUpdateFirebaseAuto(): String {
+    private fun hSdkUpdateFirebaseAuto() {
         HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto start")
-        var token = ""
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
-            token = instanceIdResult.token
+            val token = instanceIdResult.token
             if (token != "") {
-                sharedPreference.save("firebase_registration_token", token)
+                sharedPreference.saveString("firebase_registration_token", token)
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token: $token")
             } else {
-                val firebaseRegistrationToken: String =
-                    sharedPreference.getValueString("firebase_registration_token")!!.toString()
-                HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token empty loaded: $firebaseRegistrationToken")
+                HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token empty")
             }
         }
-        HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished token: $token")
-        return token
+        HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto finished")
     }
 
     fun hSdkUpdateFirebaseManual(x_token: String): String {
-        sharedPreference.save("firebase_registration_token", x_token)
+        sharedPreference.saveString("firebase_registration_token", x_token)
         HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseManual.Firebase token: $x_token")
         return x_token
     }
@@ -41,9 +37,11 @@ internal class Initialization(val context: Context) {
         val loadedDataLocalOperation = HyberOperativeData()
         val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
         loadedDataLocalOperation.registrationStatus = registrationStatus
+        hSdkUpdateFirebaseAuto()
 
         //1
-        loadedDataLocalOperation.firebase_registration_token = hSdkUpdateFirebaseAuto()
+        val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
+        loadedDataLocalOperation.firebase_registration_token = firebaseRegistrationToken
 
         if (registrationStatus) {
 
@@ -97,13 +95,13 @@ internal class Initialization(val context: Context) {
         HyberLoggerSdk.debug("Initialization.hSdkInitSaveToLocal  started")
         val hyberUuid = UUID.randomUUID().toString()
         HyberLoggerSdk.debug("Initialization.hSdkInit  hyberUuid=$hyberUuid, deviceId=$deviceId, hyber_user_msisdn=$hyber_user_msisdn, hyber_user_Password=$hyber_user_Password, hyber_registration_token=$hyber_registration_token, hyber_user_id=$hyber_user_id, hyber_registration_createdAt=$hyber_registration_createdAt")
-        sharedPreference.save("hyber_uuid", hyberUuid)
-        sharedPreference.save("deviceId", deviceId)
-        sharedPreference.save("hyber_user_msisdn", hyber_user_msisdn)
-        sharedPreference.save("hyber_user_Password", hyber_user_Password)
-        sharedPreference.save("hyber_registration_token", hyber_registration_token)
-        sharedPreference.save("hyber_user_id", hyber_user_id)
-        sharedPreference.save("hyber_registration_createdAt", hyber_registration_createdAt)
+        sharedPreference.saveString("hyber_uuid", hyberUuid)
+        sharedPreference.saveString("deviceId", deviceId)
+        sharedPreference.saveString("hyber_user_msisdn", hyber_user_msisdn)
+        sharedPreference.saveString("hyber_user_Password", hyber_user_Password)
+        sharedPreference.saveString("hyber_registration_token", hyber_registration_token)
+        sharedPreference.saveString("hyber_user_id", hyber_user_id)
+        sharedPreference.saveString("hyber_registration_createdAt", hyber_registration_createdAt)
         sharedPreference.save("registrationstatus", registrationStatus)
     }
 
