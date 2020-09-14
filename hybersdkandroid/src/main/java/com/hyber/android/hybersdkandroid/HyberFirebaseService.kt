@@ -46,12 +46,10 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         }
 
         try {
-            val initInitial = Initialization(applicationContext)
-            val localData = initInitial.hSdkGetParametersFromLocal()
-            if (localData.hyber_registration_token != "" && localData.firebase_registration_token != "") {
+            if (HyberDatabase.hyber_registration_token != "" && HyberDatabase.firebase_registration_token != "") {
                 val answerPlatform = api.hDeviceUpdate(
-                    localData.hyber_registration_token,
-                    localData.firebase_registration_token,
+                    HyberDatabase.hyber_registration_token,
+                    HyberDatabase.firebase_registration_token,
                     PushSdkParameters.hyber_deviceName,
                     getDevInform.getPhoneType(applicationContext),
                     PushSdkParameters.hyber_osType,
@@ -74,6 +72,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
 
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        HyberLoggerSdk.debug("HyberFirebaseService.onMessageReceived : started")
 
         super.onMessageReceived(remoteMessage)
 

@@ -2,6 +2,7 @@ package com.hyber.android.hybersdkandroid.core
 
 import android.content.Context
 import com.google.firebase.iid.FirebaseInstanceId
+import com.hyber.android.hybersdkandroid.HyberDatabase
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 import java.util.*
 
@@ -34,53 +35,54 @@ internal class Initialization(val context: Context) {
     fun hSdkGetParametersFromLocal(): HyberOperativeData {
         HyberLoggerSdk.debug("Initialization.hSdkGetParametersFromLocal started")
 
-        val loadedDataLocalOperation = HyberOperativeData()
+        HyberDatabase = HyberOperativeData()
         val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
-        loadedDataLocalOperation.registrationStatus = registrationStatus
+        HyberDatabase.registrationStatus = registrationStatus
+
         hSdkUpdateFirebaseAuto()
 
         //1
         val firebaseRegistrationToken: String = sharedPreference.getValueString("firebase_registration_token")!!.toString()
-        loadedDataLocalOperation.firebase_registration_token = firebaseRegistrationToken
+        HyberDatabase.firebase_registration_token = firebaseRegistrationToken
 
         if (registrationStatus) {
 
             //2
             val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
-            loadedDataLocalOperation.hyber_uuid = hyberUuid
+            HyberDatabase.hyber_uuid = hyberUuid
 
             //3
             val devId: String = sharedPreference.getValueString("deviceId")!!.toString()
-            loadedDataLocalOperation.deviceId = devId
+            HyberDatabase.deviceId = devId
 
             //4
             val hyberUserMsisdn: String =
                 sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
-            loadedDataLocalOperation.hyber_user_msisdn = hyberUserMsisdn
+            HyberDatabase.hyber_user_msisdn = hyberUserMsisdn
 
             //5
             val hyberUserPassword: String =
                 sharedPreference.getValueString("hyber_user_Password")!!.toString()
-            loadedDataLocalOperation.hyber_user_Password = hyberUserPassword
+            HyberDatabase.hyber_user_Password = hyberUserPassword
 
             //6
             val hyberRegistrationToken: String =
                 sharedPreference.getValueString("hyber_registration_token")!!.toString()
-            loadedDataLocalOperation.hyber_registration_token = hyberRegistrationToken
+            HyberDatabase.hyber_registration_token = hyberRegistrationToken
 
             //7
             val hyberUserId: String =
                 sharedPreference.getValueString("hyber_user_id")!!.toString()
-            loadedDataLocalOperation.hyber_user_id = hyberUserId
+            HyberDatabase.hyber_user_id = hyberUserId
 
             //8
             val hyberRegistrationCreatedAt: String =
                 sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
-            loadedDataLocalOperation.hyber_registration_createdAt = hyberRegistrationCreatedAt
+            HyberDatabase.hyber_registration_createdAt = hyberRegistrationCreatedAt
         }
-        HyberLoggerSdk.debug("Initialization.paramsLoader finished: hyberUuid=${loadedDataLocalOperation.hyber_uuid}, devId=${loadedDataLocalOperation.deviceId}, hyberUserMsisdn=${loadedDataLocalOperation.hyber_user_msisdn}, hyberUserPassword=${loadedDataLocalOperation.hyber_user_Password}, hyberRegistrationToken=${loadedDataLocalOperation.hyber_registration_token}, hyberUserId=${loadedDataLocalOperation.hyber_user_id}, hyberRegistrationCreatedAt=${loadedDataLocalOperation.hyber_registration_createdAt}")
+        HyberLoggerSdk.debug("Initialization.paramsLoader finished: hyberUuid=${HyberDatabase.hyber_uuid}, devId=${HyberDatabase.deviceId}, hyberUserMsisdn=${HyberDatabase.hyber_user_msisdn}, hyberUserPassword=${HyberDatabase.hyber_user_Password}, hyberRegistrationToken=${HyberDatabase.hyber_registration_token}, hyberUserId=${HyberDatabase.hyber_user_id}, hyberRegistrationCreatedAt=${HyberDatabase.hyber_registration_createdAt}")
 
-        return loadedDataLocalOperation
+        return HyberDatabase
     }
 
     fun hSdkInitSaveToLocal(
@@ -103,6 +105,15 @@ internal class Initialization(val context: Context) {
         sharedPreference.saveString("hyber_user_id", hyber_user_id)
         sharedPreference.saveString("hyber_registration_createdAt", hyber_registration_createdAt)
         sharedPreference.save("registrationstatus", registrationStatus)
+
+        HyberDatabase.hyber_uuid = hyberUuid
+        HyberDatabase.deviceId = deviceId
+        HyberDatabase.hyber_user_msisdn = hyber_user_msisdn
+        HyberDatabase.hyber_user_Password = hyber_user_Password
+        HyberDatabase.hyber_registration_createdAt = hyber_registration_createdAt
+        HyberDatabase.hyber_user_id = hyber_user_id
+        HyberDatabase.hyber_registration_token = hyber_registration_token
+        HyberDatabase.registrationStatus = registrationStatus
     }
 
 
