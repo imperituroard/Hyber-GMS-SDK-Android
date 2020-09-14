@@ -10,7 +10,7 @@ internal class SharedPreference(val context: Context) {
     private var sharedPref: SharedPreferences =
         context.getSharedPreferences(preferenceDatabase, Context.MODE_PRIVATE)
 
-    fun save(KEY_NAME: String, text: String) {
+    fun saveString(KEY_NAME: String, text: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putString(KEY_NAME, text)
         editor.apply()
