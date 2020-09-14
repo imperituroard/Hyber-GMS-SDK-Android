@@ -9,7 +9,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.hyber.android.hybersdkandroid.core.Initialization
 
 class HyberMessaging : Service() {
     private var notificationManager: NotificationManager? = null
@@ -18,11 +17,6 @@ class HyberMessaging : Service() {
         if (Build.VERSION.SDK_INT <= 25) {
             //Send Foreground Notification
             sendNotification("", "", "")
-            val initHyber = Initialization(applicationContext)
-            initHyber.hSdkInit2()
-        } else {
-            val initHyber = Initialization(applicationContext)
-            initHyber.hSdkInit2()
         }
         return super.onStartCommand(intent, flags, startId)
     }

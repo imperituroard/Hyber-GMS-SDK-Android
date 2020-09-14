@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.res.Configuration
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
 
-internal class GetInfo {
+class GetInfo {
 
     /** Returns the consumer friendly device name  */
     fun getDeviceName(): String? {

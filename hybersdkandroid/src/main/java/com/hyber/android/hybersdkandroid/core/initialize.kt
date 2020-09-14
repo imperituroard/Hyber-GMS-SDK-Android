@@ -10,130 +10,104 @@ import java.util.*
 internal class Initialization(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
 
-    fun hSdkUpdateFirebaseAuto(hyberInternalParamsObj: PushSdkParameters): PushSdkParameters {
+    private fun hSdkUpdateFirebaseAuto(): String {
+        var token = ""
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
-            val token = instanceIdResult.token
+            token = instanceIdResult.token
             if (token != "") {
                 sharedPreference.save("firebase_registration_token", token)
-                hyberInternalParamsObj.firebase_registration_token = token
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token: $token")
             } else {
                 val firebaseRegistrationToken: String =
                     sharedPreference.getValueString("firebase_registration_token")!!.toString()
-                hyberInternalParamsObj.firebase_registration_token = firebaseRegistrationToken
                 HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseAuto.Firebase token empty loaded: $firebaseRegistrationToken")
+                token = firebaseRegistrationToken
             }
         }
-        return hyberInternalParamsObj
+        return token
     }
 
-    fun hSdkUpdateFirebaseManual(x_token: String, hyberInternalParamsObj: PushSdkParameters): PushSdkParameters {
+    fun hSdkUpdateFirebaseManual(x_token: String): String {
         sharedPreference.save("firebase_registration_token", x_token)
-        hyberInternalParamsObj.firebase_registration_token = x_token
         HyberLoggerSdk.debug("Initialization.hSdkUpdateFirebaseManual.Firebase token: $x_token")
-        return hyberInternalParamsObj
+        return x_token
     }
 
-    private fun paramsLoader(hyberInternalParamsObj: PushSdkParameters): PushSdkParameters {
-        HyberLoggerSdk.debug("Initialization.paramsLoader started")
 
-        val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
-        hyberInternalParamsObj.hyber_uuid = hyberUuid
+    fun hSdkGetParametersFromLocal(): HyberOperativeData {
+        HyberLoggerSdk.debug("Initialization.hSdkGetParametersFromLocal started")
 
-        val devId: String = sharedPreference.getValueString("deviceId")!!.toString()
-        hyberInternalParamsObj.deviceId = devId
-
-        val hyberUserMsisdn: String =
-            sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
-        hyberInternalParamsObj.hyber_user_msisdn = hyberUserMsisdn
-
-        val hyberUserPassword: String =
-            sharedPreference.getValueString("hyber_user_Password")!!.toString()
-        hyberInternalParamsObj.hyber_user_Password = hyberUserPassword
-
-        val hyberDeviceType: String =
-            sharedPreference.getValueString("hyber_deviceType")!!.toString()
-        hyberInternalParamsObj.hyber_deviceType = hyberDeviceType
-
-        val hyberDeviceName: String =
-            sharedPreference.getValueString("hyber_deviceName")!!.toString()
-        hyberInternalParamsObj.hyber_deviceName = hyberDeviceName
-
-        val hyberOsType: String = sharedPreference.getValueString("hyber_osType")!!.toString()
-        hyberInternalParamsObj.hyber_osType = hyberOsType
-
-        val hyberRegistrationToken: String =
-            sharedPreference.getValueString("hyber_registration_token")!!.toString()
-        hyberInternalParamsObj.hyber_registration_token = hyberRegistrationToken
-
-        val hyberUserId: String =
-            sharedPreference.getValueString("hyber_user_id")!!.toString()
-        hyberInternalParamsObj.hyber_user_id = hyberUserId
-
-        val hyberRegistrationCreatedAt: String =
-            sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
-        hyberInternalParamsObj.hyber_registration_createdAt = hyberRegistrationCreatedAt
-        HyberLoggerSdk.debug("Initialization.paramsLoader finished: hyberUuid=$hyberUuid, devId=$devId, hyberUserMsisdn=$hyberUserMsisdn, hyberUserPassword=$hyberUserPassword, hyberDeviceType=$hyberDeviceType, hyberDeviceName=$hyberDeviceName, hyberOsType=$hyberOsType, hyberRegistrationToken=$hyberRegistrationToken, hyberUserId=$hyberUserId, hyberRegistrationCreatedAt=$hyberRegistrationCreatedAt")
-        return hyberInternalParamsObj
-    }
-
-    fun hSdkInit(
-        hOsType1: String,
-        hDeviceType1: String,
-        hDeviceName1: String,
-        hUrlsInfo: UrlsPlatformList
-    ): PushSdkParameters {
-        var hyberInternalParamsObj = PushSdkParameters
-
-        HyberLoggerSdk.debug("Initialization.hSdkInit  started")
+        val loadedDataLocalOperation = HyberOperativeData()
         val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
-        hyberInternalParamsObj.registrationStatus = registrationStatus
-        hyberInternalParamsObj.branch_current_active = hUrlsInfo
-        hyberInternalParamsObj.hyber_osType = hOsType1
-        hyberInternalParamsObj.hyber_deviceType = hDeviceType1
-        hyberInternalParamsObj.hyber_deviceName = hDeviceName1
+        loadedDataLocalOperation.registrationStatus = registrationStatus
 
-        HyberLoggerSdk.debug("Initialization.hSdkInit  registrationstatus: $registrationStatus")
-        HyberLoggerSdk.debug("Initialization.hSdkInit  hUrlsInfo=$hUrlsInfo, hOsType1=$hOsType1, hDeviceType1=$hDeviceType1, hDeviceName1=$hDeviceName1")
+        if (registrationStatus) {
+            //1
+            loadedDataLocalOperation.firebase_registration_token = hSdkUpdateFirebaseAuto()
 
-        hyberInternalParamsObj = hSdkUpdateFirebaseAuto(hyberInternalParamsObj)
+            //2
+            val hyberUuid: String = sharedPreference.getValueString("hyber_uuid")!!.toString()
+            loadedDataLocalOperation.hyber_uuid = hyberUuid
 
-        if (!registrationStatus) {
-            val hyberUuid = UUID.randomUUID().toString()
-            sharedPreference.save("hyber_uuid", hyberUuid)
-            hyberInternalParamsObj.hyber_uuid = hyberUuid
-            sharedPreference.save("hyber_osType", hOsType1)
-            sharedPreference.save("hyber_deviceType", hDeviceType1)
-            sharedPreference.save("hyber_deviceName", hDeviceName1)
-        } else {
-            hyberInternalParamsObj = paramsLoader(hyberInternalParamsObj)
+            //3
+            val devId: String = sharedPreference.getValueString("deviceId")!!.toString()
+            loadedDataLocalOperation.deviceId = devId
+
+            //4
+            val hyberUserMsisdn: String =
+                sharedPreference.getValueString("hyber_user_msisdn")!!.toString()
+            loadedDataLocalOperation.hyber_user_msisdn = hyberUserMsisdn
+
+            //5
+            val hyberUserPassword: String =
+                sharedPreference.getValueString("hyber_user_Password")!!.toString()
+            loadedDataLocalOperation.hyber_user_Password = hyberUserPassword
+
+            //6
+            val hyberRegistrationToken: String =
+                sharedPreference.getValueString("hyber_registration_token")!!.toString()
+            loadedDataLocalOperation.hyber_registration_token = hyberRegistrationToken
+
+            //7
+            val hyberUserId: String =
+                sharedPreference.getValueString("hyber_user_id")!!.toString()
+            loadedDataLocalOperation.hyber_user_id = hyberUserId
+
+            //8
+            val hyberRegistrationCreatedAt: String =
+                sharedPreference.getValueString("hyber_registration_createdAt")!!.toString()
+            loadedDataLocalOperation.hyber_registration_createdAt = hyberRegistrationCreatedAt
         }
-        return hyberInternalParamsObj
+        HyberLoggerSdk.debug("Initialization.paramsLoader finished: hyberUuid=${loadedDataLocalOperation.hyber_uuid}, devId=${loadedDataLocalOperation.deviceId}, hyberUserMsisdn=${loadedDataLocalOperation.hyber_user_msisdn}, hyberUserPassword=${loadedDataLocalOperation.hyber_user_Password}, hyberRegistrationToken=${loadedDataLocalOperation.hyber_registration_token}, hyberUserId=${loadedDataLocalOperation.hyber_user_id}, hyberRegistrationCreatedAt=${loadedDataLocalOperation.hyber_registration_createdAt}")
+
+        return loadedDataLocalOperation
     }
 
-    fun hSdkInit2(): PushSdkParameters {
-        var hyberInternalParamsObj = PushSdkParameters
-        HyberLoggerSdk.debug("Initialization.hSdkInit2  started")
-        val registrationStatus: Boolean = sharedPreference.getValueBool("registrationstatus", false)
-        hyberInternalParamsObj.registrationStatus = registrationStatus
-        HyberLoggerSdk.debug("Initialization.hSdkInit2  getValueBool: $registrationStatus")
-
-        hyberInternalParamsObj = hSdkUpdateFirebaseAuto(hyberInternalParamsObj)
-
-        if (!registrationStatus) {
-            val hyberUuid = UUID.randomUUID().toString()
-            sharedPreference.save("hyber_uuid", hyberUuid)
-            hyberInternalParamsObj.hyber_uuid = hyberUuid
-        } else {
-            hyberInternalParamsObj = paramsLoader(hyberInternalParamsObj)
-        }
-        return hyberInternalParamsObj
+    fun hSdkInitSaveToLocal(
+        deviceId: String,
+        hyber_user_msisdn: String,
+        hyber_user_Password: String,
+        hyber_registration_token: String,
+        hyber_user_id: String,
+        hyber_registration_createdAt: String,
+        registrationStatus: Boolean
+    ) {
+        HyberLoggerSdk.debug("Initialization.hSdkInitSaveToLocal  started")
+        val hyberUuid = UUID.randomUUID().toString()
+        HyberLoggerSdk.debug("Initialization.hSdkInit  hyberUuid=$hyberUuid, deviceId=$deviceId, hyber_user_msisdn=$hyber_user_msisdn, hyber_user_Password=$hyber_user_Password, hyber_registration_token=$hyber_registration_token, hyber_user_id=$hyber_user_id, hyber_registration_createdAt=$hyber_registration_createdAt")
+        sharedPreference.save("hyber_uuid", hyberUuid)
+        sharedPreference.save("deviceId", deviceId)
+        sharedPreference.save("hyber_user_msisdn", hyber_user_msisdn)
+        sharedPreference.save("hyber_user_Password", hyber_user_Password)
+        sharedPreference.save("hyber_registration_token", hyber_registration_token)
+        sharedPreference.save("hyber_user_id", hyber_user_id)
+        sharedPreference.save("hyber_registration_createdAt", hyber_registration_createdAt)
+        sharedPreference.save("registrationstatus", registrationStatus)
     }
 
-    fun clearData(hyberInternalParamsObj: PushSdkParameters): PushSdkParameters {
+
+    fun clearData() {
         sharedPreference.clearSharedPreference()
-        hyberInternalParamsObj.registrationStatus = false
         HyberLoggerSdk.debug("Initialization.clearData  processed")
-        return hyberInternalParamsObj
     }
 }

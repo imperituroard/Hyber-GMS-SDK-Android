@@ -8,7 +8,10 @@ import android.content.Intent
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import com.hyber.android.hybersdkandroid.R
+import com.hyber.android.hybersdkandroid.add.GetInfo
 import com.hyber.android.hybersdkandroid.add.HyberInternal
+
+
 
 
 open class HyberPublicParams {
@@ -23,7 +26,10 @@ open class HyberPublicParams {
             context, 0 /* Request code */, intent,
             PendingIntent.FLAG_ONE_SHOT
         )
+
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+
 
         return NotificationCompat.Builder(context, "hyber.push.hyber")
             .setContentText(notificationTextMess)
@@ -63,35 +69,17 @@ object PushSdkParametersPublic {
 }
 
 object PushSdkParameters {
-
-    //uuid generates only one time
-    var hyber_uuid: String = String()
-
-    //its deviceId which we receive from server with answer for hyber_register_new()
-    var deviceId: String = String()
-
-    //is procedure for register new device completed or not
-    // (true - devise exist on server. )
-    // false - it s new device and we need to complete hyber_register_new()
-    var registrationStatus: Boolean = false
-
-    var sdkVersion: String = "1.0.0.18"
-    var hyber_osType: String = String()
-    var hyber_deviceName: String = String()
-    var hyber_deviceType: String = String()
-    var hyber_user_Password: String = String()
-    var hyber_user_msisdn: String = String()
-    var hyber_registration_token: String = String()
-    var hyber_user_id: String = String()
-    var hyber_registration_createdAt: String = String()
-    var firebase_registration_token: String = String()
-    var hyber_registration_time: String = String()
+    private var infoLocalDeviceHardware: GetInfo = GetInfo()
+    var sdkVersion: String = "1.0.0.22"
+    var hyber_osType: String = "android"
+    var hyber_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
 
     var push_notification_display_priority: Int = 2
-
+        set(value) {
+            if (value > 0) field = value
+        }
     //platform url branches. It can be rewrite by Hyber SDK initiation
     var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
-
 }
 
 interface HyberAp
@@ -140,4 +128,27 @@ data class UrlsPlatformList(
     val fun_hyber_url_message_dr: String,
     val fun_hyber_url_mess_queue: String,
     val hyber_url_message_history: String
+)
+
+internal data class HyberOperativeData(
+
+    //is procedure for register new device completed or not
+    // (true - devise exist on server. )
+    // false - it s new device and we need to complete hyber_register_new()
+    var registrationStatus: Boolean = false,
+
+    var hyber_user_Password: String = "",
+    var hyber_user_msisdn: String = "",
+    var hyber_registration_token: String = "",
+    var hyber_user_id: String = "",
+    var hyber_registration_createdAt: String = "",
+    var firebase_registration_token: String = "",
+    var hyber_registration_time: String = "",
+
+    //uuid generates only one time
+    var hyber_uuid: String = "",
+
+    //its deviceId which we receive from server with answer for hyber_register_new()
+    var deviceId: String = ""
+
 )
