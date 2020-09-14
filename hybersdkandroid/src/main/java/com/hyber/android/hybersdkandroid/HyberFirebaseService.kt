@@ -46,11 +46,14 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
 
         try {
             if (HyberDatabase.hyber_registration_token != "" && HyberDatabase.firebase_registration_token != "") {
+
+                val localPhoneInfoNewToken = getDevInform.getPhoneType(applicationContext)
+                HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : localPhoneInfoNewToken: $localPhoneInfoNewToken")
                 val answerPlatform = api.hDeviceUpdate(
                     HyberDatabase.hyber_registration_token,
                     HyberDatabase.firebase_registration_token,
                     PushSdkParameters.hyber_deviceName,
-                    getDevInform.getPhoneType(applicationContext),
+                    localPhoneInfoNewToken,
                     PushSdkParameters.hyber_osType,
                     PushSdkParameters.sdkVersion,
                     s

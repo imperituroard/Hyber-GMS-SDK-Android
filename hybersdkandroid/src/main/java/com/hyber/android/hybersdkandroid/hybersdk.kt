@@ -15,7 +15,7 @@ object HyberPushMess {
     var log_level_active: String = "error" //global variable sdk log level
 }
 
-lateinit var HyberDatabase: HyberOperativeData
+internal lateinit var HyberDatabase: HyberOperativeData
 
 @Suppress("SpellCheckingInspection", "unused", "FunctionName")
 class HyberSDKQueue {

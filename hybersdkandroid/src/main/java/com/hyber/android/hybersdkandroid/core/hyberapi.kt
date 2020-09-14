@@ -32,13 +32,10 @@ internal class HyberApi {
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
-            Log.d(TAG, "Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
+            HyberLoggerSdk.debug("Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
             resp
         } catch (e: Exception) {
-            Log.d(
-                TAG,
-                "Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed"
-            )
+            HyberLoggerSdk.debug("Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed")
             "failed"
         }
     }
@@ -67,10 +64,7 @@ internal class HyberApi {
                     "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$osVersion\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
                 //val message = "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$os_version\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
 
-                Log.d(
-                    TAG,
-                    "Result: Start step2, Function: hyber_device_register, Class: HyberApi, message: $message"
-                )
+                HyberLoggerSdk.debug("Result: Start step2, Function: hyber_device_register, Class: HyberApi, message: $message")
 
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
@@ -78,11 +72,18 @@ internal class HyberApi {
                 val connectorWebPlatform = mURL.openConnection() as HttpsURLConnection
                 connectorWebPlatform.doOutput = true
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
-                connectorWebPlatform.setRequestProperty("X-Hyber-Client-API-Key", xPlatformClientAPIKey)
+                connectorWebPlatform.setRequestProperty(
+                    "X-Hyber-Client-API-Key",
+                    xPlatformClientAPIKey
+                )
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
                 connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                connectorWebPlatform.setRequestProperty("X-Hyber-App-Fingerprint", X_Hyber_App_Fingerprint)
-                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                connectorWebPlatform.setRequestProperty(
+                    "X-Hyber-App-Fingerprint",
+                    X_Hyber_App_Fingerprint
+                )
+                connectorWebPlatform.sslSocketFactory =
+                    SSLSocketFactory.getDefault() as SSLSocketFactory
 
                 with(connectorWebPlatform) {
                     requestMethod = "POST"
@@ -92,10 +93,9 @@ internal class HyberApi {
                     wr.write(postData)
 
                     wr.flush()
-                    Log.d(
-                        TAG,
-                        "Result: Finished step3, Function: hyber_device_register, Class: HyberApi, Response Code : $responseCode"
-                    )
+
+                    HyberLoggerSdk.debug("Result: Finished step3, Function: hyber_device_register, Class: HyberApi, Response Code : $responseCode")
+
                     functionCodeAnswer = responseCode
                     if (responseCode == 200) {
 
@@ -108,10 +108,9 @@ internal class HyberApi {
                                 inputLine = it.readLine()
                             }
                             it.close()
-                            Log.d(
-                                TAG,
-                                "Result: Finished step4, Function: hyber_device_register, Class: HyberApi, Response : $response"
-                            )
+
+                            HyberLoggerSdk.debug("Result: Finished step4, Function: hyber_device_register, Class: HyberApi, Response : $response")
+
                             functionNetAnswer = answerForm.registerProcedureAnswer2(
                                 responseCode.toString(),
                                 response.toString(),
@@ -129,10 +128,8 @@ internal class HyberApi {
                 }
             } catch (e: Exception) {
 
-                Log.d(
-                    TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
-                )
+                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
+
                 functionNetAnswer = answerForm.registerProcedureAnswer2(
                     "705",
                     "unknown",
@@ -160,24 +157,15 @@ internal class HyberApi {
 
             try {
 
-                Log.d(
-                    TAG,
-                    "Result: Start step1, Function: hyber_device_revoke, Class: HyberApi, dev_list: $dev_list, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token"
-                )
+                HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_revoke, Class: HyberApi, dev_list: $dev_list, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token")
 
                 val message2 = "{\"devices\":$dev_list}"
 
-                Log.d(
-                    TAG,
-                    "Result: Start step2, Function: hyber_device_revoke, Class: HyberApi, message2: $message2"
-                )
+                HyberLoggerSdk.debug("Result: Start step2, Function: hyber_device_revoke, Class: HyberApi, message2: $message2")
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
-
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
-
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
-
                 val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_revoke)
 
                 val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
@@ -185,11 +173,14 @@ internal class HyberApi {
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
                 connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                connectorWebPlatform.setRequestProperty(
+                    "X-Hyber-Timestamp",
+                    currentTimestamp2.toString()
+                )
                 connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
-
+                connectorWebPlatform.sslSocketFactory =
+                    SSLSocketFactory.getDefault() as SSLSocketFactory
 
                 with(connectorWebPlatform) {
                     requestMethod = "POST"
@@ -245,11 +236,7 @@ internal class HyberApi {
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
-                Log.d(
-                    TAG,
-                    "\nSent 'GET' request to hyber_get_device_all with : X_Hyber_Session_Id : $X_Hyber_Session_Id; X_Hyber_Auth_Token : $X_Hyber_Auth_Token; period_in_seconds : $period_in_seconds"
-                )
-
+                HyberLoggerSdk.debug("\nSent 'GET' request to hyber_get_device_all with : X_Hyber_Session_Id : $X_Hyber_Session_Id; X_Hyber_Auth_Token : $X_Hyber_Auth_Token; period_in_seconds : $period_in_seconds")
 
                 val mURL2 =
                     URL(PushSdkParameters.branch_current_active.hyber_url_message_history + currentTimestamp2.toString())
@@ -277,10 +264,7 @@ internal class HyberApi {
                 }
             } catch (e: Exception) {
 
-                Log.d(
-                    TAG,
-                    "Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}"
-                )
+                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
                 functionCodeAnswer3 = 700
                 functionNetAnswer3 = "Failed"
 
@@ -313,10 +297,9 @@ internal class HyberApi {
 
                     val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
-                    Log.d(
-                        TAG,
-                        "Result: Start step1, Function: hyber_get_device_all, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $authToken"
-                    )
+
+                    HyberLoggerSdk.debug("Result: Start step1, Function: hyber_get_device_all, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $authToken")
+
 
                     val mURL2 =
                         URL(PushSdkParameters.branch_current_active.fun_hyber_url_get_device_all)
@@ -342,17 +325,13 @@ internal class HyberApi {
 
                             functionNetAnswer4 = it.readLine().toString()
 
-                            Log.d(
-                                TAG,
-                                "Result: Finish step2, Function: hyber_get_device_all, Class: HyberApi, function_net_answer4: $functionNetAnswer4"
-                            )
+                            HyberLoggerSdk.debug("Result: Finish step2, Function: hyber_get_device_all, Class: HyberApi, function_net_answer4: $functionNetAnswer4")
                         }
                     }
                 } catch (e: Exception) {
-                    Log.d(
-                        TAG,
-                        "Result: Failed step3, Function: hyber_get_device_all, Class: HyberApi, exception: $e"
-                    )
+                    HyberLoggerSdk.debug("Result: Failed step3, Function: hyber_get_device_all, Class: HyberApi, exception: $e")
+
+
                     functionNetAnswer4 = "Failed"
                 }
             })
@@ -403,8 +382,12 @@ internal class HyberApi {
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
                 connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
                 connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
-                connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
-                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                connectorWebPlatform.setRequestProperty(
+                    "X-Hyber-Timestamp",
+                    currentTimestamp2.toString()
+                )
+                connectorWebPlatform.sslSocketFactory =
+                    SSLSocketFactory.getDefault() as SSLSocketFactory
 
                 with(connectorWebPlatform) {
                     requestMethod = "POST"
@@ -456,7 +439,6 @@ internal class HyberApi {
         X_Hyber_Auth_Token: String
     ): HyberDataApi {
 
-
         var functionNetAnswer6 = String()
         var functionCodeAnswer6 = 0
 
@@ -480,10 +462,14 @@ internal class HyberApi {
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
                 connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                connectorWebPlatform.setRequestProperty(
+                    "X-Hyber-Timestamp",
+                    currentTimestamp2.toString()
+                )
                 connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                connectorWebPlatform.sslSocketFactory =
+                    SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
                 with(connectorWebPlatform) {
@@ -550,17 +536,25 @@ internal class HyberApi {
 
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                    val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_dr)
+                    val mURL2 =
+                        URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_dr)
 
                     val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
                     connectorWebPlatform.doOutput = true
                     connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
                     connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
-                    connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
-                    connectorWebPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
+                    connectorWebPlatform.setRequestProperty(
+                        "X-Hyber-Session-Id",
+                        X_Hyber_Session_Id
+                    )
+                    connectorWebPlatform.setRequestProperty(
+                        "X-Hyber-Timestamp",
+                        currentTimestamp2.toString()
+                    )
                     connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
-                    connectorWebPlatform.sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
+                    connectorWebPlatform.sslSocketFactory =
+                        SSLSocketFactory.getDefault() as SSLSocketFactory
 
 
                     with(connectorWebPlatform) {
