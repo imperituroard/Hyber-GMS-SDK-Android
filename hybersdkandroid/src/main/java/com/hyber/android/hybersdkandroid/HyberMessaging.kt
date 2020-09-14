@@ -18,10 +18,10 @@ class HyberMessaging : Service() {
         if (Build.VERSION.SDK_INT <= 25) {
             //Send Foreground Notification
             sendNotification("", "", "")
-            val initHyber = Initialization(applicationContext, HyberPushMess.hyberInternalParamsObject)
+            val initHyber = Initialization(applicationContext)
             initHyber.hSdkInit2()
         } else {
-            val initHyber = Initialization(applicationContext, HyberPushMess.hyberInternalParamsObject)
+            val initHyber = Initialization(applicationContext)
             initHyber.hSdkInit2()
         }
         return super.onStartCommand(intent, flags, startId)
