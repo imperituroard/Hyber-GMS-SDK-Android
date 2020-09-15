@@ -128,7 +128,10 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
             HyberLoggerSdk.debug("Message Notification Body: " + remoteMessage.notification!!.body!!)
 
             try {
-                sendNotification(remoteMessage)
+
+                println(remoteMessage)
+                
+                //sendNotification(remoteMessage)
             } catch (ee: Exception) {
                 HyberLoggerSdk.debug("Notification payload sendNotification: Unknown Fail")
             }
