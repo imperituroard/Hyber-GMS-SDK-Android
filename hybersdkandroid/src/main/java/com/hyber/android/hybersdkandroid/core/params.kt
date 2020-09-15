@@ -12,8 +12,6 @@ import com.hyber.android.hybersdkandroid.add.GetInfo
 import com.hyber.android.hybersdkandroid.add.HyberInternal
 
 
-
-
 open class HyberPublicParams {
 
     open fun notificationBuilder(
@@ -28,8 +26,6 @@ open class HyberPublicParams {
         )
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
-
 
         return NotificationCompat.Builder(context, "hyber.push.hyber")
             .setContentText(notificationTextMess)
@@ -66,11 +62,13 @@ object PushSdkParametersPublic {
         hyber_url_message_history = "https://test-push.hyber.im/api/2.3/message/history?startDate="
     )
     const val TAG_LOGGING = "HyberPushSDK"
+    const val hyber_log_level_error = "error"
+    const val hyber_log_level_debug = "debug"
 }
 
 object PushSdkParameters {
     private var infoLocalDeviceHardware: GetInfo = GetInfo()
-    var sdkVersion: String = "1.0.0.37"
+    var sdkVersion: String = "1.0.0.38"
     var hyber_osType: String = "android"
     var hyber_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
 
@@ -81,8 +79,6 @@ object PushSdkParameters {
     //platform url branches. It can be rewrite by Hyber SDK initiation
     var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
 
-    var hyber_log_level_error = "error"
-    var hyber_log_level_debug = "debug"
 }
 
 interface HyberAp
