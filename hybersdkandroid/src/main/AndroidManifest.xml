@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hyber.android.hybersdkandroid" >
+<manifest package="com.hyber.android.hybersdkandroid" >
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.settings.CHANNEL_NOTIFICATION_SETTINGS"/>
-    <uses-permission android:name="android.settings.APP_NOTIFICATION_SETTINGS"/>
 
-    <application>
-        <service
-            android:name="com.hyber.android.hybersdkandroid.HyberFirebaseService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-
-        <service
-            android:name="com.hyber.android.hybersdkandroid.HyberMessaging"
-            android:enabled="true"
-            android:exported="true">
-        </service>
-    </application>
 </manifest>
