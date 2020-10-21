@@ -96,6 +96,18 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         if (remoteMessage.data.isNotEmpty()) {
             try {
                 HyberLoggerSdk.debug("Message from remote: $remoteMessage")
+                HyberLoggerSdk.debug("Message from remote data: ${remoteMessage.data}")
+                HyberLoggerSdk.debug("Message from remote messageId: ${remoteMessage.messageId}")
+                HyberLoggerSdk.debug("Message from remote messageType: ${remoteMessage.messageType}")
+                HyberLoggerSdk.debug("Message from remote priority: ${remoteMessage.priority}")
+                HyberLoggerSdk.debug("Message from remote rawData: ${remoteMessage.rawData}")
+                HyberLoggerSdk.debug("Message from remote ttl: ${remoteMessage.ttl}")
+                HyberLoggerSdk.debug("Message from remote to: ${remoteMessage.to}")
+                HyberLoggerSdk.debug("Message from remote sentTime: ${remoteMessage.sentTime}")
+                HyberLoggerSdk.debug("Message from remote collapseKey: ${remoteMessage.collapseKey}")
+                HyberLoggerSdk.debug("Message from remote originalPriority: ${remoteMessage.originalPriority}")
+                HyberLoggerSdk.debug("Message from remote senderId: ${remoteMessage.senderId}")
+                HyberLoggerSdk.debug("Message from remote data to string: ${remoteMessage.data.toString()}")
                 if (HyberDatabase.firebase_registration_token != "" && HyberDatabase.hyber_registration_token != "") {
                     val hyberAnswer = api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),
