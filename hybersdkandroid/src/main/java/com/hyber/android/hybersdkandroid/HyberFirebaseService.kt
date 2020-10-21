@@ -95,7 +95,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             try {
-
+                HyberLoggerSdk.debug("Message from remote: $remoteMessage")
                 if (HyberDatabase.firebase_registration_token != "" && HyberDatabase.hyber_registration_token != "") {
                     val hyberAnswer = api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),

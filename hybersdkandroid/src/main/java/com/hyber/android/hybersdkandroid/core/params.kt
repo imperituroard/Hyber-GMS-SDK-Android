@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
-import com.hyber.android.hybersdkandroid.R
 import com.hyber.android.hybersdkandroid.add.GetInfo
 import com.hyber.android.hybersdkandroid.add.HyberInternal
 
@@ -30,7 +29,7 @@ open class HyberPublicParams {
         return NotificationCompat.Builder(context, "hyber.push.hyber")
             .setContentText(notificationTextMess)
             .setAutoCancel(true)
-            .setSmallIcon(R.drawable.googleg_standard_color_18)
+            //.setSmallIcon(R.drawable.googleg_standard_color_18)
             .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
             .setSound(defaultSoundUri)
             //.setVibrate(longArrayOf(1000))
