@@ -124,7 +124,11 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
             }
 
             try {
-                HyberPushMess.message = remoteMessage.data.toString()
+                var dataMessFromFirebase = remoteMessage.data.toString()
+                if (dataMessFromFirebase.contains("\\/")) {
+                    dataMessFromFirebase = dataMessFromFirebase.replace("\\/", "/")
+                }
+                HyberPushMess.message = dataMessFromFirebase
                 val intent = Intent()
                 intent.action = "com.hyber.android.hybersdkandroid.Push"
                 sendBroadcast(intent)
