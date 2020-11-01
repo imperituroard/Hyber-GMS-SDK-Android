@@ -1,3 +1,7 @@
+/*
+Service for Firebase Push notification messaging
+ */
+
 package com.hyber.android.hybersdkandroid
 
 import android.app.NotificationManager
@@ -12,7 +16,6 @@ import com.hyber.android.hybersdkandroid.core.HyberApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
 import com.hyber.android.hybersdkandroid.core.HyberPublicParams
 import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
-
 
 internal class HyberFirebaseService : FirebaseMessagingService() {
 
@@ -88,7 +91,6 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
         // [END_EXCLUDE]
 
-        // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         HyberLoggerSdk.debug("From: " + remoteMessage.from!!)
 
@@ -107,7 +109,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
                 HyberLoggerSdk.debug("Message from remote collapseKey: ${remoteMessage.collapseKey}")
                 HyberLoggerSdk.debug("Message from remote originalPriority: ${remoteMessage.originalPriority}")
                 HyberLoggerSdk.debug("Message from remote senderId: ${remoteMessage.senderId}")
-                HyberLoggerSdk.debug("Message from remote data to string: ${remoteMessage.data.toString()}")
+                HyberLoggerSdk.debug("Message from remote data to string: ${remoteMessage.data}")
                 if (HyberDatabase.firebase_registration_token != "" && HyberDatabase.hyber_registration_token != "") {
                     val hyberAnswer = api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),
@@ -144,7 +146,15 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
             HyberLoggerSdk.debug("Message Notification Body: " + remoteMessage.notification!!.body!!)
 
             try {
-                sendNotification(remoteMessage)
+                when (HyberPushMess.push_message_style) {
+                    0 -> sendNotification(remoteMessage)
+                    1 -> {
+                        sendNotificationImageType1(remoteMessage, parsing.parseImageUrl(remoteMessage.data.toString()))
+                    }
+                    else -> {
+                        sendNotification(remoteMessage)
+                    }
+                }
             } catch (ee: Exception) {
                 HyberLoggerSdk.debug("Notification payload sendNotification: Unknown Fail")
             }
@@ -162,6 +172,20 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
             notificationObject.notificationBuilder(
                 applicationContext,
                 remoteMessage.notification!!.body.toString()
+            ).build()
+        )
+    }
+
+    private fun sendNotificationImageType1(remoteMessage: RemoteMessage, imageUrl: String) {
+        val notificationObject = HyberPublicParams()
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(
+            137923, // ID of notification
+            notificationObject.notificationBuilder(
+                applicationContext,
+                remoteMessage.notification!!.body.toString(),
+                imageUrl
             ).build()
         )
     }

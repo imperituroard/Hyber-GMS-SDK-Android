@@ -66,7 +66,7 @@ internal class HyberApi {
 
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
-                val mURL = URL(PushSdkParameters.branch_current_active.fun_hyber_url_registration)
+                val mURL = URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_registration)
                 val connectorWebPlatform = mURL.openConnection() as HttpsURLConnection
                 connectorWebPlatform.doOutput = true
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
@@ -164,7 +164,7 @@ internal class HyberApi {
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
-                val mURL2 = URL(PushSdkParameters.branch_current_active.fun_hyber_url_revoke)
+                val mURL2 = URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_revoke)
 
                 val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
                 connectorWebPlatform.doOutput = true
@@ -229,15 +229,17 @@ internal class HyberApi {
         val threadNetF3 = Thread(Runnable {
             try {
 
-                val currentTimestamp2 =
-                    System.currentTimeMillis() - period_in_seconds // We want timestamp in seconds
+                //this timestamp for URL.
+                val currentTimestamp1 = System.currentTimeMillis() - period_in_seconds // We want timestamp in seconds
+
+                //this timestamp for token
+                val currentTimestamp2 = System.currentTimeMillis()
 
                 val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
 
                 HyberLoggerSdk.debug("\nSent 'GET' request to hyber_get_device_all with : X_Hyber_Session_Id : $X_Hyber_Session_Id; X_Hyber_Auth_Token : $X_Hyber_Auth_Token; period_in_seconds : $period_in_seconds")
 
-                val mURL2 =
-                    URL(PushSdkParameters.branch_current_active.hyber_url_message_history + currentTimestamp2.toString())
+                val mURL2 = URL(PushSdkParameters.branch_current_active.pushsdk_url_message_history + currentTimestamp1.toString())
 
                 with(mURL2.openConnection() as HttpsURLConnection) {
                     requestMethod = "GET"  // optional default is GET
@@ -261,13 +263,10 @@ internal class HyberApi {
                     }
                 }
             } catch (e: Exception) {
-
                 HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
                 functionCodeAnswer3 = 700
                 functionNetAnswer3 = "Failed"
-
             }
-
         })
 
         threadNetF3.start()
@@ -300,7 +299,7 @@ internal class HyberApi {
 
 
                     val mURL2 =
-                        URL(PushSdkParameters.branch_current_active.fun_hyber_url_get_device_all)
+                        URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_get_device_all)
 
 
                     with(mURL2.openConnection() as HttpsURLConnection) {
@@ -372,7 +371,7 @@ internal class HyberApi {
 
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
 
-                val mURL = URL(PushSdkParameters.branch_current_active.fun_hyber_url_device_update)
+                val mURL = URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_device_update)
 
                 val connectorWebPlatform = mURL.openConnection() as HttpsURLConnection
                 connectorWebPlatform.doOutput = true
@@ -453,7 +452,7 @@ internal class HyberApi {
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
                 val mURL2 =
-                    URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_callback)
+                    URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_message_callback)
 
                 val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
                 connectorWebPlatform.doOutput = true
@@ -535,7 +534,7 @@ internal class HyberApi {
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
                     val mURL2 =
-                        URL(PushSdkParameters.branch_current_active.fun_hyber_url_message_dr)
+                        URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_message_dr)
 
                     val connectorWebPlatform = mURL2.openConnection() as HttpsURLConnection
                     connectorWebPlatform.doOutput = true

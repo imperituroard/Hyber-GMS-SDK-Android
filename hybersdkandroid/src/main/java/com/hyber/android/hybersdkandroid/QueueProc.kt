@@ -103,7 +103,7 @@ internal class QueueProc {
 
         val threadNetF2 = Thread(Runnable {
 
-            val hyberUrlMessQueue: String = PushSdkParameters.branch_current_active.fun_hyber_url_mess_queue
+            val hyberUrlMessQueue: String = PushSdkParameters.branch_current_active.fun_pushsdk_url_mess_queue
 
             try {
                 HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_mess_queue, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token")

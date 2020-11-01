@@ -15,6 +15,10 @@ import kotlin.properties.Delegates
 object HyberPushMess {
     var message: String? = null   //global variable for push messages
     var log_level_active: String = "error" //global variable sdk log level
+    var push_message_style: Int = 0 //style type of push notification
+    //push_message_style types
+    //0 - only text in push notification
+    //1 - text and large image in notification
 }
 
 internal lateinit var HyberDatabase: HyberOperativeData
@@ -56,7 +60,8 @@ class HyberSDKQueue {
 class HyberSDK(
     context: Context,
     platform_branch: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue,
-    log_level: String = "error"
+    log_level: String = "error",
+    push_style: Int = 0
 ) {
 
     //any classes initialization
@@ -74,6 +79,7 @@ class HyberSDK(
     init {
         this.context = context
         HyberPushMess.log_level_active = log_level
+        HyberPushMess.push_message_style = push_style
         hyberDeviceType = localDeviceInfo.getPhoneType(context)
         PushSdkParameters.branch_current_active = platform_branch
         try {
@@ -86,8 +92,6 @@ class HyberSDK(
         }
         updateToken()
     }
-
-
 
 
     private var answerNotRegistered: HyberFunAnswerGeneral =
@@ -205,6 +209,88 @@ class HyberSDK(
     //1-1
     //registration procedure with direct FCM token input
     //hyber_register_new2(
+    fun hyber_register_new(
+        X_Hyber_Client_API_Key: String,    // APP API key on hyber platform
+        X_Hyber_App_Fingerprint: String,   // App Fingerprint key
+        user_msisdn: String,               // User MSISDN
+        user_password: String,             // User Password
+        X_FCM_token: String                // FCM firebase token
+    ): HyberFunAnswerRegister {
+        try {
+            updateToken()
+            initHObject.hSdkGetParametersFromLocal()
+            HyberLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${HyberDatabase.registrationStatus}, X_Hyber_Session_Id: $X_FCM_token")
+
+            if (HyberDatabase.registrationStatus) {
+                return answerAny.hyberRegisterNewRegisterExists2(
+                    HyberDatabase.deviceId,
+                    HyberDatabase.hyber_registration_token,
+                    HyberDatabase.hyber_user_id,
+                    HyberDatabase.hyber_user_msisdn,
+                    HyberDatabase.hyber_registration_createdAt
+                )
+
+            } else {
+                initHObject.hSdkUpdateFirebaseManual(X_FCM_token)
+                if (X_FCM_token != "" && X_FCM_token != " ") {
+                    val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
+                        X_Hyber_Client_API_Key,
+                        X_FCM_token,
+                        X_Hyber_App_Fingerprint,
+                        PushSdkParameters.hyber_deviceName,
+                        hyberDeviceType,
+                        PushSdkParameters.hyber_osType,
+                        PushSdkParameters.sdkVersion,
+                        user_password,
+                        user_msisdn,
+                        context
+                    )
+                    //rewriteParams.rewriteHyberUserMsisdn(user_msisdn)
+                    //rewriteParams.rewriteHyberUserPassword(user_password)
+
+                    HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
+                    HyberLoggerSdk.debug("uuid: ${HyberDatabase.hyber_uuid}")
+
+                    var regStatus = false
+                    if (respHyber.code == 200) {
+                        regStatus = true
+                    }
+
+                    initHObject.hSdkInitSaveToLocal(
+                        respHyber.body.deviceId,
+                        user_msisdn,
+                        user_password,
+                        respHyber.body.token,
+                        respHyber.body.userId,
+                        respHyber.body.createdAt,
+                        regStatus
+                    )
+
+                    return HyberFunAnswerRegister(
+                        code = respHyber.code,
+                        result = respHyber.body.result,
+                        description = respHyber.body.description,
+                        deviceId = respHyber.body.deviceId,
+                        token = respHyber.body.token,
+                        userId = respHyber.body.userId,
+                        userPhone = respHyber.body.userPhone,
+                        createdAt = respHyber.body.createdAt
+                    )
+                } else {
+                    return answerAny.registerProcedureAnswer2(
+                        "901",
+                        "X_Hyber_Session_Id is empty. Maybe firebase registration problem",
+                        context
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            return answerAny.registerProcedureAnswer2("700", "unknown", context)
+        }
+    }
+
+//deprecated
+    @Deprecated("Function hyber_register_new2 will be remove soon. Please use hyber_register_new")
     fun hyber_register_new2(
         X_Hyber_Client_API_Key: String,    // APP API key on hyber platform
         X_Hyber_App_Fingerprint: String,   // App Fingerprint key
@@ -284,6 +370,7 @@ class HyberSDK(
             return answerAny.registerProcedureAnswer2("700", "unknown", context)
         }
     }
+
 
     //2
     fun hyber_clear_current_device(): HyberFunAnswerGeneral {

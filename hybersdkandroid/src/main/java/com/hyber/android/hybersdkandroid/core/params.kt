@@ -5,13 +5,76 @@ package com.hyber.android.hybersdkandroid.core
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import com.hyber.android.hybersdkandroid.add.GetInfo
 import com.hyber.android.hybersdkandroid.add.HyberInternal
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 open class HyberPublicParams {
+
+    /*
+*To get a Bitmap image from the URL received
+* */
+    private fun getBitmapFromUrl(imageUrl: String): Bitmap? {
+        var ansBitmap: Bitmap? = null
+        val threadNetBitmap = Thread(Runnable {
+            try {
+                val url = URL(imageUrl)
+                val connection = url.openConnection() as HttpURLConnection
+                connection.doInput = true
+                connection.connect()
+                val input = connection.inputStream
+                ansBitmap = BitmapFactory.decodeStream(input)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                ansBitmap = null
+            }})
+        threadNetBitmap.start()
+        threadNetBitmap.join()
+        return ansBitmap
+    }
+
+    open fun notificationBuilder(
+        context: Context,
+        notificationTextMess: String,
+        image: String
+    ): NotificationCompat.Builder {
+        val imageBitmap = getBitmapFromUrl(image)
+        val intent = Intent(context, context::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(
+            context, 0 /* Request code */, intent,
+            PendingIntent.FLAG_ONE_SHOT
+        )
+
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        if (imageBitmap != null) {
+        return NotificationCompat.Builder(context, "hyber.push.hyber")
+            .setContentText(notificationTextMess)
+            .setAutoCancel(true)
+            //.setSmallIcon(R.drawable.googleg_standard_color_18)
+            .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
+            .setSound(defaultSoundUri)
+            //.setVibrate(longArrayOf(1000))
+            .setContentIntent(pendingIntent)
+            .setLargeIcon(imageBitmap)}
+        else {
+            return NotificationCompat.Builder(context, "hyber.push.hyber")
+                .setContentText(notificationTextMess)
+                .setAutoCancel(true)
+                //.setSmallIcon(R.drawable.googleg_standard_color_18)
+                .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
+                .setSound(defaultSoundUri)
+                //.setVibrate(longArrayOf(1000))
+                .setContentIntent(pendingIntent)
+        }
+    }
 
     open fun notificationBuilder(
         context: Context,
@@ -41,33 +104,34 @@ open class HyberPublicParams {
 //URLs DATA for Hyber platform for different branches
 object PushSdkParametersPublic {
     val branchMasterValue: UrlsPlatformList = UrlsPlatformList(
-        fun_hyber_url_device_update = "https://push.hyber.im/api/2.3/device/update",
-        fun_hyber_url_registration = "https://push.hyber.im/api/2.3/device/registration",
-        fun_hyber_url_revoke = "https://push.hyber.im/api/2.3/device/revoke",
-        fun_hyber_url_get_device_all = "https://push.hyber.im/api/2.3/device/all",
-        fun_hyber_url_message_callback = "https://push.hyber.im/api/2.3/message/callback",
-        fun_hyber_url_message_dr = "https://push.hyber.im/api/2.3/message/dr",
-        fun_hyber_url_mess_queue = "https://push.hyber.im/api/2.3/message/queue",
-        hyber_url_message_history = "https://push.hyber.im/api/2.3/message/history?startDate="
+        fun_pushsdk_url_device_update = "https://push.hyber.im/api/2.3/device/update",
+        fun_pushsdk_url_registration = "https://push.hyber.im/api/2.3/device/registration",
+        fun_pushsdk_url_revoke = "https://push.hyber.im/api/2.3/device/revoke",
+        fun_pushsdk_url_get_device_all = "https://push.hyber.im/api/2.3/device/all",
+        fun_pushsdk_url_message_callback = "https://push.hyber.im/api/2.3/message/callback",
+        fun_pushsdk_url_message_dr = "https://push.hyber.im/api/2.3/message/dr",
+        fun_pushsdk_url_mess_queue = "https://push.hyber.im/api/2.3/message/queue",
+        pushsdk_url_message_history = "https://push.hyber.im/api/2.3/message/history?startDate="
     )
     val branchTestValue: UrlsPlatformList = UrlsPlatformList(
-        fun_hyber_url_device_update = "https://test-push.hyber.im/api/2.3/device/update",
-        fun_hyber_url_registration = "https://test-push.hyber.im/api/2.3/device/registration",
-        fun_hyber_url_revoke = "https://test-push.hyber.im/api/2.3/device/revoke",
-        fun_hyber_url_get_device_all = "https://test-push.hyber.im/api/2.3/device/all",
-        fun_hyber_url_message_callback = "https://test-push.hyber.im/api/2.3/message/callback",
-        fun_hyber_url_message_dr = "https://test-push.hyber.im/api/2.3/message/dr",
-        fun_hyber_url_mess_queue = "https://test-push.hyber.im/api/2.3/message/queue",
-        hyber_url_message_history = "https://test-push.hyber.im/api/2.3/message/history?startDate="
+        fun_pushsdk_url_device_update = "https://test-push.hyber.im/api/2.3/device/update",
+        fun_pushsdk_url_registration = "https://test-push.hyber.im/api/2.3/device/registration",
+        fun_pushsdk_url_revoke = "https://test-push.hyber.im/api/2.3/device/revoke",
+        fun_pushsdk_url_get_device_all = "https://test-push.hyber.im/api/2.3/device/all",
+        fun_pushsdk_url_message_callback = "https://test-push.hyber.im/api/2.3/message/callback",
+        fun_pushsdk_url_message_dr = "https://test-push.hyber.im/api/2.3/message/dr",
+        fun_pushsdk_url_mess_queue = "https://test-push.hyber.im/api/2.3/message/queue",
+        pushsdk_url_message_history = "https://test-push.hyber.im/api/2.3/message/history?startDate="
     )
     const val TAG_LOGGING = "HyberPushSDK"
-    const val hyber_log_level_error = "error"
-    const val hyber_log_level_debug = "debug"
+    const val pushsdk_log_level_error = "error"
+    const val pushsdk_log_level_debug = "debug"
+
 }
 
 object PushSdkParameters {
     private var infoLocalDeviceHardware: GetInfo = GetInfo()
-    var sdkVersion: String = "1.0.0.38"
+    var sdkVersion: String = "1.0.0.41"
     var hyber_osType: String = "android"
     var hyber_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
 
@@ -118,14 +182,14 @@ data class HyberFunAnswerGeneral(
 )
 
 data class UrlsPlatformList(
-    val fun_hyber_url_device_update: String,
-    val fun_hyber_url_registration: String,
-    val fun_hyber_url_revoke: String,
-    val fun_hyber_url_get_device_all: String,
-    val fun_hyber_url_message_callback: String,
-    val fun_hyber_url_message_dr: String,
-    val fun_hyber_url_mess_queue: String,
-    val hyber_url_message_history: String
+    val fun_pushsdk_url_device_update: String,
+    val fun_pushsdk_url_registration: String,
+    val fun_pushsdk_url_revoke: String,
+    val fun_pushsdk_url_get_device_all: String,
+    val fun_pushsdk_url_message_callback: String,
+    val fun_pushsdk_url_message_dr: String,
+    val fun_pushsdk_url_mess_queue: String,
+    val pushsdk_url_message_history: String
 )
 
 data class HyberOperativeData(

@@ -29,4 +29,15 @@ internal class HyberParsing {
         HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, output: $res")
         return res
     }
+
+
+    fun parseImageUrl(input_json: String): String {
+        HyberLoggerSdk.debug("Result: Function: parseImageUrl, Class: HyberParsing, input_json: $input_json")
+        var matchResults = input_json.substringAfter(""""image":"""").substringBefore(""""""")
+        if (matchResults.contains("\\/")) {
+            matchResults = matchResults.replace("\\/", "/")
+        }
+        HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, output: $matchResults")
+        return matchResults
+    }
 }
