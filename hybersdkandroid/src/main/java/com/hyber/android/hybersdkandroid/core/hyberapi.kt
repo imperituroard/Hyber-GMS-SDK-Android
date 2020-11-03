@@ -51,7 +51,7 @@ internal class PushKApi {
         user_Phone: String,
         context: Context
     ): PushKDataApi2 {
-        var functionNetAnswer = PushKFunAnswerRegister()
+        var functionNetAnswer = HyberFunAnswerRegister()
         var functionCodeAnswer = 0
 
         val threadNetF1 = Thread(Runnable {
@@ -221,7 +221,7 @@ internal class PushKApi {
         X_Push_Session_Id: String,
         X_Push_Auth_Token: String,
         period_in_seconds: Int
-    ): PushKFunAnswerGeneral {
+    ): HyberFunAnswerGeneral {
 
         var functionNetAnswer3 = String()
         var functionCodeAnswer3 = 0
@@ -279,7 +279,7 @@ internal class PushKApi {
 
         threadNetF3.start()
         threadNetF3.join()
-        return PushKFunAnswerGeneral(functionCodeAnswer3, "OK", "Processed", functionNetAnswer3)
+        return HyberFunAnswerGeneral(functionCodeAnswer3, "OK", "Processed", functionNetAnswer3)
 
     }
 

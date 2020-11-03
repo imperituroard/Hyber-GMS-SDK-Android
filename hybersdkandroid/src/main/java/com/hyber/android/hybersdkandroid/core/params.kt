@@ -156,7 +156,7 @@ internal data class PushKDataApi(
 )
 
 
-data class PushKFunAnswerRegister(
+data class HyberFunAnswerRegister(
     val code: Int = 0,
     val result: String = "",
     val description: String = "",
@@ -169,12 +169,12 @@ data class PushKFunAnswerRegister(
 
 internal data class PushKDataApi2(
     val code: Int,
-    val body: PushKFunAnswerRegister,
+    val body: HyberFunAnswerRegister,
     val time: Int
 )
 
 
-data class PushKFunAnswerGeneral(
+data class HyberFunAnswerGeneral(
     val code: Int,
     val result: String,
     val description: String,

@@ -1,8 +1,8 @@
 package com.hyber.android.hybersdkandroid.add
 
 import android.content.Context
-import com.hyber.android.hybersdkandroid.core.PushKFunAnswerGeneral
-import com.hyber.android.hybersdkandroid.core.PushKFunAnswerRegister
+import com.hyber.android.hybersdkandroid.core.HyberFunAnswerGeneral
+import com.hyber.android.hybersdkandroid.core.HyberFunAnswerRegister
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
@@ -61,9 +61,9 @@ internal class Answer {
         push_k_user_id: String,
         push_k_user_msisdn: String,
         push_k_registration_createdAt: String
-    ): PushKFunAnswerRegister {
+    ): HyberFunAnswerRegister {
 
-        return PushKFunAnswerRegister(
+        return HyberFunAnswerRegister(
             code = 701,
             deviceId = deviceId,
             token = push_k_registration_token,
@@ -79,10 +79,10 @@ internal class Answer {
         resp_code: String,
         resp_body: String,
         context: Context
-    ): PushKFunAnswerRegister {
+    ): HyberFunAnswerRegister {
 
         val pushKRewrite = RewriteParams(context)
-        val answerRegistrar: PushKFunAnswerRegister
+        val answerRegistrar: HyberFunAnswerRegister
 
         when (resp_code) {
             "200" -> {
@@ -97,7 +97,7 @@ internal class Answer {
                         parent.profile.createdAt
                     )
                 )
-                answerRegistrar = PushKFunAnswerRegister(
+                answerRegistrar = HyberFunAnswerRegister(
                     code = 200,
                     description = "Success",
                     result = "Ok",
@@ -117,8 +117,7 @@ internal class Answer {
                 return answerRegistrar
             }
             "401" -> {
-
-                answerRegistrar = PushKFunAnswerRegister(
+                answerRegistrar = HyberFunAnswerRegister(
                     code = 401,
                     description = "(Client error) authentication error, probably errors",
                     result = "Failed",
@@ -128,11 +127,10 @@ internal class Answer {
                     userPhone = "unknown",
                     createdAt = "unknown"
                 )
-
                 return answerRegistrar
             }
             "400" -> {
-                answerRegistrar = PushKFunAnswerRegister(
+                answerRegistrar = HyberFunAnswerRegister(
                     code = 400,
                     description = "(Client error) request validation error",
                     result = "Failed",
@@ -142,12 +140,10 @@ internal class Answer {
                     userPhone = "unknown",
                     createdAt = "unknown"
                 )
-
                 return answerRegistrar
             }
             "500" -> {
-
-                answerRegistrar = PushKFunAnswerRegister(
+                answerRegistrar = HyberFunAnswerRegister(
                     code = 500,
                     description = "(Server error)",
                     result = "Failed",
@@ -158,10 +154,9 @@ internal class Answer {
                     createdAt = "unknown"
                 )
                 return answerRegistrar
-
             }
             "700" -> {
-                answerRegistrar = PushKFunAnswerRegister(
+                answerRegistrar = HyberFunAnswerRegister(
                     code = 700,
                     description = "Internal SDK error",
                     result = "Failed",
@@ -174,8 +169,7 @@ internal class Answer {
                 return answerRegistrar
             }
             else -> {
-
-                answerRegistrar = PushKFunAnswerRegister(
+                answerRegistrar = HyberFunAnswerRegister(
                     code = 710,
                     description = "Unknown error",
                     result = "Failed",
@@ -194,17 +188,17 @@ internal class Answer {
         resp_code: String,
         body_json: String,
         description: String
-    ): PushKFunAnswerGeneral {
+    ): HyberFunAnswerGeneral {
 
         return when (resp_code) {
             "200" -> {
-                PushKFunAnswerGeneral(200, "OK", "Success", body_json)
+                HyberFunAnswerGeneral(200, "OK", "Success", body_json)
             }
             "400" -> {
-                PushKFunAnswerGeneral(400, "Failed", "Failed", "unknown")
+                HyberFunAnswerGeneral(400, "Failed", "Failed", "unknown")
             }
             else -> {
-                PushKFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
+                HyberFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
             }
         }
     }

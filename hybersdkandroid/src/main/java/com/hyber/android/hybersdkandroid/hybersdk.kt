@@ -26,11 +26,11 @@ internal lateinit var PushKDatabase: PushOperativeData
 @Suppress("SpellCheckingInspection", "unused", "FunctionName")
 class HyberSDKQueue {
 
-    fun hyber_check_queue(context: Context): PushKFunAnswerGeneral {
-        val answerNotKnown = PushKFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
+    fun hyber_check_queue(context: Context): HyberFunAnswerGeneral {
+        val answerNotKnown = HyberFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
         try {
             val answ = Answer()
-            val answerNotRegistered = PushKFunAnswerGeneral(
+            val answerNotRegistered = HyberFunAnswerGeneral(
                 704,
                 "Failed",
                 "Registration data not found",
@@ -94,10 +94,10 @@ class HyberSDK(
     }
 
 
-    private var answerNotRegistered: PushKFunAnswerGeneral =
-        PushKFunAnswerGeneral(704, "Failed", "Registration data not found", "Not registered")
-    private var answerNotKnown: PushKFunAnswerGeneral =
-        PushKFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
+    private var answerNotRegistered: HyberFunAnswerGeneral =
+        HyberFunAnswerGeneral(704, "Failed", "Registration data not found", "Not registered")
+    private var answerNotKnown: HyberFunAnswerGeneral =
+        HyberFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
 
     //answer codes
     //200 - Ok
@@ -132,7 +132,7 @@ class HyberSDK(
         X_Hyber_App_Fingerprint: String,
         user_msisdn: String,
         user_password: String
-    ): PushKFunAnswerRegister {
+    ): HyberFunAnswerRegister {
         try {
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
@@ -182,7 +182,7 @@ class HyberSDK(
                         respPush.body.createdAt,
                         regStatus
                     )
-                    return PushKFunAnswerRegister(
+                    return HyberFunAnswerRegister(
                         code = respPush.code,
                         result = respPush.body.result,
                         description = respPush.body.description,
@@ -215,7 +215,7 @@ class HyberSDK(
         user_msisdn: String,               // User MSISDN
         user_password: String,             // User Password
         X_FCM_token: String                // FCM firebase token
-    ): PushKFunAnswerRegister {
+    ): HyberFunAnswerRegister {
         try {
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
@@ -266,7 +266,7 @@ class HyberSDK(
                         regStatus
                     )
 
-                    return PushKFunAnswerRegister(
+                    return HyberFunAnswerRegister(
                         code = respPush.code,
                         result = respPush.body.result,
                         description = respPush.body.description,
@@ -297,7 +297,7 @@ class HyberSDK(
         user_msisdn: String,               // User MSISDN
         user_password: String,             // User Password
         X_FCM_token: String                // FCM firebase token
-    ): PushKFunAnswerRegister {
+    ): HyberFunAnswerRegister {
         try {
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
@@ -348,7 +348,7 @@ class HyberSDK(
                         regStatus
                     )
 
-                    return PushKFunAnswerRegister(
+                    return HyberFunAnswerRegister(
                         code = respPushK.code,
                         result = respPushK.body.result,
                         description = respPushK.body.description,
@@ -373,7 +373,7 @@ class HyberSDK(
 
 
     //2
-    fun hyber_clear_current_device(): PushKFunAnswerGeneral {
+    fun hyber_clear_current_device(): HyberFunAnswerGeneral {
         try {
             PushKLoggerSdk.debug("hyber_clear_current_device start")
             updateToken()
@@ -421,13 +421,13 @@ class HyberSDK(
 
     //return all message history till time
     //3
-    fun hyber_get_message_history(period_in_seconds: Int): PushKFunAnswerGeneral {
+    fun hyber_get_message_history(period_in_seconds: Int): HyberFunAnswerGeneral {
         try {
             PushKLoggerSdk.debug("hyber_get_message_history period_in_seconds: $period_in_seconds")
             updateToken()
             PushKLoggerSdk.debug("Start hyber_get_message_history request: firebase_registration_token: ${PushKDatabase.firebase_registration_token}, hyber_registration_token: ${PushKDatabase.push_k_registration_token}, period_in_seconds: $period_in_seconds")
             if (PushKDatabase.registrationStatus) {
-                val messHistPush: PushKFunAnswerGeneral = apiPushData.hGetMessageHistory(
+                val messHistPush: HyberFunAnswerGeneral = apiPushData.hGetMessageHistory(
                     PushKDatabase.firebase_registration_token, //_xPushSessionId
                     PushKDatabase.push_k_registration_token,
                     period_in_seconds
@@ -454,7 +454,7 @@ class HyberSDK(
     }
 
     //4
-    fun hyber_get_device_all_from_hyber(): PushKFunAnswerGeneral {
+    fun hyber_get_device_all_from_hyber(): HyberFunAnswerGeneral {
         try {
             PushKLoggerSdk.debug("Start hyber_get_device_all_from_hyber request: firebase_registration_token: ${PushKDatabase.firebase_registration_token}, hyber_registration_token: ${PushKDatabase.push_k_registration_token}")
 
@@ -486,7 +486,7 @@ class HyberSDK(
     }
 
     //5
-    fun hyber_update_registration(): PushKFunAnswerGeneral {
+    fun hyber_update_registration(): HyberFunAnswerGeneral {
         try {
             PushKLoggerSdk.debug("hyber_update_registration started")
             updateToken()
@@ -519,7 +519,7 @@ class HyberSDK(
     fun hyber_send_message_callback(
         message_id: String,
         message_text: String
-    ): PushKFunAnswerGeneral {
+    ): HyberFunAnswerGeneral {
         try {
             PushKLoggerSdk.debug("hyber_send_message_callback message_id: $message_id, message_text: $message_text")
             updateToken()
@@ -546,7 +546,7 @@ class HyberSDK(
     }
 
     //7
-    fun hyber_message_delivery_report(message_id: String): PushKFunAnswerGeneral {
+    fun hyber_message_delivery_report(message_id: String): HyberFunAnswerGeneral {
         try {
             PushKLoggerSdk.debug("hyber_message_delivery_report message_id: $message_id")
             updateToken()
@@ -581,7 +581,7 @@ class HyberSDK(
 
 
     //8 delete all devices
-    fun hyber_clear_all_device(): PushKFunAnswerGeneral {
+    fun hyber_clear_all_device(): HyberFunAnswerGeneral {
         try {
             updateToken()
             if (PushKDatabase.registrationStatus) {
@@ -629,7 +629,7 @@ class HyberSDK(
     }
 
     //9temp
-    fun rewrite_msisdn(newmsisdn: String): PushKFunAnswerGeneral {
+    fun rewrite_msisdn(newmsisdn: String): HyberFunAnswerGeneral {
         PushKLoggerSdk.debug("rewrite_msisdn start: $newmsisdn")
         return try {
             if (PushKDatabase.registrationStatus) {
@@ -644,7 +644,7 @@ class HyberSDK(
     }
 
     //10temp
-    fun rewrite_password(newPassword: String): PushKFunAnswerGeneral {
+    fun rewrite_password(newPassword: String): HyberFunAnswerGeneral {
 
         PushKLoggerSdk.debug("rewrite_password start: $newPassword")
 
@@ -658,7 +658,7 @@ class HyberSDK(
 
 
     //11hyber
-    fun hyber_check_queue(): PushKFunAnswerGeneral {
+    fun hyber_check_queue(): HyberFunAnswerGeneral {
         try {
             updateToken()
             if (PushKDatabase.registrationStatus) {
