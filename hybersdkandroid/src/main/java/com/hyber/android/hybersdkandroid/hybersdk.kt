@@ -5,47 +5,47 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.hyber.android.hybersdkandroid.add.Answer
 import com.hyber.android.hybersdkandroid.add.GetInfo
-import com.hyber.android.hybersdkandroid.add.HyberParsing
+import com.hyber.android.hybersdkandroid.add.PushParsing
 import com.hyber.android.hybersdkandroid.add.RewriteParams
 import com.hyber.android.hybersdkandroid.core.*
-import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
+import com.hyber.android.hybersdkandroid.logger.PushKLoggerSdk
 import kotlin.properties.Delegates
 
 @Suppress("SpellCheckingInspection")
 object HyberPushMess {
     var message: String? = null   //global variable for push messages
     var log_level_active: String = "error" //global variable sdk log level
-    var push_message_style: Int = 0 //style type of push notification
+    var push_message_style: Int = 1 //style type of push notification
     //push_message_style types
     //0 - only text in push notification
     //1 - text and large image in notification
 }
 
-internal lateinit var HyberDatabase: HyberOperativeData
+internal lateinit var PushKDatabase: PushOperativeData
 
 @Suppress("SpellCheckingInspection", "unused", "FunctionName")
 class HyberSDKQueue {
 
-    fun hyber_check_queue(context: Context): HyberFunAnswerGeneral {
-        val answerNotKnown = HyberFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
+    fun hyber_check_queue(context: Context): PushKFunAnswerGeneral {
+        val answerNotKnown = PushKFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
         try {
             val answ = Answer()
-            val answerNotRegistered = HyberFunAnswerGeneral(
+            val answerNotRegistered = PushKFunAnswerGeneral(
                 704,
                 "Failed",
                 "Registration data not found",
                 "Not registered"
             )
-            val initHyberParams2 = Initialization(context)
-            initHyberParams2.hSdkGetParametersFromLocal()
+            val initPushParams2 = Initialization(context)
+            initPushParams2.hSdkGetParametersFromLocal()
 
-            return if (HyberDatabase.registrationStatus) {
+            return if (PushKDatabase.registrationStatus) {
                 val queue = QueueProc()
-                val anss = queue.hyberDeviceMessQueue(
-                    HyberDatabase.firebase_registration_token,
-                    HyberDatabase.hyber_registration_token, context
+                val anss = queue.pushDeviceMessQueue(
+                    PushKDatabase.firebase_registration_token,
+                    PushKDatabase.push_k_registration_token, context
                 )
-                HyberLoggerSdk.debug("HyberSDKQueue.hyber_check_queue response: $anss")
+                PushKLoggerSdk.debug("PushSDKQueue.hyber_check_queue response: $anss")
                 answ.generalAnswer("200", "{}", "Success")
             } else {
                 answerNotRegistered
@@ -68,19 +68,19 @@ class HyberSDK(
     private var context: Context by Delegates.notNull()
     private var initHObject: Initialization = Initialization(context)
     private var localDeviceInfo: GetInfo = GetInfo()
-    private var apiHyberData: HyberApi = HyberApi()
+    private var apiPushData: PushKApi = PushKApi()
     private var answerAny: Answer = Answer()
     private var rewriteParams: RewriteParams = RewriteParams(context)
-    private var parsing: HyberParsing = HyberParsing()
-    private var hyberInternalParamsObject: PushSdkParameters = PushSdkParameters
-    private var hyberDeviceType: String = ""
+    private var parsing: PushParsing = PushParsing()
+    private var pushInternalParamsObject: PushSdkParameters = PushSdkParameters
+    private var pushDeviceType: String = ""
 
     //main class initialization
     init {
         this.context = context
         HyberPushMess.log_level_active = log_level
         HyberPushMess.push_message_style = push_style
-        hyberDeviceType = localDeviceInfo.getPhoneType(context)
+        pushDeviceType = localDeviceInfo.getPhoneType(context)
         PushSdkParameters.branch_current_active = platform_branch
         try {
             val localDataLoaded = initHObject.hSdkGetParametersFromLocal()
@@ -88,16 +88,16 @@ class HyberSDK(
                 this.hyber_update_registration()
             }
         } catch (e: Exception) {
-            HyberLoggerSdk.error("HyberSDK.init registration update problem $e")
+            PushKLoggerSdk.error("PushSDK.init registration update problem $e")
         }
         updateToken()
     }
 
 
-    private var answerNotRegistered: HyberFunAnswerGeneral =
-        HyberFunAnswerGeneral(704, "Failed", "Registration data not found", "Not registered")
-    private var answerNotKnown: HyberFunAnswerGeneral =
-        HyberFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
+    private var answerNotRegistered: PushKFunAnswerGeneral =
+        PushKFunAnswerGeneral(704, "Failed", "Registration data not found", "Not registered")
+    private var answerNotKnown: PushKFunAnswerGeneral =
+        PushKFunAnswerGeneral(710, "Failed", "Unknown error", "unknown")
 
     //answer codes
     //200 - Ok
@@ -132,65 +132,65 @@ class HyberSDK(
         X_Hyber_App_Fingerprint: String,
         user_msisdn: String,
         user_password: String
-    ): HyberFunAnswerRegister {
+    ): PushKFunAnswerRegister {
         try {
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
-            val xHyberSessionId = HyberDatabase.firebase_registration_token
-            HyberLoggerSdk.debug("Start hyber_register_new X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${HyberDatabase.registrationStatus}, X_Hyber_Session_Id: $xHyberSessionId")
+            val xPushSessionId = PushKDatabase.firebase_registration_token
+            PushKLoggerSdk.debug("Start hyber_register_new X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${PushKDatabase.registrationStatus}, X_Hyber_Session_Id: $xPushSessionId")
 
-            if (HyberDatabase.registrationStatus) {
-                return answerAny.hyberRegisterNewRegisterExists2(
-                    HyberDatabase.deviceId,
-                    HyberDatabase.hyber_registration_token,
-                    HyberDatabase.hyber_user_id,
-                    HyberDatabase.hyber_user_msisdn,
-                    HyberDatabase.hyber_registration_createdAt
+            if (PushKDatabase.registrationStatus) {
+                return answerAny.pushKRegisterNewRegisterExists2(
+                    PushKDatabase.deviceId,
+                    PushKDatabase.push_k_registration_token,
+                    PushKDatabase.push_k_user_id,
+                    PushKDatabase.push_k_user_msisdn,
+                    PushKDatabase.push_k_registration_createdAt
                 )
             } else {
 
-                if (xHyberSessionId != "" && xHyberSessionId != " ") {
-                    val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
+                if (xPushSessionId != "" && xPushSessionId != " ") {
+                    val respPush: PushKDataApi2 = apiPushData.hDeviceRegister(
                         X_Hyber_Client_API_Key,
-                        xHyberSessionId,
+                        xPushSessionId,
                         X_Hyber_App_Fingerprint,
-                        PushSdkParameters.hyber_deviceName,
-                        hyberDeviceType,
-                        PushSdkParameters.hyber_osType,
+                        PushSdkParameters.push_k_deviceName,
+                        pushDeviceType,
+                        PushSdkParameters.push_k_osType,
                         PushSdkParameters.sdkVersion,
                         user_password,
                         user_msisdn,
                         context
                     )
-                    //rewriteParams.rewriteHyberUserMsisdn(user_msisdn)
-                    //rewriteParams.rewriteHyberUserPassword(user_password)
+                    //rewriteParams.rewritePushUserMsisdn(user_msisdn)
+                    //rewriteParams.rewritePushUserPassword(user_password)
 
-                    HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
-                    HyberLoggerSdk.debug("uuid: ${HyberDatabase.hyber_uuid}")
+                    PushKLoggerSdk.debug("hyber_register_new response: $respPush")
+                    PushKLoggerSdk.debug("uuid: ${PushKDatabase.push_k_uuid}")
 
                     var regStatus = false
-                    if (respHyber.code == 200) {
+                    if (respPush.code == 200) {
                         regStatus = true
                     }
 
                     initHObject.hSdkInitSaveToLocal(
-                        respHyber.body.deviceId,
+                        respPush.body.deviceId,
                         user_msisdn,
                         user_password,
-                        respHyber.body.token,
-                        respHyber.body.userId,
-                        respHyber.body.createdAt,
+                        respPush.body.token,
+                        respPush.body.userId,
+                        respPush.body.createdAt,
                         regStatus
                     )
-                    return HyberFunAnswerRegister(
-                        code = respHyber.code,
-                        result = respHyber.body.result,
-                        description = respHyber.body.description,
-                        deviceId = respHyber.body.deviceId,
-                        token = respHyber.body.token,
-                        userId = respHyber.body.userId,
-                        userPhone = respHyber.body.userPhone,
-                        createdAt = respHyber.body.createdAt
+                    return PushKFunAnswerRegister(
+                        code = respPush.code,
+                        result = respPush.body.result,
+                        description = respPush.body.description,
+                        deviceId = respPush.body.deviceId,
+                        token = respPush.body.token,
+                        userId = respPush.body.userId,
+                        userPhone = respPush.body.userPhone,
+                        createdAt = respPush.body.createdAt
                     )
                 } else {
                     return answerAny.registerProcedureAnswer2(
@@ -215,66 +215,66 @@ class HyberSDK(
         user_msisdn: String,               // User MSISDN
         user_password: String,             // User Password
         X_FCM_token: String                // FCM firebase token
-    ): HyberFunAnswerRegister {
+    ): PushKFunAnswerRegister {
         try {
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
-            HyberLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${HyberDatabase.registrationStatus}, X_Hyber_Session_Id: $X_FCM_token")
+            PushKLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${PushKDatabase.registrationStatus}, X_Hyber_Session_Id: $X_FCM_token")
 
-            if (HyberDatabase.registrationStatus) {
-                return answerAny.hyberRegisterNewRegisterExists2(
-                    HyberDatabase.deviceId,
-                    HyberDatabase.hyber_registration_token,
-                    HyberDatabase.hyber_user_id,
-                    HyberDatabase.hyber_user_msisdn,
-                    HyberDatabase.hyber_registration_createdAt
+            if (PushKDatabase.registrationStatus) {
+                return answerAny.pushKRegisterNewRegisterExists2(
+                    PushKDatabase.deviceId,
+                    PushKDatabase.push_k_registration_token,
+                    PushKDatabase.push_k_user_id,
+                    PushKDatabase.push_k_user_msisdn,
+                    PushKDatabase.push_k_registration_createdAt
                 )
 
             } else {
                 initHObject.hSdkUpdateFirebaseManual(X_FCM_token)
                 if (X_FCM_token != "" && X_FCM_token != " ") {
-                    val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
+                    val respPush: PushKDataApi2 = apiPushData.hDeviceRegister(
                         X_Hyber_Client_API_Key,
                         X_FCM_token,
                         X_Hyber_App_Fingerprint,
-                        PushSdkParameters.hyber_deviceName,
-                        hyberDeviceType,
-                        PushSdkParameters.hyber_osType,
+                        PushSdkParameters.push_k_deviceName,
+                        pushDeviceType,
+                        PushSdkParameters.push_k_osType,
                         PushSdkParameters.sdkVersion,
                         user_password,
                         user_msisdn,
                         context
                     )
-                    //rewriteParams.rewriteHyberUserMsisdn(user_msisdn)
-                    //rewriteParams.rewriteHyberUserPassword(user_password)
+                    //rewriteParams.rewritePushUserMsisdn(user_msisdn)
+                    //rewriteParams.rewritePushUserPassword(user_password)
 
-                    HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
-                    HyberLoggerSdk.debug("uuid: ${HyberDatabase.hyber_uuid}")
+                    PushKLoggerSdk.debug("hyber_register_new response: $respPush")
+                    PushKLoggerSdk.debug("uuid: ${PushKDatabase.push_k_uuid}")
 
                     var regStatus = false
-                    if (respHyber.code == 200) {
+                    if (respPush.code == 200) {
                         regStatus = true
                     }
 
                     initHObject.hSdkInitSaveToLocal(
-                        respHyber.body.deviceId,
+                        respPush.body.deviceId,
                         user_msisdn,
                         user_password,
-                        respHyber.body.token,
-                        respHyber.body.userId,
-                        respHyber.body.createdAt,
+                        respPush.body.token,
+                        respPush.body.userId,
+                        respPush.body.createdAt,
                         regStatus
                     )
 
-                    return HyberFunAnswerRegister(
-                        code = respHyber.code,
-                        result = respHyber.body.result,
-                        description = respHyber.body.description,
-                        deviceId = respHyber.body.deviceId,
-                        token = respHyber.body.token,
-                        userId = respHyber.body.userId,
-                        userPhone = respHyber.body.userPhone,
-                        createdAt = respHyber.body.createdAt
+                    return PushKFunAnswerRegister(
+                        code = respPush.code,
+                        result = respPush.body.result,
+                        description = respPush.body.description,
+                        deviceId = respPush.body.deviceId,
+                        token = respPush.body.token,
+                        userId = respPush.body.userId,
+                        userPhone = respPush.body.userPhone,
+                        createdAt = respPush.body.createdAt
                     )
                 } else {
                     return answerAny.registerProcedureAnswer2(
@@ -297,66 +297,66 @@ class HyberSDK(
         user_msisdn: String,               // User MSISDN
         user_password: String,             // User Password
         X_FCM_token: String                // FCM firebase token
-    ): HyberFunAnswerRegister {
+    ): PushKFunAnswerRegister {
         try {
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
-            HyberLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${HyberDatabase.registrationStatus}, X_Hyber_Session_Id: $X_FCM_token")
+            PushKLoggerSdk.debug("Start hyber_register_new: X_Hyber_Client_API_Key: ${X_Hyber_Client_API_Key}, X_Hyber_App_Fingerprint: ${X_Hyber_App_Fingerprint}, registrationstatus: ${PushKDatabase.registrationStatus}, X_Hyber_Session_Id: $X_FCM_token")
 
-            if (HyberDatabase.registrationStatus) {
-                return answerAny.hyberRegisterNewRegisterExists2(
-                    HyberDatabase.deviceId,
-                    HyberDatabase.hyber_registration_token,
-                    HyberDatabase.hyber_user_id,
-                    HyberDatabase.hyber_user_msisdn,
-                    HyberDatabase.hyber_registration_createdAt
+            if (PushKDatabase.registrationStatus) {
+                return answerAny.pushKRegisterNewRegisterExists2(
+                    PushKDatabase.deviceId,
+                    PushKDatabase.push_k_registration_token,
+                    PushKDatabase.push_k_user_id,
+                    PushKDatabase.push_k_user_msisdn,
+                    PushKDatabase.push_k_registration_createdAt
                 )
 
             } else {
                 initHObject.hSdkUpdateFirebaseManual(X_FCM_token)
                 if (X_FCM_token != "" && X_FCM_token != " ") {
-                    val respHyber: HyberDataApi2 = apiHyberData.hDeviceRegister(
+                    val respPushK: PushKDataApi2 = apiPushData.hDeviceRegister(
                         X_Hyber_Client_API_Key,
                         X_FCM_token,
                         X_Hyber_App_Fingerprint,
-                        PushSdkParameters.hyber_deviceName,
-                        hyberDeviceType,
-                        PushSdkParameters.hyber_osType,
+                        PushSdkParameters.push_k_deviceName,
+                        pushDeviceType,
+                        PushSdkParameters.push_k_osType,
                         PushSdkParameters.sdkVersion,
                         user_password,
                         user_msisdn,
                         context
                     )
-                    //rewriteParams.rewriteHyberUserMsisdn(user_msisdn)
-                    //rewriteParams.rewriteHyberUserPassword(user_password)
+                    //rewriteParams.rewritePushUserMsisdn(user_msisdn)
+                    //rewriteParams.rewritePushUserPassword(user_password)
 
-                    HyberLoggerSdk.debug("hyber_register_new response: $respHyber")
-                    HyberLoggerSdk.debug("uuid: ${HyberDatabase.hyber_uuid}")
+                    PushKLoggerSdk.debug("hyber_register_new response: $respPushK")
+                    PushKLoggerSdk.debug("uuid: ${PushKDatabase.push_k_uuid}")
 
                     var regStatus = false
-                    if (respHyber.code == 200) {
+                    if (respPushK.code == 200) {
                         regStatus = true
                     }
 
                     initHObject.hSdkInitSaveToLocal(
-                        respHyber.body.deviceId,
+                        respPushK.body.deviceId,
                         user_msisdn,
                         user_password,
-                        respHyber.body.token,
-                        respHyber.body.userId,
-                        respHyber.body.createdAt,
+                        respPushK.body.token,
+                        respPushK.body.userId,
+                        respPushK.body.createdAt,
                         regStatus
                     )
 
-                    return HyberFunAnswerRegister(
-                        code = respHyber.code,
-                        result = respHyber.body.result,
-                        description = respHyber.body.description,
-                        deviceId = respHyber.body.deviceId,
-                        token = respHyber.body.token,
-                        userId = respHyber.body.userId,
-                        userPhone = respHyber.body.userPhone,
-                        createdAt = respHyber.body.createdAt
+                    return PushKFunAnswerRegister(
+                        code = respPushK.code,
+                        result = respPushK.body.result,
+                        description = respPushK.body.description,
+                        deviceId = respPushK.body.deviceId,
+                        token = respPushK.body.token,
+                        userId = respPushK.body.userId,
+                        userPhone = respPushK.body.userPhone,
+                        createdAt = respPushK.body.createdAt
                     )
                 } else {
                     return answerAny.registerProcedureAnswer2(
@@ -373,25 +373,25 @@ class HyberSDK(
 
 
     //2
-    fun hyber_clear_current_device(): HyberFunAnswerGeneral {
+    fun hyber_clear_current_device(): PushKFunAnswerGeneral {
         try {
-            HyberLoggerSdk.debug("hyber_clear_current_device start")
+            PushKLoggerSdk.debug("hyber_clear_current_device start")
             updateToken()
             initHObject.hSdkGetParametersFromLocal()
-            val xHyberSessionId = HyberDatabase.firebase_registration_token
-            if (HyberDatabase.registrationStatus) {
-                HyberLoggerSdk.debug("Start hyber_clear_current_device: firebase_registration_token: ${xHyberSessionId}, hyber_registration_token: ${HyberDatabase.hyber_registration_token}, registrationstatus: ${HyberDatabase.registrationStatus}, deviceId: ${HyberDatabase.deviceId}")
+            val xPushSessionId = PushKDatabase.firebase_registration_token
+            if (PushKDatabase.registrationStatus) {
+                PushKLoggerSdk.debug("Start hyber_clear_current_device: firebase_registration_token: ${xPushSessionId}, hyber_registration_token: ${PushKDatabase.push_k_registration_token}, registrationstatus: ${PushKDatabase.registrationStatus}, deviceId: ${PushKDatabase.deviceId}")
 
-                val hyberAnswer: HyberDataApi = apiHyberData.hDeviceRevoke(
-                    "[\"${HyberDatabase.deviceId}\"]",
-                    xHyberSessionId,
-                    HyberDatabase.hyber_registration_token
+                val pushAnswer: PushKDataApi = apiPushData.hDeviceRevoke(
+                    "[\"${PushKDatabase.deviceId}\"]",
+                    xPushSessionId,
+                    PushKDatabase.push_k_registration_token
                 )
-                HyberLoggerSdk.debug("hyber_answer : $hyberAnswer")
+                PushKLoggerSdk.debug("hyber_answer : $pushAnswer")
 
-                if (hyberAnswer.code == 200) {
-                    HyberLoggerSdk.debug("start clear data")
-                    val deviceId = HyberDatabase.deviceId
+                if (pushAnswer.code == 200) {
+                    PushKLoggerSdk.debug("start clear data")
+                    val deviceId = PushKDatabase.deviceId
                     initHObject.clearData()
                     return answerAny.generalAnswer(
                         "200",
@@ -399,14 +399,14 @@ class HyberSDK(
                         "Success"
                     )
                 } else {
-                    if (hyberAnswer.code == 401) {
+                    if (pushAnswer.code == 401) {
                         try {
                             initHObject.clearData()
                         } catch (ee: Exception) {
                         }
                     }
                     return answerAny.generalAnswer(
-                        hyberAnswer.code.toString(),
+                        pushAnswer.code.toString(),
                         "{\"body\":\"unknown\"}",
                         "Some problem"
                     )
@@ -421,28 +421,28 @@ class HyberSDK(
 
     //return all message history till time
     //3
-    fun hyber_get_message_history(period_in_seconds: Int): HyberFunAnswerGeneral {
+    fun hyber_get_message_history(period_in_seconds: Int): PushKFunAnswerGeneral {
         try {
-            HyberLoggerSdk.debug("hyber_get_message_history period_in_seconds: $period_in_seconds")
+            PushKLoggerSdk.debug("hyber_get_message_history period_in_seconds: $period_in_seconds")
             updateToken()
-            HyberLoggerSdk.debug("Start hyber_get_message_history request: firebase_registration_token: ${HyberDatabase.firebase_registration_token}, hyber_registration_token: ${HyberDatabase.hyber_registration_token}, period_in_seconds: $period_in_seconds")
-            if (HyberDatabase.registrationStatus) {
-                val messHistHyber: HyberFunAnswerGeneral = apiHyberData.hGetMessageHistory(
-                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                    HyberDatabase.hyber_registration_token,
+            PushKLoggerSdk.debug("Start hyber_get_message_history request: firebase_registration_token: ${PushKDatabase.firebase_registration_token}, hyber_registration_token: ${PushKDatabase.push_k_registration_token}, period_in_seconds: $period_in_seconds")
+            if (PushKDatabase.registrationStatus) {
+                val messHistPush: PushKFunAnswerGeneral = apiPushData.hGetMessageHistory(
+                    PushKDatabase.firebase_registration_token, //_xPushSessionId
+                    PushKDatabase.push_k_registration_token,
                     period_in_seconds
                 )
-                HyberLoggerSdk.debug("hyber_get_message_history mess_hist_hyber: $messHistHyber")
+                PushKLoggerSdk.debug("hyber_get_message_history mess_hist_hyber: $messHistPush")
 
-                if (messHistHyber.code == 401) {
+                if (messHistPush.code == 401) {
                     try {
                         initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
                 return answerAny.generalAnswer(
-                    messHistHyber.code.toString(),
-                    messHistHyber.body,
+                    messHistPush.code.toString(),
+                    messHistPush.body,
                     "Success"
                 )
             } else {
@@ -454,27 +454,27 @@ class HyberSDK(
     }
 
     //4
-    fun hyber_get_device_all_from_hyber(): HyberFunAnswerGeneral {
+    fun hyber_get_device_all_from_hyber(): PushKFunAnswerGeneral {
         try {
-            HyberLoggerSdk.debug("Start hyber_get_device_all_from_hyber request: firebase_registration_token: ${HyberDatabase.firebase_registration_token}, hyber_registration_token: ${HyberDatabase.hyber_registration_token}")
+            PushKLoggerSdk.debug("Start hyber_get_device_all_from_hyber request: firebase_registration_token: ${PushKDatabase.firebase_registration_token}, hyber_registration_token: ${PushKDatabase.push_k_registration_token}")
 
             updateToken()
-            if (HyberDatabase.registrationStatus) {
-                val deviceAllHyber: HyberDataApi = apiHyberData.hGetDeviceAll(
-                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                    HyberDatabase.hyber_registration_token
+            if (PushKDatabase.registrationStatus) {
+                val deviceAllPush: PushKDataApi = apiPushData.hGetDeviceAll(
+                    PushKDatabase.firebase_registration_token, //_xPushSessionId
+                    PushKDatabase.push_k_registration_token
                 )
-                HyberLoggerSdk.debug("device_all_hyber : $deviceAllHyber")
+                PushKLoggerSdk.debug("device_all_hyber : $deviceAllPush")
 
-                if (deviceAllHyber.code == 401) {
+                if (deviceAllPush.code == 401) {
                     try {
                         initHObject.clearData()
                     } catch (ee: Exception) {
                     }
                 }
                 return answerAny.generalAnswer(
-                    deviceAllHyber.code.toString(),
-                    deviceAllHyber.body,
+                    deviceAllPush.code.toString(),
+                    deviceAllPush.body,
                     "Success"
                 )
             } else {
@@ -486,19 +486,19 @@ class HyberSDK(
     }
 
     //5
-    fun hyber_update_registration(): HyberFunAnswerGeneral {
+    fun hyber_update_registration(): PushKFunAnswerGeneral {
         try {
-            HyberLoggerSdk.debug("hyber_update_registration started")
+            PushKLoggerSdk.debug("hyber_update_registration started")
             updateToken()
-            if (HyberDatabase.registrationStatus) {
-                val resss: HyberDataApi = apiHyberData.hDeviceUpdate(
-                    HyberDatabase.hyber_registration_token,
-                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                    hyberInternalParamsObject.hyber_deviceName,
-                    hyberDeviceType,
-                    hyberInternalParamsObject.hyber_osType,
-                    hyberInternalParamsObject.sdkVersion,
-                    HyberDatabase.firebase_registration_token
+            if (PushKDatabase.registrationStatus) {
+                val resss: PushKDataApi = apiPushData.hDeviceUpdate(
+                    PushKDatabase.push_k_registration_token,
+                    PushKDatabase.firebase_registration_token, //_xPushSessionId
+                    pushInternalParamsObject.push_k_deviceName,
+                    pushDeviceType,
+                    pushInternalParamsObject.push_k_osType,
+                    pushInternalParamsObject.sdkVersion,
+                    PushKDatabase.firebase_registration_token
                 )
                 if (resss.code == 401) {
                     try {
@@ -519,16 +519,16 @@ class HyberSDK(
     fun hyber_send_message_callback(
         message_id: String,
         message_text: String
-    ): HyberFunAnswerGeneral {
+    ): PushKFunAnswerGeneral {
         try {
-            HyberLoggerSdk.debug("hyber_send_message_callback message_id: $message_id, message_text: $message_text")
+            PushKLoggerSdk.debug("hyber_send_message_callback message_id: $message_id, message_text: $message_text")
             updateToken()
-            if (HyberDatabase.registrationStatus) {
-                val respp: HyberDataApi = apiHyberData.hMessageCallback(
+            if (PushKDatabase.registrationStatus) {
+                val respp: PushKDataApi = apiPushData.hMessageCallback(
                     message_id,
                     message_text,
-                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                    HyberDatabase.hyber_registration_token
+                    PushKDatabase.firebase_registration_token, //_xPushSessionId
+                    PushKDatabase.push_k_registration_token
                 )
                 if (respp.code == 401) {
                     try {
@@ -546,16 +546,16 @@ class HyberSDK(
     }
 
     //7
-    fun hyber_message_delivery_report(message_id: String): HyberFunAnswerGeneral {
+    fun hyber_message_delivery_report(message_id: String): PushKFunAnswerGeneral {
         try {
-            HyberLoggerSdk.debug("hyber_message_delivery_report message_id: $message_id")
+            PushKLoggerSdk.debug("hyber_message_delivery_report message_id: $message_id")
             updateToken()
-            if (HyberDatabase.registrationStatus) {
-                if (HyberDatabase.hyber_registration_token != "" && HyberDatabase.firebase_registration_token != "") {
-                    val respp1: HyberDataApi = apiHyberData.hMessageDr(
+            if (PushKDatabase.registrationStatus) {
+                if (PushKDatabase.push_k_registration_token != "" && PushKDatabase.firebase_registration_token != "") {
+                    val respp1: PushKDataApi = apiPushData.hMessageDr(
                         message_id,
-                        HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                        HyberDatabase.hyber_registration_token
+                        PushKDatabase.firebase_registration_token, //_xPushSessionId
+                        PushKDatabase.push_k_registration_token
                     )
                     if (respp1.code == 401) {
                         try {
@@ -581,39 +581,39 @@ class HyberSDK(
 
 
     //8 delete all devices
-    fun hyber_clear_all_device(): HyberFunAnswerGeneral {
+    fun hyber_clear_all_device(): PushKFunAnswerGeneral {
         try {
             updateToken()
-            if (HyberDatabase.registrationStatus) {
-                val deviceAllHyber: HyberDataApi = apiHyberData.hGetDeviceAll(
-                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                    HyberDatabase.hyber_registration_token
+            if (PushKDatabase.registrationStatus) {
+                val deviceAllPush: PushKDataApi = apiPushData.hGetDeviceAll(
+                    PushKDatabase.firebase_registration_token, //_xPushSessionId
+                    PushKDatabase.push_k_registration_token
                 )
-                HyberLoggerSdk.debug("hyber_clear_all_device deviceAllHyber: $deviceAllHyber")
+                PushKLoggerSdk.debug("hyber_clear_all_device deviceAllPush: $deviceAllPush")
 
-                val deviceList: String = parsing.parseIdDevicesAll(deviceAllHyber.body)
+                val deviceList: String = parsing.parseIdDevicesAll(deviceAllPush.body)
 
-                val hyberAnswer: HyberDataApi = apiHyberData.hDeviceRevoke(
+                val pushAnswer: PushKDataApi = apiPushData.hDeviceRevoke(
                     deviceList,
-                    HyberDatabase.firebase_registration_token, //_xHyberSessionId
-                    HyberDatabase.hyber_registration_token
+                    PushKDatabase.firebase_registration_token, //_xPushSessionId
+                    PushKDatabase.push_k_registration_token
                 )
 
-                HyberLoggerSdk.debug("hyber_answer : $hyberAnswer")
+                PushKLoggerSdk.debug("hyber_answer : $pushAnswer")
 
-                if (hyberAnswer.code == 200) {
-                    HyberLoggerSdk.debug("start clear data")
+                if (pushAnswer.code == 200) {
+                    PushKLoggerSdk.debug("start clear data")
                     initHObject.clearData()
                     return answerAny.generalAnswer("200", "{\"devices\":$deviceList}", "Success")
                 } else {
-                    if (hyberAnswer.code == 401) {
+                    if (pushAnswer.code == 401) {
                         try {
                             initHObject.clearData()
                         } catch (ee: Exception) {
                         }
                     }
                     return answerAny.generalAnswer(
-                        hyberAnswer.code.toString(),
+                        pushAnswer.code.toString(),
                         "{\"body\":\"unknown\"}",
                         "Some problem"
                     )
@@ -629,11 +629,11 @@ class HyberSDK(
     }
 
     //9temp
-    fun rewrite_msisdn(newmsisdn: String): HyberFunAnswerGeneral {
-        HyberLoggerSdk.debug("rewrite_msisdn start: $newmsisdn")
+    fun rewrite_msisdn(newmsisdn: String): PushKFunAnswerGeneral {
+        PushKLoggerSdk.debug("rewrite_msisdn start: $newmsisdn")
         return try {
-            if (HyberDatabase.registrationStatus) {
-                rewriteParams.rewriteHyberUserMsisdn(newmsisdn)
+            if (PushKDatabase.registrationStatus) {
+                rewriteParams.rewritePushUserMsisdn(newmsisdn)
                 answerAny.generalAnswer("200", "{}", "Success")
             } else {
                 answerNotRegistered
@@ -644,12 +644,12 @@ class HyberSDK(
     }
 
     //10temp
-    fun rewrite_password(newPassword: String): HyberFunAnswerGeneral {
+    fun rewrite_password(newPassword: String): PushKFunAnswerGeneral {
 
-        HyberLoggerSdk.debug("rewrite_password start: $newPassword")
+        PushKLoggerSdk.debug("rewrite_password start: $newPassword")
 
-        return if (HyberDatabase.registrationStatus) {
-            rewriteParams.rewriteHyberUserPassword(newPassword)
+        return if (PushKDatabase.registrationStatus) {
+            rewriteParams.rewritePushUserPassword(newPassword)
             answerAny.generalAnswer("200", "{}", "Success")
         } else {
             answerNotRegistered
@@ -658,25 +658,25 @@ class HyberSDK(
 
 
     //11hyber
-    fun hyber_check_queue(): HyberFunAnswerGeneral {
+    fun hyber_check_queue(): PushKFunAnswerGeneral {
         try {
             updateToken()
-            if (HyberDatabase.registrationStatus) {
-                if (HyberDatabase.firebase_registration_token != "" && HyberDatabase.hyber_registration_token != "") {
+            if (PushKDatabase.registrationStatus) {
+                if (PushKDatabase.firebase_registration_token != "" && PushKDatabase.push_k_registration_token != "") {
                     val queue = QueueProc()
-                    val answerData = queue.hyberDeviceMessQueue(
-                        HyberDatabase.firebase_registration_token,
-                        HyberDatabase.hyber_registration_token, context
+                    val answerData = queue.pushDeviceMessQueue(
+                        PushKDatabase.firebase_registration_token,
+                        PushKDatabase.push_k_registration_token, context
                     )
 
-                    HyberLoggerSdk.debug("hyber_check_queue answerData: $answerData")
+                    PushKLoggerSdk.debug("push_k_check_queue answerData: $answerData")
 
                     return answerAny.generalAnswer("200", "{}", "Success")
                 } else {
                     return answerAny.generalAnswer(
                         "700",
                         "{}",
-                        "Failed. firebase_registration_token or hyber_registration_token empty"
+                        "Failed. firebase_registration_token or push_k_registration_token empty"
                     )
                 }
             } else {
@@ -688,23 +688,23 @@ class HyberSDK(
     }
 
     private fun updateToken() {
-        HyberLoggerSdk.debug("HyberSDK.updateToken started2")
+        PushKLoggerSdk.debug("PushSDK.updateToken started2")
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    HyberLoggerSdk.debug("HyberSDK.updateToken experimental: failed")
+                    PushKLoggerSdk.debug("PushSDK.updateToken experimental: failed")
                     return@OnCompleteListener
                 }
                 // Get new Instance ID token
                 val token = task.result!!.token
                 if (token != "") {
-                    if (token != HyberDatabase.firebase_registration_token) {
-                        HyberDatabase.firebase_registration_token = token
-                        HyberLoggerSdk.debug("HyberSDK.updateToken token2: $token")
+                    if (token != PushKDatabase.firebase_registration_token) {
+                        PushKDatabase.firebase_registration_token = token
+                        PushKLoggerSdk.debug("PushSDK.updateToken token2: $token")
                         rewriteParams.rewriteFirebaseToken(token)
                     }
                 }
             })
-        HyberLoggerSdk.debug("HyberSDK.updateToken finished2")
+        PushKLoggerSdk.debug("PushSDK.updateToken finished2")
     }
 }

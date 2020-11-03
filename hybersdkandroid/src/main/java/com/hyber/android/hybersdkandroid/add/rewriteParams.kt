@@ -1,7 +1,7 @@
 package com.hyber.android.hybersdkandroid.add
 
 import android.content.Context
-import com.hyber.android.hybersdkandroid.HyberDatabase
+import com.hyber.android.hybersdkandroid.PushKDatabase
 import com.hyber.android.hybersdkandroid.core.SharedPreference
 
 //function for initialization different parameters
@@ -9,44 +9,44 @@ import com.hyber.android.hybersdkandroid.core.SharedPreference
 internal class RewriteParams(val context: Context) {
     private val sharedPreference: SharedPreference = SharedPreference(context)
 
-    fun rewriteHyberUserMsisdn(hyber_user_msisdn: String) {
-        sharedPreference.saveString("hyber_user_msisdn", hyber_user_msisdn)
-        HyberDatabase.hyber_user_msisdn = hyber_user_msisdn
+    fun rewritePushUserMsisdn(push_k_user_msisdn: String) {
+        sharedPreference.saveString("push_k_user_msisdn", push_k_user_msisdn)
+        PushKDatabase.push_k_user_msisdn = push_k_user_msisdn
     }
 
-    fun rewriteHyberUserPassword(hyber_user_password: String) {
-        sharedPreference.saveString("hyber_user_Password", hyber_user_password)
-        HyberDatabase.hyber_user_Password = hyber_user_password
+    fun rewritePushUserPassword(push_k_user_password: String) {
+        sharedPreference.saveString("push_k_user_Password", push_k_user_password)
+        PushKDatabase.push_k_user_Password = push_k_user_password
     }
 
-    fun rewriteHyberRegistrationToken(hyber_registration_token: String) {
-        sharedPreference.saveString("hyber_registration_token", hyber_registration_token)
-        HyberDatabase.hyber_registration_token = hyber_registration_token
+    fun rewritePushRegistrationToken(push_k_registration_token: String) {
+        sharedPreference.saveString("push_k_registration_token", push_k_registration_token)
+        PushKDatabase.push_k_registration_token = push_k_registration_token
     }
 
-    fun rewriteHyberUserId(hyber_user_id: String) {
-        sharedPreference.saveString("hyber_user_id", hyber_user_id)
-        HyberDatabase.hyber_user_id = hyber_user_id
+    fun rewritePushUserId(push_k_user_id: String) {
+        sharedPreference.saveString("push_k_user_id", push_k_user_id)
+        PushKDatabase.push_k_user_id = push_k_user_id
     }
 
-    fun rewriteHyberDeviceId(deviceId: String) {
+    fun rewritePushDeviceId(deviceId: String) {
         sharedPreference.saveString("deviceId", deviceId)
-        HyberDatabase.deviceId = deviceId
+        PushKDatabase.deviceId = deviceId
     }
 
-    fun rewriteHyberCreateAt(hyber_registration_createdAt: String) {
-        sharedPreference.saveString("hyber_registration_createdAt", hyber_registration_createdAt)
-        HyberDatabase.hyber_registration_createdAt = hyber_registration_createdAt
+    fun rewritePushCreateAt(push_k_registration_createdAt: String) {
+        sharedPreference.saveString("push_k_registration_createdAt", push_k_registration_createdAt)
+        PushKDatabase.push_k_registration_createdAt = push_k_registration_createdAt
     }
 
     fun rewriteApiRegistrationStatus(registrationstatus: Boolean) {
         sharedPreference.save("registrationstatus", registrationstatus)
-        HyberDatabase.registrationStatus = registrationstatus
+        PushKDatabase.registrationStatus = registrationstatus
     }
 
     fun rewriteFirebaseToken(fb_token_new: String) {
         sharedPreference.saveString("firebase_registration_token", fb_token_new)
-        HyberDatabase.firebase_registration_token = fb_token_new
+        PushKDatabase.firebase_registration_token = fb_token_new
     }
 
 }

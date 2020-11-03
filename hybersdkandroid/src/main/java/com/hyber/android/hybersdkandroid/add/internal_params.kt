@@ -3,7 +3,7 @@ package com.hyber.android.hybersdkandroid.add
 import android.app.Notification
 import android.os.Build
 
-internal object HyberInternal {
+internal object PushKInternal {
 
     fun notificationPriorityOld(priorityInfo: Int): Int {
 

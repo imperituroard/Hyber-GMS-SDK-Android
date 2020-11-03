@@ -2,10 +2,10 @@ package com.hyber.android.hybersdkandroid
 
 import android.content.Context
 import android.content.Intent
-import com.hyber.android.hybersdkandroid.core.HyberApi
-import com.hyber.android.hybersdkandroid.core.HyberDataApi
+import com.hyber.android.hybersdkandroid.core.PushKApi
+import com.hyber.android.hybersdkandroid.core.PushKDataApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
-import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
+import com.hyber.android.hybersdkandroid.logger.PushKLoggerSdk
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -28,20 +28,20 @@ internal class QueueProc {
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
-            HyberLoggerSdk.debug("Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
+            PushKLoggerSdk.debug("Result: OK, Function: hash, Class: QueueProc, input: $sss, output: $resp")
             resp
         } catch (e: Exception) {
-            HyberLoggerSdk.debug("Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed")
+            PushKLoggerSdk.debug("Result: FAILED, Function: hash, Class: QueueProc, input: $sss, output: failed")
             "failed"
         }
     }
 
-    private fun processHyberQueue(
+    private fun processPushQueue(
         queue: String,
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String
+        X_Push_Session_Id: String,
+        X_Push_Auth_Token: String
     ) {
-        val apiHyber = HyberApi()
+        val apiPush = PushKApi()
 
         @Serializable
         data class Empty(
@@ -84,50 +84,50 @@ internal class QueueProc {
         if (parent.messages.isNotEmpty()) {
             val list = parent.messages
             Thread.sleep(2000)
-            //initHyber_params.hyber_init3()
+            //initPush_params.push_init3()
             list.forEach {
-                HyberLoggerSdk.debug("fb token: $X_Hyber_Session_Id")
-                apiHyber.hMessageDr(it.messageId, X_Hyber_Session_Id, X_Hyber_Auth_Token)
-                HyberLoggerSdk.debug("Result: Start step2, Function: processHyberQueue, Class: HyberApi, message: ${it.messageId}")
+                PushKLoggerSdk.debug("fb token: $X_Push_Session_Id")
+                apiPush.hMessageDr(it.messageId, X_Push_Session_Id, X_Push_Auth_Token)
+                PushKLoggerSdk.debug("Result: Start step2, Function: processPushQueue, Class: QueueProc, message: ${it.messageId}")
             }
         }
     }
 
 
-    internal fun hyberDeviceMessQueue(
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String,
+    internal fun pushDeviceMessQueue(
+        X_Push_Session_Id: String,
+        X_Push_Auth_Token: String,
         context: Context
-    ): HyberDataApi {
+    ): PushKDataApi {
         var functionNetAnswer2 = String()
 
         val threadNetF2 = Thread(Runnable {
 
-            val hyberUrlMessQueue: String = PushSdkParameters.branch_current_active.fun_pushsdk_url_mess_queue
+            val pushUrlMessQueue: String = PushSdkParameters.branch_current_active.fun_pushsdk_url_mess_queue
 
             try {
-                HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_mess_queue, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token")
+                PushKLoggerSdk.debug("Result: Start step1, Function: push_device_mess_queue, Class: QueueProc, X_Push_Session_Id: $X_Push_Session_Id, X_Push_Auth_Token: $X_Push_Auth_Token")
 
                 val message2 = "{}"
 
-                HyberLoggerSdk.debug("Result: Start step2, Function: hyber_device_mess_queue, Class: HyberApi, message2: $message2")
+                PushKLoggerSdk.debug("Result: Start step2, Function: push_device_mess_queue, Class: QueueProc, message2: $message2")
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
                 //val date = Date(currentTimestamp * 1000) // Timestamp must be in ms to be converted to Date
 
-                HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue \"currentTimestamp2 : $currentTimestamp2\"")
+                PushKLoggerSdk.debug("QueueProc.pushDeviceMessQueue \"currentTimestamp2 : $currentTimestamp2\"")
 
-                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
-                val mURL2 = URL(hyberUrlMessQueue)
+                val mURL2 = URL(pushUrlMessQueue)
 
                 val urlConnectorPlatform = mURL2.openConnection() as HttpsURLConnection
                 urlConnectorPlatform.doOutput = true
                 urlConnectorPlatform.setRequestProperty("Content-Language", "en-US")
                 urlConnectorPlatform.setRequestProperty("Content-Type", "application/json")
-                urlConnectorPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                urlConnectorPlatform.setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                 urlConnectorPlatform.setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
                 urlConnectorPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
 
@@ -140,8 +140,8 @@ internal class QueueProc {
                     wr.write(postData2)
                     wr.flush()
 
-                    HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue \"URL : $url\"")
-                    HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue \"Response Code : $responseCode\"")
+                    PushKLoggerSdk.debug("QueueProc.pushDeviceMessQueue \"URL : $url\"")
+                    PushKLoggerSdk.debug("QueueProc.pushDeviceMessQueue \"Response Code : $responseCode\"")
                     try {
                         BufferedReader(InputStreamReader(inputStream)).use {
                             val response = StringBuffer()
@@ -163,15 +163,15 @@ internal class QueueProc {
                                 HyberPushMess.message = ""
                             }
 
-                            processHyberQueue(
+                            processPushQueue(
                                 response.toString(),
-                                X_Hyber_Session_Id,
-                                X_Hyber_Auth_Token
+                                X_Push_Session_Id,
+                                X_Push_Auth_Token
                             )
-                            HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue Response : $response")
+                            PushKLoggerSdk.debug("QueueProc.pushDeviceMessQueue Response : $response")
                         }
                     } catch (e: Exception) {
-                        HyberLoggerSdk.debug("QueueProc.hyberDeviceMessQueue response: unknown Fail")
+                        PushKLoggerSdk.debug("QueueProc.pushDeviceMessQueue response: unknown Fail")
                     }
 
                     functionNetAnswer2 = responseCode.toString()
@@ -182,7 +182,7 @@ internal class QueueProc {
         })
         threadNetF2.start()
         threadNetF2.join()
-        return HyberDataApi(functionNetAnswer2.toInt(), "{}", 0)
+        return PushKDataApi(functionNetAnswer2.toInt(), "{}", 0)
     }
 
 }

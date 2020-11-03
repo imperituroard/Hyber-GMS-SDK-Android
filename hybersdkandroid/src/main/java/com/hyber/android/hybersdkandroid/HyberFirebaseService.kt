@@ -10,64 +10,64 @@ import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.hyber.android.hybersdkandroid.add.GetInfo
-import com.hyber.android.hybersdkandroid.add.HyberParsing
+import com.hyber.android.hybersdkandroid.add.PushParsing
 import com.hyber.android.hybersdkandroid.add.RewriteParams
-import com.hyber.android.hybersdkandroid.core.HyberApi
+import com.hyber.android.hybersdkandroid.core.PushKApi
 import com.hyber.android.hybersdkandroid.core.PushSdkParameters
-import com.hyber.android.hybersdkandroid.core.HyberPublicParams
-import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
+import com.hyber.android.hybersdkandroid.core.PushKPublicParams
+import com.hyber.android.hybersdkandroid.logger.PushKLoggerSdk
 
 internal class HyberFirebaseService : FirebaseMessagingService() {
 
-    private var api: HyberApi = HyberApi()
-    private var parsing: HyberParsing = HyberParsing()
+    private var api: PushKApi = PushKApi()
+    private var parsing: PushParsing = PushParsing()
     private var getDevInform: GetInfo = GetInfo()
 
     override fun onCreate() {
         super.onCreate()
-        HyberLoggerSdk.debug("HyberFirebaseService.onCreate : MyService onCreate")
+        PushKLoggerSdk.debug("PushFirebaseService.onCreate : MyService onCreate")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        HyberLoggerSdk.debug("HyberFirebaseService.onDestroy : MyService onDestroy")
+        PushKLoggerSdk.debug("PushFirebaseService.onDestroy : MyService onDestroy")
     }
 
     override fun onNewToken(s: String) {
         super.onNewToken(s)
-        HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : Result: Start step1, Function: onNewToken, Class: HyberFirebaseService, new_token: $s")
+        PushKLoggerSdk.debug("PushFirebaseService.onNewToken : Result: Start step1, Function: onNewToken, Class: PushFirebaseService, new_token: $s")
 
         try {
             if (s != "") {
-                val hyberUpdateParams = RewriteParams(applicationContext)
-                hyberUpdateParams.rewriteFirebaseToken(s)
-                HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : local update: success")
+                val pushUpdateParams = RewriteParams(applicationContext)
+                pushUpdateParams.rewriteFirebaseToken(s)
+                PushKLoggerSdk.debug("PushFirebaseService.onNewToken : local update: success")
             }
         } catch (e: Exception) {
-            HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : local update: unknown error")
+            PushKLoggerSdk.debug("PushFirebaseService.onNewToken : local update: unknown error")
         }
 
         try {
-            if (HyberDatabase.hyber_registration_token != "" && HyberDatabase.firebase_registration_token != "") {
+            if (PushKDatabase.push_k_registration_token != "" && PushKDatabase.firebase_registration_token != "") {
 
                 val localPhoneInfoNewToken = getDevInform.getPhoneType(applicationContext)
-                HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : localPhoneInfoNewToken: $localPhoneInfoNewToken")
+                PushKLoggerSdk.debug("PushFirebaseService.onNewToken : localPhoneInfoNewToken: $localPhoneInfoNewToken")
                 val answerPlatform = api.hDeviceUpdate(
-                    HyberDatabase.hyber_registration_token,
-                    HyberDatabase.firebase_registration_token,
-                    PushSdkParameters.hyber_deviceName,
+                    PushKDatabase.push_k_registration_token,
+                    PushKDatabase.firebase_registration_token,
+                    PushSdkParameters.push_k_deviceName,
                     localPhoneInfoNewToken,
-                    PushSdkParameters.hyber_osType,
+                    PushSdkParameters.push_k_osType,
                     PushSdkParameters.sdkVersion,
                     s
                 )
-                HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : update success $answerPlatform")
+                PushKLoggerSdk.debug("PushFirebaseService.onNewToken : update success $answerPlatform")
             } else {
-                HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : update: failed")
+                PushKLoggerSdk.debug("PushFirebaseService.onNewToken : update: failed")
             }
 
         } catch (e: Exception) {
-            HyberLoggerSdk.debug("HyberFirebaseService.onNewToken : update: unknown error")
+            PushKLoggerSdk.debug("PushFirebaseService.onNewToken : update: unknown error")
         }
 
         // If you want to send messages to this application instance or
@@ -77,7 +77,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
 
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        HyberLoggerSdk.debug("HyberFirebaseService.onMessageReceived : started")
+        PushKLoggerSdk.debug("PushFirebaseService.onMessageReceived : started")
 
         super.onMessageReceived(remoteMessage)
 
@@ -92,37 +92,37 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
         // [END_EXCLUDE]
 
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        HyberLoggerSdk.debug("From: " + remoteMessage.from!!)
+        PushKLoggerSdk.debug("From: " + remoteMessage.from!!)
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             try {
-                HyberLoggerSdk.debug("Message from remote: $remoteMessage")
-                HyberLoggerSdk.debug("Message from remote data: ${remoteMessage.data}")
-                HyberLoggerSdk.debug("Message from remote messageId: ${remoteMessage.messageId}")
-                HyberLoggerSdk.debug("Message from remote messageType: ${remoteMessage.messageType}")
-                HyberLoggerSdk.debug("Message from remote priority: ${remoteMessage.priority}")
-                HyberLoggerSdk.debug("Message from remote rawData: ${remoteMessage.rawData}")
-                HyberLoggerSdk.debug("Message from remote ttl: ${remoteMessage.ttl}")
-                HyberLoggerSdk.debug("Message from remote to: ${remoteMessage.to}")
-                HyberLoggerSdk.debug("Message from remote sentTime: ${remoteMessage.sentTime}")
-                HyberLoggerSdk.debug("Message from remote collapseKey: ${remoteMessage.collapseKey}")
-                HyberLoggerSdk.debug("Message from remote originalPriority: ${remoteMessage.originalPriority}")
-                HyberLoggerSdk.debug("Message from remote senderId: ${remoteMessage.senderId}")
-                HyberLoggerSdk.debug("Message from remote data to string: ${remoteMessage.data}")
-                if (HyberDatabase.firebase_registration_token != "" && HyberDatabase.hyber_registration_token != "") {
-                    val hyberAnswer = api.hMessageDr(
+                PushKLoggerSdk.debug("Message from remote: $remoteMessage")
+                PushKLoggerSdk.debug("Message from remote data: ${remoteMessage.data}")
+                PushKLoggerSdk.debug("Message from remote messageId: ${remoteMessage.messageId}")
+                PushKLoggerSdk.debug("Message from remote messageType: ${remoteMessage.messageType}")
+                PushKLoggerSdk.debug("Message from remote priority: ${remoteMessage.priority}")
+                PushKLoggerSdk.debug("Message from remote rawData: ${remoteMessage.rawData}")
+                PushKLoggerSdk.debug("Message from remote ttl: ${remoteMessage.ttl}")
+                PushKLoggerSdk.debug("Message from remote to: ${remoteMessage.to}")
+                PushKLoggerSdk.debug("Message from remote sentTime: ${remoteMessage.sentTime}")
+                PushKLoggerSdk.debug("Message from remote collapseKey: ${remoteMessage.collapseKey}")
+                PushKLoggerSdk.debug("Message from remote originalPriority: ${remoteMessage.originalPriority}")
+                PushKLoggerSdk.debug("Message from remote senderId: ${remoteMessage.senderId}")
+                PushKLoggerSdk.debug("Message from remote data to string: ${remoteMessage.data}")
+                if (PushKDatabase.firebase_registration_token != "" && PushKDatabase.push_k_registration_token != "") {
+                    val pushAnswer = api.hMessageDr(
                         parsing.parseMessageId(remoteMessage.data.toString()),
-                        HyberDatabase.firebase_registration_token,
-                        HyberDatabase.hyber_registration_token
+                        PushKDatabase.firebase_registration_token,
+                        PushKDatabase.push_k_registration_token
                     )
-                    HyberLoggerSdk.debug("From Message Delivery Report: $hyberAnswer")
-                    HyberLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${HyberDatabase.firebase_registration_token}, hyberToken: ${HyberDatabase.hyber_registration_token}")
+                    PushKLoggerSdk.debug("From Message Delivery Report: $pushAnswer")
+                    PushKLoggerSdk.debug("delivery report success: messid ${remoteMessage.messageId.toString()}, token: ${PushKDatabase.firebase_registration_token}, push_k_registration_token: ${PushKDatabase.push_k_registration_token}")
                 } else {
-                    HyberLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${HyberDatabase.firebase_registration_token}, hyberToken: ${HyberDatabase.hyber_registration_token}")
+                    PushKLoggerSdk.debug("delivery report failed: messid ${remoteMessage.messageId.toString()}, token: ${PushKDatabase.firebase_registration_token}, push_k_registration_token: ${PushKDatabase.push_k_registration_token}")
                 }
             } catch (e: Exception) {
-                HyberLoggerSdk.debug("onMessageReceived: failed")
+                PushKLoggerSdk.debug("onMessageReceived: failed")
             }
 
             try {
@@ -134,16 +134,15 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
                 val intent = Intent()
                 intent.action = "com.hyber.android.hybersdkandroid.Push"
                 sendBroadcast(intent)
-
             } catch (e: Exception) {
                 HyberPushMess.message = ""
             }
-            HyberLoggerSdk.debug("Message data payload: " + remoteMessage.data.toString())
+            PushKLoggerSdk.debug("Message data payload: " + remoteMessage.data.toString())
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.notification != null) {
-            HyberLoggerSdk.debug("Message Notification Body: " + remoteMessage.notification!!.body!!)
+            PushKLoggerSdk.debug("Message Notification Body: " + remoteMessage.notification!!.body!!)
 
             try {
                 when (HyberPushMess.push_message_style) {
@@ -156,7 +155,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
                     }
                 }
             } catch (ee: Exception) {
-                HyberLoggerSdk.debug("Notification payload sendNotification: Unknown Fail")
+                PushKLoggerSdk.debug("Notification payload sendNotification: Unknown Fail")
             }
         }
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -164,7 +163,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage) {
-        val notificationObject = HyberPublicParams()
+        val notificationObject = PushKPublicParams()
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(
@@ -177,7 +176,7 @@ internal class HyberFirebaseService : FirebaseMessagingService() {
     }
 
     private fun sendNotificationImageType1(remoteMessage: RemoteMessage, imageUrl: String) {
-        val notificationObject = HyberPublicParams()
+        val notificationObject = PushKPublicParams()
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(

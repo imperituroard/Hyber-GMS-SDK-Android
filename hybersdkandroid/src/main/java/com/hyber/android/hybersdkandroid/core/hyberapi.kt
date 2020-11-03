@@ -3,7 +3,7 @@ package com.hyber.android.hybersdkandroid.core
 import android.content.Context
 import com.hyber.android.hybersdkandroid.add.Answer
 import com.hyber.android.hybersdkandroid.add.GetInfo
-import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
+import com.hyber.android.hybersdkandroid.logger.PushKLoggerSdk
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.InputStreamReader
@@ -13,8 +13,8 @@ import java.security.MessageDigest
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLSocketFactory
 
-//class for communication with hyber rest server (REST API)
-internal class HyberApi {
+//class for communication with push rest server (REST API)
+internal class PushKApi {
 
     //class init for creation answers
     private var answerForm: Answer = Answer()
@@ -30,10 +30,10 @@ internal class HyberApi {
             val md = MessageDigest.getInstance("SHA-256")
             val digest = md.digest(bytes)
             val resp: String = digest.fold("", { str, it -> str + "%02x".format(it) })
-            HyberLoggerSdk.debug("Result: OK, Function: hash, Class: HyberApi, input: $sss, output: $resp")
+            PushKLoggerSdk.debug("Result: OK, Function: hash, Class: PushKApi, input: $sss, output: $resp")
             resp
         } catch (e: Exception) {
-            HyberLoggerSdk.debug("Result: FAILED, Function: hash, Class: HyberApi, input: $sss, output: failed")
+            PushKLoggerSdk.debug("Result: FAILED, Function: hash, Class: PushKApi, input: $sss, output: failed")
             "failed"
         }
     }
@@ -41,8 +41,8 @@ internal class HyberApi {
     //POST procedure for new registration
     fun hDeviceRegister(
         xPlatformClientAPIKey: String,
-        X_Hyber_Session_Id: String,
-        X_Hyber_App_Fingerprint: String,
+        X_Push_Session_Id: String,
+        X_Push_App_Fingerprint: String,
         device_Name: String,
         device_Type: String,
         os_Type: String,
@@ -50,19 +50,19 @@ internal class HyberApi {
         user_Pass: String,
         user_Phone: String,
         context: Context
-    ): HyberDataApi2 {
-        var functionNetAnswer = HyberFunAnswerRegister()
+    ): PushKDataApi2 {
+        var functionNetAnswer = PushKFunAnswerRegister()
         var functionCodeAnswer = 0
 
         val threadNetF1 = Thread(Runnable {
             try {
-                HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_register, Class: HyberApi, xPlatformClientAPIKey: $xPlatformClientAPIKey, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_App_Fingerprint: $X_Hyber_App_Fingerprint, device_Name: $device_Name, device_Type: $device_Type, os_Type: $os_Type, sdk_Version: $sdk_Version, user_Pass: $user_Pass, user_Phone: $user_Phone")
+                PushKLoggerSdk.debug("Result: Start step1, Function: push_device_register, Class: PushKApi, xPlatformClientAPIKey: $xPlatformClientAPIKey, X_Push_Session_Id: $X_Push_Session_Id, X_Push_App_Fingerprint: $X_Push_App_Fingerprint, device_Name: $device_Name, device_Type: $device_Type, os_Type: $os_Type, sdk_Version: $sdk_Version, user_Pass: $user_Pass, user_Phone: $user_Phone")
 
                 val message =
                     "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$osVersion\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
                 //val message = "{\"userPhone\":\"$user_Phone\",\"userPass\":\"$user_Pass\",\"osType\":\"$os_Type\",\"osVersion\":\"$os_version\",\"deviceType\":\"$device_Type\",\"deviceName\":\"$device_Name\",\"sdkVersion\":\"$sdk_Version\"}"
 
-                HyberLoggerSdk.debug("Result: Start step2, Function: hyber_device_register, Class: HyberApi, message: $message")
+                PushKLoggerSdk.debug("Result: Start step2, Function: push_device_register, Class: PushKApi, message: $message")
 
                 val currentTimestamp = System.currentTimeMillis()
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
@@ -75,10 +75,10 @@ internal class HyberApi {
                     xPlatformClientAPIKey
                 )
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
-                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                 connectorWebPlatform.setRequestProperty(
                     "X-Hyber-App-Fingerprint",
-                    X_Hyber_App_Fingerprint
+                    X_Push_App_Fingerprint
                 )
                 connectorWebPlatform.sslSocketFactory =
                     SSLSocketFactory.getDefault() as SSLSocketFactory
@@ -92,7 +92,7 @@ internal class HyberApi {
 
                     wr.flush()
 
-                    HyberLoggerSdk.debug("Result: Finished step3, Function: hyber_device_register, Class: HyberApi, Response Code : $responseCode")
+                    PushKLoggerSdk.debug("Result: Finished step3, Function: push_device_register, Class: PushKApi, Response Code : $responseCode")
 
                     functionCodeAnswer = responseCode
                     if (responseCode == 200) {
@@ -107,7 +107,7 @@ internal class HyberApi {
                             }
                             it.close()
 
-                            HyberLoggerSdk.debug("Result: Finished step4, Function: hyber_device_register, Class: HyberApi, Response : $response")
+                            PushKLoggerSdk.debug("Result: Finished step4, Function: push_device_register, Class: PushKApi, Response : $response")
 
                             functionNetAnswer = answerForm.registerProcedureAnswer2(
                                 responseCode.toString(),
@@ -126,7 +126,7 @@ internal class HyberApi {
                 }
             } catch (e: Exception) {
 
-                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
+                PushKLoggerSdk.debug("Result: Failed step5, Function: push_device_register, Class: PushKApi, exception: ${e.stackTrace}")
 
                 functionNetAnswer = answerForm.registerProcedureAnswer2(
                     "705",
@@ -139,15 +139,15 @@ internal class HyberApi {
         threadNetF1.start()
         threadNetF1.join()
 
-        return HyberDataApi2(functionNetAnswer.code, functionNetAnswer, 0)
+        return PushKDataApi2(functionNetAnswer.code, functionNetAnswer, 0)
     }
 
     //POST
     fun hDeviceRevoke(
         dev_list: String,
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String
-    ): HyberDataApi {
+        X_Push_Session_Id: String,
+        X_Push_Auth_Token: String
+    ): PushKDataApi {
 
         var functionNetAnswer2 = String()
 
@@ -155,14 +155,14 @@ internal class HyberApi {
 
             try {
 
-                HyberLoggerSdk.debug("Result: Start step1, Function: hyber_device_revoke, Class: HyberApi, dev_list: $dev_list, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token")
+                PushKLoggerSdk.debug("Result: Start step1, Function: push_device_revoke, Class: PushKApi, dev_list: $dev_list, X_Push_Session_Id: $X_Push_Session_Id, X_Push_Auth_Token: $X_Push_Auth_Token")
 
                 val message2 = "{\"devices\":$dev_list}"
 
-                HyberLoggerSdk.debug("Result: Start step2, Function: hyber_device_revoke, Class: HyberApi, message2: $message2")
+                PushKLoggerSdk.debug("Result: Start step2, Function: push_device_revoke, Class: PushKApi, message2: $message2")
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
-                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
                 val mURL2 = URL(PushSdkParameters.branch_current_active.fun_pushsdk_url_revoke)
 
@@ -170,7 +170,7 @@ internal class HyberApi {
                 connectorWebPlatform.doOutput = true
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
-                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                 connectorWebPlatform.setRequestProperty(
                     "X-Hyber-Timestamp",
                     currentTimestamp2.toString()
@@ -197,10 +197,10 @@ internal class HyberApi {
                                 inputLine = it.readLine()
                             }
                             it.close()
-                            HyberLoggerSdk.debug("Response : $response")
+                            PushKLoggerSdk.debug("Response : $response")
                         }
                     } catch (e: Exception) {
-                        HyberLoggerSdk.debug("Failed")
+                        PushKLoggerSdk.debug("Failed")
                     }
 
                     functionNetAnswer2 = responseCode.toString()
@@ -213,15 +213,15 @@ internal class HyberApi {
         threadNetF2.start()
         threadNetF2.join()
 
-        return HyberDataApi(functionNetAnswer2.toInt(), "{}", 0)
+        return PushKDataApi(functionNetAnswer2.toInt(), "{}", 0)
     }
 
     //GET
     fun hGetMessageHistory(
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String,
+        X_Push_Session_Id: String,
+        X_Push_Auth_Token: String,
         period_in_seconds: Int
-    ): HyberFunAnswerGeneral {
+    ): PushKFunAnswerGeneral {
 
         var functionNetAnswer3 = String()
         var functionCodeAnswer3 = 0
@@ -230,14 +230,21 @@ internal class HyberApi {
             try {
 
                 //this timestamp for URL.
-                val currentTimestamp1 = System.currentTimeMillis() - period_in_seconds // We want timestamp in seconds
+                val currentTimestamp1 = (System.currentTimeMillis() / 1000L) - period_in_seconds // We want timestamp in seconds
+
+                PushKLoggerSdk.debug("Result: val currentTimestamp1, Function: hGetMessageHistory, Class: PushKApi, currentTimestamp1: $currentTimestamp1")
 
                 //this timestamp for token
-                val currentTimestamp2 = System.currentTimeMillis()
+                val currentTimestamp2 = System.currentTimeMillis() / 1000L
 
-                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                PushKLoggerSdk.debug("Result: val currentTimestamp2, Function: hGetMessageHistory, Class: PushKApi, currentTimestamp2: $currentTimestamp2")
 
-                HyberLoggerSdk.debug("\nSent 'GET' request to hyber_get_device_all with : X_Hyber_Session_Id : $X_Hyber_Session_Id; X_Hyber_Auth_Token : $X_Hyber_Auth_Token; period_in_seconds : $period_in_seconds")
+                val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
+
+                PushKLoggerSdk.debug("Result: val authToken, Function: hGetMessageHistory, Class: PushKApi, authToken: $authToken")
+
+
+                PushKLoggerSdk.debug("\nSent 'GET' request to push_get_device_all with : X_Push_Session_Id : $X_Push_Session_Id; X_Push_Auth_Token : $X_Push_Auth_Token; period_in_seconds : $period_in_seconds")
 
                 val mURL2 = URL(PushSdkParameters.branch_current_active.pushsdk_url_message_history + currentTimestamp1.toString())
 
@@ -247,7 +254,7 @@ internal class HyberApi {
                     //doOutput = true
                     setRequestProperty("Content-Language", "en-US")
                     setRequestProperty("Content-Type", "application/json")
-                    setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                    setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                     setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
                     setRequestProperty("X-Hyber-Auth-Token", authToken)
 
@@ -255,15 +262,16 @@ internal class HyberApi {
 
                     requestMethod = "GET"
 
-                    HyberLoggerSdk.debug("Sent 'GET' request to URL : $url; Response Code : $responseCode")
+                    PushKLoggerSdk.debug("Sent 'GET' request to URL : $url; Response Code : $responseCode")
                     functionCodeAnswer3 = responseCode
 
                     inputStream.bufferedReader().use {
                         functionNetAnswer3 = it.readLine().toString()
+                        PushKLoggerSdk.debug("Result: val functionNetAnswer3, Function: hGetMessageHistory, Class: PushKApi, functionNetAnswer3: $functionNetAnswer3")
                     }
                 }
             } catch (e: Exception) {
-                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
+                PushKLoggerSdk.debug("Result: Failed step5, Function: push_device_register, Class: PushKApi, exception: ${e.stackTrace}")
                 functionCodeAnswer3 = 700
                 functionNetAnswer3 = "Failed"
             }
@@ -271,13 +279,13 @@ internal class HyberApi {
 
         threadNetF3.start()
         threadNetF3.join()
-        return HyberFunAnswerGeneral(functionCodeAnswer3, "OK", "Processed", functionNetAnswer3)
+        return PushKFunAnswerGeneral(functionCodeAnswer3, "OK", "Processed", functionNetAnswer3)
 
     }
 
 
     //GET
-    fun hGetDeviceAll(X_Hyber_Session_Id: String, X_Hyber_Auth_Token: String): HyberDataApi {
+    fun hGetDeviceAll(X_Push_Session_Id: String, X_Push_Auth_Token: String): PushKDataApi {
 
         try {
 
@@ -292,10 +300,10 @@ internal class HyberApi {
                     val currentTimestamp2 =
                         System.currentTimeMillis() // We want timestamp in seconds
 
-                    val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                    val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
 
 
-                    HyberLoggerSdk.debug("Result: Start step1, Function: hyber_get_device_all, Class: HyberApi, X_Hyber_Session_Id: $X_Hyber_Session_Id, X_Hyber_Auth_Token: $X_Hyber_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $authToken")
+                    PushKLoggerSdk.debug("Result: Start step1, Function: push_get_device_all, Class: PushKApi, X_Push_Session_Id: $X_Push_Session_Id, X_Push_Auth_Token: $X_Push_Auth_Token, currentTimestamp2: $currentTimestamp2, auth_token: $authToken")
 
 
                     val mURL2 =
@@ -307,26 +315,26 @@ internal class HyberApi {
                         //doOutput = true
                         setRequestProperty("Content-Language", "en-US")
                         setRequestProperty("Content-Type", "application/json")
-                        setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                        setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                         setRequestProperty("X-Hyber-Timestamp", currentTimestamp2.toString())
                         setRequestProperty("X-Hyber-Auth-Token", authToken)
 
                         sslSocketFactory = SSLSocketFactory.getDefault() as SSLSocketFactory
 
-                        HyberLoggerSdk.debug("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+                        PushKLoggerSdk.debug("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
                         functionCodeAnswer4 = responseCode
 
-                        //if (responseCode==401) { init_hyber.clearData() }
+                        //if (responseCode==401) { init_push.clearData() }
 
                         inputStream.bufferedReader().use {
 
                             functionNetAnswer4 = it.readLine().toString()
 
-                            HyberLoggerSdk.debug("Result: Finish step2, Function: hyber_get_device_all, Class: HyberApi, function_net_answer4: $functionNetAnswer4")
+                            PushKLoggerSdk.debug("Result: Finish step2, Function: push_get_device_all, Class: PushKApi, function_net_answer4: $functionNetAnswer4")
                         }
                     }
                 } catch (e: Exception) {
-                    HyberLoggerSdk.debug("Result: Failed step3, Function: hyber_get_device_all, Class: HyberApi, exception: $e")
+                    PushKLoggerSdk.debug("Result: Failed step3, Function: push_get_device_all, Class: PushKApi, exception: $e")
 
 
                     functionNetAnswer4 = "Failed"
@@ -335,24 +343,24 @@ internal class HyberApi {
 
             threadNetF4.start()
             threadNetF4.join()
-            return HyberDataApi(functionCodeAnswer4, functionNetAnswer4, 0)
+            return PushKDataApi(functionCodeAnswer4, functionNetAnswer4, 0)
 
         } catch (e: Exception) {
-            return HyberDataApi(700, "Failed", 0)
+            return PushKDataApi(700, "Failed", 0)
         }
 
     }
 
     //POST
     fun hDeviceUpdate(
-        X_Hyber_Auth_Token: String,
-        X_Hyber_Session_Id: String,
+        X_Push_Auth_Token: String,
+        X_Push_Session_Id: String,
         device_Name: String,
         device_Type: String,
         os_Type: String,
         sdk_Version: String,
         fcm_Token: String
-    ): HyberDataApi {
+    ): PushKDataApi {
 
         var functionNetAnswer5 = String()
         var functionCodeAnswer5 = 0
@@ -363,11 +371,11 @@ internal class HyberApi {
                 val message =
                     "{\"fcmToken\": \"$fcm_Token\",\"osType\": \"$os_Type\",\"osVersion\": \"$osVersion\",\"deviceType\": \"$device_Type\",\"deviceName\": \"$device_Name\",\"sdkVersion\": \"$sdk_Version\" }"
 
-                HyberLoggerSdk.debug(message)
+                PushKLoggerSdk.debug(message)
 
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
 
-                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
 
                 val postData: ByteArray = message.toByteArray(Charset.forName("UTF-8"))
 
@@ -377,7 +385,7 @@ internal class HyberApi {
                 connectorWebPlatform.doOutput = true
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
-                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                 connectorWebPlatform.setRequestProperty("X-Hyber-Auth-Token", authToken)
                 connectorWebPlatform.setRequestProperty(
                     "X-Hyber-Timestamp",
@@ -412,7 +420,7 @@ internal class HyberApi {
                 }
 
             } catch (e: Exception) {
-                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
+                PushKLoggerSdk.debug("Result: Failed step5, Function: push_device_register, Class: PushKApi, exception: ${e.stackTrace}")
 
                 functionNetAnswer5 = "Failed"
             }
@@ -423,7 +431,7 @@ internal class HyberApi {
         threadNetF5.start()
         threadNetF5.join()
 
-        return HyberDataApi(functionCodeAnswer5, functionNetAnswer5, 0)
+        return PushKDataApi(functionCodeAnswer5, functionNetAnswer5, 0)
 
 
     }
@@ -431,10 +439,10 @@ internal class HyberApi {
     //POST
     fun hMessageCallback(
         message_id: String,
-        hyber_answer: String,
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String
-    ): HyberDataApi {
+        push_answer: String,
+        X_Push_Session_Id: String,
+        X_Push_Auth_Token: String
+    ): PushKDataApi {
 
         var functionNetAnswer6 = String()
         var functionCodeAnswer6 = 0
@@ -442,11 +450,11 @@ internal class HyberApi {
         val threadNetF6 = Thread(Runnable {
 
             try {
-                val message2 = "{\"messageId\": \"$message_id\", \"answer\": \"$hyber_answer\"}"
-                HyberLoggerSdk.debug("Body message to hyber : $message2")
+                val message2 = "{\"messageId\": \"$message_id\", \"answer\": \"$push_answer\"}"
+                PushKLoggerSdk.debug("Body message to push server : $message2")
                 val currentTimestamp2 = System.currentTimeMillis() // We want timestamp in seconds
 
-                val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
 
 
                 val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
@@ -458,7 +466,7 @@ internal class HyberApi {
                 connectorWebPlatform.doOutput = true
                 connectorWebPlatform.setRequestProperty("Content-Language", "en-US")
                 connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
-                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Hyber_Session_Id)
+                connectorWebPlatform.setRequestProperty("X-Hyber-Session-Id", X_Push_Session_Id)
                 connectorWebPlatform.setRequestProperty(
                     "X-Hyber-Timestamp",
                     currentTimestamp2.toString()
@@ -477,8 +485,8 @@ internal class HyberApi {
 
                     wr.write(postData2)
                     wr.flush()
-                    HyberLoggerSdk.debug("URL : $url")
-                    HyberLoggerSdk.debug("Response Code : $responseCode")
+                    PushKLoggerSdk.debug("URL : $url")
+                    PushKLoggerSdk.debug("Response Code : $responseCode")
                     functionCodeAnswer6 = responseCode
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
@@ -489,20 +497,20 @@ internal class HyberApi {
                             inputLine = it.readLine()
                         }
                         it.close()
-                        HyberLoggerSdk.debug("Response : $response")
+                        PushKLoggerSdk.debug("Response : $response")
 
                         functionNetAnswer6 = response.toString()
                     }
                 }
 
             } catch (e: Exception) {
-                HyberLoggerSdk.debug("Result: Failed step5, Function: hyber_device_register, Class: HyberApi, exception: ${e.stackTrace}")
+                PushKLoggerSdk.debug("Result: Failed step5, Function: push_device_register, Class: PushKApi, exception: ${e.stackTrace}")
             }
         })
 
         threadNetF6.start()
         threadNetF6.join()
-        return HyberDataApi(functionCodeAnswer6, functionNetAnswer6, 0)
+        return PushKDataApi(functionCodeAnswer6, functionNetAnswer6, 0)
 
 
     }
@@ -510,11 +518,11 @@ internal class HyberApi {
     //POST
     fun hMessageDr(
         message_id: String,
-        X_Hyber_Session_Id: String,
-        X_Hyber_Auth_Token: String
-    ): HyberDataApi {
+        X_Push_Session_Id: String,
+        X_Push_Auth_Token: String
+    ): PushKDataApi {
 
-        if (X_Hyber_Session_Id != "" && X_Hyber_Auth_Token != "" && message_id != "") {
+        if (X_Push_Session_Id != "" && X_Push_Auth_Token != "" && message_id != "") {
 
             var functionNetAnswer7 = String()
 
@@ -523,13 +531,13 @@ internal class HyberApi {
                 try {
                     val message2 = "{\"messageId\": \"$message_id\"}"
 
-                    HyberLoggerSdk.debug("Body message to hyber : $message2")
+                    PushKLoggerSdk.debug("Body message to push server : $message2")
                     val currentTimestamp2 =
                         System.currentTimeMillis() // We want timestamp in seconds
 
-                    HyberLoggerSdk.debug("Timestamp : $currentTimestamp2")
+                    PushKLoggerSdk.debug("Timestamp : $currentTimestamp2")
 
-                    val authToken = hash("$X_Hyber_Auth_Token:$currentTimestamp2")
+                    val authToken = hash("$X_Push_Auth_Token:$currentTimestamp2")
 
                     val postData2: ByteArray = message2.toByteArray(Charset.forName("UTF-8"))
 
@@ -542,7 +550,7 @@ internal class HyberApi {
                     connectorWebPlatform.setRequestProperty("Content-Type", "application/json")
                     connectorWebPlatform.setRequestProperty(
                         "X-Hyber-Session-Id",
-                        X_Hyber_Session_Id
+                        X_Push_Session_Id
                     )
                     connectorWebPlatform.setRequestProperty(
                         "X-Hyber-Timestamp",
@@ -560,8 +568,8 @@ internal class HyberApi {
                         val wr = DataOutputStream(outputStream)
                         wr.write(postData2)
                         wr.flush()
-                        HyberLoggerSdk.debug("URL : $url")
-                        HyberLoggerSdk.debug("Response Code : $responseCode")
+                        PushKLoggerSdk.debug("URL : $url")
+                        PushKLoggerSdk.debug("Response Code : $responseCode")
 
                         BufferedReader(InputStreamReader(inputStream)).use {
                             val response = StringBuffer()
@@ -572,7 +580,7 @@ internal class HyberApi {
                                 inputLine = it.readLine()
                             }
                             it.close()
-                            HyberLoggerSdk.debug("Response : $response")
+                            PushKLoggerSdk.debug("Response : $response")
                         }
                         functionNetAnswer7 = responseCode.toString()
                     }
@@ -582,9 +590,9 @@ internal class HyberApi {
             })
             threadNetF7.start()
             threadNetF7.join()
-            return HyberDataApi(functionNetAnswer7.toInt(), "{}", 0)
+            return PushKDataApi(functionNetAnswer7.toInt(), "{}", 0)
         } else {
-            return HyberDataApi(700, "{}", 0)
+            return PushKDataApi(700, "{}", 0)
         }
     }
 }

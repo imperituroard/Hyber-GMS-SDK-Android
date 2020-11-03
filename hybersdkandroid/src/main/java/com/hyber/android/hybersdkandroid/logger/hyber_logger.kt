@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-internal object HyberLoggerSdk {
+internal object PushKLoggerSdk {
 
 
     fun error(message: String) {

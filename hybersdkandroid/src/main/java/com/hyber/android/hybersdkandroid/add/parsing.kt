@@ -1,11 +1,11 @@
 package com.hyber.android.hybersdkandroid.add
 
-import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
+import com.hyber.android.hybersdkandroid.logger.PushKLoggerSdk
 
-internal class HyberParsing {
+internal class PushParsing {
 
     fun parseIdDevicesAll(input_json: String): String {
-        HyberLoggerSdk.debug("Result: Function: parseIdDevicesAll, Class: HyberParsing, input_json: $input_json")
+        PushKLoggerSdk.debug("Result: Function: parseIdDevicesAll, Class: PushParsing, input_json: $input_json")
         var restParsingStr = "["
         val regex =
             """"id":\s(\d+),\s|"id":(\d+),\s|"id":(\d+),|"id" :(\d+),|"id":(\d+) ,""".toRegex()
@@ -17,27 +17,27 @@ internal class HyberParsing {
             restParsingStr = "$restParsingStr\"$value\", "
         }
         restParsingStr = restParsingStr.dropLast(2) + "]"
-        HyberLoggerSdk.debug("Result: Function: parseIdDevicesAll, Class: HyberParsing, output: $restParsingStr")
+        PushKLoggerSdk.debug("Result: Function: parseIdDevicesAll, Class: PushParsing, output: $restParsingStr")
         return restParsingStr
     }
 
     fun parseMessageId(input_json: String): String {
-        HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, input_json: $input_json")
+        PushKLoggerSdk.debug("Result: Function: parseMessageId, Class: PushParsing, input_json: $input_json")
         val regex = ""","messageId":"(.+)",|messageId=(.+),|"messageId":"(.+)"""".toRegex()
         val matchResults = regex.find(input_json)
         val (res) = matchResults!!.destructured
-        HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, output: $res")
+        PushKLoggerSdk.debug("Result: Function: parseMessageId, Class: PushParsing, output: $res")
         return res
     }
 
 
     fun parseImageUrl(input_json: String): String {
-        HyberLoggerSdk.debug("Result: Function: parseImageUrl, Class: HyberParsing, input_json: $input_json")
-        var matchResults = input_json.substringAfter(""""image":"""").substringBefore(""""""")
+        PushKLoggerSdk.debug("Result: Function: parseImageUrl, Class: PushParsing, input_json: $input_json")
+        var matchResults = input_json.substringAfter(""""image":{""").substringAfter(""""url":"""").substringBefore(""""""")
         if (matchResults.contains("\\/")) {
             matchResults = matchResults.replace("\\/", "/")
         }
-        HyberLoggerSdk.debug("Result: Function: parseMessageId, Class: HyberParsing, output: $matchResults")
+        PushKLoggerSdk.debug("Result: Function: parseMessageId, Class: PushParsing, output: $matchResults")
         return matchResults
     }
 }

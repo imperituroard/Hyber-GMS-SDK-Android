@@ -4,7 +4,7 @@ import android.os.Build
 import android.text.TextUtils
 import android.content.Context
 import android.content.res.Configuration
-import com.hyber.android.hybersdkandroid.logger.HyberLoggerSdk
+import com.hyber.android.hybersdkandroid.logger.PushKLoggerSdk
 
 class GetInfo {
 
@@ -35,10 +35,10 @@ class GetInfo {
             val flagIsTab: Boolean =
                 context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
             if (flagIsTab) {
-                HyberLoggerSdk.debug("Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagIsTab, answer: tablet")
+                PushKLoggerSdk.debug("Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagIsTab, answer: tablet")
                 "tablet"
             } else {
-                HyberLoggerSdk.debug("Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagIsTab, answer: phone")
+                PushKLoggerSdk.debug("Result: Function: get_phone_type, Class: GetInfo, flagisTab: $flagIsTab, answer: phone")
                 "phone"
             }
         } catch (e: java.lang.Exception) {

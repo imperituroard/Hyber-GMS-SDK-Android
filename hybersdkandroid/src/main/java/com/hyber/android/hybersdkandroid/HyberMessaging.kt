@@ -37,7 +37,7 @@ class HyberMessaging : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        val builder = NotificationCompat.Builder(this, "DEFAULT_NOTIFICATION_ID")
+        val builder = NotificationCompat.Builder(this, "push.push.k.sdk")
         builder.setContentIntent(contentIntent)
             .setOngoing(true)   //Can't be swiped out
             //.setSmallIcon(R.mipmap.sym_def_app_icon)

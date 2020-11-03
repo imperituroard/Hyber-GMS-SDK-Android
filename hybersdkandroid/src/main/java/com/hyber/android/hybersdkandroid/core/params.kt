@@ -10,12 +10,12 @@ import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import com.hyber.android.hybersdkandroid.add.GetInfo
-import com.hyber.android.hybersdkandroid.add.HyberInternal
+import com.hyber.android.hybersdkandroid.add.PushKInternal
 import java.net.HttpURLConnection
 import java.net.URL
 
 
-open class HyberPublicParams {
+open class PushKPublicParams {
 
     /*
 *To get a Bitmap image from the URL received
@@ -55,21 +55,21 @@ open class HyberPublicParams {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         if (imageBitmap != null) {
-        return NotificationCompat.Builder(context, "hyber.push.hyber")
+        return NotificationCompat.Builder(context, "push.push.k.sdk")
             .setContentText(notificationTextMess)
             .setAutoCancel(true)
             //.setSmallIcon(R.drawable.googleg_standard_color_18)
-            .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
+            .setPriority(PushKInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
             .setSound(defaultSoundUri)
             //.setVibrate(longArrayOf(1000))
             .setContentIntent(pendingIntent)
             .setLargeIcon(imageBitmap)}
         else {
-            return NotificationCompat.Builder(context, "hyber.push.hyber")
+            return NotificationCompat.Builder(context, "push.push.k.sdk")
                 .setContentText(notificationTextMess)
                 .setAutoCancel(true)
                 //.setSmallIcon(R.drawable.googleg_standard_color_18)
-                .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
+                .setPriority(PushKInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
                 .setSound(defaultSoundUri)
                 //.setVibrate(longArrayOf(1000))
                 .setContentIntent(pendingIntent)
@@ -89,11 +89,11 @@ open class HyberPublicParams {
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        return NotificationCompat.Builder(context, "hyber.push.hyber")
+        return NotificationCompat.Builder(context, "push.push.k.sdk")
             .setContentText(notificationTextMess)
             .setAutoCancel(true)
             //.setSmallIcon(R.drawable.googleg_standard_color_18)
-            .setPriority(HyberInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
+            .setPriority(PushKInternal.notificationPriorityOld(PushSdkParameters.push_notification_display_priority))
             .setSound(defaultSoundUri)
             //.setVibrate(longArrayOf(1000))
             .setContentIntent(pendingIntent)
@@ -101,7 +101,7 @@ open class HyberPublicParams {
 }
 
 
-//URLs DATA for Hyber platform for different branches
+//URLs DATA for Push platform for different branches
 object PushSdkParametersPublic {
     val branchMasterValue: UrlsPlatformList = UrlsPlatformList(
         fun_pushsdk_url_device_update = "https://push.hyber.im/api/2.3/device/update",
@@ -123,7 +123,7 @@ object PushSdkParametersPublic {
         fun_pushsdk_url_mess_queue = "https://test-push.hyber.im/api/2.3/message/queue",
         pushsdk_url_message_history = "https://test-push.hyber.im/api/2.3/message/history?startDate="
     )
-    const val TAG_LOGGING = "HyberPushSDK"
+    const val TAG_LOGGING = "PushPushSDK"
     const val pushsdk_log_level_error = "error"
     const val pushsdk_log_level_debug = "debug"
 
@@ -131,32 +131,32 @@ object PushSdkParametersPublic {
 
 object PushSdkParameters {
     private var infoLocalDeviceHardware: GetInfo = GetInfo()
-    var sdkVersion: String = "1.0.0.41"
-    var hyber_osType: String = "android"
-    var hyber_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
+    var sdkVersion: String = "1.0.0.42"
+    var push_k_osType: String = "android"
+    var push_k_deviceName: String = infoLocalDeviceHardware.getDeviceName().toString()
 
     var push_notification_display_priority: Int = 2
         set(value) {
             if (value > 0) field = value
         }
-    //platform url branches. It can be rewrite by Hyber SDK initiation
+    //platform url branches. It can be rewrite by Push SDK initiation
     var branch_current_active: UrlsPlatformList = PushSdkParametersPublic.branchMasterValue
 
 }
 
-interface HyberAp
-enum class HyberApC : HyberAp {
+interface PushKAp
+enum class PushKApC : PushKAp {
     BODY
 }
 
-internal data class HyberDataApi(
+internal data class PushKDataApi(
     val code: Int,
     val body: String,
     val time: Int
 )
 
 
-data class HyberFunAnswerRegister(
+data class PushKFunAnswerRegister(
     val code: Int = 0,
     val result: String = "",
     val description: String = "",
@@ -167,14 +167,14 @@ data class HyberFunAnswerRegister(
     val createdAt: String = ""
 )
 
-internal data class HyberDataApi2(
+internal data class PushKDataApi2(
     val code: Int,
-    val body: HyberFunAnswerRegister,
+    val body: PushKFunAnswerRegister,
     val time: Int
 )
 
 
-data class HyberFunAnswerGeneral(
+data class PushKFunAnswerGeneral(
     val code: Int,
     val result: String,
     val description: String,
@@ -192,25 +192,25 @@ data class UrlsPlatformList(
     val pushsdk_url_message_history: String
 )
 
-data class HyberOperativeData(
+data class PushOperativeData(
 
     //is procedure for register new device completed or not
     // (true - devise exist on server. )
-    // false - it s new device and we need to complete hyber_register_new()
+    // false - it s new device and we need to complete push_register_new()
     var registrationStatus: Boolean = false,
 
-    var hyber_user_Password: String = "",
-    var hyber_user_msisdn: String = "",
-    var hyber_registration_token: String = "",
-    var hyber_user_id: String = "",
-    var hyber_registration_createdAt: String = "",
+    var push_k_user_Password: String = "",
+    var push_k_user_msisdn: String = "",
+    var push_k_registration_token: String = "",
+    var push_k_user_id: String = "",
+    var push_k_registration_createdAt: String = "",
     var firebase_registration_token: String = "",
-    var hyber_registration_time: String = "",
+    var push_k_registration_time: String = "",
 
     //uuid generates only one time
-    var hyber_uuid: String = "",
+    var push_k_uuid: String = "",
 
-    //its deviceId which we receive from server with answer for hyber_register_new()
+    //its deviceId which we receive from server with answer for push_register_new()
     var deviceId: String = ""
 
 )

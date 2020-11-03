@@ -1,8 +1,8 @@
 package com.hyber.android.hybersdkandroid.add
 
 import android.content.Context
-import com.hyber.android.hybersdkandroid.core.HyberFunAnswerGeneral
-import com.hyber.android.hybersdkandroid.core.HyberFunAnswerRegister
+import com.hyber.android.hybersdkandroid.core.PushKFunAnswerGeneral
+import com.hyber.android.hybersdkandroid.core.PushKFunAnswerRegister
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
@@ -55,21 +55,21 @@ internal class Answer {
         val createdAt: String
     )
 
-    fun hyberRegisterNewRegisterExists2(
+    fun pushKRegisterNewRegisterExists2(
         deviceId: String,
-        hyber_registration_token: String,
-        hyber_user_id: String,
-        hyber_user_msisdn: String,
-        hyber_registration_createdAt: String
-    ): HyberFunAnswerRegister {
+        push_k_registration_token: String,
+        push_k_user_id: String,
+        push_k_user_msisdn: String,
+        push_k_registration_createdAt: String
+    ): PushKFunAnswerRegister {
 
-        return HyberFunAnswerRegister(
+        return PushKFunAnswerRegister(
             code = 701,
             deviceId = deviceId,
-            token = hyber_registration_token,
-            userId = hyber_user_id,
-            userPhone = hyber_user_msisdn,
-            createdAt = hyber_registration_createdAt,
+            token = push_k_registration_token,
+            userId = push_k_user_id,
+            userPhone = push_k_user_msisdn,
+            createdAt = push_k_registration_createdAt,
             result = "Exists",
             description = "Device already registered. Nothing to do"
         )
@@ -79,10 +79,10 @@ internal class Answer {
         resp_code: String,
         resp_body: String,
         context: Context
-    ): HyberFunAnswerRegister {
+    ): PushKFunAnswerRegister {
 
-        val hyberRewrite = RewriteParams(context)
-        val answerRegistrar: HyberFunAnswerRegister
+        val pushKRewrite = RewriteParams(context)
+        val answerRegistrar: PushKFunAnswerRegister
 
         when (resp_code) {
             "200" -> {
@@ -97,7 +97,7 @@ internal class Answer {
                         parent.profile.createdAt
                     )
                 )
-                answerRegistrar = HyberFunAnswerRegister(
+                answerRegistrar = PushKFunAnswerRegister(
                     code = 200,
                     description = "Success",
                     result = "Ok",
@@ -108,17 +108,17 @@ internal class Answer {
                     createdAt = parent.profile.createdAt
                 )
 
-                hyberRewrite.rewriteHyberUserId(parent.profile.userId)
-                hyberRewrite.rewriteHyberRegistrationToken(parent.session.token)
-                hyberRewrite.rewriteHyberCreateAt(parent.profile.createdAt)
-                hyberRewrite.rewriteHyberDeviceId(parent.device.deviceId)
-                hyberRewrite.rewriteApiRegistrationStatus(true)
+                pushKRewrite.rewritePushUserId(parent.profile.userId)
+                pushKRewrite.rewritePushRegistrationToken(parent.session.token)
+                pushKRewrite.rewritePushCreateAt(parent.profile.createdAt)
+                pushKRewrite.rewritePushDeviceId(parent.device.deviceId)
+                pushKRewrite.rewriteApiRegistrationStatus(true)
 
                 return answerRegistrar
             }
             "401" -> {
 
-                answerRegistrar = HyberFunAnswerRegister(
+                answerRegistrar = PushKFunAnswerRegister(
                     code = 401,
                     description = "(Client error) authentication error, probably errors",
                     result = "Failed",
@@ -132,7 +132,7 @@ internal class Answer {
                 return answerRegistrar
             }
             "400" -> {
-                answerRegistrar = HyberFunAnswerRegister(
+                answerRegistrar = PushKFunAnswerRegister(
                     code = 400,
                     description = "(Client error) request validation error",
                     result = "Failed",
@@ -147,7 +147,7 @@ internal class Answer {
             }
             "500" -> {
 
-                answerRegistrar = HyberFunAnswerRegister(
+                answerRegistrar = PushKFunAnswerRegister(
                     code = 500,
                     description = "(Server error)",
                     result = "Failed",
@@ -161,7 +161,7 @@ internal class Answer {
 
             }
             "700" -> {
-                answerRegistrar = HyberFunAnswerRegister(
+                answerRegistrar = PushKFunAnswerRegister(
                     code = 700,
                     description = "Internal SDK error",
                     result = "Failed",
@@ -175,7 +175,7 @@ internal class Answer {
             }
             else -> {
 
-                answerRegistrar = HyberFunAnswerRegister(
+                answerRegistrar = PushKFunAnswerRegister(
                     code = 710,
                     description = "Unknown error",
                     result = "Failed",
@@ -194,17 +194,17 @@ internal class Answer {
         resp_code: String,
         body_json: String,
         description: String
-    ): HyberFunAnswerGeneral {
+    ): PushKFunAnswerGeneral {
 
         return when (resp_code) {
             "200" -> {
-                HyberFunAnswerGeneral(200, "OK", "Success", body_json)
+                PushKFunAnswerGeneral(200, "OK", "Success", body_json)
             }
             "400" -> {
-                HyberFunAnswerGeneral(400, "Failed", "Failed", "unknown")
+                PushKFunAnswerGeneral(400, "Failed", "Failed", "unknown")
             }
             else -> {
-                HyberFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
+                PushKFunAnswerGeneral(resp_code.toInt(), "Failed", description, body_json)
             }
         }
     }

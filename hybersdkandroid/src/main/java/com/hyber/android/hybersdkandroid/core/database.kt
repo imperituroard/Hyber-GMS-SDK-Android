@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 
 @Suppress("unused")
 internal class SharedPreference(val context: Context) {
-    private val preferenceDatabase = "hyberdatabase"
+    private val preferenceDatabase = "push_k_database"
     private var sharedPref: SharedPreferences =
         context.getSharedPreferences(preferenceDatabase, Context.MODE_PRIVATE)
 
