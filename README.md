@@ -4,7 +4,7 @@
 
 Get started by visiting:
 
-* [Setting up your project to work with the SDK](https://github.com/kirillkotov/Push-SDK-Android/wiki/Setting-up-your-project-to-work-with-the-SDK)
+* [Setting up your project to work with the SDK](https://github.com/Incuube/Hyber-GMS-SDK-Android/wiki/Setting-up-your-project-to-work-with-the-SDK)
 
 * [SDK method reference page](https://github.com/kirillkotov/Push-SDK-Android/wiki/SDK-methods)
 
