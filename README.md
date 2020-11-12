@@ -6,9 +6,9 @@ Get started by visiting:
 
 * [Setting up your project to work with the SDK](https://github.com/Incuube/Hyber-GMS-SDK-Android/wiki/Setting-up-your-project-to-work-with-the-SDK)
 
-* [SDK method reference page](https://github.com/kirillkotov/Push-SDK-Android/wiki/SDK-methods)
+* [SDK method reference page](https://github.com/Incuube/Hyber-GMS-SDK-Android/wiki/SDK-methods)
 
-* [Receiving push messages and showing notifications](https://github.com/kirillkotov/Push-SDK-Android/wiki/Receiving-push-messages-and-showing-notifications)
+* [Receiving push messages and showing notifications](https://github.com/Incuube/Hyber-GMS-SDK-Android/wiki/Receiving-push-messages-and-showing-notifications)
 
 ## Short dependency info
 
